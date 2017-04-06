@@ -1,4 +1,7 @@
 
+<script>
+    alert();   
+</script>    
 <?php
 if (isset($GLOBALS["errorMessage"])){
 $error = $GLOBALS["errorMessage"];
