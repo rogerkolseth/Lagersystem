@@ -10,12 +10,19 @@
 // Creae a new session with the client
 session_start(); 
 
+
 //init of the AreLoggedIn Session variable, default false
 $_SESSION["AreLoggedIn"] = false;
 $_SESSION["nameOfUser"] = "";
 $_SESSION["userID"] = "";
 $_SESSION["userLevel"] = "";
 
+?>
+<script>
+    alert("login");   
+</script>    
+
+<?php
 
 
 // Controller layer - select page to display (controller will handle it)
