@@ -8,9 +8,7 @@ $error = $GLOBALS["errorMessage"];
     <head>
         <title>Login Tafjord</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="system/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="system/style/LoginPageCss.css" rel="stylesheet">
+
 
     </head>
     <body>
