@@ -1,3 +1,6 @@
+<script>
+    alert('index');
+</script>
 <?php
 
 /* 

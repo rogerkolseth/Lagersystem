@@ -1,5 +1,5 @@
 <script>
-    console.log('index');
+    alert('index');
 </script>
 
 <?php

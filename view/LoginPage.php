@@ -1,6 +1,6 @@
 
 <script>
-    alert();   
+    alert("login");   
 </script>    
 <?php
 if (isset($GLOBALS["errorMessage"])){
