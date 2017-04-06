@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 
 <?php
 if (isset($GLOBALS["errorMessage"])){
@@ -20,7 +14,7 @@ $error = $GLOBALS["errorMessage"];
 
     </head>
     <body>
-        
+        <p> hei</p>
         
             <div class="container">
             
