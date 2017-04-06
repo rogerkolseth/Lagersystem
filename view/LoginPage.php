@@ -8,11 +8,13 @@ $error = $GLOBALS["errorMessage"];
     <head>
         <title>Login Tafjord</title>
         <meta charset="UTF-8">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="system/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="system/style/LoginPageCss.css" rel="stylesheet">
 
     </head>
     <body>
-        <p> hei</p>
+    
         
             <div class="container">
             
@@ -46,11 +48,9 @@ $error = $GLOBALS["errorMessage"];
             
         </div>
         <script type="text/javascript" src="system/js/hide-show-password.js"></script>
-        <script type="text/javascript" src="system/js/userAdm.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="../Bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
 
