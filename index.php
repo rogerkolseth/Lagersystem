@@ -29,7 +29,7 @@ require_once("system/controller/Router.php");
 // require_once("config");
 
 // Model layer - Database functions
- require_once("system/model/DBconnect.php");
+// require_once("system/model/DBconnect.php");
 
 
 //Creates a new Router

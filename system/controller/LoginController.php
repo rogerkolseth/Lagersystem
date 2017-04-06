@@ -1,3 +1,7 @@
+<script>
+    console.log('logincont');
+</script>
+
 <?php
 
 require_once("Controller.php");

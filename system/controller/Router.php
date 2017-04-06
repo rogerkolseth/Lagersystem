@@ -1,3 +1,7 @@
+<script>
+    console.log('ruter');
+</script>
+
 <?php
 
 // Controller layer - the router selects controller to use depending on URL and request parameters
