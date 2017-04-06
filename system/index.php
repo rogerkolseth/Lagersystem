@@ -18,7 +18,7 @@ if(($_SESSION["AreLoggedIn"]== false)||(!isset($_SESSION["AreLoggedIn"])))
  
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
-require_once("controller/controllers.php");
+require_once("controller/Controllers.php");
 require_once("controller/Router.php");
 
  
