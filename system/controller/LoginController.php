@@ -17,7 +17,7 @@ class LoginController extends Controller {
     }
 
     public function displayLoginPage() {
-        return $this->render("loginPage");
+        return $this->render("LoginPage");
     }
 
     public function loginEngine() {
