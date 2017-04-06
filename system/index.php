@@ -16,13 +16,6 @@ if(($_SESSION["AreLoggedIn"]== false)||(!isset($_SESSION["AreLoggedIn"])))
   header("Location:../");
 }
 
-?>
-<script>
-    alert('blasd');
-</script>
-
-<?php 
-
 // View layer - The Same header for all pages
 // require("view/header.php");
  
