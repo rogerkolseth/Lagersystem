@@ -1,5 +1,5 @@
 <script>
-    console.log('ruter');
+    alert('ruter');
 </script>
 
 <?php
