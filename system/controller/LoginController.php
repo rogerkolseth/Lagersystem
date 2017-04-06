@@ -1,5 +1,5 @@
 <script>
-    console.log('logincont');
+    alert('logincont');
 </script>
 
 <?php
