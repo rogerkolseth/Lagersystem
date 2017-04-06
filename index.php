@@ -19,7 +19,7 @@ $_SESSION["userLevel"] = "";
  
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
-require_once("system/controller/controllers.php");
+require_once("system/controller/Controllers.php");
 require_once("system/controller/Router.php");
  
 // View layer - The same footer for all pages
