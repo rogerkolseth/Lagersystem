@@ -8,8 +8,7 @@
 
 
 // Creae a new session with the client
-session_start(); 
-
+session_start();
 
 //init of the AreLoggedIn Session variable, default false
 $_SESSION["AreLoggedIn"] = false;
@@ -17,14 +16,7 @@ $_SESSION["nameOfUser"] = "";
 $_SESSION["userID"] = "";
 $_SESSION["userLevel"] = "";
 
-?>
-<script>
-    alert("login");   
-</script>    
-
-<?php
-
-
+ 
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
 require_once("system/controller/Controllers.php");
@@ -37,7 +29,7 @@ require_once("system/controller/Router.php");
 // require_once("config");
 
 // Model layer - Database functions
-// require_once("system/model/DBconnect.php");
+ require_once("system/model/DBconnect.php");
 
 
 //Creates a new Router

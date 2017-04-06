@@ -8,7 +8,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-<div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div id="message">
         <?php
         if (isset($GLOBALS["errorMessage"])) {
@@ -38,7 +38,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                     <button class="btn btn-success btn-md" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
                                     <button class="btn btn-success btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
-                                    <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-barcode"></span> <br/>Varelevering</button>
+                                    <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-th-list"></span> <br/>Varelevering</button>
 
                                 </div>
                                 <div class="pull-right">
@@ -87,7 +87,7 @@ if (isset($GLOBALS["errorMessage"])) {
         <?php }?>
         <?php if ($_SESSION["userLevel"] == "User") {?>
         <div class="col-md-6">
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
                 <div class="panel-heading" id="panelcolor">
                     <h2 class="panel-title text-center"><b>Siste salg</b></h2>
                 </div>
