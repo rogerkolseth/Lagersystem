@@ -9,14 +9,12 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Tafjord</title>
         
-        <script src="/system/jquery-3.1.1.min.js"></script>
         <!-- Bootstrap -->
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style/home.css" rel="stylesheet">
         <script src="js/handlebars-v4.0.5.js"></script>
         <!-- MetisMenu CSS -->
    
-        <script src="Bootstrap/js/bootstrap.min.js"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -32,7 +30,7 @@
                 <div class="navbar-header">
                     
                     <a class="navbar-left" href="?page=home" style="margin-left: 25px; margin-top: 10px;">
-                        <img src="image/tafjordLogo.png" alt="Home">
+                        <img src="image/TafjordLogo.png" alt="Home">
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
@@ -103,7 +101,6 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script type="text/javascript" src="system/js/show-hide2.js"></script>
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script src="Charts/Chart.js"></script>
  
