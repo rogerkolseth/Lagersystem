@@ -1,6 +1,4 @@
-<script>
-    alert('index');
-</script>
+
 
 <?php
 
@@ -9,8 +7,14 @@
 ////////////////////////////////////////////////
 
 //Creates a new Session with the client
+session_start();
 
+?>
+<script>
+    alert('index');
+</script>
 
+<?php 
 //Checking if AreLoggedIn Session are set and not false. If the AreLoggedIn is false or not set, user are sent back to login.
 if(($_SESSION["AreLoggedIn"]== false)||(!isset($_SESSION["AreLoggedIn"])))
 {

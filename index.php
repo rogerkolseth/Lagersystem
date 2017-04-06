@@ -1,6 +1,4 @@
-<script>
-    alert('index');
-</script>
+
 <?php
 
 /* 
@@ -11,7 +9,12 @@
 
 
 // Creae a new session with the client
-session_start();
+session_start(); ?>
+
+<script>
+    alert('index');
+</script>
+<?php 
 
 //init of the AreLoggedIn Session variable, default false
 $_SESSION["AreLoggedIn"] = false;
