@@ -1,0 +1,163 @@
+html,body
+{
+    background-color: #F4F4F4;
+    min-height: 100%;
+}
+
+.sidebar .glyphicon{
+    margin-right: 3%;
+}
+
+ .sidebar .caret {
+    float: right;
+}
+.fontSizeTableContainer
+{
+    font-size: 12px;
+}
+
+
+#snarveidiv
+{
+    width: 90%; 
+    margin-right: 10px; 
+    margin-top: -1.5%;
+}
+#bordernone
+{
+    border: none;
+}
+#handhover
+{
+    cursor: pointer;
+    
+}
+
+#redigerknapp
+{
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;
+}
+
+@media (min-width: 768px) {
+.container{
+  background-color: #FFFFFF;
+  width: 90%;
+  padding: 3%;
+  border-radius: 7px;
+  margin-right: 10%;
+
+}
+}
+.main {
+    margin-top: 2%;
+    padding-right: 3%;
+    
+}
+
+.sidebar .sidebar-nav.navbar-collapse {
+  padding-left: 0;
+  padding-right: 0;
+  
+}
+
+.navbar-default .navbar-nav>.open>a, 
+.navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+color: #FFFFFF;
+background:#002E5F; 
+}
+
+.navbar-default .navbar-nav>li>a{
+    color: #B8B8B8 ;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+    color: #FFFFFF ;
+}
+
+
+@media (min-width: 768px) {   
+.container-fluid{
+    background-color: #002E5F;
+    position: fixed;
+    width: 100%;
+}
+}
+
+.container-fluid{
+    background-color: #002E5F;
+}
+
+.nav-second-level{
+    padding-left: 26px;
+}
+
+
+.sidebar ul li {
+  border-bottom: 0.5px solid rgba(0,46,95,.1);
+ 
+}
+.sidebar ul li a.active {
+  background-color: #eeeeee;
+  
+}
+
+
+@media (min-width: 768px) {
+  .sidebar {
+    z-index: 1;
+    position: fixed;
+    width: 250px;
+    margin-top: 50px;
+    border-right: 2px solid #002E5F;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.img-thumbnail{
+height: 120px;
+width: 140px;
+}
+
+.jumbotron{
+    padding: 5px;
+}
+
+.img-border{
+    border: 0.5px solid rgba(0,46,95,.2);
+    border-radius: 3px;
+    text-align: center;
+    background:#F9F9F9;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
