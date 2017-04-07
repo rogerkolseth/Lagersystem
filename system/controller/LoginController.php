@@ -41,7 +41,7 @@ class LoginController extends Controller {
                         $loggModel->loginLog($type, $desc, $User["userID"]);
                     }
                 }
-            }
+            } 
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
             return $this->render("LoginPage", $message);
