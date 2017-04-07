@@ -621,7 +621,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
             <!-- Get the selected storage, and POST this to retrive inventory-->
             <script>
-
+$('a#saveToCSV').hide();
                 function getStorageProduct() {
                     $.ajax({
                         type: 'GET',
@@ -1458,6 +1458,7 @@ function POSTstocktakingModal() {
                 } else {    
                 var $displayUsers = $('#stocktakingContainer');
                 $displayUsers.empty();
+                $('a#saveToCSV').show();
                 document.getElementById("saveStocktaking").value = "Lagre";
                 stocktakingResultTemplate(data);
                 rowColor();
@@ -1636,6 +1637,7 @@ $(document).ready(function()
       $('#stocktakingContainer').empty();
       $('#stocktakingResultChart').empty();
       document.getElementById("saveStocktaking").value = "Neste";
+      $('a#saveToCSV').hide();
     }) ;
 });
 </script>

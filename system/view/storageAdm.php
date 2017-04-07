@@ -467,6 +467,7 @@
 
 <script>
     $('#dropdown').show();
+    $('a#saveToCSV').hide();
     $(function () {
         $.ajax({
             type: 'GET',
@@ -663,6 +664,7 @@ function errorMessageDelete() {
                 } else {    
                 var $displayUsers = $('#stocktakingContainer');
                 $displayUsers.empty();
+                $('a#saveToCSV').show();
                 document.getElementById("saveStocktaking").value = "Lagre";
                 stocktakingResultTemplate(data);
                 rowColor();
@@ -848,6 +850,7 @@ $(document).ready(function()
       $('#stocktakingContainer').empty();
       $('#stocktakingResultChart').empty();
       document.getElementById("saveStocktaking").value = "Neste";
+      $('a#saveToCSV').hide();
     }) ;
 });
 </script>
