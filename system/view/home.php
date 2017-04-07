@@ -36,9 +36,9 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
                                     <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
 
-                                    <button class="btn btn-success btn-md" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                    <button class="btn btn-success btn-md" onclick="POSTstocktakingModal()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
-                                    <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-th-list"></span> <br/>Varelevering</button>
+                                    <button class="btn btn-success btn-md" onclick="getCategoryInfo();" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+                                    <button class="btn btn-success btn-md" onclick="openModal();" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
+                                    <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct();" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-th-list"></span> <br/>Varelevering</button>
 
                                 </div>
                                 <div class="pull-right">
@@ -468,7 +468,15 @@ if (isset($GLOBALS["errorMessage"])) {
                
             <div class="modal-body row" >
                 <div class="col-md-6">
-                <table class="table" id="stocktakingContainer">
+                <label id="stocktakLabel">Uttak fra:</label>
+
+                <select name="onStorageID" id="chooseStorageStocktakContainer" class="form-control stocktaking">
+                    
+                <!-- Her kommer Handlebars Template-->
+
+                </select>  
+
+                <table class="table product" id="stocktakingContainer">
                 <!-- Innhold fra Handlebars Template -->
                 </table>
                 
@@ -977,10 +985,35 @@ $(document).ready(function()
             dataType: 'json',
             success: function (data) {
                 withdrawRestrictionTemplate(data);
+                chooseStorageStocktakTemplate(data);
             }
         });
     });
 </script>
+
+<!-- Display storages in drop down meny Template -->
+<script>
+    function chooseStorageStocktakTemplate(data) {
+        var rawTemplate = document.getElementById("chooseStorageStocktakTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var stoktakeRestrictionGeneratedHTML = compiledTemplate(data);
+
+        var stocktakingContainer = document.getElementById("chooseStorageStocktakContainer");
+        stocktakingContainer.innerHTML = stoktakeRestrictionGeneratedHTML;
+
+    }
+</script>
+
+<!-- Display storages in drop down meny Template -->
+<script id="chooseStorageStocktakTemplate" type="text/x-handlebars-template">
+<option data-id="0" value="0" class="withdrawStorage">Velg et lager</option>
+{{#each transferRestriction}}    
+<tr>
+    <option data-id="{{storageID}}" value="{{storageID}}" class="stocktake">{{storageName}}</option>
+</tr>   
+{{/each}}
+        
+</script> 
 
 <!-- Display storages in drop down meny Template -->
 <script>
@@ -1406,7 +1439,11 @@ document.getElementById("date").value  = d.yyyymmdd();
 
 <!-- stocktaking modal -->
 <script>
-function POSTstocktakingModal() {
+    $(function POSTStocktakingModal() {
+        $('#chooseStorageStocktakContainer').on('change', function () {
+            givenStorageID = $(this).find("option:selected").data('id');
+
+            if (givenStorageID > 0) {
             
             $.ajax({
                 type: 'POST',
@@ -1414,16 +1451,16 @@ function POSTstocktakingModal() {
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
-                    
-                    $('#stocktakingModal').modal('show');
                     stocktakingTemplate(data);  
-                    
                 }
             });
+        } else {
+                $('.product').empty();
+            }
             return false;
-
-    }
-</script>  
+            });
+    });
+</script>   
 
 <!-- stocktaking storage template-->         
 <script>
@@ -1455,7 +1492,11 @@ function POSTstocktakingModal() {
                     $displayUsers.empty();
                     document.getElementById("saveStocktaking").value = "Neste";
                     $('#stocktakingModal').modal('hide');
-                } else {    
+                    $('#stocktakLabel').show();  
+                $('#chooseStorageStocktakContainer').show();
+                } else {
+                $('#stocktakLabel').hide();  
+                $('#chooseStorageStocktakContainer').hide();
                 var $displayUsers = $('#stocktakingContainer');
                 $displayUsers.empty();
                 $('a#saveToCSV').show();
@@ -1464,8 +1505,7 @@ function POSTstocktakingModal() {
                 rowColor();
                 
                 stocktakingResultChart(data);
-                
-                
+
                 }
                     
                 }
@@ -1633,6 +1673,8 @@ $(document).ready(function()
         {
             resultBar.destroy();
         }
+      $('#stocktakLabel').show();  
+      $('#chooseStorageStocktakContainer').show();
       $('#stocktakingResultContainer').empty();
       $('#stocktakingContainer').empty();
       $('#stocktakingResultChart').empty();
@@ -1640,4 +1682,10 @@ $(document).ready(function()
       $('a#saveToCSV').hide();
     }) ;
 });
+</script>
+
+<script>
+function openModal(){
+    $('#stocktakingModal').modal('show');
+}          
 </script>
