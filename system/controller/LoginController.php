@@ -46,7 +46,7 @@ class LoginController extends Controller {
             $message = array("errorMessage" => $errorMessage);
             return $this->render("LoginPage", $message);
         } else {
-            header("Location:system/");
+           // header("Location:system/");
         }
     }
 
