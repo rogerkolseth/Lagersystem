@@ -17,10 +17,6 @@ $_SESSION["nameOfUser"] = "";
 $_SESSION["userID"] = "";
 $_SESSION["userLevel"] = "";
 
-if($_SESSION["AreLoggedIn"] == true)
-{
-    header("Location:system/index.php");
-}
  
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
@@ -45,6 +41,11 @@ $controller = $router->getLoginController();
 
 //Calls the show function of the logincontroller
 $controller->show($router->getPage());
+
+if($_SESSION["AreLoggedIn"] == true)
+{
+    header("Location:system/index.php");
+}
 
 
     
