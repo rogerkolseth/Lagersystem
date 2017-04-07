@@ -10,16 +10,17 @@
 // Creae a new session with the client
 session_start();
 //Check if the user are logged in, if true the user will be redirected to the main index file.
-if($_SESSION["AreLoggedIn"] == true)
-{
-    header("Location:system/index.php");
-}
+
 //init of the AreLoggedIn Session variable, default false
 $_SESSION["AreLoggedIn"] = false;
 $_SESSION["nameOfUser"] = "";
 $_SESSION["userID"] = "";
 $_SESSION["userLevel"] = "";
 
+if($_SESSION["AreLoggedIn"] == true)
+{
+    header("Location:system/index.php");
+}
  
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
