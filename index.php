@@ -42,10 +42,6 @@ $controller = $router->getLoginController();
 //Calls the show function of the logincontroller
 $controller->show($router->getPage());
 
-if($_SESSION["AreLoggedIn"] == true)
-{
-    header("Location:system/index.php");
-}
 
 
     

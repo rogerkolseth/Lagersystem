@@ -41,13 +41,17 @@ class LoginController extends Controller {
                         $loggModel->loginLog($type, $desc, $User["userID"]);
                     }
                 }
-            } 
+            }
+            if($_SESSION["AreLoggedIn"] == true){
+            header("Location:system/index.php");
+            }
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
             return $this->render("LoginPage", $message);
-        } else {
-           // header("Location:system/");
-        }
+        } 
+        
+
     }
+    
 
 }
