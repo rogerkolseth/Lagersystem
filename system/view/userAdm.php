@@ -430,8 +430,14 @@
     <button id="redigerknapp" data-id="{{userID}}" class="delete" data-toggle="tooltip" title="Slett bruker">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button> 
+    
+    <!-- Knapp som aktiverer Model for rettigheter av bruker  --> 
+
+    <label for="setRes{{userID}}" style="cursor: pointer" id="{{userID}}" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal">    <span class="glyphicon glyphicon-wrench" style="color: blue"></span>
+    </label> 
 
     </td>
+ 
  
     <!-- Printer ut navn og brukernavn inn i tabellen -->
 
@@ -445,7 +451,7 @@
 
   
     
-    <td> <input form="editRestriction" class="selectRestriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
+    <td> <input form="editRestriction" class="selectRestriction" id="setRes{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
 
   
 
@@ -943,4 +949,15 @@ function successMessageAddRes() {
         });
     });
  }
+</script>
+
+<script>
+$(document).ready(function()
+{
+    $('#userRestrictionModal').on('hidden.bs.modal', function(e)
+    { 
+        $('input:checkbox').removeAttr('checked');
+        $('#setRestriction').hide();
+    }) ;
+});
 </script>

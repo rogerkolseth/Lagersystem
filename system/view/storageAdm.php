@@ -827,7 +827,7 @@ $(document).ready(function () {
     // This must be a hyperlink
     $("#saveToCSV").on('click', function (event) {
     	
-        exportTableToCSV.apply(this, [$('#stocktakingResultContainer'), 'export.csv']);
+        exportTableToCSV.apply(this, [$('#stocktakingResultContainer'), 'varetelling.csv']);
         
         // IF CSV, don't do event.preventDefault() or return false
         // We actually need this to be a typical hyperlink

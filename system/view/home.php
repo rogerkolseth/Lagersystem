@@ -37,7 +37,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
 
                                     <button class="btn btn-success btn-md" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                    <button class="btn btn-success btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
+                                    <button class="btn btn-success btn-md" onclick="POSTstocktakingModal()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
                                     <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-th-list"></span> <br/>Varelevering</button>
 
                                 </div>
@@ -311,7 +311,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
                                 </tr>
 
-                                <input form="createProduct" type="hidden" id="date" name="date">
+                                <input form="createProduct" type="hidden" id="dateProd" name="date">
 
                                 </table>
                                 </div>
@@ -454,36 +454,45 @@ if (isset($GLOBALS["errorMessage"])) {
             <!-- Tom modal til Roger -->
 
 
-            <div class="modal fade" id="stockTakingModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Varetelling</h4>
-                        </div>
-                        <form action="?page=stocktacking" method="post" id="stocktaking">
+<!-- STOCKTAKING MODAL -->
 
-                            <div class="modal-body">
-                                <select name="storageID" form="stocktaking" id="selectStorageContainer" class="form-control">
-
-                                </select>
-                                <br>
-                                <table class="table" id="stockTakingContainer">
-
-                                </table>
-
-                            </div>
-                            <div class="modal-footer">
-                                <input form="stocktaking" class="btn btn-success" type="submit" value="Oppdater">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                            </div>
-                        </form>
-                        </form>
-
-                    </div>
-                </div>
+<div class="modal fade" id="stocktakingModal" role="dialog">
+    <div class="modal-dialog" style="width: 70%">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Lagertelling</h4>
             </div>
+            <form action="?page=stocktacking" method="post" id="stocktaking">
+               
+            <div class="modal-body row" >
+                <div class="col-md-6">
+                <table class="table" id="stocktakingContainer">
+                <!-- Innhold fra Handlebars Template -->
+                </table>
+                
+                
+                <table class="table" id="stocktakingResultContainer">
+                <!-- Innhold fra Handlebars Template -->
+                </table>
+                </div>
+                <div class="col-md-6">
+                <canvas id="stocktakingResultChart"></canvas>
+                </div>
+                        
+
+            </div>
+                   
+            <div class="modal-footer">
+                <a href="#" id="saveToCSV" class="btn btn-success">Eksporter til csv</a>
+                <input form="stocktaking" class="btn btn-success" id="saveStocktaking" type="submit" value="Neste">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+            </div>
+            </form>    
+        </div>
+    </div>
+</div>   
 
             <div class="modal fade" id="stockDeliveryModal" role="dialog">
                 <div class="modal-dialog">
@@ -543,20 +552,55 @@ if (isset($GLOBALS["errorMessage"])) {
 {{/each}}  
 </script>
 
-            <script id="stockTakingTemplate" type="text/x-handlebars-template">
-            <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
-            {{#each storageProduct}}
+<!-- Display stocktacing product-->
+<script id="stocktakingResultTemplate" type="text/x-handlebars-template">
+ <thead>
+    <tr>
+        <th>Produkt</th>
+        <th>Gammel verdi</th>
+        <th>Ny verdi</th>
+        <th>differanse</th>    
+    </tr>
+</thead>
+<tbody id="tbodyid">
+{{#each differanceArray}}
+    <tr>
+        <td>{{productName}}</td>
+        <td>{{oldQuantity}}</td>
+        <td>{{newQuantity}}</td>
+        <td class="stockResult">{{differance}}</td>    
+    </tr>
+</tbody>
+<input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+<input form="stocktaking" name="givenQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+<input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+<input form="stocktaking" name="differanceArray[]" type="hidden" value="{{differance}}">
+{{/each}}
+
+<input form="stocktaking" name="givenStorageID" type="hidden" value="{{differanceArray.0.storageID}}">
+            
+  
+</script>
+
+
+<!-- Display stocktacing product-->
+<script id="stocktakingTemplate" type="text/x-handlebars-template">
+<input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
+<input form="stocktaking" name="getResult" type="hidden" value="getResult"> 
+{{#each storageProduct}}
     
-                <tr>
-                   <th id="bordernone">{{productName}}:</th>    
-                       <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
-                       <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">                       
-                   <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
-                </tr>
+    <tr>
+       <th id="bordernone">{{productName}}:</th>    
+           <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
+           <input form="stocktaking" name="givenProductNameArray[]" type="hidden" value="{{productName}}">            
+       <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
+    </tr>
+     
     
-    
-              {{/each}} 
-            </script>    
+  {{/each}} 
+  
+</script>
 
             <script id="stockDeliveryTemplate" type="text/x-handlebars-template">
                 <br>  
@@ -739,17 +783,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 });
             </script>
 
-            <!-- Display products in storage Template -->
-            <script>
-                function stockTakingTemplate(data) {
-                    var rawTemplate = document.getElementById("stockTakingTemplate").innerHTML;
-                    var compiledTemplate = Handlebars.compile(rawTemplate);
-                    var stockTakingGeneratedHTML = compiledTemplate(data);
 
-                    var stockTaking = document.getElementById("stockTakingContainer");
-                    stockTaking.innerHTML = stockTakingGeneratedHTML;
-                }
-            </script>
 
 
             <!-- Create product -->
@@ -919,27 +953,7 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
 
 
-            <!-- POST results from stocktaking, and updating the table-->
-            <script>
-                $(function POSTeditStorageInfo() {
 
-                    $('#stocktaking').submit(function () {
-                        var url = $(this).attr('action');
-                        var data = $(this).serialize();
-                        $.ajax({
-                            type: 'POST',
-                            url: url,
-                            data: data,
-                            dataType: 'json',
-                            success: function () {
-                                $('#stockTakingModal').modal('hide');
-                            }
-                        });
-                        return false;
-                    });
-                });
-
-            </script>
 
             <script>
 $(document).ready(function()
@@ -1369,4 +1383,259 @@ $('.stockResult').filter(function(index){
 {{/each}}
             
   
+</script>
+
+<script>
+Date.prototype.yyyymmdd = function() {
+   var yyyy = this.getFullYear();
+   var mm = this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : (this.getMonth() + 1); // getMonth() is zero-based
+   var dd  = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
+   return "".concat(yyyy).concat(mm).concat(dd);
+  };
+
+var d = new Date();
+document.getElementById("dateProd").value  = d.yyyymmdd();
+document.getElementById("date").value  = d.yyyymmdd();
+
+</script>
+
+
+
+
+<!-- STOCKTAKING OF STORAGE -->
+
+<!-- stocktaking modal -->
+<script>
+function POSTstocktakingModal() {
+            
+            $.ajax({
+                type: 'POST',
+                url: '?page=getStorageProduct',
+                data: {givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function (data) {
+                    
+                    $('#stocktakingModal').modal('show');
+                    stocktakingTemplate(data);  
+                    
+                }
+            });
+            return false;
+
+    }
+</script>  
+
+<!-- stocktaking storage template-->         
+<script>
+    function stocktakingTemplate(data) {
+        var rawTemplate = document.getElementById("stocktakingTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var stocktakingStorageGeneratedHTML = compiledTemplate(data);
+
+        var storageContainer = document.getElementById("stocktakingContainer");
+        storageContainer.innerHTML = stocktakingStorageGeneratedHTML;
+    }
+</script>
+
+<!-- POST results from stocktaking, and updating the table-->
+<script>
+    $(function POSTstocktakingResult() {
+
+        $('#stocktaking').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                if(document.getElementById("saveStocktaking").value === "Lagre"){
+                var $displayUsers = $('#stocktakingResultContainer');
+                    $displayUsers.empty();
+                    document.getElementById("saveStocktaking").value = "Neste";
+                    $('#stocktakingModal').modal('hide');
+                } else {    
+                var $displayUsers = $('#stocktakingContainer');
+                $displayUsers.empty();
+                document.getElementById("saveStocktaking").value = "Lagre";
+                stocktakingResultTemplate(data);
+                rowColor();
+                
+                stocktakingResultChart(data);
+                
+                
+                }
+                    
+                }
+            });
+            return false;
+        });
+    });
+    
+</script>
+
+
+
+<script>
+    
+    var resultBar;
+ function stocktakingResultChart(data)
+    {
+        
+        
+        
+
+          var ctx = document.getElementById('stocktakingResultChart').getContext('2d');
+          
+                    var product = [];
+                    var antall = [];
+                    var farge = [];
+
+                        $.each(data.differanceArray, function(i, item){
+                            product.push(item.productName);
+                            antall.push(item.differance);
+                        });
+                        
+                        var bars = antall;
+                        for(i = 0; i < bars.length; i++){
+                        //You can check for bars[i].value and put your conditions here
+                        if(bars[i] >= 10 || bars[i] <= -10)
+                        {
+                            //grønn
+                            farge.push("#d9534f");
+                        }
+                        else if(bars[i] < 10 && bars[i] >=5 || bars[i] > -10 && bars[i] <= -5)
+                        {
+                            //orange
+                            farge.push("#f0ad4e");
+                        }
+                        else if(bars[i] < 5 || bars[i] > -5)
+                        {
+                            //rød
+                            farge.push("#5cb85c");
+                        }
+                        }
+
+                            window.resultBar = new Chart(ctx, {
+                                
+                            type: 'bar',
+                            data: {
+                                labels: product,
+                                datasets: [
+                                    {
+                                        label: "Antall",
+ 
+                                        borderColor: "black",
+                                        backgroundColor: farge,
+                                        borderWidth: 1,
+                                        data: antall
+                                      }
+                            ]
+                            },                    
+                        
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                scales:{
+                                    yAxes: [{
+                                        ticks: {
+                                        beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            },
+                            responsive : true
+
+                        });
+    }
+</script>
+</script>
+
+
+<!-- stocktaking storage template-->         
+<script>
+    function stocktakingResultTemplate(data) {
+        var rawTemplate = document.getElementById("stocktakingResultTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var stocktakingStorageGeneratedHTML = compiledTemplate(data);
+
+        var storageContainer = document.getElementById("stocktakingResultContainer");
+        storageContainer.innerHTML = stocktakingStorageGeneratedHTML;
+    }
+</script>
+<script>
+$(document).ready(function () {
+
+	function exportTableToCSV($table, filename) {
+    
+        var $rows = $table.find('tr:has(td),tr:has(th)'),
+    
+            // Temporary delimiter characters unlikely to be typed by keyboard
+            // This is to avoid accidentally splitting the actual contents
+            tmpColDelim = String.fromCharCode(11), // vertical tab character
+            tmpRowDelim = String.fromCharCode(0), // null character
+    
+            // actual delimiter characters for CSV format
+            colDelim = '","',
+            rowDelim = '"\r\n"',
+    
+            // Grab text from table into CSV formatted string
+            csv = '"' + $rows.map(function (i, row) {
+                var $row = $(row), $cols = $row.find('td,th');
+    
+                return $cols.map(function (j, col) {
+                    var $col = $(col), text = $col.text();
+    
+                    return text.replace(/"/g, '""'); // escape double quotes
+    
+                }).get().join(tmpColDelim);
+    
+            }).get().join(tmpRowDelim)
+                .split(tmpRowDelim).join(rowDelim)
+                .split(tmpColDelim).join(colDelim) + '"',
+    
+            
+    
+            // Data URI
+            csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+            
+            console.log(csv);
+            
+        	if (window.navigator.msSaveBlob) { // IE 10+
+        		//alert('IE' + csv);
+        		window.navigator.msSaveOrOpenBlob(new Blob([csv], {type: "text/plain;charset=utf-8;"}), "csvname.csv")
+        	} 
+        	else {
+        		$(this).attr({ 'download': filename, 'href': csvData, 'target': '_blank' }); 
+        	}
+    }
+    
+    // This must be a hyperlink
+    $("#saveToCSV").on('click', function (event) {
+    	
+        exportTableToCSV.apply(this, [$('#stocktakingResultContainer'), 'varetelling.csv']);
+        
+        // IF CSV, don't do event.preventDefault() or return false
+        // We actually need this to be a typical hyperlink
+    });
+
+});
+</script>
+<script>
+$(document).ready(function()
+{
+    $('#stocktakingModal').on('hidden.bs.modal', function(e)
+    { 
+        if(resultBar)
+        {
+            resultBar.destroy();
+        }
+      $('#stocktakingResultContainer').empty();
+      $('#stocktakingContainer').empty();
+      $('#stocktakingResultChart').empty();
+      document.getElementById("saveStocktaking").value = "Neste";
+    }) ;
+});
 </script>
