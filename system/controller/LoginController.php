@@ -44,7 +44,7 @@ class LoginController extends Controller {
             }
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
-            return $this->render("loginPage", $message);
+            return $this->render("LoginPage", $message);
         } else {
             header("Location:system/");
         }
