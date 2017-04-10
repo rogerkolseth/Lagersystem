@@ -188,6 +188,7 @@ $test = $GLOBALS["errorMessage"];
                 <!-- Innhold fra Handlebars Template -->
             </div>    
             <div class="modal-footer">
+                <div id="errorDelete"></div>
                 <input form="deleteMedia" class="btn btn-success" type="submit" value="Slett">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
@@ -471,7 +472,7 @@ function successMessageDelete() {
 
 <script>
 function errorMessageDelete() {    
-    $('<div class="alert alert-danger"><strong>Error!</strong> Kan ikke slette media som er i bruk. </div>').appendTo('#success')
+    $('<div class="alert alert-danger"><strong>Error!</strong> Kan ikke slette media som er i bruk. </div>').appendTo('#errorDelete')
             .delay(2000).fadeOut(500, function() {
             $(this).remove();
            });;
@@ -503,7 +504,7 @@ function errorMessageDelete() {
                 url: url,
                 data: data,
                 dataType: 'json',
-                erro: function (){
+                error: function (){
                     errorMessageDelete();
                 },
                 success: function (data) {
