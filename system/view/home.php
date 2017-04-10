@@ -161,6 +161,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
         <div class="col-md-12">
         <div class="col-md-6">
+            
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h2 class="panel-title text-center"><b>Lagerbeholdning</b></h2>
@@ -979,16 +980,36 @@ $(document).ready(function()
  
 
     $(function () {
+        
         $.ajax({
             type: 'GET',
             url: '?page=getTransferRestriction',
             dataType: 'json',
             success: function (data) {
+                
+                showHide(data);
                 withdrawRestrictionTemplate(data);
                 chooseStorageStocktakTemplate(data);
             }
         });
     });
+</script>
+
+<script>
+function showHide(data){
+    var limit = 0;
+    for (var i = 0; i < data.transferRestriction.length; i++) {
+            limit = limit + 1;
+        }
+                
+        if(limit < 1){
+            $('#chooseStorage').show();
+            $('#singleStorage').hide();
+        } else{
+            $('#chooseStorage').hide(); 
+            $('#singleStorage').show();
+        }
+}
 </script>
 
 <!-- Display storages in drop down meny Template -->
@@ -1039,6 +1060,7 @@ $(document).ready(function()
         
 </script> 
 <!-- Get the selected storage, and POST this to retrive inventory-->
+
 <script>
     var givenStorageID;
     $(function POSTfromStorageModals() {
