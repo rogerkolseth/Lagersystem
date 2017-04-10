@@ -17,6 +17,7 @@ class LoginController extends Controller {
     }
 
     public function loginEngine() {
+        echo test;
         if (isset($_POST['givenUsername']) && ($_POST['givenPassword']) && ($_POST['givenLastLogin'])) {
             $givenUsername = $_REQUEST["givenUsername"];
             $givenPassword = $_REQUEST["givenPassword"];
