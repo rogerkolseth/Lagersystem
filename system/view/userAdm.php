@@ -108,7 +108,7 @@
         <div class="panel-heading">
             <h3 class="panel-title text-center"><b>Brukeroversikt</b>
                 <div class="pull-right" style="margin-right: 3.3%">
-                    <b><span class="glyphicon glyphicon-wrench"></span></b>
+                    <p>Lagertilgang: </p>
                 </div>
             </h3>
         </div>
@@ -433,7 +433,7 @@
     
     <!-- Knapp som aktiverer Model for rettigheter av bruker  --> 
 
-    <label for="setRes{{userID}}" style="cursor: pointer" id="{{userID}}" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal">    <span class="glyphicon glyphicon-wrench" style="color: blue"></span>
+    <label for="setRes{{userID}}" id="{{userID}}" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal">    <img id="keyIcon" src="image/key-icon2.png"></img>
     </label> 
 
     </td>

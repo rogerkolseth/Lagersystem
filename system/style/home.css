@@ -19,6 +19,14 @@ html,body
 {
     margin-bottom: 25px;
 }
+#keyIcon
+{
+    cursor: pointer;
+    
+    width: 20px;
+    height: 18px;
+    
+}
 
 
 #snarveidiv
