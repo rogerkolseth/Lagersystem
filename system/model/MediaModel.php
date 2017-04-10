@@ -49,10 +49,7 @@ class MediaModel {
     }
     
     public function deletetMediaByID($deleteMediaID)    {
-       $this->disabCons->execute();
-       $this->delStmt->execute(array("deleteMediaID" => $deleteMediaID));
-       $this->actCons->execute();
-       return $this->delStmt;
+       return $this->delStmt->execute(array("deleteMediaID" => $deleteMediaID));
     }
     
     public function getAllMediaInfo(){

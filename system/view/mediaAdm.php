@@ -434,12 +434,12 @@ function successMessageEdit() {
 </script> 
 
 
-<!--    DELETE STORAGE     -->
+<!--    DELETE MEDIA     -->
 
 
 <!-- Display what media to delete storage modal -->
 <script>
-    $(function POSTdeleteStorageModal() {
+    $(function POSTdeleteMediaeModal() {
 
         $('#displayMediaContainer').delegate('.delete', 'click', function () {
             var givenMediaID = $(this).attr('data-id');
@@ -469,6 +469,15 @@ function successMessageDelete() {
 }    
 </script> 
 
+<script>
+function errorMessageDelete() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Kan ikke slette media som er i bruk. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
+
 <!-- Delete media template-->         
 <script>
     function deleteMediaTemplate(data) {
@@ -481,9 +490,9 @@ function successMessageDelete() {
     }
 </script>
 
-<!-- Delete the storage that is selected-->
+<!-- Delete the media that is selected-->
 <script>
-    $(function deleteStorageByID() {
+    $(function deleteMediaByID() {
 
         $('#deleteMedia').submit(function () {
             var url = $(this).attr('action');
@@ -494,6 +503,9 @@ function successMessageDelete() {
                 url: url,
                 data: data,
                 dataType: 'json',
+                erro: function (){
+                    errorMessageDelete();
+                },
                 success: function (data) {
 
                     UpdateMediaTable();
