@@ -16,6 +16,12 @@ class CategoryController extends Controller {
             $this->getAllCategoryInfo();
         } else if ($page == "getCategorySearchResult"){
             $this->getCategorySearchResult();
+        } else if ($page == "getCategoryByID"){
+            $this->getCategoryByID();
+        } else if ($page == "deleteCategoryEngine"){
+            $this->deleteCategoryEngine();
+        } else if ($page == "editCategoryEngine"){
+            $this->editCategoryEngine();
         }
          
     }
@@ -42,7 +48,7 @@ class CategoryController extends Controller {
         echo $data;
     }
     
-        private function getCategorySearchResult(){
+    private function getCategorySearchResult(){
         $categoryModel = $GLOBALS["categoryModel"];
         
         if (isset($_POST['givenCategorySearchWord'])) {
@@ -56,5 +62,42 @@ class CategoryController extends Controller {
         $data = json_encode(array("category" => $searchResult));
         echo $data;
     }
+    
+    private function getCategoryByID(){
+        $givenCategoryID = $_REQUEST["givenCategoryID"];
+        $categoryModel = $GLOBALS["categoryModel"];
+        
+        $result = $categoryModel->getCategoryByID($givenCategoryID);
+        
+        $data = json_encode(array("categoryByID" => $result));
+        echo $data;
+    }
+    
+    private function deleteCategoryEngine(){
+        $deleteCategoryID = $_REQUEST["deleteCategoryID"]; 
+        
+        $categoryModel = $GLOBALS["categoryModel"];
+        $delited = $categoryModel->deleteCategory($deleteCategoryID);
+        
+        if($delited){
+        echo json_encode("success");} 
+        else {return false;}
+    }
+    
+    private function editCategoryEngine(){
+        $editCategoryID = $_REQUEST["editCategoryID"];
+        $editCategoryName = $_REQUEST["editCategoryName"];
+        $sessionID = $_SESSION["userID"];
+        
+        $sesionLog = $GLOBALS["userModel"];
+        $sesionLog->setSession($sessionID);
+        
+        $categoryEditInfo = $GLOBALS["categoryModel"];
+        $edited = $categoryEditInfo->editCategory($editCategoryName, $editCategoryID);
+        
+        if($edited){
+        echo json_encode("success");} else {return false;}
+    }
+    
 
 }   

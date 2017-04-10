@@ -59,7 +59,6 @@ class UserModel {
         return $this->editStmt->execute(array("editName" => $editName, "editUsername" => $editUsername, "editPassword" => $editPassword, "editUserLevel" => $editUserLevel, "editEmail" => $editEmail, "editUserID" => $editUserID, "editMediaID" => $editMediaID));
     }
 
-    // kommer tilbake til, ved oppretting av bruker
     public function addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID, $sessionID) {
         $this->setSession($sessionID);
         $this->addStmt->execute(array("givenName" => $givenName, "givenUsername" => $givenUsername, "givenPassword" => $givenPassword, "givenUserLevel" => $givenUserLevel, "givenEmail" => $givenEmail, "givenMediaID" => $givenMediaID));
@@ -67,7 +66,6 @@ class UserModel {
         return $lastAdded;
     }
 
-    // kommer tilbake til, ved sletting av bruker
     public function removeUser($removeUserID) {
        $this->disabCons->execute();
        $this->delStmt->execute(array("removeUserID" => $removeUserID));

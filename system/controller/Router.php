@@ -127,7 +127,10 @@ class Router {
                 case "addCategoryEngine" :
                 case "categoryAdm" :  
                 case "getAllCategoryInfo" :
-                case "getCategorySearchResult" :    
+                case "getCategorySearchResult" : 
+                case "getCategoryByID" :
+                case "deleteCategoryEngine" :
+                case "editCategoryEngine" :    
                     return new CategoryController();
                     
                 case "logg" :
