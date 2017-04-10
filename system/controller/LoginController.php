@@ -39,11 +39,6 @@ class LoginController extends Controller {
                         $_SESSION["userID"] = $User["userID"];
                         $_SESSION["userLevel"] = $User["userLevel"];
                         $loggModel->loginLog($type, $desc, $User["userID"]);
-                        ?> 
-                        <script>
-                            alert("work");
-                        </script>
-                        <?php
                     }
                 }
             }
@@ -55,7 +50,7 @@ class LoginController extends Controller {
             $message = array("errorMessage" => $errorMessage);
             return $this->render("LoginPage", $message);
         } 
-        }
+      } else {displayLoginPage();}
 
     }
     
