@@ -51,7 +51,7 @@ class LoginController extends Controller {
             $message = array("errorMessage" => $errorMessage);
             return $this->render("LoginPage", $message);
         } 
-      } else {displayLoginPage();}
+      } else { return $this->render("LoginPage");}
 
     }
     
