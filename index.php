@@ -43,10 +43,6 @@ $controller = $router->getLoginController();
 $controller->show($router->getPage());
 
 
-//Check if the user are logged in, if true the user will be redirected to the main index file.
-if($_SESSION["AreLoggedIn"] == true){
-    header("Location:system/index.php");          
-}
 
     
     
