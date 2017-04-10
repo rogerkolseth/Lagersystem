@@ -468,9 +468,9 @@ if (isset($GLOBALS["errorMessage"])) {
                
             <div class="modal-body row" >
                 <div class="col-md-6">
-                <label id="stocktakLabel">Uttak fra:</label>
+                <label id="stocktakLabel">Velg lager: </label>
 
-                <select name="onStorageID" id="chooseStorageStocktakContainer" class="form-control stocktaking">
+                <select name="onStorageID" id="chooseStorageStocktakContainer" class="form-control stocktaking marginBStorage">
                     
                 <!-- Her kommer Handlebars Template-->
 
