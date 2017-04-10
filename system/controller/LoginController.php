@@ -39,11 +39,13 @@ class LoginController extends Controller {
                         $_SESSION["userID"] = $User["userID"];
                         $_SESSION["userLevel"] = $User["userLevel"];
                         $loggModel->loginLog($type, $desc, $User["userID"]);
+                        alert();
                     }
                 }
             }
             if($_SESSION["AreLoggedIn"] == true){
             header("Location:system/index.php");
+            
             } else {
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
