@@ -37,7 +37,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
 
                                     <button class="btn btn-success btn-md" onclick="getCategoryInfo();" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                    <button class="btn btn-success btn-md" onclick="openModal();" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
+                                    <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#stocktakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
                                     <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct();" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-th-list"></span> <br/>Varelevering</button>
 
                                 </div>
@@ -1685,8 +1685,3 @@ $(document).ready(function()
 });
 </script>
 
-<script>
-function openModal(){
-    $('#stocktakingModal').modal('show');
-}          
-</script>
