@@ -44,12 +44,12 @@ class LoginController extends Controller {
             }
             if($_SESSION["AreLoggedIn"] == true){
             header("Location:system/index.php");
-            }
+            } else {
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
             return $this->render("LoginPage", $message);
         } 
-        
+        }
 
     }
     
