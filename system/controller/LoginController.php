@@ -39,7 +39,11 @@ class LoginController extends Controller {
                         $_SESSION["userID"] = $User["userID"];
                         $_SESSION["userLevel"] = $User["userLevel"];
                         $loggModel->loginLog($type, $desc, $User["userID"]);
-                        alert();
+                        ?> 
+                        <script>
+                            alert("work");
+                        </script>
+                        <?php
                     }
                 }
             }
