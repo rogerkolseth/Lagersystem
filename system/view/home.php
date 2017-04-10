@@ -1680,6 +1680,7 @@ $(document).ready(function()
       $('#stocktakingResultChart').empty();
       document.getElementById("saveStocktaking").value = "Neste";
       $('a#saveToCSV').hide();
+      $('#chooseStorageStocktakContainer').prop('selectedIndex',0);
     }) ;
 });
 </script>
