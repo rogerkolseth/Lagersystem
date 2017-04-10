@@ -107,9 +107,7 @@
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title text-center"><b>Brukeroversikt</b>
-                <div class="pull-right" style="margin-right: 3.3%">
-                    <p>Lagertilgang: </p>
-                </div>
+                
             </h3>
         </div>
         <table class="table table-responsive">
