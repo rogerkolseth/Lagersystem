@@ -96,7 +96,7 @@ class Router {
                 case "addProductEngine" :
                 case "editProductEngine" :
                 case "deleteProductEngine" :  
-                case "getAllCategoryInfo" :
+                
                 case "getLowInventory" :
                     return new ProductController();
                     
@@ -125,7 +125,10 @@ class Router {
                     return new mediaController();
                     
                 case "addCategoryEngine" :
-                    return new HomeController();
+                case "categoryAdm" :  
+                case "getAllCategoryInfo" :
+                case "getCategorySearchResult" :    
+                    return new CategoryController();
                     
                 case "logg" :
                 case "getAllLoggInfo" :

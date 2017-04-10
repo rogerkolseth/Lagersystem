@@ -21,7 +21,7 @@ $test = $GLOBALS["errorMessage"];
                     <input class="form-control" form="searchForMedia" type="text" name="givenMediaSearchWord" value="" placeholder="Søk etter media..">  
                     <input class="form-control btn btn-primary" form="searchForMedia" type="submit" value="Søk">
                     
-                    <button onclick="UpdateMediaTable()" class="btn btn-primary " type="button">Alle producter</button>
+                    <button onclick="UpdateMediaTable()" class="btn btn-primary " type="button">Alle medier</button>
                 
                 <div class="pull-right">
                     <button class="btn btn-success" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>

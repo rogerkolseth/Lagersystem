@@ -11,3 +11,4 @@ require_once("SaleController.php");
 require_once("ReturnController.php");
 require_once("MediaController.php");
 require_once("LoggController.php");
+require_once("CategoryController.php");

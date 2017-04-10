@@ -81,6 +81,9 @@
                                 <li>
                                     <a href="?page=mediaAdm"><span class="glyphicon glyphicon-picture"></span> Media Administrering</a>
                                 </li>
+                                <li>
+                                    <a href="?page=categoryAdm"><span class="glyphicon glyphicon-picture"></span> Kategori Administrering</a>
+                                </li>
                             </ul>
                   
                         </li>

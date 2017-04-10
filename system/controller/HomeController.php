@@ -9,27 +9,13 @@ class HomeController extends Controller {
 
     public function show($page) {
         if ($page == "home"){
-            $this->showInventory();
-        } else if ($page == "addCategoryEngine"){
-            $this->addCategory();
-        }
+            $this->showHomePage();
+        } 
          
     }
     
-    private function showInventory(){
+    private function showHomePage(){
         return $this->render("home");
-    }
-    
-    private function addCategory(){
-        $givenCategoryName = $_REQUEST["givenCategoryName"];
-        
-        $addCategory = $GLOBALS["categoryModel"];
-        $added = $addCategory->addCategory($givenCategoryName);
-       if($added){
-          echo json_encode("success"); 
-       } 
-        
-        
     }
 
 }    

@@ -454,9 +454,9 @@
     <td> <input form="editRestriction" class="selectRestriction" id="setRes{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
 
   
-
+</tr>
     {{/each}}
-    </tr>
+    
 
 
 </script>
