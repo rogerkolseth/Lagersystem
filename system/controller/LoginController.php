@@ -17,7 +17,7 @@ class LoginController extends Controller {
     }
 
     public function loginEngine() {
-        echo test;
+
         if (isset($_POST['givenUsername']) && ($_POST['givenPassword']) && ($_POST['givenLastLogin'])) {
             $givenUsername = $_REQUEST["givenUsername"];
             $givenPassword = $_REQUEST["givenPassword"];
@@ -43,16 +43,12 @@ class LoginController extends Controller {
                     }
                 }
             }
-            if($_SESSION["AreLoggedIn"] == true){
-            header("Location:system/index.php");
             
-            } else {
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
             return $this->render("LoginPage", $message);
-        } 
-      } else { return $this->render("LoginPage");}
-
+         
+      } 
     }
     
 
