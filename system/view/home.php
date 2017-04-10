@@ -512,7 +512,7 @@ if (isset($GLOBALS["errorMessage"])) {
                         </div>
                         <form action="?page=stockDelivery" method="post" id="stockDelivery">
                             <div class="modal-body">
-                                <label>Velg produkt som inn på hovedlager</label>
+                                <label>Velg produkt(er) som skal inn på Hovedlageret</label>
                                 <div id="stockDeliveryContainer">
 
                                 </div>
