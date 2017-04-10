@@ -36,7 +36,7 @@ $error = $GLOBALS["errorMessage"];
 
                             <label class="checkbox">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="show-hide" value="">
-                                Vis passord
+                                Vis passords
                             </label>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 Logg inn</button>
