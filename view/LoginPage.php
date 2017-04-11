@@ -13,6 +13,8 @@ $error = $GLOBALS["errorMessage"];
 <html>
     <head>
         <title>Login Tafjord</title>
+            <link rel="shortcut icon" type="image/png" href="image/Tafjord1.png">
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="system/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +30,7 @@ $error = $GLOBALS["errorMessage"];
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
                     
                     <div class="account-wall">
-                        <img class="profile-img" src="system/image/Tafjord1.jpg" alt="">
+                        <img class="profile-img" src="system/image/TafjordLogo3.png" alt="">
                         <form class="form-signin" id="login" action="?page=loginEngine" method="post">
                             <input type="text" class="form-control" placeholder="Brukernavn" name="givenUsername" required autofocus>
                             <input type="password" id="psw" autocomplete="off" class="form-control" placeholder="Passord" name="givenPassword" required>

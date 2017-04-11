@@ -166,12 +166,16 @@ if (isset($GLOBALS["errorMessage"])) {
                     <div class="panel-heading">
                         <h2 class="panel-title text-center"><b>Lagerbeholdning</b></h2>
                         <br>
-                        <select name="fromStorageID" id="chooseStorageContainer" class="form-control">
+                        <div id="chooseStorage">
+                            <select name="fromStorageID" id="chooseStorageContainer" class="form-control">
 
-                                <!-- Her kommer Handlebars Template-->
+                                    <!-- Her kommer Handlebars Template-->
 
-                        </select>
-                        
+                            </select>
+                        </div>
+                        <div id="singleStorageContainer">
+                            
+                        </div>
                     </div>
                 
 
@@ -990,26 +994,49 @@ $(document).ready(function()
                 showHide(data);
                 withdrawRestrictionTemplate(data);
                 chooseStorageStocktakTemplate(data);
+                singleStorageTemplate(data);
+                
             }
         });
     });
 </script>
 
+
 <script>
 function showHide(data){
     var limit = 0;
+    chosenStorageTemplate(data);
     for (var i = 0; i < data.transferRestriction.length; i++) {
             limit = limit + 1;
         }
                 
-        if(limit < 1){
-            $('#chooseStorage').show();
-            $('#singleStorage').hide();
+        if(limit < 2){
+            $('#chooseStorage').hide();
+            $('#singleStorageContainer').show();
+            
+            
         } else{
-            $('#chooseStorage').hide(); 
-            $('#singleStorage').show();
+            $('#chooseStorage').show(); 
+            $('#singleStorageContainer').hide();
         }
 }
+</script>
+<script>
+    function singleStorageTemplate(data) {
+        var rawTemplate = document.getElementById("singleStorageTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var stoktakeRestrictionGeneratedHTML = compiledTemplate(data);
+
+        var stocktakingContainer = document.getElementById("singleStorageContainer");
+        stocktakingContainer.innerHTML = stoktakeRestrictionGeneratedHTML;
+
+    }
+</script>
+<script id="singleStorageTemplate" type="text/x-handlebars-template">
+
+{{#each transferRestriction}}    
+<h2 class="panel-title text-center"><b>{{storageName}}</b></h2>  
+{{/each}}       
 </script>
 
 <!-- Display storages in drop down meny Template -->
