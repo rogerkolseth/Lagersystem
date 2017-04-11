@@ -13,7 +13,7 @@ $error = $GLOBALS["errorMessage"];
 <html>
     <head>
         <title>Login Tafjord</title>
-            <link rel="shortcut icon" type="image/png" href="image/Tafjord1.png">
+            <link rel="shortcut icon" type="image/png" href="system/image/TafjordLogo3.png">
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
