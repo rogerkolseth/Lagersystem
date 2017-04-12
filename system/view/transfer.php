@@ -17,11 +17,12 @@
 
             </select>
         </div>
-      
-
+        <div class="col-md-8">
+        <label>Overfør Til:</label>
+        </div>
         <div class="col-sm-3 col-md-4">  
             
-            <label>Overfør Til:</label>
+            
             <select name="toStorageID" form="transferProducts" id="toTransferRestrictionContainer" class="form-control update">
 
                 <!-- Her kommer Handlebars Template-->

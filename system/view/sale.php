@@ -11,8 +11,11 @@
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group ">
         <div id="success"></div>
         <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
+            <div class="col-md-12 row">
+                <label class="pull-left">Uttak fra:</label>
+            </div>
         <div class="col-sm-3 col-md-4 row">
-            <label>Uttak fra:</label>
+            
             <div id="chooseStorage">
             <select name="fromStorageID" form="withdrawProducts" id="withdrawrRestrictionContainer" class="form-control">
 
@@ -25,7 +28,7 @@
             </div>
         </div>
             
-        <div class="col-sm-1 col-md-2 row">
+        <div class="col-sm-1 col-md-2">
             <select id="chooseCategoryContainer" class="form-control">
                         
             </select>
