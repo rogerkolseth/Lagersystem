@@ -20,7 +20,7 @@ class SaleModel {
     
     const SELECT_ALL_LAST_QUERY =  "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, users.username, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
             " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID INNER JOIN users ON sales.userID = users.userID ORDER BY date DESC LIMIT 10";
-
+    
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;

@@ -10,6 +10,7 @@ class ProductModel {
     const SELECT_QUERY = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID" ;
     const UPDATE_QUERY = "UPDATE " . ProductModel::TABLE . " SET productName = :editProductName, price = :editPrice, categoryID = :editCategoryID, mediaID = :editMediaID WHERE productID = :editProductID" ;
     const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID WHERE productName LIKE :givenSearchWord";
+    const PROD_FROM_CATID = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID WHERE categories.categoryID = :givenCategoryID";
     const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, price, CategoryID, MediaID, date, macAdresse) VALUES (:givenProductName, :givenPrice, :givenCategoryID, :givenMediaID, :givenProductDate, :givenMacAdresse)";
     const DELETE_QUERY = "DELETE FROM " . ProductModel::TABLE . " WHERE productID = :removeProductID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
@@ -25,6 +26,7 @@ class ProductModel {
       $this->selProductID = $this->dbConn->prepare(ProductModel::SELECT_QUERY_PRODUCTID);
       $this->disabCons = $this->dbConn->prepare(ProductModel::DISABLE_CONS);
       $this->actCons = $this->dbConn->prepare(ProductModel::ACTIVATE_CONS);
+      $this->prodFromCat = $this->dbConn->prepare(ProductModel::PROD_FROM_CATID);
     }
     
     
@@ -58,5 +60,11 @@ class ProductModel {
         $this->selProductID->execute(array("givenProductID" => $givenProductID));
         return $this->selProductID->fetchAll(PDO::FETCH_ASSOC);
     } 
+    
+    public function getProductFromCategory($givenCategoryID) {
+        $this->prodFromCat->execute(array("givenCategoryID" => $givenCategoryID));
+        return $this->prodFromCat->fetchAll(PDO::FETCH_ASSOC);
+    } 
+    
     
 }

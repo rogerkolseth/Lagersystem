@@ -22,9 +22,10 @@ class ProductController extends Controller {
             $this->getProductByID();
         } else if ($page == "getProductLocation") {
             $this->getProductLocation();
-        } else if ($page == "getLowInventory")
-        {
+        } else if ($page == "getLowInventory"){
             $this->getLowInventory();
+        } else if ($page == "getProductFromCategory"){
+            $this->getProductFromCategory();
         }
     }
     
@@ -139,4 +140,18 @@ class ProductController extends Controller {
         echo $data;
     }
 
+    private function getProductFromCategory(){
+        $givenCategoryID = $_REQUEST["givenCategoryID"]; 
+        if($givenCategoryID == 0){
+            $this->getAllProductInfo();
+        } else {
+        $productInfo = $GLOBALS["productModel"];
+        
+        $result = $productInfo->getProductFromCategory($givenCategoryID);
+        
+        $data = json_encode(array("productInfo" => $result));
+
+        echo $data;
+        }
+    }
 } 

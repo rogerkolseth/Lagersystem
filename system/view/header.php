@@ -56,8 +56,8 @@
 
 
                         <li><a href="?page=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                        <li><a id="saleLink"><span class="glyphicon glyphicon-export"></span> Registrer Uttak</a></li>
-                        <li><a id="returnLink"><span class="glyphicon glyphicon-import"></span> Registrer Retur</a></li>    
+                        <li><a href ="?page=sale"><span class="glyphicon glyphicon-export"></span> Registrer Uttak</a></li>
+                        <li><a href = "?page=return"><span class="glyphicon glyphicon-import"></span> Registrer Retur</a></li>    
 
                         <li><a id="transferLink"><span class="glyphicon glyphicon-random"></span> Overføring</a></li>
 
@@ -127,12 +127,8 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (data) {
                     if(data > 1){ 
-                        document.getElementById("saleLink").href = "?page=sale";
-                        document.getElementById("returnLink").href = "?page=return";  
                         document.getElementById("transferLink").href = "?page=transfer";
                  } else {
-                        document.getElementById("saleLink").href = "?page=saleSingle";
-                        document.getElementById("returnLink").href = "?page=returnSingle";
                         document.getElementById("transferLink").href = "?page=transferSingle";
                  } 
             }

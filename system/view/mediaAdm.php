@@ -20,7 +20,9 @@ $test = $GLOBALS["errorMessage"];
                 
                     <input class="form-control" form="searchForMedia" type="text" name="givenMediaSearchWord" value="" placeholder="Søk etter media..">  
                     <input class="form-control btn btn-primary" form="searchForMedia" type="submit" value="Søk">
-                    
+                    <select id="chooseCategoryContainer" class="form-control btn btn-primary">
+                        
+                    </select>
                     <button onclick="UpdateMediaTable()" class="btn btn-primary " type="button">Alle medier</button>
                 
                 <div class="pull-right">
@@ -198,6 +200,12 @@ $test = $GLOBALS["errorMessage"];
 </div>      
     
     
+<script id="chooseCategoryTemplate" type="text/x-handlebars-template">
+<option data-id="0" value="0">Velg Kategori</option>
+{{#each category}}
+<option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
+{{/each}}
+</script>    
     
 <!-- Display what media you are deleting-->
 <script id="deleteMediaTemplate" type="text/x-handlebars-template">
@@ -544,4 +552,48 @@ function errorMessageDelete() {
         });
     });
  }
+</script>
+
+<script>
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getCategorySearchResult',
+            dataType: 'json',
+            success: function (data) {
+                chooseCategory(data);
+            }
+        });
+    });
+</script>
+
+<!-- Display storage template -->
+<script>
+    function chooseCategory(data) {
+        var rawTemplate = document.getElementById("chooseCategoryTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var productTableGeneratedHTML = compiledTemplate(data);
+        var productContainer = document.getElementById("chooseCategoryContainer");
+        productContainer.innerHTML = productTableGeneratedHTML;
+    }
+</script>
+
+<script>
+    $(function updateResultFromCategory() {
+        
+        $('#chooseCategoryContainer').on('change', function () {
+            givenCategoryID = $(this).find("option:selected").data('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getMediaFromCategory',
+                    data: {givenCategoryID: givenCategoryID},
+                    dataType: 'json',
+                    success: function (data) {
+                        mediaDisplayTemplate(data);
+                    }
+                });
+            return false;
+        });
+    });
 </script>

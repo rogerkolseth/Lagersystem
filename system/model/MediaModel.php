@@ -14,6 +14,8 @@ class MediaModel {
     const SELECT_QUERY = "SELECT * FROM " . MediaModel::TABLE;
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
+    const MEDIA_FROM_CATID = "SELECT * FROM " . MediaModel::TABLE . " INNER JOIN categories ON media.categoryID = categories.categoryID WHERE categories.categoryID = :givenCategoryID";
+    
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -25,7 +27,7 @@ class MediaModel {
       $this->selStmt = $this->dbConn->prepare(MediaModel::SELECT_QUERY);
       $this->disabCons = $this->dbConn->prepare(MediaModel::DISABLE_CONS);
       $this->actCons = $this->dbConn->prepare(MediaModel::ACTIVATE_CONS);
-
+      $this->mediaFromCat = $this->dbConn->prepare(MediaModel::MEDIA_FROM_CATID);
     }
     
     public function getMediaSearchResult($givenSearchWord){
@@ -56,5 +58,10 @@ class MediaModel {
         $this->selStmt->execute();
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC); 
     }
+    
+    public function getMediaFromCategory($givenCategoryID) {
+        $this->mediaFromCat->execute(array("givenCategoryID" => $givenCategoryID));
+        return $this->mediaFromCat->fetchAll(PDO::FETCH_ASSOC);
+    } 
 }
 

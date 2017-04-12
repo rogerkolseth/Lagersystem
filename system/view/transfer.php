@@ -28,7 +28,12 @@
                 
             </select>
             
-        </div>     
+        </div>
+        <div class="col-sm-1 col-md-2 row">
+            <select id="chooseCategoryContainer" class="form-control">
+                        
+            </select>
+        </div>  
         
         <br><br><br><br>
 
@@ -69,6 +74,13 @@
 </div>  
     </div>  
 
+
+<script id="chooseCategoryTemplate" type="text/x-handlebars-template">
+<option data-id="0" value="0">Velg Kategori</option>
+{{#each category}}
+<option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
+{{/each}}
+</script>
 
 <script id="transferQuantityTemplate" type="text/x-handlebars-template">
     
@@ -169,6 +181,26 @@ $(function () {
             
         return false;
 
+        });
+    });
+</script>
+
+<script>
+    $(function updateResultFromCategory() {
+        
+        $('#chooseCategoryContainer').on('change', function () {
+            givenCategoryID = $(this).find("option:selected").data('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getStoProFromCat',
+                    data: {givenCategoryID: givenCategoryID, givenStorageID: givenStorageID},
+                    dataType: 'json',
+                    success: function (data) {
+                        transferProductTemplate(data);
+                    }
+                });
+            return false;
         });
     });
 </script>
@@ -304,3 +336,27 @@ $(function () {
         });
     });
 </script>  
+
+<script>
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getCategorySearchResult',
+            dataType: 'json',
+            success: function (data) {
+                chooseCategory(data);
+            }
+        });
+    });
+</script>
+
+<!-- Display storage template -->
+<script>
+    function chooseCategory(data) {
+        var rawTemplate = document.getElementById("chooseCategoryTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var productTableGeneratedHTML = compiledTemplate(data);
+        var productContainer = document.getElementById("chooseCategoryContainer");
+        productContainer.innerHTML = productTableGeneratedHTML;
+    }
+</script>

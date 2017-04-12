@@ -15,8 +15,11 @@
                     <input class="form-control" form="searchForProduct" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter produkt..">  
                     <input class="form-control btn btn-primary" form="searchForProduct" type="submit" value="Søk">
                     
+                    <select id="chooseCategoryContainer" class="form-control btn btn-primary">
+                        
+                    </select>
                     <button onclick="UpdateProductTable()" class="btn btn-primary " type="button">Alle producter</button>
-                
+                    
                 <div class="pull-right row">
                     <button class="btn btn-success" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal">Opprett Produkt</button>
                 </div>
@@ -223,6 +226,12 @@
 
 
 <!-- TEMPLATES-->
+<script id="chooseCategoryTemplate" type="text/x-handlebars-template">
+<option data-id="0" value="0">Velg Kategori</option>
+{{#each category}}
+<option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
+{{/each}}
+</script>
 
 <script id="editProductTemplate" type="text/x-handlebars-template">
 {{#each product}}    
@@ -381,6 +390,7 @@
     });
 </script>
 
+
 <!-- Update product information -->
 <script>
     function UpdateProductTable() {
@@ -397,7 +407,7 @@
     }
 </script>
 
-<!-- Display storage template -->
+<!-- Display product template -->
 <script>
     function productTableTemplate(data) {
 
@@ -768,6 +778,49 @@ function createProductInfo(){
  }
 </script>
 
+<script>
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getCategorySearchResult',
+            dataType: 'json',
+            success: function (data) {
+                chooseCategory(data);
+            }
+        });
+    });
+</script>
+
+<!-- Display storage template -->
+<script>
+    function chooseCategory(data) {
+        var rawTemplate = document.getElementById("chooseCategoryTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var productTableGeneratedHTML = compiledTemplate(data);
+        var productContainer = document.getElementById("chooseCategoryContainer");
+        productContainer.innerHTML = productTableGeneratedHTML;
+    }
+</script>
+
+<script>
+    $(function updateResultFromCategory() {
+        
+        $('#chooseCategoryContainer').on('change', function () {
+            givenCategoryID = $(this).find("option:selected").data('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getProductFromCategory',
+                    data: {givenCategoryID: givenCategoryID},
+                    dataType: 'json',
+                    success: function (data) {
+                        productTableTemplate(data);
+                    }
+                });
+            return false;
+        });
+    });
+</script>
 
 <script>
 Date.prototype.yyyymmdd = function() {

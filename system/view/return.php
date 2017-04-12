@@ -9,10 +9,20 @@
         <form id="returnProducts" action="?page=returnProduct" method="post">
             <div class="col-sm-3 col-md-4 row">
             <label>Returner til:</label>
+            <div id="chooseStorage">
             <select name="toStorageID" form="returnProducts" id="returnRestrictionContainer" class="form-control">
 
                 <!-- Her kommer Handlebars Template-->
 
+            </select>
+            </div> 
+            <div id="singleStorageContainer">
+                            
+            </div>
+        </div>
+        <div class="col-sm-1 col-md-2 row">
+            <select id="chooseCategoryContainer" class="form-control">
+                        
             </select>
         </div>
         
@@ -67,6 +77,13 @@
 </div>
 </div>
 
+<script id="chooseCategoryTemplate" type="text/x-handlebars-template">
+<option data-id="0" value="0">Velg Kategori</option>
+{{#each category}}
+<option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
+{{/each}}
+</script>
+
 <script id="returnQuantityTemplate" type="text/x-handlebars-template">
 {{#each product}} 
     <tr class="selectQuantity">
@@ -115,6 +132,7 @@
             url: '?page=getTransferRestriction',
             dataType: 'json',
             success: function (data) {
+                showHide(data);
                 returnRestrictionTemplate(data);
             }
         });
@@ -138,7 +156,7 @@
 
 <!-- Get the selected storage, and POST this to retrive inventory-->
 <script>
- 
+  var givenStorageID;
     $(function POSTfromStorageModal() {
         
         $('#returnRestrictionContainer').on('change', function () {
@@ -168,6 +186,44 @@
 
             return false;
 
+        });
+    });
+</script>
+
+<script>
+function displaySingleStorage(givenStorageID) {
+       
+            if (givenStorageID > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getStorageProduct',
+                    data: {givenStorageID: givenStorageID},
+                    dataType: 'json',
+                    success: function (data) {
+                        returnProductTemplate(data);
+                    }
+                });
+            } 
+            return false;
+    }
+</script>
+
+<script>
+    $(function updateResultFromCategory() {
+        
+        $('#chooseCategoryContainer').on('change', function () {
+            givenCategoryID = $(this).find("option:selected").data('id');
+            
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getStoProFromCat',
+                    data: {givenCategoryID: givenCategoryID, givenStorageID: givenStorageID},
+                    dataType: 'json',
+                    success: function (data) {
+                        returnProductTemplate(data);
+                    }
+                });
+            return false;
         });
     });
 </script>
@@ -309,3 +365,49 @@ document.getElementById("date").value  = d.yyyymmdd();
         });
     });
 </script>  
+
+<script>
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getCategorySearchResult',
+            dataType: 'json',
+            success: function (data) {
+                chooseCategory(data);
+            }
+        });
+    });
+</script>
+
+<!-- Display storage template -->
+<script>
+    function chooseCategory(data) {
+        var rawTemplate = document.getElementById("chooseCategoryTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var productTableGeneratedHTML = compiledTemplate(data);
+        var productContainer = document.getElementById("chooseCategoryContainer");
+        productContainer.innerHTML = productTableGeneratedHTML;
+    }
+</script>
+
+<script>
+function showHide(data){
+    var limit = 0;
+    
+    for (var i = 0; i < data.transferRestriction.length; i++) {
+            limit = limit + 1;
+        }
+          
+        if(limit < 2){
+            $('#chooseStorage').hide();
+            $('#singleStorageContainer').show();
+            storageID = data.transferRestriction[0].storageID;  
+            displaySingleStorage(storageID);
+            $('#singleStorageContainer').append('<p>' + data.transferRestriction[0].storageName + '</p>'); 
+
+        } else{
+            $('#chooseStorage').show(); 
+            $('#singleStorageContainer').hide();
+        }
+}
+</script>

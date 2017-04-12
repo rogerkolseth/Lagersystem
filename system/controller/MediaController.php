@@ -25,6 +25,8 @@ class mediaController extends Controller {
             $this->editMedia();
         } else if ($page == "deleteMedia"){
             $this->deleteMedia();
+        } else if ($page == "getMediaFromCategory"){
+            $this->getMediaFromCategory();
         }
     }
 
@@ -167,6 +169,20 @@ class mediaController extends Controller {
             unlink("image/".$mediaName);
             echo json_encode("success");
         } else {return false;}
+    }
+    
+    private function getMediaFromCategory(){
+        $givenCategoryID = $_REQUEST["givenCategoryID"]; 
+        if($givenCategoryID == 0){
+            $this->getMediaSearchResult();
+        } else {
+        $mediaModel = $GLOBALS["mediaModel"];
+        
+        $result = $mediaModel->getMediaFromCategory($givenCategoryID);
+        
+        $data = json_encode(array("mediaInfo" => $result));
+        echo $data;
+        }
     }
 
 }

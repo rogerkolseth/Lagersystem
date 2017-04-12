@@ -50,9 +50,9 @@ class Router {
                 case "getSalesFromID" :   
                 case "editMySale" :  
                 case "getResCount" :
-                case "saleSingle" :  
                 case "getLastSaleInfo" :
                 case "getAllLastSaleInfo" :
+                case "getStoProFromCat" :    
                     return new SaleController();
                     
                 case "return" :
@@ -61,8 +61,7 @@ class Router {
                 case "returnProduct" :
                 case "getReturnsFromID" :    
                 case "editMyReturn" :
-                case "stockDelivery" :
-                case "returnSingle" :    
+                case "stockDelivery" :  
                     return new ReturnController();
                     
                 case "getAllProductInfo" :
@@ -96,7 +95,7 @@ class Router {
                 case "addProductEngine" :
                 case "editProductEngine" :
                 case "deleteProductEngine" :  
-                
+                case "getProductFromCategory" :  
                 case "getLowInventory" :
                     return new ProductController();
                     
@@ -122,6 +121,7 @@ class Router {
                 case "getMediaByID" :  
                 case "editMedia" :    
                 case "deleteMedia" :
+                case "getMediaFromCategory" :    
                     return new mediaController();
                     
                 case "addCategoryEngine" :

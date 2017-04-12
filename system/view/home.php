@@ -158,6 +158,8 @@ if (isset($GLOBALS["errorMessage"])) {
         </div>
         <?php }?>
 
+    
+    <!-- LAGERBEHOLDNING -->
 
         <div class="col-md-12">
         <div class="col-md-6">
@@ -1001,19 +1003,20 @@ $(document).ready(function()
     });
 </script>
 
-
+<!-- Dersom der er kun 1 lager så vises dete-->
 <script>
 function showHide(data){
     var limit = 0;
-    chosenStorageTemplate(data);
+    var storageID;
     for (var i = 0; i < data.transferRestriction.length; i++) {
             limit = limit + 1;
         }
-                
+          
         if(limit < 2){
             $('#chooseStorage').hide();
             $('#singleStorageContainer').show();
-            
+            storageID = data.transferRestriction[0].storageID;  
+            displaySingeStorage(storageID);
             
         } else{
             $('#chooseStorage').show(); 
@@ -1115,6 +1118,28 @@ function showHide(data){
 
         });
     });
+</script>
+
+<!-- Display inventory and chart if single storage-->
+<script>
+function displaySingeStorage(givenStorageID) {
+        
+            chartTest(givenStorageID);
+
+            if (givenStorageID > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getStorageProduct',
+                    data: {givenStorageID: givenStorageID},
+                    dataType: 'json',
+                    success: function (data) {
+                        chosenStorageTemplate(data);
+                        rowColor();
+                    }
+                });
+            } 
+            return false;
+    }
 </script>
 
 <script>

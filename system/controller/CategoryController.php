@@ -22,7 +22,7 @@ class CategoryController extends Controller {
             $this->deleteCategoryEngine();
         } else if ($page == "editCategoryEngine"){
             $this->editCategoryEngine();
-        }
+        } 
          
     }
     
@@ -89,15 +89,11 @@ class CategoryController extends Controller {
         $editCategoryName = $_REQUEST["editCategoryName"];
         $sessionID = $_SESSION["userID"];
         
-        $sesionLog = $GLOBALS["userModel"];
-        $sesionLog->setSession($sessionID);
-        
         $categoryEditInfo = $GLOBALS["categoryModel"];
         $edited = $categoryEditInfo->editCategory($editCategoryName, $editCategoryID);
         
         if($edited){
         echo json_encode("success");} else {return false;}
     }
-    
 
 }   
