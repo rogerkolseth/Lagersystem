@@ -29,7 +29,7 @@ class LoginController extends Controller {
             $loggModel = $GLOBALS["loggModel"];
             $userModel = $GLOBALS["userModel"];
             $userModel->updateLastLogin($givenLastLogin, $givenUsername);
-
+            $result = $loggModel->loggCheck($type);
             $Users = $userModel->getAllUserInfo();
 
             foreach ($Users as $User) {
@@ -39,21 +39,21 @@ class LoginController extends Controller {
                         $_SESSION["nameOfUser"] = $User["name"];
                         $_SESSION["userID"] = $User["userID"];
                         $_SESSION["userLevel"] = $User["userLevel"];
-                        $loggModel->loginLog($type, $desc, $User["userID"]);
+                        if ($result[0]["typeCheck"] > 0) {
+                            $loggModel->loginLog($type, $desc, $User["userID"]);
+                        }
                     }
                 }
             }
-            if($_SESSION["AreLoggedIn"] == true){
-                header("Location:system/index.php");          
+            if ($_SESSION["AreLoggedIn"] == true) {
+                header("Location:system/index.php");
             }
 
-            
+
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
             return $this->render("LoginPage", $message);
-         
-      } 
+        }
     }
-    
 
 }

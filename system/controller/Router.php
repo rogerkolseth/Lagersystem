@@ -136,6 +136,8 @@ class Router {
                 case "logg" :
                 case "getAllLoggInfo" :
                 case "getLatestLoggInfo" :
+                case "loggCheck" :
+                case "getLoggCheckStatus" :    
                     return new LoggController();
                     }
                 }

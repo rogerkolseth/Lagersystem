@@ -5,6 +5,8 @@ class LoggModel {
     private $dbConn;
     
     const TABLE = "logg";
+    const CHECK_TABLE = "loggtype";
+    
     const SELECT_QUERY = 
          "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
@@ -40,6 +42,11 @@ class LoggModel {
     
     const INSERT_LOGIN_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.typeID, logg.desc, logg.userID, logg.date) VALUES (:givenType, :givenDesc, :givenUserID, NOW())";
     
+    const CHECK_IF_LOGG = "SELECT loggtype.typeCheck FROM " . LoggModel::CHECK_TABLE . " WHERE loggtype.typeID = :givenTypeID";
+    
+    const EDIT_LOGG_CHECK = "UPDATE " . LoggModel::CHECK_TABLE . " SET typeCheck = :givenLoggCheck WHERE typeID = :givenTypeID";
+    const SELECT_CHECHSTATUS = "SELECT typeCheck FROM " . LoggModel::CHECK_TABLE;
+    
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
       $this->selStmt = $this->dbConn->prepare(LoggModel::SELECT_QUERY);
@@ -49,6 +56,9 @@ class LoggModel {
       $this->addDeliveryLogg = $this->dbConn->prepare(LoggModel::INSERT_DELIV_LOGG);
       $this->stocktakeLogg = $this->dbConn->prepare(LoggModel::INSERT_StOCKTAKE_LOGG);
       $this->loginLogg = $this->dbConn->prepare(LoggModel::INSERT_LOGIN_LOGG);
+      $this->checkStmt = $this->dbConn->prepare(LoggModel::CHECK_IF_LOGG);
+      $this->editLoggCheck = $this->dbConn->prepare(LoggModel::EDIT_LOGG_CHECK);
+      $this->chechStatus = $this->dbConn->prepare(LoggModel::SELECT_CHECHSTATUS);
     }   
     
     public function getAllLoggInfo($givenLogSearchWord){
@@ -76,4 +86,20 @@ class LoggModel {
     public function loginLog($type, $desc, $givenUserID){
         return $this->loginLogg->execute(array("givenType" => $type, "givenDesc" => $desc, "givenUserID" => $givenUserID));
     }
+    
+    public function loggCheck($givenTypeID) {
+        $this->checkStmt->execute(array("givenTypeID" => $givenTypeID));
+        return $this->checkStmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function editLoggCheck($typeID, $loggCheck) {
+        return $this->editLoggCheck->execute(array("givenTypeID" => $typeID, "givenLoggCheck" => $loggCheck));
+    }
+    
+    public function getLoggCheckStatus() {
+        $this->chechStatus->execute();
+        return $this->chechStatus->fetchALL(PDO::FETCH_ASSOC);    
+    }
+    
+    
 }

@@ -13,6 +13,7 @@
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style/home.css" rel="stylesheet">
         <script src="js/handlebars-v4.0.5.js"></script>
+        
         <!-- MetisMenu CSS -->
    
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -106,6 +107,7 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script src="Charts/Chart.js"></script>
+
  
 <script>
 
