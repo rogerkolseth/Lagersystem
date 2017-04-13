@@ -45,7 +45,7 @@ class LoggModel {
     const CHECK_IF_LOGG = "SELECT loggtype.typeCheck FROM " . LoggModel::CHECK_TABLE . " WHERE loggtype.typeID = :givenTypeID";
     
     const EDIT_LOGG_CHECK = "UPDATE " . LoggModel::CHECK_TABLE . " SET typeCheck = :givenLoggCheck WHERE typeID = :givenTypeID";
-    const SELECT_CHECHSTATUS = "SELECT typeCheck FROM " . LoggModel::CHECK_TABLE;
+    const SELECT_CHECHSTATUS = "SELECT * FROM " . LoggModel::CHECK_TABLE;
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;

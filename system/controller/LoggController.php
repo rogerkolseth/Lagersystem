@@ -15,6 +15,8 @@ class LoggController extends Controller {
             $this->loggCheck();
         } else if ($page == "getLoggCheckStatus"){
             $this->getLoggCheckStatus();
+        } else if ($page == "getAdvanceSearchData"){
+            $this->getAdvanceSearchData();
         }
     }
 
@@ -78,6 +80,18 @@ class LoggController extends Controller {
 
         $data = json_encode(array("checkStatus" => $status));
         echo $data;
+    }
+    
+    private function getAdvanceSearchData(){
+        $storageModel = $GLOBALS["storageModel"];
+        $userModel = $GLOBALS["userModel"];
+        
+        $userInfo = $userModel->getAllUserInfo();
+        $storageInfo = $storageModel->getAll();
+        
+        $data = json_encode(array("userInfo" => $userInfo, "storageInfo" => $storageInfo));
+        echo $data;
+        
     }
 
 }

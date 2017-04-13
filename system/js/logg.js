@@ -147,6 +147,7 @@ $(function () {
         dataType: 'json',
         success: function (data) {
             updateCheckbox(data);
+            typeSearchTemplate(data);
         }
     });
 });
@@ -184,3 +185,76 @@ function updateCheckbox(data) {
     }
 }
 
+
+function toggler() {
+    $("#advanceSearch").toggle();
+}
+
+$(function () {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getAdvanceSearchData',
+        dataType: 'json',
+        success: function (data) {
+            userSearchTemplate(data);
+            storageSearchTemplate(data);
+        }
+    });
+});
+
+function typeSearchTemplate(data) {
+    var $typeTemplate = $('#typeContainer');
+    $typeTemplate.empty();
+    $.each(data.checkStatus, function (i, item) {
+        $typeTemplate.append('<li>' + item.typeName +'<input id="typeContainer" type="checkbox" name="loggType[]" value="'+item.typeID+'"></li>');
+
+    });
+}
+
+function storageSearchTemplate(data) {
+    var $storageTemplate = $('#storageContainer');
+    $storageTemplate.empty();
+    var $toStorageTemplate = $('#toStorageContainer');
+    $toStorageTemplate.empty();
+    var $fromStorageTemplate = $('#fromStorageContainer');
+    $fromStorageTemplate.empty();
+    $.each(data.storageInfo, function (i, item) {
+        $storageTemplate.append('<li>' + item.storageName +'<input id="typeContainer" type="checkbox" name="storage[]" value="'+item.storageID+'"></li>');
+        $toStorageTemplate.append('<li>' + item.storageName +'<input id="typeContainer" type="checkbox" name="toStorage[]" value="'+item.storageID+'"></li>');
+        $fromStorageTemplate.append('<li>' + item.storageName +'<input id="typeContainer" type="checkbox" name="fromStorage[]" value="'+item.storageID+'"></li>');
+
+    });
+}
+
+function userSearchTemplate(data) {
+    var $usernameTemplate = $('#usernameContainer');
+    $usernameTemplate.empty();
+    var $onUserTemplate = $('#onUserContainer');
+    $onUserTemplate.empty();
+    $.each(data.userInfo, function (i, item) {
+        $usernameTemplate.append('<li>' + item.username +'<input id="typeContainer" type="checkbox" name="username[]" value="'+item.userID+'"></li>');
+        $onUserTemplate.append('<li>' + item.username +'<input id="typeContainer" type="checkbox" name="onUser[]" value="'+item.userID+'"></li>');
+
+    });
+}
+
+$(function POSTadvanceLoggSearch() {
+    $('#advanceLoggSearch').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            error: function () {
+
+            },
+            success: function (data) {
+
+            }
+        });
+        return false;
+    });
+});
