@@ -105,7 +105,7 @@ class ReturnController extends Controller {
         $transferQuantityArray = $_REQUEST["deliveryQuantity"];
         $toStorageID = "1";
         
-        $type = "Varelevering";
+        $type = 5;
         $desc= "Inn på lager";
         $sessionID = $_SESSION["userID"];
 

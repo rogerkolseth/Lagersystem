@@ -53,7 +53,7 @@
 <tbody id="tbodyid">
 {{#each allLoggInfo}}
     <tr>
-        <td>{{type}}</td>
+        <td>{{typeName}}</td>
         <td>{{desc}}</td>
         <td>{{storageName}}</td>
         <td>{{toStorage}}</td>

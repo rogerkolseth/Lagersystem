@@ -190,7 +190,7 @@ class StorageController extends Controller {
         $givenQuantityArray = $_REQUEST["givenQuantityArray"];
         $oldQuantityArray = $_REQUEST["oldQuantityArray"];  
         $differanceArray = $_REQUEST["differanceArray"];  
-        $type = "Varetelling";
+        $type = 10;
         $desc= "Oppdatering av antall";
         $sessionID = $_SESSION["userID"];
         

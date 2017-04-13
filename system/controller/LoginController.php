@@ -23,7 +23,7 @@ class LoginController extends Controller {
             $givenPassword = $_REQUEST["givenPassword"];
             $givenLastLogin = $_REQUEST["givenLastLogin"];
 
-            $type = "Innlogging";
+            $type = 2;
             $desc = "Bruker logget inn";
 
             $loggModel = $GLOBALS["loggModel"];

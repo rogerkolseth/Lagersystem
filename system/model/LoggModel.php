@@ -6,37 +6,39 @@ class LoggModel {
     
     const TABLE = "logg";
     const SELECT_QUERY = 
-         "SELECT l.type, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
         ."LEFT JOIN users as u1 ON l.userID = u1.userID "
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
-        ."LEFT JOIN products as p ON l.productID = p.productID WHERE l.type LIKE :givenSearchWord OR l.desc LIKE :givenSearchWord OR s1.storageName LIKE :givenSearchWord OR s2.storageName LIKE :givenSearchWord OR s3.storageName LIKE :givenSearchWord OR l.quantity LIKE :givenSearchWord "
+        ."LEFT JOIN loggType as lt ON l.typeID = lt.typeID "    
+        ."LEFT JOIN products as p ON l.productID = p.productID WHERE lt.typeName LIKE :givenSearchWord OR l.desc LIKE :givenSearchWord OR s1.storageName LIKE :givenSearchWord OR s2.storageName LIKE :givenSearchWord OR s3.storageName LIKE :givenSearchWord OR l.quantity LIKE :givenSearchWord "
             . "OR l.oldQuantity LIKE :givenSearchWord OR l.newQuantity LIKE :givenSearchWord OR l.differential LIKE :givenSearchWord OR u1.username LIKE :givenSearchWord OR u2.username OR p.productName LIKE :givenSearchWord OR customerNr LIKE :givenSearchWord ORDER BY date DESC";
     
     const SELECT_LATEST_QUERY = 
-         "SELECT l.type, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
         ."LEFT JOIN users as u1 ON l.userID = u1.userID "
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
+        ."LEFT JOIN loggType as lt ON l.typeID = lt.typeID "     
         ."LEFT JOIN products as p ON l.productID = p.productID ORDER BY date DESC LIMIT 10 ";
     
-    const INSERT_QUERY = "INSERT INTO " . LoggModel::TABLE . " (type, desc, storageID, fromStorageID, toStorageID, quantity, oldQuantity, newQuantity, differential, userID, onUserID, productID, date, customerNr) "
+    const INSERT_QUERY = "INSERT INTO " . LoggModel::TABLE . " (typeID, desc, storageID, fromStorageID, toStorageID, quantity, oldQuantity, newQuantity, differential, userID, onUserID, productID, date, customerNr) "
             . "VALUES (:type, :desc, :storageID, :fromStorageID, :toStorageID, :quantity, :oldQuantity, :newQuantity, :differential, :userID, :onUserID, :productID, :date, :customerNr)";
 
-    const INSERT_TRANS_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.fromStorageID, logg.toStorageID, logg.quantity, logg.userID, logg.productID, logg.date) VALUES "
+    const INSERT_TRANS_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.typeID, logg.desc, logg.fromStorageID, logg.toStorageID, logg.quantity, logg.userID, logg.productID, logg.date) VALUES "
             . "(:givenType, :givenDesc, :givenFromStorageID, :givenToStorageID, :givenQuantity, :givenSessionID, :givenProductID, NOW())";
     
-    const INSERT_DELIV_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.toStorageID, logg.quantity, logg.userID, logg.productID, logg.date) VALUES "
+    const INSERT_DELIV_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.typeID, logg.desc, logg.toStorageID, logg.quantity, logg.userID, logg.productID, logg.date) VALUES "
             . "(:givenType, :givenDesc, :givenToStorageID, :givenQuantity, :givenSessionID, :givenProductID, NOW())";
     
-    const INSERT_StOCKTAKE_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.storageID, logg.newQuantity, logg.oldQuantity, logg.differential, logg.productID, logg.userID, logg.date) VALUES "
+    const INSERT_StOCKTAKE_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.typeID, logg.desc, logg.storageID, logg.newQuantity, logg.oldQuantity, logg.differential, logg.productID, logg.userID, logg.date) VALUES "
             . "(:givenType, :givenDesc, :givenStorageID, :givenQuantity, :givenOldQuantity, :givenDifferanse, :givenProductID, :givenSessionID, NOW())";
     
-    const INSERT_LOGIN_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.userID, logg.date) VALUES (:givenType, :givenDesc, :givenUserID, NOW())";
+    const INSERT_LOGIN_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.typeID, logg.desc, logg.userID, logg.date) VALUES (:givenType, :givenDesc, :givenUserID, NOW())";
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;

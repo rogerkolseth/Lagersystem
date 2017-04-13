@@ -55,7 +55,7 @@ class transferController extends Controller {
         $toStorageID = $_REQUEST["toStorageID"];
         
         //LOGG
-        $type = "Overføring";
+        $type = 8;
         $desc= "Overførte produkt";
         $sessionID = $_SESSION["userID"];
         
