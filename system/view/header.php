@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Tafjord</title>
-        <link rel="shortcut icon" type="image/png" href="system/image/TafjordLogo3.png">
+        <link rel="shortcut icon" type="image/png" href="/image/TafjordLogo3.png">
         <!-- Bootstrap -->
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style/home.css" rel="stylesheet">
