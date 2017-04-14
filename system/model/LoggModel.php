@@ -156,8 +156,8 @@ class LoggModel {
         $this->advSearch = $this->dbConn->prepare($sql);
         $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray,[$fromDateArray, $toDateArray]);
         $this->advSearch->execute($params);
-        return $sql;
-        //return $this->advSearch->fetchALL(PDO::FETCH_ASSOC);    
+        
+        return $this->advSearch->fetchALL(PDO::FETCH_ASSOC);    
         
     }
     
