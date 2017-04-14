@@ -8,7 +8,7 @@
         <div id="success"></div>
         <form id="returnProducts" action="?page=returnProduct" method="post">
             <div class="col-md-12 row">
-                <label class="pull-left">Uttak fra:</label>
+                <label class="pull-left">Retur til:</label>
             </div>
             <div class="col-sm-3 col-md-4 row">
             

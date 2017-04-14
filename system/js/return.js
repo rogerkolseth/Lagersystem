@@ -279,9 +279,10 @@ function showHide(data) {
     if (limit < 2) {
         $('#chooseStorage').hide();
         $('#singleStorageContainer').show();
-        storageID = data.transferRestriction[0].storageID;
+        var storageID = data.transferRestriction[0].storageID;
         displaySingleStorage(storageID);
         $('#singleStorageContainer').append('<p>' + data.transferRestriction[0].storageName + '</p>');
+        $('#singleStorageContainer').append('<input name="toStorageID" data-id="'+storageID+'" value="'+storageID+'" type="hidden"/>');
         $('#chooseCategoryContainer').show();
     } else {
         $('#chooseStorage').show();
