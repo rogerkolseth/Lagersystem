@@ -168,7 +168,6 @@
                         </div>
                     </div> 
 
-                    <input class="form-control btn btn-primary" type="submit" form="advanceLoggSearch"  value="Søk">
                     
                     <div class="dropdown" id="toDateSearch">
                         <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
@@ -182,17 +181,12 @@
                         </div>
                     </div>
                     
-                    
+                    <input class="form-control btn btn-primary" type="submit" form="advanceLoggSearch"  value="Søk">
                     
                 </div>
 
             </form>
-            <div class="input-group date" data-provide="datepicker">
-                <input type="text" class="form-control">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
-            </div>
+
 
 
 

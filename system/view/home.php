@@ -787,3 +787,32 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 <script src="js/home.js"></script>   
+
+<script>
+// STOCKTAKING OF STORAGE -- >
+// stocktaking modal -- >
+
+$(function POSTfromStorageModal() {
+
+    $('#chooseStorageStocktakContainer').on('change', function () {
+       var givenStorageID = $(this).find("option:selected").data('id');
+       
+        if (givenStorageID > 0) {
+
+            $.ajax({
+                type: 'POST',
+                url: '?page=getStorageProduct',
+                data: {givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function (data) {
+                    stocktakingTemplate(data);
+                }
+            });
+        } else {
+            $('.product').empty();
+        }
+        return false;
+    });
+});
+
+</script>

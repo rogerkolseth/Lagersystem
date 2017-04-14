@@ -387,11 +387,11 @@ function withdrawRestrictionTemplate(data) {
 
 // Get the selected storage, and POST this to retrive inventory-- >
 
-var givenStorageID;
+
 $(function POSTfromStorageModals() {
 
     $('#chooseStorageContainer').on('change', function () {
-        givenStorageID = $(this).find("option:selected").data('id');
+        var givenStorageID = $(this).find("option:selected").data('id');
         chartTest(givenStorageID);
         if (givenStorageID > 0) {
             $.ajax({
@@ -667,29 +667,6 @@ document.getElementById("date").value = d.yyyymmdd();
 
 
 
-// STOCKTAKING OF STORAGE -- >
-// stocktaking modal -- >
-
-$(function POSTStocktakingModal() {
-    $('#chooseStorageStocktakContainer').on('change', function () {
-        givenStorageID = $(this).find("option:selected").data('id');
-        if (givenStorageID > 0) {
-
-            $.ajax({
-                type: 'POST',
-                url: '?page=getStorageProduct',
-                data: {givenStorageID: givenStorageID},
-                dataType: 'json',
-                success: function (data) {
-                    stocktakingTemplate(data);
-                }
-            });
-        } else {
-            $('.product').empty();
-        }
-        return false;
-    });
-});
 
 
 //stocktaking storage template-- >
@@ -748,10 +725,6 @@ $(function POSTstocktakingResult() {
 var resultBar;
 function stocktakingResultChart(data)
 {
-
-
-
-
     var ctx = document.getElementById('stocktakingResultChart').getContext('2d');
     var product = [];
     var antall = [];
@@ -885,4 +858,6 @@ $(document).ready(function ()
         $('#chooseStorageStocktakContainer').prop('selectedIndex', 0);
     });
 });
+     
+     
      
