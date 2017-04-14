@@ -140,8 +140,12 @@ class LoggModel {
         if(empty(!$fromDateArray) && empty(!$toDateArray)){
         $fromDate = implode(',', array_fill(0, count($fromDateArray), '?'));
         $toDate = implode(',', array_fill(0, count($toDateArray), '?'));
-        $dateQuery = "AND (l.date BETWEEN $fromDate AND $toDate)";
-        } else {$dateQuery = "";}
+        $fromDateQuery = "AND (l.date BETWEEN $fromDate";
+        $toDateQuery = "AND $toDate)";
+        $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray,[$fromDateArray], [$toDateArray]);
+        } else {$fromDateQuery = ""; $toDateQuery= "";
+        $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray);
+        }
         
         
         $sql = "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
@@ -151,12 +155,12 @@ class LoggModel {
         ."LEFT JOIN users as u1 ON l.userID = u1.userID "
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
         ."LEFT JOIN loggType as lt ON l.typeID = lt.typeID "    
-        ."LEFT JOIN products as p ON l.productID = p.productID WHERE $typeQuery $storageQuery $toStorageQuery $fromStorageQuery $usernameQuery $onUserQuery $productQuery $dateQuery ORDER BY date DESC";
+        ."LEFT JOIN products as p ON l.productID = p.productID WHERE $typeQuery $storageQuery $toStorageQuery $fromStorageQuery $usernameQuery $onUserQuery $productQuery $fromDateQuery $toDateQuery ORDER BY date DESC";
         
         $this->advSearch = $this->dbConn->prepare($sql);
-        $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray,[$fromDateArray, $toDateArray]);
-        $this->advSearch->execute($params);
         
+        $this->advSearch->execute($params);
+
         return $this->advSearch->fetchALL(PDO::FETCH_ASSOC);    
         
     }
