@@ -17,6 +17,8 @@ class LoggController extends Controller {
             $this->getLoggCheckStatus();
         } else if ($page == "getAdvanceSearchData"){
             $this->getAdvanceSearchData();
+        } else if($page == "advanceLoggSearch"){
+            $this->advanceLoggSearch();
         }
     }
 
@@ -91,6 +93,16 @@ class LoggController extends Controller {
         
         $data = json_encode(array("userInfo" => $userInfo, "storageInfo" => $storageInfo));
         echo $data;
+        
+    }
+    
+    private function advanceLoggSearch(){
+        $loggTypeArray = $_REQUEST["loggType"];
+        $storageArray = $_REQUEST["storage"];
+        $toStorageArray = $_REQUEST["toStorage"];
+        $fromStorageArray = $_REQUEST["fromStorage"];
+        $usernameArray = $_REQUEST["username"];
+        $onUserArray = $_REQUEST["onUser"];
         
     }
 

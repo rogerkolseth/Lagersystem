@@ -154,8 +154,9 @@
                         </ul>
                     </div>
                 </div>    
-                </div>
                 <input class="form-control btn btn-primary" type="submit" form="advanceLoggSearch"  value="Søk">
+
+                </div>
 
             </form>
 
