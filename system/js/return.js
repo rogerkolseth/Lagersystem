@@ -2,6 +2,7 @@
 
 $('#returnButton').hide(); // hides transferbutton  
 $('#commentContainer').hide();
+$('#chooseCategoryContainer').hide();
 $(function () {
     $.ajax({
         type: 'GET',
@@ -49,8 +50,8 @@ $(function POSTfromStorageModal() {
                     $('#returnButton').hide();
                     $('#commentContainer').hide();
                     $('.selectQuantity').remove();
-
-
+                    $('#chooseCategoryContainer').show();
+                    $('#chooseCategoryContainer').prop('selectedIndex',0);
                 }
             });
         } else {
@@ -58,6 +59,7 @@ $(function POSTfromStorageModal() {
             $('.selectQuantity').remove();
             $('#commentContainer').hide();
             $('#returnButton').hide();
+            $('#chooseCategoryContainer').hide();
         }
 
         return false;

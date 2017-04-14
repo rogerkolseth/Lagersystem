@@ -1,6 +1,7 @@
 // Get storage information with user restriction -->
 
-$('#transferButton').hide(); // hides transferbutton                    
+$('#transferButton').hide(); // hides transferbutton          
+$('#chooseCategoryContainer').hide();
 $(function () {
     $.ajax({
         type: 'GET',
@@ -47,6 +48,8 @@ $(function POSTfromTransferModal() {
                     transferProductTemplate(data);
                     $('.selectQuantity').remove();
                     $('#transferButton').hide();
+                    $('#chooseCategoryContainer').show();
+                    $('#chooseCategoryContainer').prop('selectedIndex',0);
 
                 }
             });
@@ -54,6 +57,7 @@ $(function POSTfromTransferModal() {
             $('.product').remove();
             $('.selectQuantity').remove();
             $('#transferButton').hide();
+            $('#chooseCategoryContainer').hide();
         }
 
         return false;
