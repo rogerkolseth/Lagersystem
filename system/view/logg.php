@@ -22,31 +22,6 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="redigerknapp" data-toggle="dropdown" data-target="#loggCheckMenu" aria-haspopup="true" aria-expanded="false">
                 <span class="glyphicon glyphicon-cog" style="color: grey"></span>
             </button>
-            <div class="col-md-12 row">
-            <div class="col-md-3 row">
-            <input class="form-control" type="text" name="datefilter" value="" />
-            </div>
-            </div>
-            <script type="text/javascript">
-                    $(function() {
-
-                      $('input[name="datefilter"]').daterangepicker({
-                          autoUpdateInput: false,
-                          locale: {
-                              cancelLabel: 'Clear'
-                          }
-                      });
-
-                      $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-                          $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-                      });
-
-                      $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-                          $(this).val('');
-                      });
-
-                    });
-            </script>   
 
             <div class="dropdown" id="loggCheckMenu">
 
@@ -181,30 +156,7 @@
                     </div>     
 
 
-                    <div class="dropdown" id="fromDateSearch">
-                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                            Velg Fra Dato
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                            <h4>Velg fra dato:</h4>
-                            <ul style="list-style-type:circle" id="dateContainer">
-
-                            </ul>
-                        </div>
-                    </div> 
-
-                    
-                    <div class="dropdown" id="toDateSearch">
-                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                            Velg Til Dato
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                            <h4>Velg til dato:</h4>
-                            <ul style="list-style-type:circle" id="dateContainer">
-
-                            </ul>
-                        </div>
-                    </div>
+                    <input class="form-control" type="text" name="date" value="" />
                     
                     <input class="form-control btn btn-primary" type="submit" form="advanceLoggSearch"  value="Søk">
                     
@@ -271,3 +223,24 @@
 </script>
 
 <script src="js/logg.js"></script>
+
+            <script type="text/javascript">
+                    $(function() {
+
+                      $('input[name="date"]').daterangepicker({
+                          autoUpdateInput: false,
+                          locale: {
+                              cancelLabel: 'Clear'
+                          }
+                      });
+
+                      $('input[name="date"]').on('apply.daterangepicker', function(ev, picker) {
+                          $(this).val(picker.startDate.format('YYYY-MM-DD') + ' / ' + picker.endDate.format('YYYY-MM-DD'));
+                      });
+
+                      $('input[name="date"]').on('cancel.daterangepicker', function(ev, picker) {
+                          $(this).val('');
+                      });
+
+                    });
+            </script>   

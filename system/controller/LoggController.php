@@ -123,9 +123,16 @@ class LoggController extends Controller {
         if (isset($_POST['product'])) {
             $productArray = $_REQUEST["product"];
         } else { $productArray = array();}
+        if (empty(!$_POST['date'])) {
+            $dateArray = $_REQUEST["date"];
+            $date = explode("/", $dateArray);
+            $fromDate = $date[0];
+            $toDate = $date[1];
+        } else { $fromDate=""; $toDate="";}
+        
         
         $loggModel = $GLOBALS["loggModel"];
-        $search = $loggModel->advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray);
+        $search = $loggModel->advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray, $fromDate, $toDate);
         
         $data = json_encode(array("allLoggInfo" => $search));
         echo $data;
