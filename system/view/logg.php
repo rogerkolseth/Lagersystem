@@ -68,101 +68,135 @@
 
 
             <button  class="btn btn-primary" onclick="toggler();">Avansert søk</button>
-            
+
             <form id="advanceLoggSearch" class="form-inline" action="?page=advanceLoggSearch" method="post">
                 <div id="advanceSearch" class="advanceSearchToogle">
-                <div class="dropdown" id="typeSearch">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                        Velg Type
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                        <h4>Velg type:</h4>
-                        <ul style="list-style-type:circle" id="typeContainer">
+                    <div class="dropdown" id="typeSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg Type
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg type:</h4>
+                            <ul style="list-style-type:circle" id="typeContainer">
 
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="dropdown" id="storageSearch">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                        Velg Lager
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                        <h4>Velg Lager:</h4>
-                        <ul style="list-style-type:circle" id="storageContainer">
+                    <div class="dropdown" id="storageSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg Lager
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg Lager:</h4>
+                            <ul style="list-style-type:circle" id="storageContainer">
 
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="dropdown" id="toStorageSearch">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                        Velg Til Lager
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                        <h4>Velg Til Lager:</h4>
-                        <ul style="list-style-type:circle" id="toStorageContainer">
 
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="dropdown" id="fromStorageSearch">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                        Velg Fra Lager
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                        <h4>Velg Fra Lager:</h4>
-                        <ul style="list-style-type:circle" id="fromStorageContainer">
+                    <div class="dropdown" id="toStorageSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg Til Lager
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg Til Lager:</h4>
+                            <ul style="list-style-type:circle" id="toStorageContainer">
 
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="dropdown" id="fromStorageSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg Fra Lager
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg Fra Lager:</h4>
+                            <ul style="list-style-type:circle" id="fromStorageContainer">
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dropdown" id="usernameSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg bruker
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg bruker:</h4>
+                            <ul style="list-style-type:circle" id="usernameContainer">
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dropdown" id="onUserSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg På Bruker
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg På Bruker:</h4>
+                            <ul style="list-style-type:circle" id="onUserContainer">
+
+                            </ul>
+                        </div>
+                    </div> 
+
+                    <div class="dropdown" id="productSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg Produkt
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg Produkt:</h4>
+                            <ul style="list-style-type:circle" id="productContainer">
+
+                            </ul>
+                        </div>
+                    </div>     
+
+
+                    <div class="dropdown" id="fromDateSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg Fra Dato
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg fra dato:</h4>
+                            <ul style="list-style-type:circle" id="dateContainer">
+
+                            </ul>
+                        </div>
+                    </div> 
+
+                    <input class="form-control btn btn-primary" type="submit" form="advanceLoggSearch"  value="Søk">
                     
-                <div class="dropdown" id="usernameSearch">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                        Velg bruker
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                        <h4>Velg bruker:</h4>
-                        <ul style="list-style-type:circle" id="usernameContainer">
+                    <div class="dropdown" id="toDateSearch">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            Velg Til Dato
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="redigerknapp">
+                            <h4>Velg til dato:</h4>
+                            <ul style="list-style-type:circle" id="dateContainer">
 
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
-                </div>
                     
-                <div class="dropdown" id="onUserSearch">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                        Velg På Bruker
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                        <h4>Velg På Bruker:</h4>
-                        <ul style="list-style-type:circle" id="onUserContainer">
-
-                        </ul>
-                    </div>
-                </div> 
                     
-                <div class="dropdown" id="dateSearch">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                        Velg Periode
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="redigerknapp">
-                        <h4>Velg Periode:</h4>
-                        <ul style="list-style-type:circle" id="dateContainer">
-
-                        </ul>
-                    </div>
-                </div>    
-                <input class="form-control btn btn-primary" type="submit" form="advanceLoggSearch"  value="Søk">
-
+                    
                 </div>
 
             </form>
+            <div class="input-group date" data-provide="datepicker">
+                <input type="text" class="form-control">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
+            </div>
 
-            
-            
-             
+
+
+
             <br><br>
 
 

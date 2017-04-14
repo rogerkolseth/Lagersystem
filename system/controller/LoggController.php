@@ -87,23 +87,48 @@ class LoggController extends Controller {
     private function getAdvanceSearchData(){
         $storageModel = $GLOBALS["storageModel"];
         $userModel = $GLOBALS["userModel"];
+        $productModel = $GLOBALS["productModel"];
         
         $userInfo = $userModel->getAllUserInfo();
         $storageInfo = $storageModel->getAll();
+        $givenProductSearchWord = "%%";
+        $productInfo = $productModel->getSearchResult($givenProductSearchWord);
         
-        $data = json_encode(array("userInfo" => $userInfo, "storageInfo" => $storageInfo));
+        
+        
+        $data = json_encode(array("userInfo" => $userInfo, "storageInfo" => $storageInfo, "productInfo" => $productInfo));
         echo $data;
         
     }
     
     private function advanceLoggSearch(){
-        $loggTypeArray = $_REQUEST["loggType"];
-        $storageArray = $_REQUEST["storage"];
-        $toStorageArray = $_REQUEST["toStorage"];
-        $fromStorageArray = $_REQUEST["fromStorage"];
-        $usernameArray = $_REQUEST["username"];
-        $onUserArray = $_REQUEST["onUser"];
+        if (isset($_POST['loggType'])) {
+            $loggTypeArray = $_REQUEST["loggType"];
+        } else { $loggTypeArray = array();}
+        if (isset($_POST['storage'])) {
+            $storageArray = $_REQUEST["storage"];
+        } else { $storageArray = array();}
+        if (isset($_POST['toStorage'])) {
+            $toStorageArray = $_REQUEST["toStorage"];
+        } else { $toStorageArray = array();}
+        if (isset($_POST['fromStorage'])) {
+            $fromStorageArray = $_REQUEST["fromStorage"];
+        } else { $fromStorageArray = array();}
+        if (isset($_POST['username'])) {
+            $usernameArray = $_REQUEST["username"];
+        } else { $usernameArray = array();}
+        if (isset($_POST['onUser'])) {
+            $onUserArray = $_REQUEST["onUser"];
+        } else { $onUserArray = array();}
+        if (isset($_POST['product'])) {
+            $productArray = $_REQUEST["product"];
+        } else { $productArray = array();}
         
+        $loggModel = $GLOBALS["loggModel"];
+        $search = $loggModel->advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray);
+        
+        $data = json_encode(array("allLoggInfo" => $search));
+        echo $data;
     }
 
 }

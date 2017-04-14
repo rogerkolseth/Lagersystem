@@ -40,7 +40,7 @@ function displayLoggTable(data) {
 
 
 
-$(function POSTsearchForSale() {
+$(function POSTsearchForLog() {
 
     $('#searchForLog').submit(function () {
         var url = $(this).attr('action');
@@ -198,6 +198,7 @@ $(function () {
         success: function (data) {
             userSearchTemplate(data);
             storageSearchTemplate(data);
+            productSearchTemplate(data);
         }
     });
 });
@@ -238,6 +239,15 @@ function userSearchTemplate(data) {
     });
 }
 
+function productSearchTemplate(data) {
+    var $productTemplate = $('#productContainer');
+    $productTemplate.empty();
+    $.each(data.productInfo, function (i, item) {
+        $productTemplate.append('<li>' + item.productName +'<input id="typeContainer" type="checkbox" name="product[]" value="'+item.productID+'"></li>');
+
+    });
+}
+
 $(function POSTadvanceLoggSearch() {
     $('#advanceLoggSearch').submit(function () {
         var url = $(this).attr('action');
@@ -248,13 +258,14 @@ $(function POSTadvanceLoggSearch() {
             url: url,
             data: data,
             dataType: 'json',
-            error: function () {
-
-            },
             success: function (data) {
-
+                displayLoggTable(data);
             }
         });
         return false;
     });
+});
+
+$('.datepicker').datepicker({
+    startDate: '-3d'
 });

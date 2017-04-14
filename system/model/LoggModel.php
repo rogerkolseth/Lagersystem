@@ -101,5 +101,56 @@ class LoggModel {
         return $this->chechStatus->fetchALL(PDO::FETCH_ASSOC);    
     }
     
+    public function advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray){
+        if(empty(!$loggTypeArray)){
+        $type = implode(',', array_fill(0, count($loggTypeArray), '?'));
+        $typeQuery = "l.typeID IN ($type)";
+        } else {$typeQuery = "l.typeID IN (SELECT l.typeID)";}
+        
+        if(empty(!$storageArray)){
+        $storage = implode(',', array_fill(0, count($storageArray), '?'));
+        $storageQuery = "AND l.storageID IN ($storage)";
+        } else {$storageQuery = "";}
+        
+        if(empty(!$toStorageArray)){
+        $toStorage = implode(',', array_fill(0, count($toStorageArray), '?'));
+        $toStorageQuery = "AND l.toStorageID IN ($toStorage)";
+        } else {$toStorageQuery = "";}
+        
+        if(empty(!$fromStorageArray)){
+        $fromStorage = implode(',', array_fill(0, count($fromStorageArray), '?'));
+        $fromStorageQuery = "AND l.fromStorageID IN ($fromStorage)";
+        } else {$fromStorageQuery = "";}
+        
+        if(empty(!$usernameArray)){
+        $username = implode(',', array_fill(0, count($usernameArray), '?'));
+        $usernameQuery = "AND l.userID IN ($username)";
+        } else {$usernameQuery = "";}
+        
+        if(empty(!$onUserArray)){
+        $onUser = implode(',', array_fill(0, count($onUserArray), '?'));
+        $onUserQuery = "AND l.onUserID IN ($onUser)";
+        } else {$onUserQuery = "";}
+        
+        if(empty(!$productArray)){
+        $product = implode(',', array_fill(0, count($productArray), '?'));
+        $productQuery = "AND l.productID IN ($product)";
+        } else {$productQuery = "";}
+        
+        
+        $sql = "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+        ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
+        ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
+        ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
+        ."LEFT JOIN users as u1 ON l.userID = u1.userID "
+        ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
+        ."LEFT JOIN loggType as lt ON l.typeID = lt.typeID "    
+        ."LEFT JOIN products as p ON l.productID = p.productID WHERE $typeQuery $storageQuery $toStorageQuery $fromStorageQuery $usernameQuery $onUserQuery $productQuery";
+        
+        $this->advSearch = $this->dbConn->prepare($sql);
+        $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray);
+        $this->advSearch->execute($params);
+        return $this->advSearch->fetchALL(PDO::FETCH_ASSOC);    
+    }
     
 }
