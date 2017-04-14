@@ -8,7 +8,7 @@ class LoggModel {
     const CHECK_TABLE = "loggtype";
     
     const SELECT_QUERY = 
-         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.date AS date FROM " . LoggModel::TABLE . " AS l "
+         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
