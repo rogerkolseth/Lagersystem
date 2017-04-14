@@ -2,7 +2,6 @@
 
 
 $('#withdrawButton').hide();
-$('#chooseCategoryContainer').hide();
 $(function () {
     $.ajax({
         type: 'GET',
@@ -288,10 +287,12 @@ function showHide(data) {
         storageID = data.transferRestriction[0].storageID;
         displaySingleStorage(storageID);
         $('#singleStorageContainer').append('<p>' + data.transferRestriction[0].storageName + '</p>');
+        $('#chooseCategoryContainer').show();
 
     } else {
         $('#chooseStorage').show();
         $('#singleStorageContainer').hide();
+        $('#chooseCategoryContainer').hide();
     }
 }
 
