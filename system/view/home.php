@@ -16,154 +16,154 @@ if (isset($GLOBALS["errorMessage"])) {
         }
         ?>
     </div>
-    
-    <?php if ($_SESSION["userLevel"] == "Administrator") {?>
-    <div id="snarveidiv">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <span class="glyphicon glyphicon-bookmark"></span> Snarveier</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="">
-                            <div class="col-xs-6 col-sm-6 col-md-12 text-center">
-                                <div class="pull-left">
-                                    <button class="btn btn-success btn-md" type="button" onclick="getMediaInfo();" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
-                                    <button class="btn btn-success btn-md" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
-                                    <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
-                                    <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
+    <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+        <div id="snarveidiv">
 
-                                    <button class="btn btn-success btn-md" onclick="getCategoryInfo();" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                    <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#stocktakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
-                                    <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct();" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-th-list"></span> <br/>Varelevering</button>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-bookmark"></span> Snarveier</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="">
+                                <div class="col-xs-6 col-sm-6 col-md-12 text-center">
+                                    <div class="pull-left">
+                                        <button class="btn btn-success btn-md" type="button" onclick="getMediaInfo();" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
+                                        <button class="btn btn-success btn-md" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
+                                        <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
+                                        <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
 
+                                        <button class="btn btn-success btn-md" onclick="getCategoryInfo();" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+                                        <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#stocktakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
+                                        <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct();" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-th-list"></span> <br/>Varelevering</button>
+
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="?page=editUser" class="btn btn-warning btn-md" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
+                                        <a href="../" class="btn btn-danger btn-md" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
+                                    </div>
                                 </div>
-                                <div class="pull-right">
-                                    <a href="?page=editUser" class="btn btn-warning btn-md" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
-                                    <a href="../" class="btn btn-danger btn-md" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
-                                </div>
+
                             </div>
-                                
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    <?php } ?>
+
+
+
+    <div class="container">
+
+        <div class="col-md-12">
+            <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h2 class="panel-title text-center"><b>Snart tom lagerbeholdning</b></h2>
+                        </div>
+                        <table class="table fontSizeTableContainer">
+                            <thead>
+                                <tr>
+                                    <th>Produkt</th>
+                                    <th>Antall</th>
+                                    <th>Lager</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lowInvContainer">
+                                <!-- Handlebars -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            <?php } ?>
+            <?php if ($_SESSION["userLevel"] == "User") { ?>
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" id="panelcolor">
+                            <h2 class="panel-title text-center"><b>Siste salg</b></h2>
                         </div>
 
+                        <table class="table fontSizeTableContainer">
+                            <thead>
+                                <tr>
+                                    <th>Selger</th>
+                                    <th>KundeNr</th>
+                                    <th>Lager</th>
+                                    <th>Antall</th>
+                                    <th>Kommentar</th>
+                                    <th>Dato</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="allLastSaleContainer">
+                                <!-- Handlebars -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            <?php } ?>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h2 class="panel-title text-center"><b>Dine siste salg</b></h2>
+
+                    </div>
+                    <table class="table fontSizeTableContainer">
+                        <thead>
+                            <tr>
+                                <th>KundeNr</th>
+                                <th>Produkt</th>
+                                <th>Lager</th>
+                                <th>Antall</th>
+                                <th>Kommentar</th>
+                                <th>Dato</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lastSaleContainer">
+                            <!-- Handlebars -->
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+        <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+            <div class="col-md-12">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" >
+
+                            <h2 class="panel-title text-center"><b>Siste hendeleser</b></h2>
+                        </div>
+                        <table class="table fontSizeTableContainer" id="loggTableContainer">
+                            <!-- Innhold fra Handlebars Template -->
+                        </table>
+
                     </div>
                 </div>
-            </div>
-        </div>
 
 
-    </div>
-    <?php }?>
-   
-    
- 
-<div class="container">
+            </div>
+        <?php } ?>
 
-    <div class="col-md-12">
-        <?php if ($_SESSION["userLevel"] == "Administrator") {?>
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h2 class="panel-title text-center"><b>Snart tom lagerbeholdning</b></h2>
-                </div>
-                <table class="table fontSizeTableContainer">
-                    <thead>
-                        <tr>
-                            <th>Produkt</th>
-                            <th>Antall</th>
-                            <th>Lager</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lowInvContainer">
-                    <!-- Handlebars -->
-                    </tbody>
-                </table>
-            </div>
-            
-        </div>
-        <?php }?>
-        <?php if ($_SESSION["userLevel"] == "User") {?>
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading" id="panelcolor">
-                    <h2 class="panel-title text-center"><b>Siste salg</b></h2>
-                </div>
-                
-                <table class="table fontSizeTableContainer">
-                    <thead>
-                        <tr>
-                            <th>Selger</th>
-                            <th>KundeNr</th>
-                            <th>Lager</th>
-                            <th>Antall</th>
-                            <th>Kommentar</th>
-                            <th>Dato</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody id="allLastSaleContainer">
-                        <!-- Handlebars -->
-                    </tbody>
-                </table>
-            </div>
-            
-        </div>
-        <?php }?>
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h2 class="panel-title text-center"><b>Dine siste salg</b></h2>
-                    
-                </div>
-                <table class="table fontSizeTableContainer">
-                    <thead>
-                        <tr>
-                            <th>KundeNr</th>
-                            <th>Produkt</th>
-                            <th>Lager</th>
-                            <th>Antall</th>
-                            <th>Kommentar</th>
-                            <th>Dato</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lastSaleContainer">
-                        <!-- Handlebars -->
-                    </tbody>
-                </table>
-                
-            </div>
-            
-        </div>
-    </div>
-        <?php if ($_SESSION["userLevel"] == "Administrator") {?>
-        <div class="col-md-12">
-            
-            <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading" >
-                    
-                    <h2 class="panel-title text-center"><b>Siste hendeleser</b></h2>
-                </div>
-                <table class="table fontSizeTableContainer" id="loggTableContainer">
-                <!-- Innhold fra Handlebars Template -->
-                </table>
-                
-            </div>
-            </div>
-           
-            
-        </div>
-        <?php }?>
 
-    
-    <!-- LAGERBEHOLDNING -->
+        <!-- LAGERBEHOLDNING -->
 
         <div class="col-md-12">
-        <div class="col-md-6">
-            
+            <div class="col-md-6">
+
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h2 class="panel-title text-center"><b>Lagerbeholdning</b></h2>
@@ -171,110 +171,110 @@ if (isset($GLOBALS["errorMessage"])) {
                         <div id="chooseStorage">
                             <select name="fromStorageID" id="chooseStorageContainer" class="form-control">
 
-                                    <!-- Her kommer Handlebars Template-->
+                                <!-- Her kommer Handlebars Template-->
 
                             </select>
                         </div>
                         <div id="singleStorageContainer">
-                            
+
                         </div>
                     </div>
-                
 
-                
-                <table class="table table-bordered fontSizeTableContainer">
-                    <thead>
-                        <tr>
-                            <th>Produkt</th>
-                            <th>Antall</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody id="chosenStorageContainer">
-                        
-                    <!-- Her kommer Handlebars Template-->
-                    </tbody>
-                </table>
-            </div>
+
+
+                    <table class="table table-bordered fontSizeTableContainer">
+                        <thead>
+                            <tr>
+                                <th>Produkt</th>
+                                <th>Antall</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="chosenStorageContainer">
+
+                            <!-- Her kommer Handlebars Template-->
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-md-6">
-                
+
                 <canvas id="myChart" height="290"></canvas>
-                
-              
+
+
             </div>
         </div>
     </div>
-    
-        <!-- HER KOMMER INNHOLDET>   -->                
 
-        <!-- Opprett bruker modal -->
+    <!-- HER KOMMER INNHOLDET>   -->                
 
-
-        <div class="modal fade" id="createUserModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Innholdet til Modalen -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Opprett bruker</h4>
-                    </div>
-                    <form action="?page=addUserEngine" method="post" id="createUser">
-                        <div class="modal-body">
-                            <div class="text-center">
-                                <table class="table">
-                                
-                                    <tr>
-                                        <th style="border: none">Name:</th>
-                                        <td style="border: none"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Brukernavn:</th>
-                                        <td><input class="form-control" type="text" name="givenUsername" required="required" value="" autocomplete="off"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Passord:</th>
-                                        <td><input class="form-control" type="text" name="givenPassword" required="required" value="" autocomplete="off"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email:</th>
-                                        <td><input class="form-control" type="text" name="givenEmail" required="required" value="" autocomplete="off"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>UserLevel:</th>                                       
-                                        <td>
-                                            <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
-                                                <option></option>
-                                                <option value="User">User</option>
-                                                <option value="Administrator">Administrator</option>
-                                                </select>  
-                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Media:</th>
-                                        <td>
-                                            <select name="givenMediaID" id="selectMediaIDuser" required="required" class="form-control" autocomplete="off">
-                                            </select>
-                                        </td>
-                                    </tr>
-
-                                    </table>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <p id="errorMessage"></p>
-                            <input class="btn btn-success" form="createUser" type="submit" value="Opprett bruker">
+    <!-- Opprett bruker modal -->
 
 
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-
-                        </div>
-                        </form>
+    <div class="modal fade" id="createUserModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Opprett bruker</h4>
                 </div>
-            </div>
-        </div> 
+                <form action="?page=addUserEngine" method="post" id="createUser">
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <table class="table">
 
-    
+                                <tr>
+                                    <th style="border: none">Name:</th>
+                                    <td style="border: none"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th>Brukernavn:</th>
+                                    <td><input class="form-control" type="text" name="givenUsername" required="required" value="" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th>Passord:</th>
+                                    <td><input class="form-control" type="text" name="givenPassword" required="required" value="" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td><input class="form-control" type="text" name="givenEmail" required="required" value="" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th>UserLevel:</th>                                       
+                                    <td>
+                                        <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
+                                            <option></option>
+                                            <option value="User">User</option>
+                                            <option value="Administrator">Administrator</option>
+                                        </select>  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Media:</th>
+                                    <td>
+                                        <select name="givenMediaID" id="selectMediaIDuser" required="required" class="form-control" autocomplete="off">
+                                        </select>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <p id="errorMessage"></p>
+                        <input class="btn btn-success" form="createUser" type="submit" value="Opprett bruker">
+
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+
+
 
     <!-- CREATE PRODUCT MODAL -->
 
@@ -461,53 +461,53 @@ if (isset($GLOBALS["errorMessage"])) {
             <!-- Tom modal til Roger -->
 
 
-<!-- STOCKTAKING MODAL -->
+            <!-- STOCKTAKING MODAL -->
 
-<div class="modal fade" id="stocktakingModal" role="dialog">
-    <div class="modal-dialog" style="width: 70%">
-        <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Lagertelling</h4>
-            </div>
-            <form action="?page=stocktacking" method="post" id="stocktaking">
-               
-            <div class="modal-body row" >
-                <div class="col-md-6">
-                <label id="stocktakLabel">Velg lager: </label>
+            <div class="modal fade" id="stocktakingModal" role="dialog">
+                <div class="modal-dialog" style="width: 70%">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Lagertelling</h4>
+                        </div>
+                        <form action="?page=stocktacking" method="post" id="stocktaking">
 
-                <select name="onStorageID" id="chooseStorageStocktakContainer" class="form-control stocktaking marginBStorage">
-                    
-                <!-- Her kommer Handlebars Template-->
+                            <div class="modal-body row" >
+                                <div class="col-md-6">
+                                    <label id="stocktakLabel">Velg lager: </label>
 
-                </select>  
+                                    <select name="onStorageID" id="chooseStorageStocktakContainer" class="form-control stocktaking marginBStorage">
 
-                <table class="table product" id="stocktakingContainer">
-                <!-- Innhold fra Handlebars Template -->
-                </table>
-                
-                
-                <table class="table" id="stocktakingResultContainer">
-                <!-- Innhold fra Handlebars Template -->
-                </table>
+                                        <!-- Her kommer Handlebars Template-->
+
+                                    </select>  
+
+                                    <table class="table product" id="stocktakingContainer">
+                                        <!-- Innhold fra Handlebars Template -->
+                                    </table>
+
+
+                                    <table class="table" id="stocktakingResultContainer">
+                                        <!-- Innhold fra Handlebars Template -->
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <canvas id="stocktakingResultChart"></canvas>
+                                </div>
+
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <a href="#" id="saveToCSV" class="btn btn-success">Eksporter til csv</a>
+                                <input form="stocktaking" class="btn btn-success" id="saveStocktaking" type="submit" value="Neste">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                            </div>
+                        </form>    
+                    </div>
                 </div>
-                <div class="col-md-6">
-                <canvas id="stocktakingResultChart"></canvas>
-                </div>
-                        
-
-            </div>
-                   
-            <div class="modal-footer">
-                <a href="#" id="saveToCSV" class="btn btn-success">Eksporter til csv</a>
-                <input form="stocktaking" class="btn btn-success" id="saveStocktaking" type="submit" value="Neste">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-            </div>
-            </form>    
-        </div>
-    </div>
-</div>   
+            </div>   
 
             <div class="modal fade" id="stockDeliveryModal" role="dialog">
                 <div class="modal-dialog">
@@ -531,7 +531,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                     </table>
 
-                                    
+
                                 </div>                        
 
 
@@ -547,75 +547,75 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>        
 
-            
-<script id="deliveryQuantityTemplate" type="text/x-handlebars-template">
-{{#each product}} 
-    <tr class="selectQuantity">
-        <th>Produkt:   </th>
-        <td>{{productName}}</td>
-        <input name="deliveryProductID[]" id="{{productID}}" form="stockDelivery" type="hidden" value="{{productID}}"/>
-        <th>Antall:</th>
-        <td><input class="form-control" name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
-        
-        <td>
-            <button id="redigerknapp" class="remove" data-toggle="tooltip" >
+
+            <script id="deliveryQuantityTemplate" type="text/x-handlebars-template">
+                {{#each product}} 
+                <tr class="selectQuantity">
+                <th>Produkt:   </th>
+                <td>{{productName}}</td>
+                <input name="deliveryProductID[]" id="{{productID}}" form="stockDelivery" type="hidden" value="{{productID}}"/>
+                <th>Antall:</th>
+                <td><input class="form-control" name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
+
+                <td>
+                <button id="redigerknapp" class="remove" data-toggle="tooltip" >
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
-            </button>
-        </td>    
-        
-    </tr>
-{{/each}}  
-</script>
+                </button>
+                </td>    
 
-<!-- Display stocktacing product-->
-<script id="stocktakingResultTemplate" type="text/x-handlebars-template">
- <thead>
-    <tr>
-        <th>Produkt</th>
-        <th>Gammel verdi</th>
-        <th>Ny verdi</th>
-        <th>differanse</th>    
-    </tr>
-</thead>
-<tbody id="tbodyid">
-{{#each differanceArray}}
-    <tr>
-        <td>{{productName}}</td>
-        <td>{{oldQuantity}}</td>
-        <td>{{newQuantity}}</td>
-        <td class="stockResult">{{differance}}</td>    
-    </tr>
-</tbody>
-<input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
-<input form="stocktaking" name="givenQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
-<input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
-<input form="stocktaking" name="differanceArray[]" type="hidden" value="{{differance}}">
-{{/each}}
+                </tr>
+                {{/each}}  
+            </script>
 
-<input form="stocktaking" name="givenStorageID" type="hidden" value="{{differanceArray.0.storageID}}">
-            
-  
-</script>
+            <!-- Display stocktacing product-->
+            <script id="stocktakingResultTemplate" type="text/x-handlebars-template">
+                <thead>
+                <tr>
+                <th>Produkt</th>
+                <th>Gammel verdi</th>
+                <th>Ny verdi</th>
+                <th>differanse</th>    
+                </tr>
+                </thead>
+                <tbody id="tbodyid">
+                {{#each differanceArray}}
+                <tr>
+                <td>{{productName}}</td>
+                <td>{{oldQuantity}}</td>
+                <td>{{newQuantity}}</td>
+                <td class="stockResult">{{differance}}</td>    
+                </tr>
+                </tbody>
+                <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+                <input form="stocktaking" name="givenQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+                <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+                <input form="stocktaking" name="differanceArray[]" type="hidden" value="{{differance}}">
+                {{/each}}
+
+                <input form="stocktaking" name="givenStorageID" type="hidden" value="{{differanceArray.0.storageID}}">
 
 
-<!-- Display stocktacing product-->
-<script id="stocktakingTemplate" type="text/x-handlebars-template">
-<input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
-<input form="stocktaking" name="getResult" type="hidden" value="getResult"> 
-{{#each storageProduct}}
-    
-    <tr>
-       <th id="bordernone">{{productName}}:</th>    
-           <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
-           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
-           <input form="stocktaking" name="givenProductNameArray[]" type="hidden" value="{{productName}}">            
-       <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
-    </tr>
-     
-    
-  {{/each}} 
-  
-</script>
+            </script>
+
+
+            <!-- Display stocktacing product-->
+            <script id="stocktakingTemplate" type="text/x-handlebars-template">
+                <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
+                <input form="stocktaking" name="getResult" type="hidden" value="getResult"> 
+                {{#each storageProduct}}
+
+                <tr>
+                <th id="bordernone">{{productName}}:</th>    
+                <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+                <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
+                <input form="stocktaking" name="givenProductNameArray[]" type="hidden" value="{{productName}}">            
+                <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
+                </tr>
+
+
+                {{/each}} 
+
+            </script>
 
             <script id="stockDeliveryTemplate" type="text/x-handlebars-template">
                 <br>  
@@ -626,1136 +626,164 @@ if (isset($GLOBALS["errorMessage"])) {
 
             <!-- Display storages in drop down meny Template -->
             <script id="selectStorageTemplate" type="text/x-handlebars-template">
-            <option data-id="0" value="0" class="stockTaking">Velg et lager</option>
+                <option data-id="0" value="0" class="stockTaking">Velg et lager</option>
                 {{#each storageInfo}}    
-                    <tr>
-                        <option data-id="{{storageID}}" value="{{storageID}}" class="stockTaking">{{storageName}}</option>
-                    </tr>   
+                <tr>
+                <option data-id="{{storageID}}" value="{{storageID}}" class="stockTaking">{{storageName}}</option>
+                </tr>   
                 {{/each}}
             </script>        
 
             <!-- Get the selected storage, and POST this to retrive inventory-->
-            <script>
-$('a#saveToCSV').hide();
-                function getStorageProduct() {
-                    $.ajax({
-                        type: 'GET',
-                        url: '?page=getAllProductInfo',
-                        dataType: 'json',
-                        success: function (data) {
-                            stockDeliveryTemplate(data);
-                        }
-                    });
-                    return false;
-                }
+
+            <script id="singleStorageTemplate" type="text/x-handlebars-template">
+
+                {{#each transferRestriction}}    
+                <h2 class="panel-title text-center"><b>{{storageName}}</b></h2>  
+                {{/each}}       
             </script>
 
-            <!-- Display products in storage Template -->
-            <script>
-                function stockDeliveryTemplate(data) {
-                    var rawTemplate = document.getElementById("stockDeliveryTemplate").innerHTML;
-                    var compiledTemplate = Handlebars.compile(rawTemplate);
-                    var deliverytGeneratedHTML = compiledTemplate(data);
 
-                    var deliveryContainer = document.getElementById("stockDeliveryContainer");
-                    deliveryContainer.innerHTML = deliverytGeneratedHTML;
-                }
-            </script>
-            
-            <!-- Get productInfo from selected ID -->
-<script>
-                            
-    $(function POSTselectedProduct() {
-
-        $('#stockDeliveryContainer').delegate('.product', 'click', function () {
-            var givenProductID = $(this).attr('data-id');
-              if( $('#'+givenProductID).length )   
-            {
-                return false;
-            } else {
-            
-            
-            $.ajax({
-                type: 'POST',
-                url: '?page=getProductByID',
-                data: {givenProductID: givenProductID},
-                dataType: 'json',
-                success: function (data) {
-                    deliveryQuantityTemplate(data);
-                }
-            });
-            return false;
-
-        }
-        });
-    });
-</script> 
-
-<script>
-    function deliveryQuantityTemplate(data) {
-        var rawTemplate = document.getElementById("deliveryQuantityTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var transferProductGeneratedHTML = compiledTemplate(data);
-
-        var transferContainer = document.getElementById("deliveryQuantityContainer");
-        transferContainer.innerHTML += transferProductGeneratedHTML;
-        
-    }
-</script>
-
-<script>
-    $(function POSTtransferProducts() {
-
-        $('#stockDelivery').submit(function () {
-            var url = $(this).attr('action');
-            var data = $(this).serialize();
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: data,
-                dataType: 'json',
-                error: function () {
-                    var $displayUsers = $('#errorMessage');
-                    $displayUsers.empty().append("Kunne ikke overføre");
-                },
-                success: function (data) {
-                    $('#deliveryQuantityContainer').empty();
-                    $('#stockDeliveryModal').modal('hide');
-                }
-            });
-            return false;
-        });
-    });
-</script>
-
-<!-- remove product -->
-<script>
-    $(function POSTdeleteStorageModal() {
-
-        $('#deliveryQuantityContainer').delegate('.remove', 'click', function () {
-           var $tr = $(this).closest('tr');        
-          
-           $tr.fadeOut(150, function() {
-            $(this).remove();
-           });       
-        });
-    });
-</script>  
-
-            <!-- Get storage information  -->
-            <script>
-                function getStorageInfo() {
-                    $.ajax({
-                        type: 'GET',
-                        url: '?page=getAllStorageInfo',
-                        dataType: 'json',
-                        success: function (data) {
-                            selectStorageTemplate(data);
-                        }
-                    });
-                }
-            </script>
 
             <!-- Display storages in drop down meny Template -->
-            <script>
-                function selectStorageTemplate(data) {
+            <script id="chooseStorageStocktakTemplate" type="text/x-handlebars-template">
+                <option data-id="0" value="0" class="withdrawStorage">Velg et lager</option>
+                {{#each transferRestriction}}    
+                <tr>
+                <option data-id="{{storageID}}" value="{{storageID}}" class="stocktake">{{storageName}}</option>
+                </tr>   
+                {{/each}}
 
-                    var rawTemplate = document.getElementById("selectStorageTemplate").innerHTML;
-                    var compiledTemplate = Handlebars.compile(rawTemplate);
-                    var selectStorageGeneratedHTML = compiledTemplate(data);
-
-                    var storageContainer = document.getElementById("selectStorageContainer");
-                    storageContainer.innerHTML = selectStorageGeneratedHTML;
+            </script> 
 
 
-                }
-            </script>
 
-            <!-- Get the selected storage, and POST this to retrive inventory-->
+            <!-- Display storages in drop down meny Template -->
+            <script id="chooseStorageTemplate" type="text/x-handlebars-template">
+                <option data-id="0" value="0" class="withdrawStorage">Velg et lager</option>
+                {{#each transferRestriction}}    
+                <tr>
+                <option data-id="{{storageID}}" value="{{storageID}}" class="withdrawStorage">{{storageName}}</option>
+                </tr>   
+                {{/each}}
 
-            <script>
-                var givenStorageID;
-                $(function POSTfromStorageModal() {
+            </script> 
 
-                    $('#selectStorageContainer').on('change', function () {
-                        givenStorageID = $(this).find("option:selected").data('id');
 
-                        if (givenStorageID > 0) {
-                            $.ajax({
-                                type: 'POST',
-                                url: '?page=getStorageProduct',
-                                data: {givenStorageID: givenStorageID},
-                                dataType: 'json',
-                                success: function (data) {
-                                    stockTakingTemplate(data);
-                                }
-                            });
-                        }
-                        return false;
+            <script id="chosenStorageTemplate" type="text/x-handlebars-template">
 
-                    });
-                });
+                {{#each storageProduct}}
+                <tr class="quantityColor">
+                <td class="quantityColor">{{productName}}</td>
+                <td class="quantityColor">{{quantity}}</td>
+                </tr>
+                {{/each}} 
             </script>
 
 
 
 
-            <!-- Create product -->
-            <script>
-                $(function POSTuserInfo() {
+            <script id="loggTableTemplate" type="text/x-handlebars-template">
+                <thead>
+                <tr>
+                <th>Type</th>
+                <th>Beskrivelse</th>
+                <th>Lagernavn</th>
+                <th>Til lager</th>
+                <th>Fra lager</th>      
+                <th>Antall</th>
+                <th>Gammelt antall</th>
+                <th>Nytt antall</th>
+                <th>Differanse</th>
+                <th>Brukernavn</th>
+                <th>På bruker</th>
+                <th>Produkt</th>    
+                <th>KundeNr</th>
+                <th>Dato</th>            
+                </tr>
+                </thead>
+                <tbody id="tbodyid">
+                {{#each latestLoggInfo}}
+                <tr>
+                <td>{{typeName}}</td>
+                <td>{{desc}}</td>
+                <td>{{storageName}}</td>
+                <td>{{toStorage}}</td>
+                <td>{{fromStorage}}</td>
+                <td>{{quantity}}</td>
+                <td>{{oldQuantity}}</td>
+                <td>{{newQuantity}}</td>
+                <td>{{differential}}</td>  
+                <td>{{username}}</td>
+                <td>{{onUsername}}</td>
+                <td>{{productName}}</td>
+                <td>{{customerNr}}</td>
+                <td>{{date}}</td>
+                </tr>
+                </tbody>
+                {{/each}}
 
-                    $('#createUser').submit(function () {
-                        var url = $(this).attr('action');
-                        var data = $(this).serialize();
-
-                        $.ajax({
-                            type: 'POST',
-                            url: url,
-                            data: data,
-                            dataType: 'json',
-                            error: function () {
-                                var $displayError = $('#errorMessage');
-                                $displayError.empty().append("Brukernavn trolig i bruk");
-                            },
-                            success: function () {
-                                $("#createUser")[0].reset();
-                                $('#createUserModal').modal('hide');
-                                $('#errorMessage').remove();
-
-                            }
-                        });
-                        return false;
-                    });
-                });
-
-            </script>
-
-            <!-- CREATE PRODUCT -->
-
-            <script>
-                $(function POSTproductInfo() {
-
-                    $('#createProduct').submit(function () {
-                        var url = $(this).attr('action');
-                        var data = $(this).serialize();
-
-                        $.ajax({
-                            type: 'POST',
-                            url: url,
-                            data: data,
-                            dataType: 'json',
-                            success: function () {
-                                $("#createProduct")[0].reset();
-                                $('#createProductModal').modal('hide');
-                            }
-                        });
-                        return false;
-                    });
-                });
-
-            </script>
-
-            <!-- CREATE STORAGE -->
-
-
-            <script>
-                $(function POSTstorageInfo() {
-
-                    $('#createStorage').submit(function () {
-                        var url = $(this).attr('action');
-                        var data = $(this).serialize();
-
-                        $.ajax({
-                            type: 'POST',
-                            url: url,
-                            data: data,
-                            dataType: 'json',
-                            success: function () {
-                                $("#createStorage")[0].reset();
-                                $('#createStorageModal').modal('hide');
-                            }
-                        });
-                        return false;
-                    });
-                });
-
-            </script>
-
-            <script>
-                $(function POSTstorageInfo() {
-
-                    $('#createCategory').submit(function () {
-                        var url = $(this).attr('action');
-                        var data = $(this).serialize();
-
-                        $.ajax({
-                            type: 'POST',
-                            url: url,
-                            data: data,
-                            dataType: 'json',
-                            success: function () {
-                                $("#createCategory")[0].reset();
-                                $('#createCategoryModal').modal('hide');
-                            }
-                        });
-                        return false;
-                    });
-                });
 
             </script>
 
 
 
-            <script>
-                function createProductInfo() {
-                    getMediaInfo();
-                    getCategoryInfo();
-                }
-            </script>
-            <script>
-                function getMediaInfo() {
-                    
-                    var $displayMediaInformationUser = $('#selectMediaIDuser');
-                    $displayMediaInformationUser.empty();
-                    
-                    var $displayMediaInformationPro = $('#selectMediaIDpro');
-                    $displayMediaInformationPro.empty();
-                    $(function () {
-                        $.ajax({
-                            type: 'GET',
-                            url: '?page=getAllMediaInfo',
-                            dataType: 'json',
-                            success: function (data) {
-
-                                $.each(data.mediaInfo, function (i, item) {
-
-                                    $displayMediaInformationPro.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
-                                    $displayMediaInformationUser.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
-                                });
+            <script id="lowInvTemplate" type="text/x-handlebars-template">
 
 
-                            }
-                        });
-                    });
-                }
-            </script>
-            <script>
-                function getCategoryInfo() {
-                    var $displayCategoryInformationMed = $('#selectCategoryMed');
-                    var $displayCategoryInformationPro = $('#selectCategoryPro');
-                    $displayCategoryInformationMed.empty();
-                    $displayCategoryInformationPro.empty();
-                    $(function () {
-                        $.ajax({
-                            type: 'GET',
-                            url: '?page=getAllCategoryInfo',
-                            dataType: 'json',
-                            success: function (data) {
+                {{#each lowInv}}
+                <tr>
+                <td class="quantityColor">{{productName}}</td>
+                <td class="quantityColor">{{quantity}}</td>
+                <td class="quantityColor" >{{storageName}}</td>
+                <tr>
 
-                                $.each(data.categoryInfo, function (i, item) {
-
-                                    $displayCategoryInformationMed.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
-                                    $displayCategoryInformationPro.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
-
-                                });
+                {{/each}}
 
 
-                            }
-                        });
-                    });
-                }
             </script>
 
 
 
 
-            <script>
-$(document).ready(function()
-{
-    $('#stockDeliveryModal').on('hidden.bs.modal', function(e)
-    { 
-      $('#deliveryQuantityContainer').empty();
-    }) ;
-});
+
+            <script id="lastSaleTemplate" type="text/x-handlebars-template">
+
+
+                {{#each lastSaleInfo}}
+                <tr>
+                <td>{{customerNr}}</td>
+                <td>{{productName}}</td>
+                <td>{{storageName}}</td>
+                <td>{{quantity}}</td>
+                <td>{{comment}}</td>
+                <td>{{date}}</td>
+                </tr>
+
+                {{/each}}
+
+
             </script>
 
 
-            <!-- Get storage information with user restriction -->
-<script>
- 
+            <script id="allLastSaleTemplate" type="text/x-handlebars-template">
 
-    $(function () {
-        
-        $.ajax({
-            type: 'GET',
-            url: '?page=getTransferRestriction',
-            dataType: 'json',
-            success: function (data) {
-                
-                showHide(data);
-                withdrawRestrictionTemplate(data);
-                chooseStorageStocktakTemplate(data);
-                singleStorageTemplate(data);
-                
-            }
-        });
-    });
-</script>
+                {{#each allLastSaleInfo}}
+                <tr>
+                <td>{{username}}</td>
+                <td>{{customerNr}}</td>
+                <td>{{productName}}</td>
+                <td>{{storageName}}</td>
+                <td>{{quantity}}</td>
+                <td>{{comment}}</td>
+                <td>{{date}}</td>
 
-<!-- Dersom der er kun 1 lager så vises dete-->
-<script>
-function showHide(data){
-    var limit = 0;
-    var storageID;
-    for (var i = 0; i < data.transferRestriction.length; i++) {
-            limit = limit + 1;
-        }
-          
-        if(limit < 2){
-            $('#chooseStorage').hide();
-            $('#singleStorageContainer').show();
-            storageID = data.transferRestriction[0].storageID;  
-            displaySingeStorage(storageID);
-            
-        } else{
-            $('#chooseStorage').show(); 
-            $('#singleStorageContainer').hide();
-        }
-}
-</script>
-<script>
-    function singleStorageTemplate(data) {
-        var rawTemplate = document.getElementById("singleStorageTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var stoktakeRestrictionGeneratedHTML = compiledTemplate(data);
 
-        var stocktakingContainer = document.getElementById("singleStorageContainer");
-        stocktakingContainer.innerHTML = stoktakeRestrictionGeneratedHTML;
+                {{/each}}
 
-    }
-</script>
-<script id="singleStorageTemplate" type="text/x-handlebars-template">
 
-{{#each transferRestriction}}    
-<h2 class="panel-title text-center"><b>{{storageName}}</b></h2>  
-{{/each}}       
-</script>
+            </script>
 
-<!-- Display storages in drop down meny Template -->
-<script>
-    function chooseStorageStocktakTemplate(data) {
-        var rawTemplate = document.getElementById("chooseStorageStocktakTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var stoktakeRestrictionGeneratedHTML = compiledTemplate(data);
 
-        var stocktakingContainer = document.getElementById("chooseStorageStocktakContainer");
-        stocktakingContainer.innerHTML = stoktakeRestrictionGeneratedHTML;
 
-    }
-</script>
-
-<!-- Display storages in drop down meny Template -->
-<script id="chooseStorageStocktakTemplate" type="text/x-handlebars-template">
-<option data-id="0" value="0" class="withdrawStorage">Velg et lager</option>
-{{#each transferRestriction}}    
-<tr>
-    <option data-id="{{storageID}}" value="{{storageID}}" class="stocktake">{{storageName}}</option>
-</tr>   
-{{/each}}
-        
-</script> 
-
-<!-- Display storages in drop down meny Template -->
-<script>
-    function withdrawRestrictionTemplate(data) {
-        var rawTemplate = document.getElementById("chooseStorageTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var transferRestrictionGeneratedHTML = compiledTemplate(data);
-
-        var transferContainer = document.getElementById("chooseStorageContainer");
-        transferContainer.innerHTML = transferRestrictionGeneratedHTML;
-
-    }
-</script>
-
-<!-- Display storages in drop down meny Template -->
-<script id="chooseStorageTemplate" type="text/x-handlebars-template">
-<option data-id="0" value="0" class="withdrawStorage">Velg et lager</option>
-{{#each transferRestriction}}    
-<tr>
-    <option data-id="{{storageID}}" value="{{storageID}}" class="withdrawStorage">{{storageName}}</option>
-</tr>   
-{{/each}}
-        
-</script> 
-<!-- Get the selected storage, and POST this to retrive inventory-->
-
-<script>
-    var givenStorageID;
-    $(function POSTfromStorageModals() {
-        
-        $('#chooseStorageContainer').on('change', function () {
-            givenStorageID = $(this).find("option:selected").data('id');
-            
-            chartTest(givenStorageID);
-
-            if (givenStorageID > 0) {
-                $.ajax({
-                    type: 'POST',
-                    url: '?page=getStorageProduct',
-                    data: {givenStorageID: givenStorageID},
-                    dataType: 'json',
-                    success: function (data) {
-                        chosenStorageTemplate(data);
-                        rowColor();
-                       
-                    }
-                });
-            } 
-
-            return false;
-
-        });
-    });
-</script>
-
-<!-- Display inventory and chart if single storage-->
-<script>
-function displaySingeStorage(givenStorageID) {
-        
-            chartTest(givenStorageID);
-
-            if (givenStorageID > 0) {
-                $.ajax({
-                    type: 'POST',
-                    url: '?page=getStorageProduct',
-                    data: {givenStorageID: givenStorageID},
-                    dataType: 'json',
-                    success: function (data) {
-                        chosenStorageTemplate(data);
-                        rowColor();
-                    }
-                });
-            } 
-            return false;
-    }
-</script>
-
-<script>
-    function chosenStorageTemplate(data) {
-        var rawTemplate = document.getElementById("chosenStorageTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var transferProductGeneratedHTML = compiledTemplate(data);
-
-        var transferContainer = document.getElementById("chosenStorageContainer");
-        transferContainer.innerHTML = transferProductGeneratedHTML;
-    }
-</script>
-
-<script id="chosenStorageTemplate" type="text/x-handlebars-template">
-     
-    {{#each storageProduct}}
-    <tr class="quantityColor">
-    <td class="quantityColor">{{productName}}</td>
-    <td class="quantityColor">{{quantity}}</td>
-    </tr>
-    {{/each}} 
-</script>
-
-<!-- Get storageInventory from selected storage-->
-<script>
-    function chartTest(data) {
-         
-        var givenStorageID = data;
-       
-        $(function () {
-          
-            $.ajax({
-                type: 'POST',
-                url: '?page=chartProduct',
-                data: {givenStorageID: givenStorageID},
-                dataType: 'json',
-                success: function (data) {
-
-                    
-                    drawChart(data);
-                    
-                }
-            });
-        });
-    }
-    
-    var myObjBar;
-    
-    function drawChart(data)
-    {
-        if(myObjBar)
-        {
-            myObjBar.destroy();
-        }
-          var ctx = document.getElementById('myChart').getContext('2d');
-          var product = [];
-          var antall = [];
-          var farge = [];
-          
-
-
-                        $.each(data, function(i, item){
-                        product.push(item.productName);
-                        antall.push(item.quantity);
-                        });     
-                        
-                        var bars = antall;
-                        for(i = 0; i < bars.length; i++){
-                        //You can check for bars[i].value and put your conditions here
-                        if(bars[i] >= 10)
-                        {
-                            //grønn
-                            farge.push("#5cb85c");
-                        }
-                        else if(bars[i] < 10 && bars[i] >=5)
-                        {
-                            //orange
-                            farge.push("#f0ad4e");
-                        }
-                        else if(bars[i] < 5)
-                        {
-                            //rød
-                            farge.push("#d9534f");
-                        }
-                        }
-                            window.myObjBar = new Chart(ctx, {
-                                
-                            type: 'bar',
-                            data: {
-                                labels: product,
-                                datasets: [
-                                    {
-                                        label: "Antall",
- 
-                                        borderColor: "black",
-                                        backgroundColor: farge,
-                                        borderWidth: 1,
-                                        data: antall
-                                      }
-                            ]
-                            },                    
-                        
-                            options: {
-                                legend: {
-                                    display: false
-                                },
-                                scales:{
-                                    yAxes: [{
-                                        ticks: {
-                                        beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            },
-                            responsive : true
-
-                        });
-}
-</script>
-
-
-<script id="loggTableTemplate" type="text/x-handlebars-template">
-<thead>
-    <tr>
-        <th>Type</th>
-        <th>Beskrivelse</th>
-        <th>Lagernavn</th>
-        <th>Til lager</th>
-        <th>Fra lager</th>      
-        <th>Antall</th>
-        <th>Gammelt antall</th>
-        <th>Nytt antall</th>
-        <th>Differanse</th>
-        <th>Brukernavn</th>
-        <th>På bruker</th>
-        <th>Produkt</th>    
-        <th>KundeNr</th>
-        <th>Dato</th>            
-        </tr>
-</thead>
-<tbody id="tbodyid">
-{{#each latestLoggInfo}}
-    <tr>
-        <td>{{type}}</td>
-        <td>{{desc}}</td>
-        <td>{{storageName}}</td>
-        <td>{{toStorage}}</td>
-        <td>{{fromStorage}}</td>
-        <td>{{quantity}}</td>
-        <td>{{oldQuantity}}</td>
-        <td>{{newQuantity}}</td>
-        <td>{{differential}}</td>  
-        <td>{{username}}</td>
-        <td>{{onUsername}}</td>
-        <td>{{productName}}</td>
-        <td>{{customerNr}}</td>
-        <td>{{date}}</td>
-    </tr>
-</tbody>
-{{/each}}
-            
-  
-</script>
-
-<script>
- $(function () {
-    $.ajax({
-        type: 'GET',
-        url: '?page=getLatestLoggInfo',
-        dataType: 'json',
-        success: function (data) {
-            displayLoggTable(data);
-        }
-    });
-});   
-</script>    
-
-<script>
-    function displayLoggTable(data) {
-        var rawTemplate = document.getElementById("loggTableTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var loggTableGeneratedHTML = compiledTemplate(data);
-
-        var loggContainer = document.getElementById("loggTableContainer");
-        loggContainer.innerHTML = loggTableGeneratedHTML;
-    }
-</script>
-
-<script>
- $(function () {
-    $.ajax({
-        type: 'GET',
-        url: '?page=getLowInventory',
-        dataType: 'json',
-        success: function (data) {
-            displayLowInvTable(data);
-            rowColor();
-        }
-    });
-});   
-</script> 
-
-
-<script>
-    function displayLowInvTable(data) {
-        var rawTemplate = document.getElementById("lowInvTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var loggTableGeneratedHTML = compiledTemplate(data);
-
-        var loggContainer = document.getElementById("lowInvContainer");
-        loggContainer.innerHTML = loggTableGeneratedHTML;
-    }
-</script>
-
-<script id="lowInvTemplate" type="text/x-handlebars-template">
-
-
-{{#each lowInv}}
-    <tr>
-        <td class="quantityColor">{{productName}}</td>
-        <td class="quantityColor">{{quantity}}</td>
-        <td class="quantityColor" >{{storageName}}</td>
-    <tr>
-
-{{/each}}
-            
-  
-</script>
-
-
-
-<script>
- $(function () {
-    $.ajax({
-        type: 'GET',
-        url: '?page=getLastSaleInfo',
-        dataType: 'json',
-        success: function (data) {
-            displayLastSaleTable(data);
-            
-        }
-    });
-});   
-</script>
-
-<script>
-    function displayLastSaleTable(data) {
-        var rawTemplate = document.getElementById("lastSaleTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var loggTableGeneratedHTML = compiledTemplate(data);
-
-        var loggContainer = document.getElementById("lastSaleContainer");
-        loggContainer.innerHTML = loggTableGeneratedHTML;
-    }
-</script>
-
-<script id="lastSaleTemplate" type="text/x-handlebars-template">
-
-
-{{#each lastSaleInfo}}
-    <tr>
-    <td>{{customerNr}}</td>
-    <td>{{productName}}</td>
-    <td>{{storageName}}</td>
-    <td>{{quantity}}</td>
-    <td>{{comment}}</td>
-    <td>{{date}}</td>
-    </tr>
-
-{{/each}}
-            
-  
-</script>
-<script>
- $(function () {
-    $.ajax({
-        type: 'GET',
-        url: '?page=getAllLastSaleInfo',
-        dataType: 'json',
-        success: function (data) {
-            displayAllLastSaleTable(data);
-            
-        }
-    });
-});   
-</script>
-
-<script>
-    function displayAllLastSaleTable(data) {
-        var rawTemplate = document.getElementById("allLastSaleTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var loggTableGeneratedHTML = compiledTemplate(data);
-
-        var loggContainer = document.getElementById("allLastSaleContainer");
-        loggContainer.innerHTML = loggTableGeneratedHTML;
-    }
-</script>
-
-<script>
-function rowColor(){
-    
-// storageInformation    
-$('.quantityColor').filter(function(index){
-    return parseInt(this.innerHTML) >= 10;
-}).siblings().andSelf().attr('class', 'bg-success');
-
-$('.quantityColor').filter(function(index){
-    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5;
-}).siblings().andSelf().attr('class', 'bg-warning');
-
-$('.quantityColor').filter(function(index){
-    return parseInt(this.innerHTML) < 5;
-}).siblings().andSelf().attr('class', 'bg-danger');
-
-
-// stocktaking result
-// || 
-    
-$('.stockResult').filter(function(index){
-    return parseInt(this.innerHTML) >= 10 || parseInt(this.innerHTML) <= -10;
-}).siblings().andSelf().attr('class', 'bg-danger');
-
-$('.stockResult').filter(function(index){
-    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5 || parseInt(this.innerHTML) > -10 && parseInt(this.innerHTML) <= -5;
-}).siblings().andSelf().attr('class', 'bg-warning');
-
-$('.stockResult').filter(function(index){
-    return parseInt(this.innerHTML) < 5 || parseInt(this.innerHTML) > -5;
-}).siblings().andSelf().attr('class', 'bg-success');
-
-}
-
-</script>
-
-<script id="allLastSaleTemplate" type="text/x-handlebars-template">
-
-{{#each allLastSaleInfo}}
-    <tr>
-    <td>{{username}}</td>
-    <td>{{customerNr}}</td>
-    <td>{{productName}}</td>
-    <td>{{storageName}}</td>
-    <td>{{quantity}}</td>
-    <td>{{comment}}</td>
-    <td>{{date}}</td>
-    
-
-{{/each}}
-            
-  
-</script>
-
-<script>
-Date.prototype.yyyymmdd = function() {
-   var yyyy = this.getFullYear();
-   var mm = this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : (this.getMonth() + 1); // getMonth() is zero-based
-   var dd  = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
-   return "".concat(yyyy).concat(mm).concat(dd);
-  };
-
-var d = new Date();
-document.getElementById("dateProd").value  = d.yyyymmdd();
-document.getElementById("date").value  = d.yyyymmdd();
-
-</script>
-
-
-
-
-<!-- STOCKTAKING OF STORAGE -->
-
-<!-- stocktaking modal -->
-<script>
-    $(function POSTStocktakingModal() {
-        $('#chooseStorageStocktakContainer').on('change', function () {
-            givenStorageID = $(this).find("option:selected").data('id');
-
-            if (givenStorageID > 0) {
-            
-            $.ajax({
-                type: 'POST',
-                url: '?page=getStorageProduct',
-                data: {givenStorageID: givenStorageID},
-                dataType: 'json',
-                success: function (data) {
-                    stocktakingTemplate(data);  
-                }
-            });
-        } else {
-                $('.product').empty();
-            }
-            return false;
-            });
-    });
-</script>   
-
-<!-- stocktaking storage template-->         
-<script>
-    function stocktakingTemplate(data) {
-        var rawTemplate = document.getElementById("stocktakingTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var stocktakingStorageGeneratedHTML = compiledTemplate(data);
-
-        var storageContainer = document.getElementById("stocktakingContainer");
-        storageContainer.innerHTML = stocktakingStorageGeneratedHTML;
-    }
-</script>
-
-<!-- POST results from stocktaking, and updating the table-->
-<script>
-    $(function POSTstocktakingResult() {
-
-        $('#stocktaking').submit(function () {
-            var url = $(this).attr('action');
-            var data = $(this).serialize();
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: data,
-                dataType: 'json',
-                success: function (data) {
-                if(document.getElementById("saveStocktaking").value === "Lagre"){
-                var $displayUsers = $('#stocktakingResultContainer');
-                    $displayUsers.empty();
-                    document.getElementById("saveStocktaking").value = "Neste";
-                    $('#stocktakingModal').modal('hide');
-                    $('#stocktakLabel').show();  
-                $('#chooseStorageStocktakContainer').show();
-                } else {
-                $('#stocktakLabel').hide();  
-                $('#chooseStorageStocktakContainer').hide();
-                var $displayUsers = $('#stocktakingContainer');
-                $displayUsers.empty();
-                $('a#saveToCSV').show();
-                document.getElementById("saveStocktaking").value = "Lagre";
-                stocktakingResultTemplate(data);
-                rowColor();
-                
-                stocktakingResultChart(data);
-
-                }
-                    
-                }
-            });
-            return false;
-        });
-    });
-    
-</script>
-
-
-
-<script>
-    
-    var resultBar;
- function stocktakingResultChart(data)
-    {
-        
-        
-        
-
-          var ctx = document.getElementById('stocktakingResultChart').getContext('2d');
-          
-                    var product = [];
-                    var antall = [];
-                    var farge = [];
-
-                        $.each(data.differanceArray, function(i, item){
-                            product.push(item.productName);
-                            antall.push(item.differance);
-                        });
-                        
-                        var bars = antall;
-                        for(i = 0; i < bars.length; i++){
-                        //You can check for bars[i].value and put your conditions here
-                        if(bars[i] >= 10 || bars[i] <= -10)
-                        {
-                            //grønn
-                            farge.push("#d9534f");
-                        }
-                        else if(bars[i] < 10 && bars[i] >=5 || bars[i] > -10 && bars[i] <= -5)
-                        {
-                            //orange
-                            farge.push("#f0ad4e");
-                        }
-                        else if(bars[i] < 5 || bars[i] > -5)
-                        {
-                            //rød
-                            farge.push("#5cb85c");
-                        }
-                        }
-
-                            window.resultBar = new Chart(ctx, {
-                                
-                            type: 'bar',
-                            data: {
-                                labels: product,
-                                datasets: [
-                                    {
-                                        label: "Antall",
- 
-                                        borderColor: "black",
-                                        backgroundColor: farge,
-                                        borderWidth: 1,
-                                        data: antall
-                                      }
-                            ]
-                            },                    
-                        
-                            options: {
-                                legend: {
-                                    display: false
-                                },
-                                scales:{
-                                    yAxes: [{
-                                        ticks: {
-                                        beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            },
-                            responsive : true
-
-                        });
-    }
-</script>
-</script>
-
-
-<!-- stocktaking storage template-->         
-<script>
-    function stocktakingResultTemplate(data) {
-        var rawTemplate = document.getElementById("stocktakingResultTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var stocktakingStorageGeneratedHTML = compiledTemplate(data);
-
-        var storageContainer = document.getElementById("stocktakingResultContainer");
-        storageContainer.innerHTML = stocktakingStorageGeneratedHTML;
-    }
-</script>
-<script>
-$(document).ready(function () {
-
-	function exportTableToCSV($table, filename) {
-    
-        var $rows = $table.find('tr:has(td),tr:has(th)'),
-    
-            // Temporary delimiter characters unlikely to be typed by keyboard
-            // This is to avoid accidentally splitting the actual contents
-            tmpColDelim = String.fromCharCode(11), // vertical tab character
-            tmpRowDelim = String.fromCharCode(0), // null character
-    
-            // actual delimiter characters for CSV format
-            colDelim = '","',
-            rowDelim = '"\r\n"',
-    
-            // Grab text from table into CSV formatted string
-            csv = '"' + $rows.map(function (i, row) {
-                var $row = $(row), $cols = $row.find('td,th');
-    
-                return $cols.map(function (j, col) {
-                    var $col = $(col), text = $col.text();
-    
-                    return text.replace(/"/g, '""'); // escape double quotes
-    
-                }).get().join(tmpColDelim);
-    
-            }).get().join(tmpRowDelim)
-                .split(tmpRowDelim).join(rowDelim)
-                .split(tmpColDelim).join(colDelim) + '"',
-    
-            
-    
-            // Data URI
-            csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
-            
-            console.log(csv);
-            
-        	if (window.navigator.msSaveBlob) { // IE 10+
-        		//alert('IE' + csv);
-        		window.navigator.msSaveOrOpenBlob(new Blob([csv], {type: "text/plain;charset=utf-8;"}), "csvname.csv")
-        	} 
-        	else {
-        		$(this).attr({ 'download': filename, 'href': csvData, 'target': '_blank' }); 
-        	}
-    }
-    
-    // This must be a hyperlink
-    $("#saveToCSV").on('click', function (event) {
-    	
-        exportTableToCSV.apply(this, [$('#stocktakingResultContainer'), 'varetelling.csv']);
-        
-        // IF CSV, don't do event.preventDefault() or return false
-        // We actually need this to be a typical hyperlink
-    });
-
-});
-</script>
-<script>
-$(document).ready(function()
-{
-    $('#stocktakingModal').on('hidden.bs.modal', function(e)
-    { 
-        if(resultBar)
-        {
-            resultBar.destroy();
-        }
-      $('#stocktakLabel').show();  
-      $('#chooseStorageStocktakContainer').show();
-      $('#stocktakingResultContainer').empty();
-      $('#stocktakingContainer').empty();
-      $('#stocktakingResultChart').empty();
-      document.getElementById("saveStocktaking").value = "Neste";
-      $('a#saveToCSV').hide();
-      $('#chooseStorageStocktakContainer').prop('selectedIndex',0);
-    }) ;
-});
-</script>
-
+<script src="js/home.js"></script>   

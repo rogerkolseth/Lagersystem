@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 07. Apr, 2017 01:09 a.m.
+-- Generation Time: 13. Apr, 2017 19:00 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -71,7 +71,9 @@ CREATE TABLE `inventory` (
 --
 DELIMITER $$
 CREATE TRIGGER `removeProFromStorage_Logg` BEFORE DELETE ON `inventory` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.fromStorageID, logg.userID, logg.productID, logg.quantity, logg.date) VALUES ('Sletting', 'Fjernet produkt fra', OLD.storageID, @sessionUserID, OLD.productID, OLD.quantity, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.fromStorageID, logg.userID, logg.productID, logg.quantity, logg.date) VALUES (9, 'Fjernet produkt fra', OLD.storageID, @sessionUserID, OLD.productID, OLD.quantity, NOW());
+END IF;
 END
 $$
 DELIMITER ;
@@ -84,7 +86,7 @@ DELIMITER ;
 
 CREATE TABLE `logg` (
   `loggID` int(11) UNSIGNED NOT NULL,
-  `type` varchar(255) NOT NULL,
+  `typeID` int(11) NOT NULL,
   `desc` varchar(255) NOT NULL,
   `storageID` int(11) UNSIGNED DEFAULT NULL,
   `fromStorageID` int(11) UNSIGNED DEFAULT NULL,
@@ -99,6 +101,34 @@ CREATE TABLE `logg` (
   `date` datetime NOT NULL,
   `customerNr` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `loggtype`
+--
+
+CREATE TABLE `loggtype` (
+  `typeID` int(11) NOT NULL,
+  `typeName` varchar(255) NOT NULL,
+  `typeCheck` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dataark for tabell `loggtype`
+--
+
+INSERT INTO `loggtype` (`typeID`, `typeName`, `typeCheck`) VALUES
+(1, 'Redigering', 1),
+(2, 'Innlogging', 0),
+(3, 'Tilgang', 1),
+(4, 'Opprettelse', 1),
+(5, 'Varelevering', 1),
+(6, 'Uttak', 1),
+(7, 'Retur', 1),
+(8, 'Overføring', 1),
+(9, 'Sletting', 0),
+(10, 'Varetelling', 1);
 
 -- --------------------------------------------------------
 
@@ -131,8 +161,7 @@ CREATE TABLE `media` (
 
 INSERT INTO `media` (`mediaID`, `mediaName`, `categoryID`) VALUES
 (21, 'defaultUser.png', 4),
-(41, 'Costa Rican Frog.jpg', 2),
-(53, 'Boston City Flow.jpg', 2);
+(41, 'Costa Rican Frog.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -155,13 +184,17 @@ CREATE TABLE `products` (
 --
 DELIMITER $$
 CREATE TRIGGER `createProduct_Logg` AFTER INSERT ON `products` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.userID, logg.productID, logg.date) VALUES ('Opprettelse', 'Nytt produkt', @sessionUserID, NEW.productID, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 4) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.productID, logg.date) VALUES (4, 'Nytt produkt', @sessionUserID, NEW.productID, NOW());
+END IF;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `editProduct_Logg` AFTER UPDATE ON `products` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.UserID, logg.productID, logg.date) VALUES ('Redigering', 'Av produkt', @sessionUserID, NEW.productID, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 1) > 0 ) THEN
+    INSERT INTO logg (logg.typeD, logg.desc, logg.UserID, logg.productID, logg.date) VALUES (1, 'Av produkt', @sessionUserID, NEW.productID, NOW());
+END IF;
 END
 $$
 DELIMITER ;
@@ -183,13 +216,17 @@ CREATE TABLE `restrictions` (
 --
 DELIMITER $$
 CREATE TRIGGER `createRestriction_Logg` AFTER INSERT ON `restrictions` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.storageID, logg.userID, logg.onUserID, logg.date) VALUES ('Tilgang', 'Gav tilgang til', NEW.storageID, @sessionUserID, NEW.userID, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 3) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.storageID, logg.userID, logg.onUserID, logg.date) VALUES (3, 'Gav tilgang til', NEW.storageID, @sessionUserID, NEW.userID, NOW());
+END IF;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `removeRestriction_Logg` BEFORE DELETE ON `restrictions` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.storageID, logg.userID, logg.onUserID, logg.date) VALUES ('Tilgang', 'Fjernet tilgang til', OLD.storageID, @sessionUserID, OLD.userID, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 3) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.storageID, logg.userID, logg.onUserID, logg.date) VALUES (3, 'Fjernet tilgang til', OLD.storageID, @sessionUserID, OLD.userID, NOW());
+END IF;
 END
 $$
 DELIMITER ;
@@ -216,7 +253,9 @@ CREATE TABLE `returns` (
 --
 DELIMITER $$
 CREATE TRIGGER `newReturn_Logg` AFTER INSERT ON `returns` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.toStorageID, logg.quantity, logg.productID, logg.userID, logg.customerNr, logg.date) VALUES ('Retur', 'Tok inn produkt til', NEW.storageID, NEW.quantity, NEW.productID, NEW.userID, NEW.customerNr, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 7) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.toStorageID, logg.quantity, logg.productID, logg.userID, logg.customerNr, logg.date) VALUES (7, 'Tok inn produkt til', NEW.storageID, NEW.quantity, NEW.productID, NEW.userID, NEW.customerNr, NOW());
+END IF;
 END
 $$
 DELIMITER ;
@@ -243,7 +282,9 @@ CREATE TABLE `sales` (
 --
 DELIMITER $$
 CREATE TRIGGER `newSale_Logg` AFTER INSERT ON `sales` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.fromStorageID, logg.quantity, logg.productID, logg.userID, logg.customerNr, logg.date) VALUES ('Uttak', 'Tok ut produkt fra', NEW.storageID, NEW.quantity, NEW.productID, NEW.userID, NEW.customerNr, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 6) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.fromStorageID, logg.quantity, logg.productID, logg.userID, logg.customerNr, logg.date) VALUES (6, 'Tok ut produkt fra', NEW.storageID, NEW.quantity, NEW.productID, NEW.userID, NEW.customerNr, NOW());
+END IF;
 END
 $$
 DELIMITER ;
@@ -265,21 +306,24 @@ CREATE TABLE `storage` (
 
 INSERT INTO `storage` (`storageID`, `storageName`) VALUES
 (1, 'Hovedlager'),
-(63, 'Kundesenter'),
-(71, 'Testlager');
+(63, 'Kundesenter');
 
 --
 -- Triggere `storage`
 --
 DELIMITER $$
 CREATE TRIGGER `createStorage_Logg` AFTER INSERT ON `storage` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.storageID, logg.userID, logg.date) VALUES ('Opprettelse', 'Nytt lager', NEW.storageID, @sessionUserID, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 4) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.storageID, logg.userID, logg.date) VALUES (4, 'Nytt lager', NEW.storageID, @sessionUserID, NOW());
+    END IF;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `editStorage_Logg` AFTER UPDATE ON `storage` FOR EACH ROW BEGIN 
-	INSERT INTO logg (logg.type, logg.desc, logg.UserID, logg.storageID, logg.date) VALUES ('Redigering', 'Av produkt', @sessionUserID, NEW.storageID, NOW()); 
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 1) > 0 ) THEN
+	INSERT INTO logg (logg.typeID, logg.desc, logg.UserID, logg.storageID, logg.date) VALUES (1, 'Av produkt', @sessionUserID, NEW.storageID, NOW()); 
+END IF;
 END
 $$
 DELIMITER ;
@@ -306,7 +350,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$Yp0duv9IfmC8MSpanG60XuEljLEO0KOJsUrPH45EROrzcJ1Dyxdfm', 'Administrator', 21, '2017-04-06', 'test123'),
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$Yp0duv9IfmC8MSpanG60XuEljLEO0KOJsUrPH45EROrzcJ1Dyxdfm', 'Administrator', 21, '2017-04-13', 'test123'),
 (83, 'test', 'test', '$2y$10$JfoDe1xBH5U8nnjFmqGIY.Nx.xxVBLbLmNNOfZYpd4YxDbbRPJ2ey', 'User', 21, '2017-04-06', 'test'),
 (84, 'afd', 'sdf', '$2y$10$vaaxIJQRNvdbJI8r8gJRceEmFDrlZqExTVRnNwhuQ5w4FFzLYiPLW', 'Administrator', 21, NULL, 'dsf');
 
@@ -315,19 +359,27 @@ INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `med
 --
 DELIMITER $$
 CREATE TRIGGER `createUser_Logg` AFTER INSERT ON `users` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.userID, logg.onUserID, logg.date) VALUES ('Opprettelse', 'Ny bruker', @sessionUserID, NEW.userID, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 4) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.onUserID, logg.date) VALUES (4, 'Ny bruker', @sessionUserID, NEW.userID, NOW());
+END IF;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `deleteUser_Logg` BEFORE DELETE ON `users` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.onUserID, logg.date) VALUES ('Sletting', 'Av bruker', '10', NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.onUserID, logg.date) VALUES (9, 'Av bruker', '10', NOW());
+END IF;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `editUser_Logg` AFTER UPDATE ON `users` FOR EACH ROW BEGIN
-    INSERT INTO logg (logg.type, logg.desc, logg.userID, logg.onUserID, logg.date) VALUES ('Redigering', 'Av bruker', @sessionUserID, NEW.userID, NOW());
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 1) > 0 ) THEN
+	IF NEW.name <> OLD.name OR NEW.username <> OLD.username OR NEW.password <> OLD.password OR NEW.userLevel <> OLD.userLevel OR NEW.email <> OLD.email THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.onUserID, logg.date) VALUES (1, 'Av bruker', @sessionUserID, NEW.userID, NOW());
+    END IF;
+END IF;
 END
 $$
 DELIMITER ;
@@ -369,7 +421,14 @@ ALTER TABLE `logg`
   ADD KEY `logg_ibfk_3` (`fromStorageID`),
   ADD KEY `logg_ibfk_4` (`toStorageID`),
   ADD KEY `logg_ibfk_5` (`onUserID`),
-  ADD KEY `logg_ibfk_6` (`productID`);
+  ADD KEY `logg_ibfk_6` (`productID`),
+  ADD KEY `logg_ibfk_7` (`typeID`);
+
+--
+-- Indexes for table `loggtype`
+--
+ALTER TABLE `loggtype`
+  ADD PRIMARY KEY (`typeID`);
 
 --
 -- Indexes for table `macadresse`
@@ -446,7 +505,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `categoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `checkout`
 --
@@ -456,12 +515,12 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=406;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -471,32 +530,32 @@ ALTER TABLE `macadresse`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -529,7 +588,8 @@ ALTER TABLE `logg`
   ADD CONSTRAINT `logg_ibfk_3` FOREIGN KEY (`fromStorageID`) REFERENCES `storage` (`storageID`),
   ADD CONSTRAINT `logg_ibfk_4` FOREIGN KEY (`toStorageID`) REFERENCES `storage` (`storageID`),
   ADD CONSTRAINT `logg_ibfk_5` FOREIGN KEY (`onUserID`) REFERENCES `users` (`userID`),
-  ADD CONSTRAINT `logg_ibfk_6` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`);
+  ADD CONSTRAINT `logg_ibfk_6` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
+  ADD CONSTRAINT `logg_ibfk_7` FOREIGN KEY (`typeID`) REFERENCES `loggtype` (`typeID`);
 
 --
 -- Begrensninger for tabell `macadresse`

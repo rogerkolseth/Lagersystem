@@ -14,7 +14,7 @@ class transferController extends Controller {
             $this->getTransferRestriction();
         } else if ($page == "transferProduct") {
             $this->transferProduct();
-        } else if ($page == "transferSingle"){
+        } else if ($page == "transferSingle") {
             $this->transferSinglePage();
         }
     }
@@ -28,8 +28,8 @@ class transferController extends Controller {
 
         return $this->render("transfer", $data);
     }
-    
-        private function transferSinglePage() {
+
+    private function transferSinglePage() {
         $givenUserID = $_SESSION["userID"];
         $restrictionInfo = $GLOBALS["restrictionModel"];
         $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
@@ -53,38 +53,40 @@ class transferController extends Controller {
         $transferProductIDArray = $_REQUEST["transferProductID"];
         $transferQuantityArray = $_REQUEST["transferQuantity"];
         $toStorageID = $_REQUEST["toStorageID"];
-        
+
         //LOGG
-        $type = "Overføring";
-        $desc= "Overførte produkt";
+        $type = 8;
+        $desc = "Overførte produkt";
         $sessionID = $_SESSION["userID"];
-        
+
 
         if ($fromStorageID == 0 || $toStorageID == 0) {
             return false;
         } else {
             $loggModel = $GLOBALS["loggModel"];
+            $result = $loggModel->loggCheck($type);
             $inventoryInfo = $GLOBALS["inventoryModel"];
 
             for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
                 $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
 
-                    if ($count[0]["COUNT(*)"] < 1) {
-                        
+                if ($count[0]["COUNT(*)"] < 1) {
+                    if ($result[0]["typeCheck"] > 0) {
                         $loggModel->transferLogg($type, $desc, $sessionID, $fromStorageID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
-                        $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
-                        $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
-                    } else {
-                        $loggModel->transferLogg($type, $desc, $sessionID, $fromStorageID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
-                        $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
-                        $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                     }
-
-               
+                    $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                } else {
+                    if ($result[0]["typeCheck"] > 0) {
+                        $loggModel->transferLogg($type, $desc, $sessionID, $fromStorageID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    }
+                    $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                }
             }
         }
         $data = json_encode("success");
         echo $data;
     }
 
-} 
+}
