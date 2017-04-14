@@ -22,6 +22,31 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="redigerknapp" data-toggle="dropdown" data-target="#loggCheckMenu" aria-haspopup="true" aria-expanded="false">
                 <span class="glyphicon glyphicon-cog" style="color: grey"></span>
             </button>
+            <div class="col-md-12 row">
+            <div class="col-md-3 row">
+            <input class="form-control" type="text" name="datefilter" value="" />
+            </div>
+            </div>
+            <script type="text/javascript">
+                    $(function() {
+
+                      $('input[name="datefilter"]').daterangepicker({
+                          autoUpdateInput: false,
+                          locale: {
+                              cancelLabel: 'Clear'
+                          }
+                      });
+
+                      $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                          $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+                      });
+
+                      $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                          $(this).val('');
+                      });
+
+                    });
+            </script>   
 
             <div class="dropdown" id="loggCheckMenu">
 

@@ -11,7 +11,11 @@
         <link rel="shortcut icon" type="image/png" href="image/TafjordLogo3.png">
         <!-- Bootstrap -->
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="Bootstrap/daterangepicker.css">
+        
+        
+        
+        
+        <link rel="stylesheet" type="text/css" href="Bootstrap/daterangepicker.css">
         <link href="style/home.css" rel="stylesheet">
         <script src="js/handlebars-v4.0.5.js"></script>
         
@@ -107,8 +111,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="Bootstrap/js/bootstrap.min.js"></script>
-        <script src="Bootstrap/daterangepicker.js"></script>
-        <script src="Bootstrap/moment.min.js"></script>
+        <script type="text/javascript" src="Bootstrap/moment.min.js"></script>
+        <script type="text/javascript" src="Bootstrap/daterangepicker.js"></script>
+        
         <script src="Charts/Chart.js"></script>
 
  
