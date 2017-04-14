@@ -207,7 +207,7 @@ function typeSearchTemplate(data) {
     var $typeTemplate = $('#typeContainer');
     $typeTemplate.empty();
     $.each(data.checkStatus, function (i, item) {
-        $typeTemplate.append('<li>' + item.typeName +'<input id="typeContainer" type="checkbox" name="loggType[]" value="'+item.typeID+'"></li>');
+        $typeTemplate.append('<tr><td id="bordernone">' + item.typeName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="loggType[]" value="'+item.typeID+'"></td></tr>');
 
     });
 }
@@ -220,9 +220,9 @@ function storageSearchTemplate(data) {
     var $fromStorageTemplate = $('#fromStorageContainer');
     $fromStorageTemplate.empty();
     $.each(data.storageInfo, function (i, item) {
-        $storageTemplate.append('<li>' + item.storageName +'<input id="typeContainer" type="checkbox" name="storage[]" value="'+item.storageID+'"></li>');
-        $toStorageTemplate.append('<li>' + item.storageName +'<input id="typeContainer" type="checkbox" name="toStorage[]" value="'+item.storageID+'"></li>');
-        $fromStorageTemplate.append('<li>' + item.storageName +'<input id="typeContainer" type="checkbox" name="fromStorage[]" value="'+item.storageID+'"></li>');
+        $storageTemplate.append('<tr><td id="bordernone">' + item.storageName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="storage[]" value="'+item.storageID+'"></td></tr>');
+        $toStorageTemplate.append('<tr><td id="bordernone">' + item.storageName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="toStorage[]" value="'+item.storageID+'"></td></tr>');
+        $fromStorageTemplate.append('<tr><td id="bordernone">' + item.storageName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="fromStorage[]" value="'+item.storageID+'"></td></tr>');
 
     });
 }
@@ -233,8 +233,8 @@ function userSearchTemplate(data) {
     var $onUserTemplate = $('#onUserContainer');
     $onUserTemplate.empty();
     $.each(data.userInfo, function (i, item) {
-        $usernameTemplate.append('<li>' + item.username +'<input id="typeContainer" type="checkbox" name="username[]" value="'+item.userID+'"></li>');
-        $onUserTemplate.append('<li>' + item.username +'<input id="typeContainer" type="checkbox" name="onUser[]" value="'+item.userID+'"></li>');
+        $usernameTemplate.append('<tr><td id="bordernone">' + item.username +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="username[]" value="'+item.userID+'"></td></tr>');
+        $onUserTemplate.append('<tr><td id="bordernone">' + item.username +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="onUser[]" value="'+item.userID+'"></td></tr>');
 
     });
 }
@@ -243,7 +243,7 @@ function productSearchTemplate(data) {
     var $productTemplate = $('#productContainer');
     $productTemplate.empty();
     $.each(data.productInfo, function (i, item) {
-        $productTemplate.append('<li>' + item.productName +'<input id="typeContainer" type="checkbox" name="product[]" value="'+item.productID+'"></li>');
+        $productTemplate.append('<tr><td id="bordernone">' + item.productName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="product[]" value="'+item.productID+'"></td></tr>');
 
     });
 }
