@@ -67,7 +67,7 @@
                 <h4 class="modal-title">Opprett bruker</h4>
             </div>
             <div class="modal-body">
-                <div style="text-align: center">
+                <div>
                     <table class="table">
                     <form action="?page=addStorageEngine" method="post" id="createStorage">
                          
@@ -81,7 +81,7 @@
                         </tr>
                         <tr>
                             <th id="bordernone">Lager skal kunne gå i minus:</th>
-                            <td id="bordernone"><input  type="checkbox" name="givenNegativeSupport" value="1"></td>
+                            <td id="bordernone"><input type="checkbox" name="givenNegativeSupport" value="1"></td>
                         </tr>
                     </table>
                 </div>
@@ -358,11 +358,11 @@
     <td id="bordernone"><input class="form-control" form="editStorage" required="required" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"></td> 
     </tr>
     <tr>
-    <th class="col-md-1">Grense for epostvarsling: </th>
+    <th id="bordernone">Grense for epostvarsling: </th>
     <td id="bordernone"><input class="form-control" form="editStorage" required="required" type="text" name="editWarningLimit" value="{{warningLimit}}" autocomplete="off"></td> 
 
     </tr>
-    <th class="col-md-1">Lager skal kunne gå i minus: </th>
+    <th id="bordernone">Lager skal kunne gå i minus: </th>
     <td id="bordernone"><input id="editNegativeSupport"  type="checkbox" form="editStorage" name="editNegativeSupport" value="1"></td>
     </tr>
     {{/each}}            
@@ -373,18 +373,18 @@
 <script id="storageInformationTemplate" type="text/x-handlebars-template">
     {{#each storage}}    
     <tr>  
-    <th id="bordernone" class="col-md-1">LagerID: </th>
+    <th id="bordernone" class="col-md-6">LagerID: </th>
     <td id="bordernone">{{storageID}}</td> 
     </tr>
     <tr>
-    <th class="col-md-1">Lagernavn: </th>
+    <th class="col-md-6">Lagernavn: </th>
     <td>{{storageName}}</td>
     </tr>
     <tr>
-    <th class="col-md-1">Grense for epostvarsling: </th>
+    <th class="col-md-6">Grense for epostvarsling: </th>
     <td>{{warningLimit}}</td>
     </tr>
-    <th class="col-md-1">Lager kan gå i minus: </th>
+    <th class="col-md-6">Lager kan gå i minus: </th>
     <td class="negativeSupportStatus" id="negativeSupportStatus"></td>
     </tr>
     {{/each}}                
