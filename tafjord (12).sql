@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 13. Apr, 2017 19:00 p.m.
+-- Generation Time: 18. Apr, 2017 23:42 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -161,7 +161,8 @@ CREATE TABLE `media` (
 
 INSERT INTO `media` (`mediaID`, `mediaName`, `categoryID`) VALUES
 (21, 'defaultUser.png', 4),
-(41, 'Costa Rican Frog.jpg', 2);
+(41, 'Costa Rican Frog.jpg', 2),
+(42, 'Pensive Parakeet.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -297,16 +298,18 @@ DELIMITER ;
 
 CREATE TABLE `storage` (
   `storageID` int(11) UNSIGNED NOT NULL,
-  `storageName` varchar(60) DEFAULT NULL
+  `storageName` varchar(60) NOT NULL,
+  `negativeSupport` tinyint(4) NOT NULL,
+  `warningLimit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dataark for tabell `storage`
 --
 
-INSERT INTO `storage` (`storageID`, `storageName`) VALUES
-(1, 'Hovedlager'),
-(63, 'Kundesenter');
+INSERT INTO `storage` (`storageID`, `storageName`, `negativeSupport`, `warningLimit`) VALUES
+(1, 'Hovedlager', 0, 2),
+(63, 'Kundesenter', 1, 3);
 
 --
 -- Triggere `storage`
@@ -350,9 +353,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$Yp0duv9IfmC8MSpanG60XuEljLEO0KOJsUrPH45EROrzcJ1Dyxdfm', 'Administrator', 21, '2017-04-13', 'test123'),
-(83, 'test', 'test', '$2y$10$JfoDe1xBH5U8nnjFmqGIY.Nx.xxVBLbLmNNOfZYpd4YxDbbRPJ2ey', 'User', 21, '2017-04-06', 'test'),
-(84, 'afd', 'sdf', '$2y$10$vaaxIJQRNvdbJI8r8gJRceEmFDrlZqExTVRnNwhuQ5w4FFzLYiPLW', 'Administrator', 21, NULL, 'dsf');
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$Yp0duv9IfmC8MSpanG60XuEljLEO0KOJsUrPH45EROrzcJ1Dyxdfm', 'Administrator', 42, '2017-04-18', 'test123');
 
 --
 -- Triggere `users`
@@ -515,12 +516,12 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -530,32 +531,32 @@ ALTER TABLE `macadresse`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `users`
 --
