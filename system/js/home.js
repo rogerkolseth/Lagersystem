@@ -680,43 +680,6 @@ function stocktakingTemplate(data) {
 }
 
 
-// POST results from stocktaking, and updating the table-- >
-
-$(function POSTstocktakingResult() {
-
-    $('#stocktaking').submit(function () {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: data,
-            dataType: 'json',
-            success: function (data) {
-                if (document.getElementById("saveStocktaking").value === "Lagre") {
-                    var $displayUsers = $('#stocktakingResultContainer');
-                    $displayUsers.empty();
-                    document.getElementById("saveStocktaking").value = "Neste";
-                    $('#stocktakingModal').modal('hide');
-                    $('#stocktakLabel').show();
-                    $('#chooseStorageStocktakContainer').show();
-                } else {
-                    $('#stocktakLabel').hide();
-                    $('#chooseStorageStocktakContainer').hide();
-                    var $displayUsers = $('#stocktakingContainer');
-                    $displayUsers.empty();
-                    $('a#saveToCSV').show();
-                    document.getElementById("saveStocktaking").value = "Lagre";
-                    stocktakingResultTemplate(data);
-                    rowColor();
-                    stocktakingResultChart(data);
-                }
-
-            }
-        });
-        return false;
-    });
-});
 
 
 
@@ -859,5 +822,5 @@ $(document).ready(function ()
     });
 });
      
-     
+   
      

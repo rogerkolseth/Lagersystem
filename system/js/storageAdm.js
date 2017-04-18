@@ -389,11 +389,11 @@ $(document).ready(function ()
 $(function POSTstorageInformationModal() {
 
     $('#displayStorageContainer').delegate('.information', 'click', function () {
-
         var givenStorageID = $(this).attr('data-id');
         POSTstorageRestriction(givenStorageID);
         POSTstorageProduct(givenStorageID);
         chartInventory(givenStorageID);
+
 
         $.ajax({
             type: 'POST',
@@ -403,8 +403,7 @@ $(function POSTstorageInformationModal() {
             success: function (data) {
                 $('#showStorageInformationModal').modal('show');
                 StorageInformationTemplate(data);
-
-
+                negativeSupportStatus(data.storage[0].negativeSupport);
             }
         });
         return false;
@@ -712,6 +711,7 @@ $(function POSTeditStorageModal() {
             success: function (data) {
                 editStorageTemplate(data);
                 $('#editStorageModal').modal('show');
+                updateCheckbox(data.storage[0].negativeSupport);
             }
         });
         return false;
@@ -855,6 +855,20 @@ $(function POSTsearchForStorage() {
         return false;
     });
 });
+
+function negativeSupportStatus(data) {
+    if (data > 0) {
+        $('.negativeSupportStatus').append('Ja');
+    } else {
+        $('.negativeSupportStatus').append('Nei');
+    }
+}
+
+function updateCheckbox(data){
+   if (data > 0) {
+        $("#editNegativeSupport").prop('checked', true);
+    } 
+}
 
 
 

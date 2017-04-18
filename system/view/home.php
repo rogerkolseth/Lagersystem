@@ -785,17 +785,14 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
 
 
-
-<script src="js/home.js"></script>   
-
 <script>
 // STOCKTAKING OF STORAGE -- >
 // stocktaking modal -- >
 
-$(function POSTfromStorageModal() {
+$(function chooseStorageStocktakContainer() {
 
     $('#chooseStorageStocktakContainer').on('change', function () {
-       var givenStorageID = $(this).find("option:selected").data('id');
+        var givenStorageID = $(this).find("option:selected").data('id');
        
         if (givenStorageID > 0) {
 
@@ -813,6 +810,50 @@ $(function POSTfromStorageModal() {
         }
         return false;
     });
-});
+});  
 
+
+
+// POST results from stocktaking, and updating the table-- >
+
+$(function POSTstocktakingResult() {
+
+    $('#stocktaking').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                if (document.getElementById("saveStocktaking").value === "Lagre") {
+                    var $displayUsers = $('#stocktakingResultContainer');
+                    $displayUsers.empty();
+                    document.getElementById("saveStocktaking").value = "Neste";
+                    $('#stocktakingModal').modal('hide');
+                    $('#stocktakLabel').show();
+                    $('#chooseStorageStocktakContainer').show();
+                } else {
+                    $('#stocktakLabel').hide();
+                    $('#chooseStorageStocktakContainer').hide();
+                    var $displayUsers = $('#stocktakingContainer');
+                    $displayUsers.empty();
+                    $('a#saveToCSV').show();
+                    document.getElementById("saveStocktaking").value = "Lagre";
+                    stocktakingResultTemplate(data);
+                    rowColor();
+                    stocktakingResultChart(data);
+                }
+
+            }
+            
+        });
+       return false; 
+    });
+});
 </script>
+
+
+<script src="js/home.js"></script>   
+

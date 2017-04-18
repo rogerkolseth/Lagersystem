@@ -141,6 +141,7 @@ $(function POSTselectedProduct() {
                     withdrawQuantityTemplate(data);
                     $('#commentContainer').show();
                     $('#withdrawButton').show();
+                    negativeSupportStatus();
                 }
             });
             return false;
@@ -297,6 +298,8 @@ function showHide(data) {
         $('#chooseCategoryContainer').hide();
     }
 }
+
+
 
 
 
