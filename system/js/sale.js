@@ -141,7 +141,7 @@ $(function POSTselectedProduct() {
                     withdrawQuantityTemplate(data);
                     $('#commentContainer').show();
                     $('#withdrawButton').show();
-                    negativeSupportStatus();
+                    negativeSupportStatus(data);
                 }
             });
             return false;
@@ -299,7 +299,13 @@ function showHide(data) {
     }
 }
 
-
+function negativeSupportStatus(data){
+    if(data.negativeSupport[0] < 1){
+    $('.negativeSupport').attr({
+       "max" : data.prodInfo[0].quantity,        // substitute your own
+});
+} 
+}
 
 
 

@@ -111,9 +111,9 @@ class SaleController extends Controller {
             
             $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
         }
+        $negativeSupport = "1";
 
-
-        $data = json_encode(array("prodInfo" => $inventoryModel));
+        $data = json_encode(array("prodInfo" => $inventoryModel, "negativeSupport" => $negativeSupport));
         echo $data;
     }
 
