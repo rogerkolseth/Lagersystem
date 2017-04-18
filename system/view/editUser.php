@@ -16,21 +16,22 @@ $test = $GLOBALS["errorMessage"];
                     }
                 ?>
             </div>  
-    <div class="col-md-4 col-md-offset-4" >
+    <div class="col-md-4 col-md-offset-1" >
         
-        <h3 class="text-center">Rediger bruker</h3>
+        <h3 style="margin-bottom: 4%">Rediger bruker</h3>
         
         
         <form action="?page=editUserEngine" method="post" id="editUser">
-        <table class="table table-bordered" id="displayUserContainer">
+        <table class="table" id="displayUserContainer">
             
         </table>
             <div id="editSaved" style="display: none">
                 <p class="text-success">Endringene er lagret!</p>
             </div>
-            
-                <a href="javascript:history.back()" class="btn btn-danger pull-right">Tilbake</a>
-                <input class="btn btn-success" type="submit" value="Lagre" form="editUser" onclick="document.getElementById('editSaved').style.display = 'block'; javascript:history.go(0)">  
+            <a href="javascript:history.back()" class="btn btn-danger pull-right">Tilbake</a>
+            <input class="btn btn-success pull-right" style="margin-right: 3%" type="submit" value="Lagre" form="editUser" onclick="document.getElementById('editSaved').style.display = 'block'; javascript:history.go(0)"> 
+                
+                 
             
         </form>
       

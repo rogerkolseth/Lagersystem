@@ -28,7 +28,7 @@
         <div class="dropdown col-md-1 pull-right" id="loggCheckMenu">
 
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="redigerknapp" data-toggle="dropdown" data-target="#loggCheckMenu">
-                        <span class="glyphicon glyphicon-cog" style="color: grey"></span>
+                        <span class="glyphicon glyphicon-cog" style="color: #0f0f0f; font-size: 2em;"></span>
                     </button>
 
                     <ul class="dropdown-menu">
@@ -86,7 +86,7 @@
                                     <td id="bordernone"><input id="stocktaking" type="checkbox" name="Varetelling" value="1"></td>
                                 </tr>
                             </table>
-                            <input class="btn btn-success pull-right" type="submit" form="loggCheck" data-toggle="dropdown" value="Lagre" style="margin-right: 2%">
+                            <input class="btn btn-success pull-right" type="submit" form="loggCheck" value="Lagre" style="margin-right: 2%">
                         </form>
                     </ul>
 

@@ -3,6 +3,8 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
+        
+        <h2 class="text-center">Registrer retur</h2>
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
         <div id="success"></div>
@@ -48,7 +50,9 @@
 
                 <tr>
                     <th class="col-md-1" id="bordernone">Kundenr:   </th> 
-                    <td id="bordernone"><input class="form-control" name="customerNumber" required="required" form="returnProducts" type="number" value=""/></td> 
+                    <td id="bordernone"><input class="form-control" name="customerNumber" required="required" form="returnProducts" max="999999999" type="number" value=""
+                    oninvalid="this.setCustomValidity('Ikke godkjent kundenummer')"
+                    oninput="setCustomValidity('')"/></td> 
                 </tr>  
                 <tr>
                     <th class="col-md-1">kommentar:  </th>

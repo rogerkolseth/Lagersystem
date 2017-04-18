@@ -78,6 +78,8 @@ $(function POSTloggCheck() {
 
             },
             success: function (data) {
+                
+                $('.dropdown.open').removeClass('open');
 
             }
         });
@@ -148,6 +150,7 @@ $(function () {
         success: function (data) {
             updateCheckbox(data);
             typeSearchTemplate(data);
+            
         }
     });
 });

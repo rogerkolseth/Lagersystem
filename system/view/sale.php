@@ -6,7 +6,7 @@
 
 
     <!-- DIV som holder på all informasjon til venstre på skjermen  -->
-
+    <h2 class="text-center">Registrer uttak</h2>
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group ">
         <div id="success"></div>
@@ -51,7 +51,9 @@
 
                 <tr>
                     <th id="bordernone" class="col-md-1">Kundenr:   </th> 
-                    <td id="bordernone"><input class="form-control" name="customerNumber" required="required" form="withdrawProducts" type="number" value=""/></td> 
+                    <td id="bordernone"><input class="form-control" name="customerNumber" required="required" form="withdrawProducts" type="number" max="999999999" value=""
+                    oninvalid="this.setCustomValidity('Ikke godkjent kundenummer')"
+                    oninput="setCustomValidity('')"/></td> 
                 </tr>  
                 <tr>
                     <th id="bordernone">Kommentar:  </th>
