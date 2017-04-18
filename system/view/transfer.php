@@ -92,7 +92,7 @@
         <td>{{productName}}</td>
         <input name="transferProductID[]" id="{{productID}}" form="transferProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input class="form-control" name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
+        <td><input class="form-control negativeSupport" name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
         

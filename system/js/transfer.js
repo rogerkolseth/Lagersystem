@@ -116,7 +116,7 @@ $(function POSTeditUserModal() {
                 data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
-
+                    negativeSupportStatus(data);
                     transferQuantityTemplate(data);
                     $('#transferButton').show();
                 }
@@ -242,3 +242,10 @@ function chooseCategory(data) {
     productContainer.innerHTML = productTableGeneratedHTML;
 }
 
+function negativeSupportStatus(data) {
+    if (data.negativeSupport[0].negativeSupport < 1) {
+        $('.negativeSupport').attr({
+            "max": data.prodInfo[0].quantity, // substitute your own
+        });
+    }
+}

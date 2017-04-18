@@ -98,21 +98,22 @@ class SaleController extends Controller {
     private function getProdQuantity() {
         $givenProductID = $_REQUEST["givenProductID"];
         $inventoryInfo = $GLOBALS["inventoryModel"];
+        $storageModel = $GLOBALS["storageModel"];
 
         if (isset($_POST['givenStorageID'])) {
             $givenStorageID = $_REQUEST['givenStorageID'];
             $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
+            $negativeSupport = $storageModel->getNegativeSupportStatus($givenStorageID);
         } else {
             $givenUserID = $_SESSION["userID"];
             $restrictionInfo = $GLOBALS["restrictionModel"];
             $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
 
             $givenStorageID = $restrictionModel[0]['storageID'];
-            
+            $negativeSupport = $storageModel->getNegativeSupportStatus($givenStorageID);
             $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
         }
-        $negativeSupport = "1";
-
+        
         $data = json_encode(array("prodInfo" => $inventoryModel, "negativeSupport" => $negativeSupport));
         echo $data;
     }

@@ -355,6 +355,14 @@ if (isset($GLOBALS["errorMessage"])) {
                                             <th id="bordernone">Lagernavn:</th>
                                             <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
                                         </tr>
+                                        <tr>
+                                            <th id="bordernone">Grense for epostvarsling:</th>
+                                            <td id="bordernone"><input class="form-control" type="number" required="required" name="givenWarningLimit" value=""></td>
+                                        </tr>
+                                        <tr>
+                                            <th id="bordernone">Lager skal kunne gå i minus:</th>
+                                            <td id="bordernone"><input  type="checkbox" name="givenNegativeSupport" value="1"></td>
+                                        </tr>
 
                                     </table>
                                 </div>
@@ -785,75 +793,75 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
 
 
-<script>
-// STOCKTAKING OF STORAGE -- >
-// stocktaking modal -- >
+            <script>
+            // STOCKTAKING OF STORAGE -- >
+            // stocktaking modal -- >
 
-$(function chooseStorageStocktakContainer() {
+                $(function chooseStorageStocktakContainer() {
 
-    $('#chooseStorageStocktakContainer').on('change', function () {
-        var givenStorageID = $(this).find("option:selected").data('id');
-       
-        if (givenStorageID > 0) {
+                    $('#chooseStorageStocktakContainer').on('change', function () {
+                        var givenStorageID = $(this).find("option:selected").data('id');
 
-            $.ajax({
-                type: 'POST',
-                url: '?page=getStorageProduct',
-                data: {givenStorageID: givenStorageID},
-                dataType: 'json',
-                success: function (data) {
-                    stocktakingTemplate(data);
-                }
-            });
-        } else {
-            $('.product').empty();
-        }
-        return false;
-    });
-});  
+                        if (givenStorageID > 0) {
 
-
-
-// POST results from stocktaking, and updating the table-- >
-
-$(function POSTstocktakingResult() {
-
-    $('#stocktaking').submit(function () {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: data,
-            dataType: 'json',
-            success: function (data) {
-                if (document.getElementById("saveStocktaking").value === "Lagre") {
-                    var $displayUsers = $('#stocktakingResultContainer');
-                    $displayUsers.empty();
-                    document.getElementById("saveStocktaking").value = "Neste";
-                    $('#stocktakingModal').modal('hide');
-                    $('#stocktakLabel').show();
-                    $('#chooseStorageStocktakContainer').show();
-                } else {
-                    $('#stocktakLabel').hide();
-                    $('#chooseStorageStocktakContainer').hide();
-                    var $displayUsers = $('#stocktakingContainer');
-                    $displayUsers.empty();
-                    $('a#saveToCSV').show();
-                    document.getElementById("saveStocktaking").value = "Lagre";
-                    stocktakingResultTemplate(data);
-                    rowColor();
-                    stocktakingResultChart(data);
-                }
-
-            }
-            
-        });
-       return false; 
-    });
-});
-</script>
+                            $.ajax({
+                                type: 'POST',
+                                url: '?page=getStorageProduct',
+                                data: {givenStorageID: givenStorageID},
+                                dataType: 'json',
+                                success: function (data) {
+                                    stocktakingTemplate(data);
+                                }
+                            });
+                        } else {
+                            $('.product').empty();
+                        }
+                        return false;
+                    });
+                });
 
 
-<script src="js/home.js"></script>   
+
+            // POST results from stocktaking, and updating the table-- >
+
+                $(function POSTstocktakingResult() {
+
+                    $('#stocktaking').submit(function () {
+                        var url = $(this).attr('action');
+                        var data = $(this).serialize();
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: data,
+                            dataType: 'json',
+                            success: function (data) {
+                                if (document.getElementById("saveStocktaking").value === "Lagre") {
+                                    var $displayUsers = $('#stocktakingResultContainer');
+                                    $displayUsers.empty();
+                                    document.getElementById("saveStocktaking").value = "Neste";
+                                    $('#stocktakingModal').modal('hide');
+                                    $('#stocktakLabel').show();
+                                    $('#chooseStorageStocktakContainer').show();
+                                } else {
+                                    $('#stocktakLabel').hide();
+                                    $('#chooseStorageStocktakContainer').hide();
+                                    var $displayUsers = $('#stocktakingContainer');
+                                    $displayUsers.empty();
+                                    $('a#saveToCSV').show();
+                                    document.getElementById("saveStocktaking").value = "Lagre";
+                                    stocktakingResultTemplate(data);
+                                    rowColor();
+                                    stocktakingResultChart(data);
+                                }
+
+                            }
+
+                        });
+                        return false;
+                    });
+                });
+            </script>
+
+
+            <script src="js/home.js"></script>   
 

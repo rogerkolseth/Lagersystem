@@ -11,6 +11,7 @@ class StorageModel {
     const SEARCH_QUERY = "SELECT * FROM " . StorageModel::TABLE . " WHERE storageName LIKE :givenSearchWord ";
     const INSERT_QUERY = "INSERT INTO " . StorageModel::TABLE . " (storageName, warningLimit, negativeSupport) VALUES (:givenStorageName, :givenWarningLimit, :givenNegativeSupport)";
     const DELETE_QUERY = "DELETE FROM " . StorageModel::TABLE . " WHERE storageID = :removeStorageID";
+    const NEGATIVE_SUPP = "SELECT negativeSupport FROM " . StorageModel::TABLE . " WHERE storageID = :givenStorageID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
     
@@ -28,6 +29,7 @@ class StorageModel {
         $this->selStorageID = $this->dbConn->prepare(StorageModel::SELECT_QUERY_STORAGEID);
         $this->disabCons = $this->dbConn->prepare(StorageModel::DISABLE_CONS);
         $this->actCons = $this->dbConn->prepare(StorageModel::ACTIVATE_CONS);
+        $this->negSupp = $this->dbConn->prepare(StorageModel::NEGATIVE_SUPP);
         
     }
 
@@ -62,5 +64,10 @@ class StorageModel {
         $this->selStorageID->execute(array("givenStorageID" => $givenStorageID));
         return $this->selStorageID->fetchAll(PDO::FETCH_ASSOC);
     }    
+    
+    public function getNegativeSupportStatus($givenStorageID){
+       $this->negSupp->execute(array("givenStorageID" => $givenStorageID));
+        return $this->negSupp->fetchAll(PDO::FETCH_ASSOC); 
+    }
 
 }
