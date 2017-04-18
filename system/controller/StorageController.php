@@ -36,13 +36,20 @@ class StorageController extends Controller {
 
     private function storageCreationEngine() {
         $givenStorageName = $_REQUEST["givenStorageName"];
+        $givenWarningLimit = $_REQUEST["givenWarningLimit"];
+        if (isset($_POST['givenNegativeSupport'])) {
+            $givenNegativeSupport = $_REQUEST["givenNegativeSupport"];
+        } else {
+            $givenNegativeSupport = 0;
+        }
+        
         $sessionID = $_SESSION["userID"];
 
         $setSessionID = $GLOBALS["userModel"];
         $setSessionID->setSession($sessionID);
 
         $storageCreationInfo = $GLOBALS["storageModel"];
-        $added = $storageCreationInfo->addStorage($givenStorageName);
+        $added = $storageCreationInfo->addStorage($givenStorageName, $givenWarningLimit, $givenNegativeSupport);
 
         if ($added) {
             echo json_encode("success");
@@ -54,13 +61,20 @@ class StorageController extends Controller {
     private function storageEditEngine() {
         $editStorageID = $_REQUEST["editStorageID"];
         $editStorageName = $_REQUEST["editStorageName"];
+        $editWarningLimit = $_REQUEST["editWarningLimit"];
+        if (isset($_POST['editNegativeSupport'])) {
+            $editNegativeSupport = $_REQUEST["editNegativeSupport"];
+        } else {
+            $editNegativeSupport = 0;
+        }
+        
         $sessionID = $_SESSION["userID"];
 
         $sesionLog = $GLOBALS["userModel"];
         $sesionLog->setSession($sessionID);
 
         $storageEditInfo = $GLOBALS["storageModel"];
-        $edited = $storageEditInfo->editStorage($editStorageName, $editStorageID);
+        $edited = $storageEditInfo->editStorage($editStorageName, $editStorageID, $editWarningLimit, $editNegativeSupport);
 
         if ($edited) {
             echo json_encode("success");

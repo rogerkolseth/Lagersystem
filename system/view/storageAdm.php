@@ -74,9 +74,15 @@
                         <tr>
                             <th id="bordernone">Lagernavn:</th>
                             <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
-                            
                         </tr>
-                    
+                        <tr>
+                            <th id="bordernone">Grense for epostvarsling:</th>
+                            <td id="bordernone"><input class="form-control" type="number" required="required" name="givenWarningLimit" value=""></td>
+                        </tr>
+                        <tr>
+                            <th id="bordernone">Lager skal kunne gå i minus:</th>
+                            <td id="bordernone"><input  type="checkbox" name="givenNegativeSupport" value="1"></td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -351,6 +357,14 @@
     <th id="bordernone">Lagernavn: </th> 
     <td id="bordernone"><input class="form-control" form="editStorage" required="required" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"></td> 
     </tr>
+    <tr>
+    <th class="col-md-1">Grense for epostvarsling: </th>
+    <td id="bordernone"><input class="form-control" form="editStorage" required="required" type="text" name="editWarningLimit" value="{{warningLimit}}" autocomplete="off"></td> 
+
+    </tr>
+    <th class="col-md-1">Lager skal kunne gå i minus: </th>
+    <td id="bordernone"><input id="editNegativeSupport"  type="checkbox" form="editStorage" name="editNegativeSupport" value="1"></td>
+    </tr>
     {{/each}}            
 </script>  
 
@@ -365,6 +379,13 @@
     <tr>
     <th class="col-md-1">Lagernavn: </th>
     <td>{{storageName}}</td>
+    </tr>
+    <tr>
+    <th class="col-md-1">Grense for epostvarsling: </th>
+    <td>{{warningLimit}}</td>
+    </tr>
+    <th class="col-md-1">Lager kan gå i minus: </th>
+    <td class="negativeSupportStatus" id="negativeSupportStatus"></td>
     </tr>
     {{/each}}                
 </script>   
