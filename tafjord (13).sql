@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 18. Apr, 2017 23:42 p.m.
+-- Generation Time: 19. Apr, 2017 21:26 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -308,8 +308,8 @@ CREATE TABLE `storage` (
 --
 
 INSERT INTO `storage` (`storageID`, `storageName`, `negativeSupport`, `warningLimit`) VALUES
-(1, 'Hovedlager', 0, 2),
-(63, 'Kundesenter', 1, 3);
+(1, 'Hovedlager', 0, 20),
+(63, 'Kundesenter', 1, 11);
 
 --
 -- Triggere `storage`
@@ -353,7 +353,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$Yp0duv9IfmC8MSpanG60XuEljLEO0KOJsUrPH45EROrzcJ1Dyxdfm', 'Administrator', 42, '2017-04-18', 'test123');
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$Yp0duv9IfmC8MSpanG60XuEljLEO0KOJsUrPH45EROrzcJ1Dyxdfm', 'Administrator', 42, '2017-04-19', 'test123');
 
 --
 -- Triggere `users`
@@ -521,7 +521,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -551,7 +551,7 @@ ALTER TABLE `returns`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT for table `storage`
 --

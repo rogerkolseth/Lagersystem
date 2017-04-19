@@ -27,11 +27,11 @@ class StorageController extends Controller {
             $this->deleteSingleProd();
         } else if ($page == "stocktacking") {
             $this->stocktacking();
-        }
+        } 
     }
 
     private function storageAdmPage() {
-        return $this->render("storageAdm");
+        return $this->render("storageAdm");     
     }
 
     private function storageCreationEngine() {
@@ -42,7 +42,7 @@ class StorageController extends Controller {
         } else {
             $givenNegativeSupport = 0;
         }
-        
+
         $sessionID = $_SESSION["userID"];
 
         $setSessionID = $GLOBALS["userModel"];
@@ -67,7 +67,7 @@ class StorageController extends Controller {
         } else {
             $editNegativeSupport = 0;
         }
-        
+
         $sessionID = $_SESSION["userID"];
 
         $sesionLog = $GLOBALS["userModel"];

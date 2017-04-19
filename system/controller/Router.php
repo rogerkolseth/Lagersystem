@@ -103,7 +103,8 @@ class Router {
                 case "addStorageEngine":
                 case "editStorageEngine" :
                 case "deleteStorageEngine" :
-                case "deleteSingleProd" :    
+                case "deleteSingleProd" :   
+                case "emailWarning" :    
                     return new StorageController();
                     
                 case "userAdm"    :

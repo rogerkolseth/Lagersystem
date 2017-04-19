@@ -93,6 +93,11 @@ class SaleController extends Controller {
             }
             echo json_encode("success");
         }
+    //    $storageName = 'Hovedlager';
+    //    $quantity = '3';
+    //    $toAdresse = 'roger.kolseth@gmail.com';
+    //    $productName = 'FMG';
+    //    $this->emailWarning($toAdresse, $storageName, $quantity, $productName);
     }
 
     private function getProdQuantity() {
@@ -116,6 +121,8 @@ class SaleController extends Controller {
         
         $data = json_encode(array("prodInfo" => $inventoryModel, "negativeSupport" => $negativeSupport));
         echo $data;
+        
+        
     }
 
     private function getAllMySales() {

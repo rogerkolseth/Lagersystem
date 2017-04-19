@@ -20,7 +20,7 @@ class InventoryModel {
     const UPDATE_QUERY = "UPDATE " . InventoryModel::TABLE . " SET quantity = :givenQuantity WHERE storageID = :givenStorageID AND productID = :givenProductID"; 
     const LOW_INV_QUERY = "SELECT storage.storageName, products.productName, inventory.quantity FROM  " . InventoryModel::TABLE . " INNER JOIN storage ON inventory.storageID = storage.storageID INNER JOIN products ON inventory.productID = products.productID  WHERE inventory.quantity < 10";
     const SELECT_STOPRO_FROM_CAT = "SELECT storageID, products.productName, products.productID, quantity, products.categoryID FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID WHERE storageID = :givenStorageID AND categoryID = :givenCategoryID";
-    
+    const EMAIL_WARNING = "SELECT storage.storageName, products.productName, inventory.quantity, storage.warningLimit FROM " . InventoryModel::TABLE . " INNER JOIN storage ON storage.storageID = inventory.storageID INNER JOIN products ON products.productID = inventory.productID WHERE quantity < storage.warningLimit";
     private $selStmt;
 
     public function __construct(PDO $dbConn) {
@@ -38,6 +38,7 @@ class InventoryModel {
         $this->editStmt = $this->dbConn->prepare(InventoryModel::UPDATE_QUERY);
         $this->lowInvStmt = $this->dbConn->prepare(InventoryModel::LOW_INV_QUERY);
         $this->stoProFromCat = $this->dbConn->prepare(InventoryModel::SELECT_STOPRO_FROM_CAT);
+        $this->emailAlert = $this->dbConn->prepare(InventoryModel::EMAIL_WARNING);
 
     }
     public function getLowInventory() {
@@ -100,6 +101,11 @@ class InventoryModel {
     public function getStoProFromCat($givenStorageID, $givenCategoryID){
         $this->stoProFromCat->execute(array("givenStorageID" =>  $givenStorageID, "givenCategoryID" => $givenCategoryID)); 
         return $this->stoProFromCat->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    
+    public function getEmailWarining(){
+        $this->emailAlert->execute(); 
+        return $this->emailAlert->fetchAll(PDO::FETCH_ASSOC);  
     }
 }   
     
