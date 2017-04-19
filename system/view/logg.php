@@ -86,7 +86,7 @@
                                     <td id="bordernone"><input id="stocktaking" type="checkbox" name="Varetelling" value="1"></td>
                                 </tr>
                             </table>
-                            <input class="btn btn-success pull-right" type="submit" form="loggCheck" value="Lagre" style="margin-right: 2%">
+                            <input class="btn btn-success pull-right" type="submit" form="loggCheck"  value="Lagre" style="margin-right: 2%">
                         </form>
                     </ul>
 
