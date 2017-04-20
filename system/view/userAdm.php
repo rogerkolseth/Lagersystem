@@ -431,7 +431,7 @@
     
     <!-- Knapp som aktiverer Model for rettigheter av bruker  --> 
 
-    <label for="setRes{{userID}}" id="{{userID}}" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal">    <img id="keyIcon" src="image/key-icon2.png"></img>
+    <label for="setRes{{userID}}" id="{{userID}}" onclick="getStorageInfo()" data-toggle="modal"data-toggle="tooltip" title="Gi lagertilgang" data-target="#userRestrictionModal">    <img id="keyIcon" src="image/key-icon2.png"></img>
     </label> 
 
     </td>
@@ -449,7 +449,7 @@
 
   
     
-    <td> <input form="editRestriction" class="selectRestriction" id="setRes{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
+    <td> <input form="editRestriction" class="selectRestriction" id="setRes{{userID}}" value="{{userID}}" data-toggle="tooltip" title="Gi lagertilgang" name="userRestrictions[]" type="checkbox"></td>
 
   
 </tr>
