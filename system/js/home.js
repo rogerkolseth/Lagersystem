@@ -313,7 +313,6 @@ $(document).ready(function ()
 
 
 
-// Get storage information with user restriction -- >
 
 $(function () {
 
@@ -330,6 +329,8 @@ $(function () {
         }
     });
 });
+
+
 
 
 // Dersom der er kun 1 lager så vises dete-- >
@@ -411,9 +412,9 @@ $(function POSTfromStorageModals() {
 });
 
 
-//Display inventory and chart if single storage-- >
-
-function displaySingeStorage(givenStorageID) {
+function refreshdisplaySingeStorage(givenStorageID) {
+window.setInterval (function (){
+    
 
     chartTest(givenStorageID);
     if (givenStorageID > 0) {
@@ -429,9 +430,26 @@ function displaySingeStorage(givenStorageID) {
         });
     }
     return false;
+    }, 20000);
 }
 
-
+function displaySingeStorage(givenStorageID) {
+    refreshdisplaySingeStorage(givenStorageID);
+    chartTest(givenStorageID);
+    if (givenStorageID > 0) {
+        $.ajax({
+            type: 'POST',
+            url: '?page=getStorageProduct',
+            data: {givenStorageID: givenStorageID},
+            dataType: 'json',
+            success: function (data) {
+                chosenStorageTemplate(data);
+                rowColor();
+            }
+        });
+    }
+    return false;
+}
 
 function chosenStorageTemplate(data) {
     var rawTemplate = document.getElementById("chosenStorageTemplate").innerHTML;
