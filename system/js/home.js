@@ -430,7 +430,7 @@ window.setInterval (function (){
         });
     }
     return false;
-    }, 20000);
+    }, 120000);
 }
 
 function displaySingeStorage(givenStorageID) {
