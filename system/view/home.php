@@ -16,6 +16,9 @@ if (isset($GLOBALS["errorMessage"])) {
         }
         ?>
     </div>
+    
+    
+    
 
     <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
         <div id="snarveidiv">
@@ -61,7 +64,25 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
     <div class="container">
-
+       <?php if ($_SESSION["userLevel"] == "Administrator") { ?> 
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
+        
+        <?php } ?>
+        
+        <?php if ($_SESSION["userLevel"] == "User") { ?> 
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
+        
+        <?php } ?>
         <div class="col-md-12">
             <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
                 <div class="col-md-6">
@@ -97,6 +118,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                 <tr>
                                     <th>Selger</th>
                                     <th>KundeNr</th>
+                                    <th>Produkt</th>
                                     <th>Lager</th>
                                     <th>Antall</th>
                                     <th>Kommentar</th>
@@ -157,6 +179,68 @@ if (isset($GLOBALS["errorMessage"])) {
 
             </div>
         <?php } ?>
+        
+        <!-- Hjelp modal -->
+        
+        
+        <div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Bruker informasjon</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    test
+                </div>
+                <div class="modal-footer">
+                    
+                    </div>
+            </div>
+        </div>
+    </div>
+        
+        <!-- Hjelp modal bruker -->
+        
+        
+        <div class="modal fade" id="showHelpModalUser" role="dialog">
+            <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-6 text-center">
+                    <label>Her kan du se de siste salgene gjort av alle brukerene i systemet.</label>
+                    <img id="helpimage" src="image/SisteSalg.PNG">
+                    </div>
+                    <div class="col-md-6 text-center">
+                    <label>Her kan du se de siste salgene gjort av deg.</label>
+                    <img id="helpimage" src="image/DineSisteSalg.PNG">
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
+                            Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
+                    
+                    </label>
+                    <img id="helpimage" src="image/Lagerbeholdning.PNG">
+                    </div>
+                    <div class="col-md-6 text-center">
+                    <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.</label>
+                    <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
+                    </div>
+                    
+                </div>
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+            </div>
+        </div>
+    </div> 
 
 
         <!-- LAGERBEHOLDNING -->

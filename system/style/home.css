@@ -27,6 +27,19 @@ html,body
     height: 18px;
     
 }
+#questionmark
+{
+    cursor: pointer;
+    
+    width: 27px;
+    height: 25px;
+}
+
+#helpimage
+{
+    width: 500px;
+    height: 250px;
+}
 
 
 #snarveidiv
