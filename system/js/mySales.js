@@ -7,6 +7,7 @@ $(function () {
         dataType: 'json',
         success: function (data) {
             mySalesTemplate(data);
+            userSaleTemplate(data);
         }
     });
 });
@@ -23,6 +24,7 @@ function UpdateSalesTable() {
             dataType: 'json',
             success: function (data) {
                 mySalesTemplate(data);
+                userSaleTemplate(data);
             }
         });
     });
@@ -127,3 +129,31 @@ $(function POSTeditSaleInfo() {
 });
 
 
+
+function userSaleTemplate(data) {
+    var $usernameTemplate = $('#chooseUserSaleContainer');
+    $usernameTemplate.empty();
+    $usernameTemplate.append('<tr><td id="bordernone">Alle</td> <td id="bordernone"><input id="chooseUserSale" type="checkbox" name="username[]" value="0"></td></tr>');
+    $.each(data.usernames, function (i, item) {
+        $usernameTemplate.append('<tr><td id="bordernone">' + item.username +'</td> <td id="bordernone"><input id="chooseUserSale" type="checkbox" name="username[]" value="'+item.userID+'"></td></tr>');
+    });
+    $usernameTemplate.append(' <input class="form-control btn btn-primary" type="submit" form="showUserSale"  value="Velg">');
+}
+
+$(function POSTshowUserSale() {
+
+    $('#showUserSale').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                mySalesTemplate(data);
+            }
+        });
+        return false;
+    });
+});

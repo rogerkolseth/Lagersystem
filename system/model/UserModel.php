@@ -12,6 +12,7 @@ class UserModel {
     const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email, mediaID) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail, :givenMediaID)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
     const UPDATE_LOGINDATE = "UPDATE " . UserModel::TABLE . " SET lastLogin = :givenLastLogin WHERE username = :givenUsername";
+    const SELECT_USERNAMES = "SELECT userID, username FROM " . UserModel::TABLE;
     const SET_SESSION_VAR = "SET @sessionUserID := :sessionUserID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
@@ -35,6 +36,7 @@ class UserModel {
         $this->actCons = $this->dbConn->prepare(UserModel::ACTIVATE_CONS);
         $this->lastLogin = $this->dbConn->prepare(UserModel::UPDATE_LOGINDATE);
         $this->sessionVar = $this->dbConn->prepare(UserModel::SET_SESSION_VAR);
+        $this->selUsername = $this->dbConn->prepare(UserModel::SELECT_USERNAMES);
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -47,7 +49,10 @@ class UserModel {
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    
+    public function getUsername(){
+        $this->selUsername->execute();
+        return $this->selUsername->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 
     public function getAllUserInfoFromID($givenUserID) {

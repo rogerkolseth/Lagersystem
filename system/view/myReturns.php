@@ -15,15 +15,30 @@
                     
                     <button onclick="UpdateReturnsTable()" class="btn btn-primary " type="button">Alle Returer</button>
                     
-                    <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
-                    <select id="chooseUserSaleContainer" class="form-control">
-                        
-                    </select>
-                    <?php }?>
                 </div>
                 
             </div> 
         </form>
+        
+        <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+
+                <form id="showUserReturn" action="?page=showUserReturns" method="post">
+                    <div class="dropdown form-group" id="UserSaleSearch">
+                        <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
+                            Velg brukere
+                        </button>
+                        <div class="dropdown-menu">
+
+                            <li class="dropdown-header"><h4>Velg Bruker:</h4></li>
+                            <table class="table" id="chooseUserReturnContainer">
+
+                            </table>
+                        </div>
+                    </div> 
+                </form>
+
+
+            <?php } ?>
         
         <br><br><br><br>
         
