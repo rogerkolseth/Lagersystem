@@ -74,7 +74,9 @@ class SaleController extends Controller {
         $withdrawQuantityArray = $_REQUEST["withdrawQuantity"];
         $customerNumber = $_REQUEST["customerNumber"];
         $userID = $_SESSION["userID"];
+        if (isset($_POST['withdrawComment'])) {
         $comment = $_REQUEST["withdrawComment"];
+        } else {$comment = "";}
         $date = $_REQUEST["date"];
 
 
@@ -93,11 +95,7 @@ class SaleController extends Controller {
             }
             echo json_encode("success");
         }
-    //    $storageName = 'Hovedlager';
-    //    $quantity = '3';
-    //    $toAdresse = 'roger.kolseth@gmail.com';
-    //    $productName = 'FMG';
-    //    $this->emailWarning($toAdresse, $storageName, $quantity, $productName);
+
     }
 
     private function getProdQuantity() {

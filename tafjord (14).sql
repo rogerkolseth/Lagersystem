@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 19. Apr, 2017 21:26 p.m.
+-- Generation Time: 24. Apr, 2017 12:14 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -99,7 +99,10 @@ CREATE TABLE `logg` (
   `onUserID` int(11) UNSIGNED DEFAULT NULL,
   `productID` int(11) UNSIGNED DEFAULT NULL,
   `date` datetime NOT NULL,
-  `customerNr` int(11) DEFAULT NULL
+  `customerNr` int(11) DEFAULT NULL,
+  `deletedUser` varchar(255) DEFAULT NULL,
+  `deletedStorage` varchar(255) DEFAULT NULL,
+  `deletedProduct` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -127,7 +130,7 @@ INSERT INTO `loggtype` (`typeID`, `typeName`, `typeCheck`) VALUES
 (6, 'Uttak', 1),
 (7, 'Retur', 1),
 (8, 'Overføring', 1),
-(9, 'Sletting', 0),
+(9, 'Sletting', 1),
 (10, 'Varetelling', 1);
 
 -- --------------------------------------------------------
@@ -160,9 +163,9 @@ CREATE TABLE `media` (
 --
 
 INSERT INTO `media` (`mediaID`, `mediaName`, `categoryID`) VALUES
-(21, 'defaultUser.png', 4),
+(21, 'defaultUser.png', 3),
 (41, 'Costa Rican Frog.jpg', 2),
-(42, 'Pensive Parakeet.jpg', 2);
+(43, 'Pensive Parakeet.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -181,6 +184,14 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dataark for tabell `products`
+--
+
+INSERT INTO `products` (`productID`, `productName`, `price`, `categoryID`, `mediaID`, `date`, `macAdresse`) VALUES
+(55, 'FMG', '999.00', 2, 21, '2017-04-13', 'FALSE'),
+(56, 'Dekoder', '1490.00', 2, 21, '2017-04-14', 'FALSE');
+
+--
 -- Triggere `products`
 --
 DELIMITER $$
@@ -189,6 +200,10 @@ IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 4) > 0 ) TH
     INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.productID, logg.date) VALUES (4, 'Nytt produkt', @sessionUserID, NEW.productID, NOW());
 END IF;
 END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `deleteProduct` BEFORE DELETE ON `products` FOR EACH ROW BEGIN IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedProduct) VALUES (9, 'Av produkt', @sessionUserID, NOW(), OLD.productName); END IF; END
 $$
 DELIMITER ;
 DELIMITER $$
@@ -323,6 +338,14 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
+CREATE TRIGGER `deleteStorage` BEFORE DELETE ON `storage` FOR EACH ROW BEGIN
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
+	INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedStorage) VALUES (9, 'Av lager', @sessionUserID, NOW(), OLD.storageName);
+    END IF;
+    END
+$$
+DELIMITER ;
+DELIMITER $$
 CREATE TRIGGER `editStorage_Logg` AFTER UPDATE ON `storage` FOR EACH ROW BEGIN 
 IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 1) > 0 ) THEN
 	INSERT INTO logg (logg.typeID, logg.desc, logg.UserID, logg.storageID, logg.date) VALUES (1, 'Av produkt', @sessionUserID, NEW.storageID, NOW()); 
@@ -353,7 +376,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$Yp0duv9IfmC8MSpanG60XuEljLEO0KOJsUrPH45EROrzcJ1Dyxdfm', 'Administrator', 42, '2017-04-19', 'test123');
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$J4MC9FnFjvAwgA.5cJSb5uZPVwPFseKu29S8spw7dILuzbuxt3jna', 'Administrator', 21, '2017-04-24', 'test123');
 
 --
 -- Triggere `users`
@@ -369,7 +392,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `deleteUser_Logg` BEFORE DELETE ON `users` FOR EACH ROW BEGIN
 IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
-    INSERT INTO logg (logg.typeID, logg.desc, logg.onUserID, logg.date) VALUES (9, 'Av bruker', '10', NOW());
+    INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedUser) VALUES (9, 'Av bruker', @sessionUserID, NOW(), OLD.username);
 END IF;
 END
 $$
@@ -516,12 +539,12 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -531,17 +554,17 @@ ALTER TABLE `macadresse`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 --
 -- AUTO_INCREMENT for table `returns`
 --
@@ -551,17 +574,17 @@ ALTER TABLE `returns`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- Begrensninger for dumpede tabeller
 --

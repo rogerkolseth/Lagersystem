@@ -461,4 +461,4 @@
 
 
 
-<script src="js/userAdm.js"></script> 
+<script type="text/javascript" src="js/userAdm.js"></script> 

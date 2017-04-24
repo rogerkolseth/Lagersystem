@@ -607,7 +607,9 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
             <!-- Display stocktacing product-->
+            <!-- Display stocktacing product-->
             <script id="stocktakingTemplate" type="text/x-handlebars-template">
+                <h2>{{storageProduct.0.storageName}}</h2><br>  
                 <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
                 <input form="stocktaking" name="getResult" type="hidden" value="getResult"> 
                 {{#each storageProduct}}
@@ -617,7 +619,9 @@ if (isset($GLOBALS["errorMessage"])) {
                 <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
                 <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
                 <input form="stocktaking" name="givenProductNameArray[]" type="hidden" value="{{productName}}">            
-                <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
+                <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="" autocomplete="off"></td>
+                <th id="bordernone">Registrert verdi</th>
+                <td id="bordernone">{{quantity}}</td>
                 </tr>
 
 
@@ -794,8 +798,8 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
             <script>
-            // STOCKTAKING OF STORAGE -- >
-            // stocktaking modal -- >
+                // STOCKTAKING OF STORAGE -- >
+                // stocktaking modal -- >
 
                 $(function chooseStorageStocktakContainer() {
 
@@ -822,7 +826,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-            // POST results from stocktaking, and updating the table-- >
+                // POST results from stocktaking, and updating the table-- >
 
                 $(function POSTstocktakingResult() {
 
@@ -861,7 +865,26 @@ if (isset($GLOBALS["errorMessage"])) {
                     });
                 });
             </script>
+            <script>
+                $(document).ready(function ()
+                {
+                    $('#stocktakingModal').on('hidden.bs.modal', function (e)
+                    {
+                        if (resultBar)
+                        {
+                            resultBar.destroy();
+                        }
+                        $('#stocktakLabel').show();
+                        $('#chooseStorageStocktakContainer').show();
+                        $('#stocktakingResultContainer').empty();
+                        $('#stocktakingContainer').empty();
+                        $('#stocktakingResultChart').empty();
+                        document.getElementById("saveStocktaking").value = "Neste";
+                        $('a#saveToCSV').hide();
+                        $('#chooseStorageStocktakContainer').prop('selectedIndex', 0);
+                    });
+                });
+            </script>
 
-
-            <script src="js/home.js"></script>   
+            <script type="text/javascript" src="js/home.js"></script>   
 

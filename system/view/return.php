@@ -72,7 +72,7 @@
             
             <input form="returnProducts" type="hidden" id="date" name="date">
             
-            <button form="returnProducts" type="submit" class="btn btn-success" id="returnButton">Overfør</button>
+            <button form="returnProducts" type="submit" class="btn btn-success" id="returnButton">Registrer Retur</button>
             <p id="errorMessage"></p>
         </div> 
         </form>
@@ -129,4 +129,4 @@
 </script>  
 
 
-<script src="js/return.js"></script>
+<script type="text/javascript" src="js/return.js"></script>

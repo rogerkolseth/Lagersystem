@@ -139,4 +139,4 @@ $test = $GLOBALS["errorMessage"];
         
 </script>
         
-<script src="js/editUser.js"></script>
+<script type="text/javascript" src="js/editUser.js"></script>

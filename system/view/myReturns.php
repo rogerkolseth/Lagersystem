@@ -14,6 +14,12 @@
                     <input class="form-control btn btn-primary" form="searchForReturns" type="submit" value="Søk">
                     
                     <button onclick="UpdateReturnsTable()" class="btn btn-primary " type="button">Alle Returer</button>
+                    
+                    <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+                    <select id="chooseUserSaleContainer" class="form-control">
+                        
+                    </select>
+                    <?php }?>
                 </div>
                 
             </div> 
@@ -114,4 +120,4 @@
 </script>  
 
 
-<script src="js/myReturns.js"></script>
+<script type="text/javascript" src="js/myReturns.js"></script>

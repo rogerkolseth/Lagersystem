@@ -373,4 +373,4 @@
 </script>
 
 
-<script src="js/productAdm.js"></script>
+<script type="text/javascript" src="js/productAdm.js"></script>

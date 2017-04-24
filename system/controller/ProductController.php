@@ -78,6 +78,11 @@ class ProductController extends Controller {
 
     private function deleteProductEngine() {
         $removeProductID = $_REQUEST["deleteProductID"];
+        
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
 
         $removeProduct = $GLOBALS["productModel"];
         $delited = $removeProduct->removeProduct($removeProductID);

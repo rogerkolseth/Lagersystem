@@ -58,7 +58,7 @@
             
             
             
-            <button form="transferProducts" type="submit" class="btn btn-success" id="transferButton">Overfør</button>
+            <button form="transferProducts" type="submit" class="btn btn-success" id="transferButton">Registrer Overføring</button>
 
         </div>    
     </form>
@@ -123,4 +123,4 @@
 {{/each}} 
 </script>    
 
-<script src="js/transfer.js"></script>   
+<script type="text/javascript" src="js/transfer.js"></script>   

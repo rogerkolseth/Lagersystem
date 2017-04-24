@@ -54,7 +54,7 @@ abstract class Controller {
 //Username to use for SMTP authentication - use full email address for gmail
         $mail->Username = "roger.kolseth@gmail.com";
 //Password to use for SMTP authentication
-        $mail->Password = "tilbake";
+        $mail->Password = "******";
 //Set who the message is to be sent from
         $mail->setFrom('roger.kolseth@gmail.com', 'Lagersystem');
 //Set who the message is to be sent to
@@ -69,3 +69,8 @@ abstract class Controller {
 
 }
 
+    //    $storageName = 'Hovedlager';
+    //    $quantity = '3';
+    //    $toAdresse = 'roger.kolseth@gmail.com';
+    //    $productName = 'FMG';
+    //    $this->emailWarning($toAdresse, $storageName, $quantity, $productName);

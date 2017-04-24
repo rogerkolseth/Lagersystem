@@ -89,12 +89,17 @@ class StorageController extends Controller {
         if ($removeStorageID != 1) {
             $deleteInventory = $GLOBALS["inventoryModel"];
             $deleteInventory->deleteInventory($removeStorageID);
+            
+            $restrictionModel = $GLOBALS["restrictionModel"];
+            $restrictionModel->deleteResStorageID($removeStorageID);
+            
+            $sessionID = $_SESSION["userID"];
+
+            $setSessionID = $GLOBALS["userModel"];
+            $setSessionID->setSession($sessionID);
 
             $removeStorage = $GLOBALS["storageModel"];
             $removeStorage->removeStorage($removeStorageID);
-
-            $restrictionModel = $GLOBALS["restrictionModel"];
-            $restrictionModel->deleteResStorageID($removeStorageID);
 
             echo json_encode("success");
         }
@@ -148,7 +153,7 @@ class StorageController extends Controller {
             $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
 
             $givenStorageID = $restrictionModel[0]['storageID'];
-            ;
+
             $inventoryModel = $inventoryInfo->getAllStorageInventoryByStorageID($givenStorageID);
         }
 

@@ -57,7 +57,7 @@
                 </tr>  
                 <tr>
                     <th id="bordernone">Kommentar:  </th>
-                    <td id="bordernone"><input class="form-control" name="withdrawComment" required="required" form="withdrawProducts" type="text" value=""/></td>
+                    <td id="bordernone"><input class="form-control" name="withdrawComment" form="withdrawProducts" type="text" value=""/></td>
                 </tr>
 
             </table>
@@ -75,7 +75,7 @@
             
             <input form="withdrawProducts" type="hidden" id="date" name="date">
             
-            <button form="withdrawProducts" type="submit" class="btn btn-success" id="withdrawButton" hidden>Overfør</button>
+            <button form="withdrawProducts" type="submit" class="btn btn-success" id="withdrawButton" hidden>Registrer Uttak</button>
             <p id="errorMessage"></p>
         </div>
         </form>
@@ -135,4 +135,4 @@
     {{/each}} 
 </script>
 
-<script src="js/sale.js"></script>
+<script type="text/javascript" src="js/sale.js"></script>

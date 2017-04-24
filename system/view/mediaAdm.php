@@ -274,4 +274,4 @@ $test = $GLOBALS["errorMessage"];
 </script>    
 
 
-<script src="js/mediaAdm.js"></script>
+<script type="text/javascript" src="js/mediaAdm.js"></script>
