@@ -337,13 +337,12 @@
 {{#each storageProduct}}
     
     <tr>
-       <th id="bordernone">{{productName}}:</th>    
+       <th id="bordernone">{{productName}} ({{quantity}}):</th>    
            <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
            <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
            <input form="stocktaking" name="givenProductNameArray[]" type="hidden" value="{{productName}}">            
        <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
-           <th id="bordernone">Registrert verdi</th>
-               <td id="bordernone">{{quantity}}</td>
+           
     </tr>
      
     

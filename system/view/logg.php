@@ -150,12 +150,12 @@
 
                     <div class="dropdown form-group" id="usernameSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
-                            Velg bruker
+                            Velg Bruker
                         </button>
                         <div class="dropdown-menu">
                        
                             
-                            <li class="dropdown-header"><h4>Velg bruker:</h4></li>
+                            <li class="dropdown-header"><h4>Velg Bruker:</h4></li>
                                 <table class="table" id="usernameContainer">
                         
                                 </table>
