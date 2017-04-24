@@ -87,16 +87,16 @@ class StorageController extends Controller {
         $removeStorageID = $_REQUEST["deleteStorageID"];
 
         if ($removeStorageID != 1) {
+            $sessionID = $_SESSION["userID"];
+
+            $setSessionID = $GLOBALS["userModel"];
+            $setSessionID->setSession($sessionID);
+            
             $deleteInventory = $GLOBALS["inventoryModel"];
             $deleteInventory->deleteInventory($removeStorageID);
             
             $restrictionModel = $GLOBALS["restrictionModel"];
             $restrictionModel->deleteResStorageID($removeStorageID);
-            
-            $sessionID = $_SESSION["userID"];
-
-            $setSessionID = $GLOBALS["userModel"];
-            $setSessionID->setSession($sessionID);
 
             $removeStorage = $GLOBALS["storageModel"];
             $removeStorage->removeStorage($removeStorageID);

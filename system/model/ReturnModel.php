@@ -5,10 +5,10 @@ class ReturnModel {
     private $dbConn;
     
     const TABLE = "returns";
-    const SELECT_QUERY = "SELECT returnID, customerNr, products.productName, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . ReturnModel::TABLE . 
-            " INNER JOIN products ON returns.productID = products.productID INNER JOIN storage ON returns.storageID = storage.storageID";
-    const SELECT_MY_RETURNS = "SELECT returnID, customerNr, products.productName, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . ReturnModel::TABLE . 
-            " INNER JOIN products ON returns.productID = products.productID INNER JOIN storage ON returns.storageID = storage.storageID WHERE userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR userID = :givenUserID AND comment LIKE "
+    const SELECT_QUERY = "SELECT returnID, customerNr, products.productName, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
+            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID";
+    const SELECT_MY_RETURNS = "SELECT returnID, customerNr, products.productName, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
+            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID WHERE userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR userID = :givenUserID AND comment LIKE "
             . ":givenProductSearchWord OR userID = :givenUserID AND productName LIKE :givenProductSearchWord OR userID = :givenUserID AND storageName LIKE :givenProductSearchWord ORDER BY date DESC";
     const INSERT_QUERY = "INSERT INTO " . ReturnModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, :givenDate, :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
     const SELECT_FROM_ID = "SELECT * FROM " . ReturnModel::TABLE . " WHERE returnID = :givenReturnID";
@@ -54,8 +54,8 @@ class ReturnModel {
         } else {$usernameQuery = "";}
         
         
-        $sql = "SELECT returnID, customerNr, products.productName, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . ReturnModel::TABLE . 
-            " INNER JOIN products ON returns.productID = products.productID INNER JOIN storage ON returns.storageID = storage.storageID WHERE $usernameQuery ORDER BY date DESC";
+        $sql = "SELECT returnID, customerNr, products.productName, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
+            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID WHERE $usernameQuery ORDER BY date DESC";
     
         $this->selUserReturn = $this->dbConn->prepare($sql);
         

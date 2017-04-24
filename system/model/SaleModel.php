@@ -6,10 +6,10 @@ class SaleModel {
     
     const TABLE = "sales";
     
-    const SELECT_QUERY = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
-            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID";
-    const SELECT_MY_SALES = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
-            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR userID = :givenUserID AND comment LIKE "
+    const SELECT_QUERY = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct  FROM " . SaleModel::TABLE . 
+            " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID";
+    const SELECT_MY_SALES = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct FROM " . SaleModel::TABLE . 
+            " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID WHERE userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR userID = :givenUserID AND comment LIKE "
             . ":givenProductSearchWord OR userID = :givenUserID AND productName LIKE :givenProductSearchWord OR userID = :givenUserID AND storageName LIKE :givenProductSearchWord ORDER BY date DESC";
     const SELECT_STORAGE = "SELECT * FROM " . SaleModel::TABLE . " WHERE storageID = :givenStorageID";
     const UPDATE_QUERY = "UPDATE " . SaleModel::TABLE . " SET customerNr = :editCustomerNr, comment = :editComment  WHERE salesID = :editSaleID" ;
@@ -78,8 +78,8 @@ class SaleModel {
         } else {$usernameQuery = "";}
         
         
-        $sql = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
-            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE $usernameQuery ORDER BY date DESC";
+        $sql = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct FROM " . SaleModel::TABLE . 
+            " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID WHERE $usernameQuery ORDER BY date DESC";
     
         $this->selUserSale = $this->dbConn->prepare($sql);
         
