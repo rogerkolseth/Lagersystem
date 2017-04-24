@@ -118,8 +118,8 @@
         {{#each mySales}}  
         <tr>
         <td>{{customerNr}}</td>        
-        <td>{{productName}}</td>
-        <td>{{storageName}}</td>
+        <td>{{productName}}{{deletedProduct}}</td>
+        <td>{{storageName}}{{deletedStorage}}</td>
         <td>{{quantity}}</td>    
         <td>{{comment}}</td>    
         <td>{{date}}</td>   
