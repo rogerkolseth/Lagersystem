@@ -19,6 +19,8 @@ class ReturnController extends Controller {
             $this->editMyReturn();
         } else if ($page == "stockDelivery") {
             $this->stockDelivery();
+        } else if ($page == "showUserReturns"){
+            $this->chooseUserReturns();
         }
     }
 
@@ -64,13 +66,20 @@ class ReturnController extends Controller {
 
         if (isset($_POST['givenProductSearchWord'])) {
             $givenProductSearchWord = "%{$_REQUEST["givenProductSearchWord"]}%";
-            $myReturns = $returnModel->getAllReturnInfo($givenUserID, $givenProductSearchWord);
+            $myReturns = $returnModel->getMyReturns($givenUserID, $givenProductSearchWord);
         } else {
             $givenProductSearchWord = "%%";
-            $myReturns = $returnModel->getAllReturnInfo($givenUserID, $givenProductSearchWord);
+            $myReturns = $returnModel->getMyReturns($givenUserID, $givenProductSearchWord);
         }
 
-        $data = json_encode(array("myReturns" => $myReturns));
+        if ($_SESSION["userLevel"] == "Administrator") {
+            $userModel = $GLOBALS["userModel"];
+            $usernames = $userModel->getUsername();
+            $data = json_encode(array("myReturns" => $myReturns, "usernames" => $usernames));
+        } else {
+            $data = json_encode(array("myReturns" => $myReturns));
+        }
+
         echo $data;
     }
 
@@ -130,6 +139,30 @@ class ReturnController extends Controller {
         }
 
         $data = json_encode("success");
+        echo $data;
+    }
+
+    private function chooseUserReturns() {
+        if (isset($_POST['username'])) {
+            $usernameArray = $_REQUEST["username"];
+        } else {
+            $usernameArray = array();
+        }
+        $returnModel = $GLOBALS["returnModel"];
+
+        foreach ($usernameArray as $user):
+            if ($user == 0) {
+                $getAllUserReturns = $returnModel->getAllReturnInfo();
+                $data = json_encode(array("myReturns" => $getAllUserReturns));
+                echo $data;
+                return false;
+            }
+        endforeach;
+
+
+        $getUserReturns = $returnModel->getSelectedUserReturns($usernameArray);
+
+        $data = json_encode(array("myReturns" => $getUserReturns));
         echo $data;
     }
 

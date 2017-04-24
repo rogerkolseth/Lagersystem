@@ -29,6 +29,8 @@ class SaleController extends Controller {
             $this->getAllLastSaleInfo();
         } else if ($page == "getStoProFromCat") {
             $this->getStoProFromCat();
+        } else if ($page == "showUserSale") {
+            $this->chooseUserSales();
         }
     }
 
@@ -75,8 +77,10 @@ class SaleController extends Controller {
         $customerNumber = $_REQUEST["customerNumber"];
         $userID = $_SESSION["userID"];
         if (isset($_POST['withdrawComment'])) {
-        $comment = $_REQUEST["withdrawComment"];
-        } else {$comment = "";}
+            $comment = $_REQUEST["withdrawComment"];
+        } else {
+            $comment = "";
+        }
         $date = $_REQUEST["date"];
 
 
@@ -95,7 +99,6 @@ class SaleController extends Controller {
             }
             echo json_encode("success");
         }
-
     }
 
     private function getProdQuantity() {
@@ -116,11 +119,9 @@ class SaleController extends Controller {
             $negativeSupport = $storageModel->getNegativeSupportStatus($givenStorageID);
             $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
         }
-        
+
         $data = json_encode(array("prodInfo" => $inventoryModel, "negativeSupport" => $negativeSupport));
         echo $data;
-        
-        
     }
 
     private function getAllMySales() {
@@ -136,8 +137,13 @@ class SaleController extends Controller {
             $mySales = $saleModel->getMySales($givenUserID, $givenProductSearchWord);
         }
 
-
-        $data = json_encode(array("mySales" => $mySales));
+        if ($_SESSION["userLevel"] == "Administrator") {
+            $userModel = $GLOBALS["userModel"];
+            $usernames = $userModel->getUsername();
+            $data = json_encode(array("mySales" => $mySales, "usernames" => $usernames));
+        } else {
+            $data = json_encode(array("mySales" => $mySales));
+        }
         echo $data;
     }
 
@@ -191,10 +197,10 @@ class SaleController extends Controller {
                 echo $data;
             }
         } else {
-                $givenUserID = $_SESSION["userID"];
-                $restrictionInfo = $GLOBALS["restrictionModel"];
-                $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
-                $givenStorageID = $restrictionModel[0]['storageID'];
+            $givenUserID = $_SESSION["userID"];
+            $restrictionInfo = $GLOBALS["restrictionModel"];
+            $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
+            $givenStorageID = $restrictionModel[0]['storageID'];
             if ($givenCategoryID == 0) {
                 $result = $inventoryInfo->getAllStorageInventoryByStorageID($givenStorageID);
                 $data = json_encode(array("storageProduct" => $result));
@@ -205,6 +211,30 @@ class SaleController extends Controller {
                 echo $data;
             }
         }
+    }
+
+    private function chooseUserSales() {
+        if (isset($_POST['username'])) {
+            $usernameArray = $_REQUEST["username"];
+        } else {
+            $usernameArray = array();
+        }
+        $saleModel = $GLOBALS["saleModel"];
+
+        foreach ($usernameArray as $user):
+            if ($user == 0) {
+                $getAllUserSale = $saleModel->getAllSaleInfo();
+                $data = json_encode(array("mySales" => $getAllUserSale));
+                echo $data;
+                return false;
+            }
+        endforeach;
+
+
+        $getUserSale = $saleModel->getSelectedUserSale($usernameArray);
+
+        $data = json_encode(array("mySales" => $getUserSale));
+        echo $data;
     }
 
 }

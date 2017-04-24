@@ -6,7 +6,8 @@ class SaleModel {
     
     const TABLE = "sales";
     
-    const SELECT_QUERY = "SELECT * FROM " . SaleModel::TABLE;
+    const SELECT_QUERY = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
+            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID";
     const SELECT_MY_SALES = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
             " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR userID = :givenUserID AND comment LIKE "
             . ":givenProductSearchWord OR userID = :givenUserID AND productName LIKE :givenProductSearchWord OR userID = :givenUserID AND storageName LIKE :givenProductSearchWord ORDER BY date DESC";
@@ -68,6 +69,23 @@ class SaleModel {
     public function getSaleFromID($givenSalesID){
         $this->selFromID->execute(array("givenSalesID" =>  $givenSalesID)); 
         return $this->selFromID->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    
+    public function getSelectedUserSale($usernameArray){
+       if(empty(!$usernameArray)){
+        $userID = implode(',', array_fill(0, count($usernameArray), '?'));
+        $usernameQuery = "userID IN ($userID)";
+        } else {$usernameQuery = "";}
+        
+        
+        $sql = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
+            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE $usernameQuery ORDER BY date DESC";
+    
+        $this->selUserSale = $this->dbConn->prepare($sql);
+        
+        $this->selUserSale->execute($usernameArray);
+
+        return $this->selUserSale->fetchALL(PDO::FETCH_ASSOC);  
     }
     
 }

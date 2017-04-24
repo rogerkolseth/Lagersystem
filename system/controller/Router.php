@@ -134,6 +134,12 @@ class Router {
                 case "editCategoryEngine" :    
                     return new CategoryController();
                     
+                case "showUserSale" :
+                    return new SaleController();
+                    
+                case "showUserReturns" :
+                    return new ReturnController();
+                    
                 case "logg" :
                 case "getAllLoggInfo" :
                 case "getLatestLoggInfo" :

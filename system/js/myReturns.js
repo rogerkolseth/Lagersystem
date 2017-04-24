@@ -7,6 +7,7 @@ $(function () {
         dataType: 'json',
         success: function (data) {
             myReturnsTemplate(data);
+            userReturnTemplate(data);
         }
     });
 });
@@ -23,6 +24,7 @@ function UpdateReturnsTable() {
             dataType: 'json',
             success: function (data) {
                 myReturnsTemplate(data);
+                userReturnTemplate(data);
             }
         });
     });
@@ -121,3 +123,30 @@ $(function POSTeditReturnsInfo() {
 });
 
 
+function userReturnTemplate(data) {
+    var $usernameTemplate = $('#chooseUserReturnContainer');
+    $usernameTemplate.empty();
+    $usernameTemplate.append('<tr><td id="bordernone">Alle</td> <td id="bordernone"><input id="chooseUserSale" type="checkbox" name="username[]" value="0"></td></tr>');
+    $.each(data.usernames, function (i, item) {
+        $usernameTemplate.append('<tr><td id="bordernone">' + item.username +'</td> <td id="bordernone"><input id="chooseUserReturn" type="checkbox" name="username[]" value="'+item.userID+'"></td></tr>');
+    });
+    $usernameTemplate.append(' <input class="form-control btn btn-primary" type="submit" form="showUserReturn"  value="Velg">');
+}
+
+$(function POSTshowUserReturn() {
+
+    $('#showUserReturn').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                myReturnsTemplate(data);
+            }
+        });
+        return false;
+    });
+});
