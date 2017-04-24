@@ -3,6 +3,12 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
         
         <h2 class="text-center">Registrer retur</h2>
 

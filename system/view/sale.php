@@ -3,6 +3,12 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="container">
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
 
 
     <!-- DIV som holder på all informasjon til venstre på skjermen  -->
@@ -84,7 +90,57 @@
 
 
     </div>  
-</div>    
+</div> 
+    
+    <div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <label>
+                            1. Velg hvilke lager du vil ta ut fra.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                    <img src="image/VelgLager.PNG">
+                    </div>
+                </div>
+                
+                    <div class="col-md-12">
+                        <label>
+                            2. Velg hvilke produkt(er) du ønsker å ta ut fra lageret.<br>
+                            Du kan også velge kategori for å lettere finne produkter.
+                        </label>
+                        
+                    </div>
+                <div class="col-md-12">
+                    <img src="image/VelgKategori.PNG">
+                    </div>
+                <div class="col-md-12">
+                    <label>
+                        3. Skriv inn kundenummeret og legge til en kommentar.<br>
+                        Du skal også velge antall produkter du vil ta ut.
+                    </label>
+                </div>
+                <div class="col-md-12">
+                <img src="image/RegistrerUttak.PNG">
+                </div>
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+        </div>
+        </div>
+            
+        
+    
 </div> 
 
 

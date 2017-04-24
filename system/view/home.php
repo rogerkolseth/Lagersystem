@@ -180,28 +180,66 @@ if (isset($GLOBALS["errorMessage"])) {
             </div>
         <?php } ?>
         
+        
+        
         <!-- Hjelp modal -->
         
         
         <div class="modal fade" id="showHelpModal" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Bruker informasjon</h4>
+                    <h4 class="modal-title">Hjelp</h4>
                 </div>
                 <div class="modal-body">
-                    
-                    test
-                </div>
-                <div class="modal-footer">
-                    
+                    <div class="col-md-12 text-center">
+                        <label>
+                            Her er forskjellige snarveier til ofte brukte funksjoner.
+                        </label>
+                        <img style="width: 90%" src="image/Snarvei.PNG">
                     </div>
+                    
+                    <div class="col-md-6 text-center">
+                        <label>
+                            Her kan du se hvilke produkter det er lite av og hvilke lager de ligger på.
+                        </label>
+                        <img id="helpimage" src="image/SnartTomLagerbeholdning.PNG">
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <label>
+                            Her kan du se dine siste salg.
+                        </label>
+                        <img id="helpimage" src="image/DineSisteSalgAdmin.PNG">
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <label>
+                            Her kan du se det siste som har blitt logget.
+                        </label>
+                        <img id="" src="image/SisteHendelser.PNG">
+                    </div>
+                    
+                    <div class="col-md-6 text-center">
+                        <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
+                            Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
+                    </label>
+                    <img id="helpimage" src="image/Lagerbeholdning.PNG">
+                    </div>
+                    <div class="col-md-6 text-center">
+                    <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.</label>
+                    <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
+                    </div>
+                
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+                
             </div>
         </div>
     </div>
-        
+    </div>
         <!-- Hjelp modal bruker -->
         
         
@@ -222,17 +260,7 @@ if (isset($GLOBALS["errorMessage"])) {
                     <label>Her kan du se de siste salgene gjort av deg.</label>
                     <img id="helpimage" src="image/DineSisteSalg.PNG">
                     </div>
-                    <div class="col-md-6 text-center">
-                        <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
-                            Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
                     
-                    </label>
-                    <img id="helpimage" src="image/Lagerbeholdning.PNG">
-                    </div>
-                    <div class="col-md-6 text-center">
-                    <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.</label>
-                    <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
-                    </div>
                     
                 </div>
                 <div class="modal-footer col-md-12">
