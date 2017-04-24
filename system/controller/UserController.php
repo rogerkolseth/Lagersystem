@@ -154,6 +154,11 @@ class UserController extends Controller {
         $removeUserRestriction = $GLOBALS["restrictionModel"];
         $removeUserRestriction->deleteUserRestriction($removeUserID);
         
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+        
         $removeUser = $GLOBALS["userModel"];
         $delited = $removeUser->removeUser($removeUserID);
         

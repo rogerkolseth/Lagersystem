@@ -239,7 +239,7 @@
     <tr>
     <td>{{typeName}}</td>
     <td>{{desc}}</td>
-    <td>{{storageName}}</td>
+    <td>{{storageName}}{{deletedStorage}}</td>
     <td>{{toStorage}}</td>
     <td>{{fromStorage}}</td>
     <td>{{quantity}}</td>
@@ -247,8 +247,8 @@
     <td>{{newQuantity}}</td>
     <td>{{differential}}</td>  
     <td>{{username}}</td>
-    <td>{{onUsername}}</td>
-    <td>{{productName}}</td>
+    <td>{{onUsername}}{{deletedUser}}</td>
+    <td>{{productName}}{{deletedProduct}}</td>
     <td>{{customerNr}}</td>
     <td>{{date}}</td>
     </tr>
@@ -256,7 +256,7 @@
     {{/each}}
 </script>
 
-<script src="js/logg.js"></script>
+<script type="text/javascript" src="js/logg.js"></script>
 
 <script type="text/javascript">
     $(function () {

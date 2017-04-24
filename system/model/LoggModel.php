@@ -8,7 +8,7 @@ class LoggModel {
     const CHECK_TABLE = "loggtype";
     
     const SELECT_QUERY = 
-         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
@@ -19,7 +19,7 @@ class LoggModel {
             . "OR l.oldQuantity LIKE :givenSearchWord OR l.newQuantity LIKE :givenSearchWord OR l.differential LIKE :givenSearchWord OR u1.username LIKE :givenSearchWord OR u2.username OR p.productName LIKE :givenSearchWord OR customerNr LIKE :givenSearchWord ORDER BY date DESC LIMIT 100";
     
     const SELECT_LATEST_QUERY = 
-         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
@@ -148,7 +148,7 @@ class LoggModel {
         }
         
         
-        $sql = "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+        $sql = "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "

@@ -13,6 +13,11 @@
                     <input class="form-control btn btn-primary" form="searchForSale" type="submit" value="Søk">
                     
                     <button onclick="UpdateSalesTable()" class="btn btn-primary " type="button">Alle Salg</button>
+                    <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+                    <select id="chooseUserSaleContainer" class="form-control">
+                        
+                    </select>
+                    <?php }?>
                 </div>
                 
             </div> 
@@ -109,4 +114,4 @@
 {{/each}}
 </script>  
 
-<script src="js/mySales.js"></script>
+<script type="text/javascript" src="js/mySales.js"></script>

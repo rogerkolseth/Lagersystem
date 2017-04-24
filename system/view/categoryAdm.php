@@ -198,4 +198,4 @@
 </script>
 
 
-<script src="js/categoryAdm.js"></script>
+<script type="text/javascript" src="js/categoryAdm.js"></script>
