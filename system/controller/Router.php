@@ -89,6 +89,7 @@ class Router {
                     return new mediaController();
                 
                 case "sendInventarWarning" :
+                case "newPassword" :    
                     return new EmailController(); 
                         
             }

@@ -941,6 +941,7 @@ $(function POSTtransferProducts() {
             success: function (data) {
                 $('#deliveryQuantityContainer').empty();
                 $('#stockDeliveryModal').modal('hide');
+                successMessagedelivery();
             }
         });
         return false;
@@ -958,3 +959,11 @@ $(function POSTdeleteStorageModal() {
         });
     });
 });
+
+function successMessagedelivery() {
+    $('<div class="alert alert-success"><strong>Levert!</strong> Vareleveringen er registrert. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function () {
+        $(this).remove();
+    });
+    ;
+}

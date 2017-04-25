@@ -22,7 +22,7 @@
 
                     <button onclick="UpdateStorageTable()" class="btn btn-primary " type="button">Alle lagrer</button>
                     <div class="pull-right">
-
+                        <button class="btn btn-info" type="button" onclick="getStorageProduct();" data-toggle="modal" data-target="#stockDeliveryModal">Varelevering</button>
                         <button class="btn btn-success" type="button" data-toggle="modal" data-target="#createStorageModal">Opprett Lager</button>
                     </div>
                 </div> 

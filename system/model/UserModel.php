@@ -14,6 +14,8 @@ class UserModel {
     const UPDATE_LOGINDATE = "UPDATE " . UserModel::TABLE . " SET lastLogin = :givenLastLogin WHERE username = :givenUsername";
     const SELECT_USERNAMES = "SELECT userID, username FROM " . UserModel::TABLE;
     const SELECT_EMAIL = "SELECT users.email FROM users WHERE users.userLevel = 'Administrator'";
+    const FIND_USER = "SELECT userID FROM " . UserModel::TABLE . " WHERE username = :givenUsername AND email =:givenEmail";
+    const NEW_PASSWORD = "UPDATE " . UserModel::TABLE . " SET password = :newPassword WHERE userID = :userID";
     const SET_SESSION_VAR = "SET @sessionUserID := :sessionUserID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
@@ -39,6 +41,8 @@ class UserModel {
         $this->sessionVar = $this->dbConn->prepare(UserModel::SET_SESSION_VAR);
         $this->selUsername = $this->dbConn->prepare(UserModel::SELECT_USERNAMES);
         $this->getAdminEmail = $this->dbConn->prepare(UserModel::SELECT_EMAIL);
+        $this->findUser = $this->dbConn->prepare(UserModel::FIND_USER);
+        $this->newPass = $this->dbConn->prepare(UserModel::NEW_PASSWORD);
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -91,6 +95,15 @@ class UserModel {
     public function getAdminEmail(){
         $this->getAdminEmail->execute();
         return $this->getAdminEmail->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function forgottenPassword($givenUsername, $givenEmail){
+        $this->findUser->execute(array("givenUsername" => $givenUsername, "givenEmail" => $givenEmail));
+        return $this->findUser->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function newPassword($newPassword, $userID){
+        $this->newPass->execute(array("newPassword" => $newPassword, "userID" => $userID));
     }
 
 }
