@@ -3,295 +3,333 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
-<div class="row">
-        <div class="pull-right">
-            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
-            </label>
+        <div class="row">
+            <div class="pull-right">
+                <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+                </label>
+            </div>
         </div>
-    </div>
-    <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">     
+        <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">     
 
 
-        <!-- SØK ETTER LAGER -->
+            <!-- SØK ETTER LAGER -->
 
-        <form class="form-inline" id="searchForStorage" action="?page=getAllStorageInfo" method="post">
-            <div class="form-group col-md-12 row">
-                
+            <form class="form-inline" id="searchForStorage" action="?page=getAllStorageInfo" method="post">
+                <div class="form-group col-md-12 row">
+
                     <input class="form-control" form="searchForStorage"type="text" name="givenStorageSearchWord" value="" placeholder="Søk etter Lager..">  
                     <input class="form-control btn btn-primary" form="searchForStorage" type="submit" value="Søk">
-                
+
                     <button onclick="UpdateStorageTable()" class="btn btn-primary " type="button">Alle lagrer</button>
-                <div class="pull-right">
-                
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#createStorageModal">Opprett Lager</button>
-                </div>
-            </div> 
-        </form>
+                    <div class="pull-right">
 
-
-        <br><br>
-        <div id="success"></div>
-        <br> 
-
-        <!-- DISPLAY STORAGE CONTAINER -->
-        <br>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center"><b>Lageroversikt</b></h3>
-            </div>
-        <table class="table table-responsive"> 
-             
-            <tbody id="displayStorageContainer">
-
-                <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
-
-            </tbody>
-
-        </table>
-            
-        </div>
-
-    </div>
-</div>
-
-
-
-
-<!-- DIV som holder på all informasjon til høgre på skjermen  -->
-
-
-<!-- CREATE STORAGE MODAL -->
-
-
-<div class="modal fade" id="createStorageModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Opprett bruker</h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <table class="table">
-                    <form action="?page=addStorageEngine" method="post" id="createStorage">
-                         
-                        <tr>
-                            <th id="bordernone">Lagernavn:</th>
-                            <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
-                        </tr>
-                        <tr>
-                            <th id="bordernone">Lager skal kunne gå i minus:</th>
-                            <td id="bordernone"><input type="checkbox" name="givenNegativeSupport" value="1"></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div id="error"></div>
-                <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager">
-
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-
-            </div>
-            </form>
-        </div>
-    </div>
-</div> 
-
-
-
-
-
-
-<!-- EDIT STORAGE MODAL-->
-
-
-<div class="modal fade" id="editStorageModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Lager informasjon</h4>
-            </div>
-            <form action="?page=editStorageEngine" method="post" id="editStorage"> 
-            
-            <div class="modal-body">
-                <table class="table" id="editStorageContainer">
-                    
-
-                <!-- Innhold fra Handlebars Template -->
-                    
-                </table>
-            </div>
-            
-            <div class="modal-footer">
-                <div id="errorEdit"></div>
-                <input class="btn btn-success" form="editStorage" type="submit" value="Lagre" form="editStorage">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div> 
-
-
-
-
-<!-- GET STORAGE INFORMATION MODAL-->
-
-<div class="modal fade" id="showStorageInformationModal" role="dialog">
-    <div class="modal-dialog" style="width: 70%">
-        <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Lager Informasjon</h4>
-            </div>
-            <div class="modal-body row">
-                <div class="col-sm-3 col-md-5">
-                    <div class="col-md-12">
-                    <table class="table">
-                        <tbody id="storageInformationContainer">
-
-                            <!-- Her kommer handlebars Template -->
-
-                        </tbody>
-                    </table>
+                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#createStorageModal">Opprett Lager</button>
                     </div>
-                    <div class="col-md-6">
-                    
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h2 class="panel-title text-center"><b>Brukere med tilgang</b></h2>
-                            </div>
-                    <table class="table">
-                        
-                        <tbody id="storageRestrictionContainer">
-                            
-                                
-                                
+                </div> 
+            </form>
+
+
+            <br><br>
+            <div id="success"></div>
+            <br> 
+
+            <!-- DISPLAY STORAGE CONTAINER -->
+            <br>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center"><b>Lageroversikt</b></h3>
+                </div>
+                <table class="table table-responsive"> 
+
+                    <tbody id="displayStorageContainer">
+
+                        <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!-- DIV som holder på all informasjon til høgre på skjermen  -->
+
+
+    <!-- CREATE STORAGE MODAL -->
+
+
+    <div class="modal fade" id="createStorageModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Opprett bruker</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <table class="table">
+                            <form action="?page=addStorageEngine" method="post" id="createStorage">
+
+                                <tr>
+                                    <th id="bordernone">Lagernavn:</th>
+                                    <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
+                                </tr>
+                                <tr>
+                                    <th id="bordernone">Lager skal kunne gå i minus:</th>
+                                    <td id="bordernone"><input type="checkbox" name="givenNegativeSupport" value="1"></td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div id="error"></div>
+                    <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager">
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+
+
+
+
+
+
+    <!-- EDIT STORAGE MODAL-->
+
+
+    <div class="modal fade" id="editStorageModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lager informasjon</h4>
+                </div>
+                <form action="?page=editStorageEngine" method="post" id="editStorage"> 
+
+                    <div class="modal-body">
+                        <table class="table" id="editStorageContainer">
+
+
+                            <!-- Innhold fra Handlebars Template -->
+
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div id="errorEdit"></div>
+                        <input class="btn btn-success" form="editStorage" type="submit" value="Lagre" form="editStorage">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+
+
+
+
+    <!-- GET STORAGE INFORMATION MODAL-->
+
+    <div class="modal fade" id="showStorageInformationModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lager Informasjon</h4>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-3 col-md-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <tbody id="storageInformationContainer">
 
                                     <!-- Her kommer handlebars Template -->
 
-                                
-                                                  
-                        </tbody>    
-                    </table>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>Brukere med tilgang</b></h2>
+                                </div>
+                                <table class="table">
+
+                                    <tbody id="storageRestrictionContainer">
+
+
+
+
+                                        <!-- Her kommer handlebars Template -->
+
+
+
+                                    </tbody>    
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>Produkt i lager</b></h2>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Produkt</th>
+                                            <th>Antall</th>  
+                                        </tr>
+                                    </thead>  
+                                    <tbody id="storageProductContainer">
+
+                                    </tbody>
+
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                    <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h2 class="panel-title text-center"><b>Produkt i lager</b></h2>
-                            </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Produkt</th>
-                                <th>Antall</th>  
-                            </tr>
-                          </thead>  
-                        <tbody id="storageProductContainer">
-                            
-                        </tbody>
+                    <div class="col-sm-9 col-md-7">
 
-                    </table>
+                        <canvas id="myChart"></canvas>
+
                     </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div id="successRes"></div>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+
+
+    <!-- DELETE STORAGE MODAL -->
+
+
+    <div class="modal fade" id="deleteStorageModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lager informasjon</h4>
+                </div>
+                <form action="?page=deleteStorageEngine" method="post" id="deleteStorage">
+                    <div class="modal-body" id="deleteStorageContainer">
+
+                        <!-- Innhold fra Handlebars Template -->
+
                     </div>
-                </div>
-                <div class="col-sm-9 col-md-7">
+                    <p id="errorMessage">
 
-                    <canvas id="myChart"></canvas>
-                    
-                </div>
-                    
+                    </p>    
+                    <div class="modal-footer">
+                        <div id="errorDelete"></div>
+                        <input form="deleteStorage" class="btn btn-success" type="submit" value="Slett">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+                </form>    
             </div>
-            <div class="modal-footer">
-                <div id="successRes"></div>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+        </div>
+    </div>   
+
+
+
+    <!-- STOCKTAKING MODAL -->
+
+    <div class="modal fade" id="stocktakingModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lagertelling</h4>
+                </div>
+                <form action="?page=stocktacking" method="post" id="stocktaking">
+
+                    <div class="modal-body row" >
+                        <div class="col-md-6">
+                            <table class="table" id="stocktakingContainer">
+                                <!-- Innhold fra Handlebars Template -->
+                            </table>
+
+
+                            <table class="table" id="stocktakingResultContainer">
+                                <!-- Innhold fra Handlebars Template -->
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="stocktakingResultChart"></canvas>
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="#" id="saveToCSV" class="btn btn-success">Eksporter til csv</a>
+                        <input form="stocktaking" class="btn btn-success" id="saveStocktaking" type="submit" value="Neste">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+                </form>    
+            </div>
+        </div>
+    </div>   
+
+    <div class="modal fade" id="stockDeliveryModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Varelevering</h4>
+                </div>
+                <form action="?page=stockDelivery" method="post" id="stockDelivery">
+                    <div class="modal-body">
+                        <label>Velg produkt(er) som skal inn på Hovedlageret</label>
+                        <div id="stockDeliveryContainer">
+
+                        </div>
+                        <br><br>
+                        <div>
+                            <table class="table table-responsive" id="deliveryQuantityContainer">
+
+                                <!-- Lar deg velge antall enheter -->
+
+                            </table>
+
+
+                        </div>                        
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button form="stockDelivery" type="submit" class="btn btn-success" id="deliveryButton">Overfør</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+                </form>
+                </form>
 
             </div>
         </div>
     </div>
-</div> 
-
-
-
-
-<!-- DELETE STORAGE MODAL -->
-
-
-<div class="modal fade" id="deleteStorageModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Lager informasjon</h4>
-            </div>
-            <form action="?page=deleteStorageEngine" method="post" id="deleteStorage">
-            <div class="modal-body" id="deleteStorageContainer">
-
-                <!-- Innhold fra Handlebars Template -->
-
-            </div>
-                <p id="errorMessage">
-                    
-                </p>    
-            <div class="modal-footer">
-                <div id="errorDelete"></div>
-                <input form="deleteStorage" class="btn btn-success" type="submit" value="Slett">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-            </div>
-            </form>    
-        </div>
-    </div>
-</div>   
-
-
-
-<!-- STOCKTAKING MODAL -->
-
-<div class="modal fade" id="stocktakingModal" role="dialog">
-    <div class="modal-dialog" style="width: 70%">
-        <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Lagertelling</h4>
-            </div>
-            <form action="?page=stocktacking" method="post" id="stocktaking">
-               
-            <div class="modal-body row" >
-                <div class="col-md-6">
-                <table class="table" id="stocktakingContainer">
-                <!-- Innhold fra Handlebars Template -->
-                </table>
-                
-                
-                <table class="table" id="stocktakingResultContainer">
-                <!-- Innhold fra Handlebars Template -->
-                </table>
-                </div>
-                <div class="col-md-6">
-                <canvas id="stocktakingResultChart"></canvas>
-                </div>
-                        
-
-            </div>
-                   
-            <div class="modal-footer">
-                <a href="#" id="saveToCSV" class="btn btn-success">Eksporter til csv</a>
-                <input form="stocktaking" class="btn btn-success" id="saveStocktaking" type="submit" value="Neste">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-            </div>
-            </form>    
-        </div>
-    </div>
-</div>   
 
 
 
@@ -299,51 +337,51 @@
 </div>
 
 <div class="modal fade" id="showHelpModal" role="dialog">
-        <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content row">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Hjelp</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-12">
-                        <label>
+    <div class="modal-dialog" style="width: 70%">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content row">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Hjelp</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <label>
                         Bruk denne funksjonen for å søke etter lager.
-                        </label>
-                        
-                    </div>
-                    <div class="col-md-12">
-                <img src="image/SøkLager.PNG">
-                    </div>
-                
-                
-                    <div class="col-md-12">
-                        <label>
-                            Her oppretter du nye lager.
-                        </label>
-                        
-                    </div>
+                    </label>
+
+                </div>
+                <div class="col-md-12">
+                    <img src="image/SøkLager.PNG">
+                </div>
+
+
+                <div class="col-md-12">
+                    <label>
+                        Her oppretter du nye lager.
+                    </label>
+
+                </div>
                 <div class="col-md-12">
                     <img src="image/OpprettLager.PNG">
-                    </div>
+                </div>
                 <div class="col-md-12">
                     <label>
                         Skriv inn info om lageret du vil opprette.
                     </label>
                 </div>
                 <div class="col-md-12">
-                <img src="image/.PNG">
+                    <img src="image/.PNG">
                 </div>
-                    <div class="col-md-12">
+                <div class="col-md-12">
                     <label>
                         Dette er en liste over alle lagerene i systemet.
                     </label>
                 </div>
                 <div class="col-md-12">
-                <img src="image/Lager.PNG">
+                    <img src="image/Lager.PNG">
                 </div>
-                    <div class="col-md-12">
+                <div class="col-md-12">
                     <label>
                         Dette er alternativer for lager:<br>
                         1. <img src="image/EndreBruker.PNG">Endre lager<br>
@@ -352,77 +390,103 @@
                         4. <img src="image/Varetelling.PNG">Varetelling for lageret
                     </label>
                 </div>
-                
-                   
-                    
-                
+
+
+
+
                 <div class="modal-footer col-md-12">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
             </div>
-            </div>
         </div>
-        
+    </div>
+
 </div>
 
 <!-- TEMPLATES -->
 
+<script id="stockDeliveryTemplate" type="text/x-handlebars-template">
+    <br>  
+    {{#each productInfo}} 
+    <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+    {{/each}} 
+</script>
+
+<script id="deliveryQuantityTemplate" type="text/x-handlebars-template">
+    {{#each product}} 
+    <tr class="selectQuantity">
+    <th>Produkt:   </th>
+    <td>{{productName}}</td>
+    <input name="deliveryProductID[]" id="{{productID}}" form="stockDelivery" type="hidden" value="{{productID}}"/>
+    <th>Antall:</th>
+    <td><input class="form-control" name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
+
+    <td>
+    <button id="redigerknapp" class="remove" data-toggle="tooltip" >
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+    </td>    
+
+    </tr>
+    {{/each}}  
+</script>
+
 <!-- Display stocktacing product-->
 <script id="stocktakingResultTemplate" type="text/x-handlebars-template">
- <thead>
+    <thead>
     <tr>
-        <th>Produkt</th>
-        <th>Gammel verdi</th>
-        <th>Ny verdi</th>
-        <th>differanse</th>    
+    <th>Produkt</th>
+    <th>Gammel verdi</th>
+    <th>Ny verdi</th>
+    <th>differanse</th>    
     </tr>
-</thead>
-<tbody id="tbodyid">
-{{#each differanceArray}}
+    </thead>
+    <tbody id="tbodyid">
+    {{#each differanceArray}}
     <tr>
-        <td>{{productName}}</td>
-        <td>{{oldQuantity}}</td>
-        <td>{{newQuantity}}</td>
-        <td class="stockResult">{{differance}}</td>    
+    <td>{{productName}}</td>
+    <td>{{oldQuantity}}</td>
+    <td>{{newQuantity}}</td>
+    <td class="stockResult">{{differance}}</td>    
     </tr>
-</tbody>
-<input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
-<input form="stocktaking" name="givenQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
-<input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
-<input form="stocktaking" name="differanceArray[]" type="hidden" value="{{differance}}">
-{{/each}}
+    </tbody>
+    <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+    <input form="stocktaking" name="givenQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+    <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+    <input form="stocktaking" name="differanceArray[]" type="hidden" value="{{differance}}">
+    {{/each}}
 
-<input form="stocktaking" name="givenStorageID" type="hidden" value="{{differanceArray.0.storageID}}">
-            
-  
+    <input form="stocktaking" name="givenStorageID" type="hidden" value="{{differanceArray.0.storageID}}">
+
+
 </script>
 
 
 <!-- Display stocktacing product-->
 <script id="stocktakingTemplate" type="text/x-handlebars-template">
-<h2>{{storageProduct.0.storageName}}</h2><br>  
-<input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
-<input form="stocktaking" name="getResult" type="hidden" value="getResult"> 
-{{#each storageProduct}}
-    
+    <h2>{{storageProduct.0.storageName}}</h2><br>  
+    <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
+    <input form="stocktaking" name="getResult" type="hidden" value="getResult"> 
+    {{#each storageProduct}}
+
     <tr>
-       <th id="bordernone">{{productName}}</th>    
-           <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
-           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
-           <input form="stocktaking" name="givenProductNameArray[]" type="hidden" value="{{productName}}">            
+    <th id="bordernone">{{productName}}</th>    
+    <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+    <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
+    <input form="stocktaking" name="givenProductNameArray[]" type="hidden" value="{{productName}}">            
 
-       
-           
 
-       <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="" autocomplete="off"></td>
-           <th id="bordernone">Forventet antall</th>
-               <td id="bordernone">{{quantity}}</td>
+
+
+    <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="" autocomplete="off"></td>
+    <th id="bordernone">Forventet antall</th>
+    <td id="bordernone">{{quantity}}</td>
 
     </tr>
-     
-    
-  {{/each}} 
-  
+
+
+    {{/each}} 
+
 </script>
 
 <!-- Display editStorage-->                    
@@ -466,11 +530,11 @@
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
     {{#each storageRestriction}}
     <tr>
-        <td >
-            <button id="redigerknapp" data-id="{{userID}}" class="deleteUserRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
-            <span class="glyphicon glyphicon-remove" style="color: red"></span>
-            </button>
-        </td>
+    <td >
+    <button id="redigerknapp" data-id="{{userID}}" class="deleteUserRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+    </td>
     <td >{{name}}</td>    
     </tr>        
     {{/each}}       
@@ -480,14 +544,14 @@
 <script id="storageProductTemplate" type="text/x-handlebars-template">
     {{#each storageProduct}}
     <tr>
-        <td >
-        <button id="redigerknapp" data-id="{{productID}}" class="deleteStorageInventory" data-toggle="tooltip" title="Fjern lagertilgang">
-            <span class="glyphicon glyphicon-remove" style="color: red"></span>
-        </button>
-        </td>
-        <th>{{productName}}</th>
-        <td class="quantityColor"> {{quantity}}</td>
-     
+    <td >
+    <button id="redigerknapp" data-id="{{productID}}" class="deleteStorageInventory" data-toggle="tooltip" title="Fjern lagertilgang">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+    </td>
+    <th>{{productName}}</th>
+    <td class="quantityColor"> {{quantity}}</td>
+
     </tr>
     {{/each}}    
 </script>

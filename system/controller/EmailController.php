@@ -7,7 +7,7 @@ class EmailController extends Controller {
     public function show($page) {
         if ($page == "sendInventarWarning") {
             $this->sendEmailWarning();
-        }
+        } 
     }
     
     private function sendEmailWarning(){

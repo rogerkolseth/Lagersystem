@@ -870,5 +870,91 @@ function updateCheckbox(data){
     } 
 }
 
+function getStorageProduct() {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getAllProductInfo',
+        dataType: 'json',
+        success: function (data) {
+            stockDeliveryTemplate(data);
+        }
+    });
+    return false;
+}
+
+//Display products in storage Template -- >
+
+function stockDeliveryTemplate(data) {
+    var rawTemplate = document.getElementById("stockDeliveryTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var deliverytGeneratedHTML = compiledTemplate(data);
+    var deliveryContainer = document.getElementById("stockDeliveryContainer");
+    deliveryContainer.innerHTML = deliverytGeneratedHTML;
+}
+
+$(function POSTselectedProduct() {
+
+    $('#stockDeliveryContainer').delegate('.product', 'click', function () {
+        var givenProductID = $(this).attr('data-id');
+        if ($('#' + givenProductID).length)
+        {
+            return false;
+        } else {
 
 
+            $.ajax({
+                type: 'POST',
+                url: '?page=getProductByID',
+                data: {givenProductID: givenProductID},
+                dataType: 'json',
+                success: function (data) {
+                    deliveryQuantityTemplate(data);
+                }
+            });
+            return false;
+        }
+    });
+});
+
+function deliveryQuantityTemplate(data) {
+    var rawTemplate = document.getElementById("deliveryQuantityTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var transferProductGeneratedHTML = compiledTemplate(data);
+    var transferContainer = document.getElementById("deliveryQuantityContainer");
+    transferContainer.innerHTML += transferProductGeneratedHTML;
+}
+
+$(function POSTtransferProducts() {
+
+    $('#stockDelivery').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            error: function () {
+                var $displayUsers = $('#errorMessage');
+                $displayUsers.empty().append("Kunne ikke overføre");
+            },
+            success: function (data) {
+                $('#deliveryQuantityContainer').empty();
+                $('#stockDeliveryModal').modal('hide');
+            }
+        });
+        return false;
+    });
+});
+
+// remove product -- >
+
+$(function POSTdeleteStorageModal() {
+
+    $('#deliveryQuantityContainer').delegate('.remove', 'click', function () {
+        var $tr = $(this).closest('tr');
+        $tr.fadeOut(150, function () {
+            $(this).remove();
+        });
+    });
+});

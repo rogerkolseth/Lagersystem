@@ -82,6 +82,7 @@ class Router {
                 case "getUserRestriction" :  
                 case "editUser" :
                 case "editUserEngine" :
+                case "employeeTraning" :    
                     return new UserController();
                     
                 case "uploadImageShortcut2" :
