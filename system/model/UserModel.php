@@ -13,6 +13,7 @@ class UserModel {
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
     const UPDATE_LOGINDATE = "UPDATE " . UserModel::TABLE . " SET lastLogin = :givenLastLogin WHERE username = :givenUsername";
     const SELECT_USERNAMES = "SELECT userID, username FROM " . UserModel::TABLE;
+    const SELECT_EMAIL = "SELECT users.email FROM users WHERE users.userLevel = 'Administrator'";
     const SET_SESSION_VAR = "SET @sessionUserID := :sessionUserID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
@@ -37,6 +38,7 @@ class UserModel {
         $this->lastLogin = $this->dbConn->prepare(UserModel::UPDATE_LOGINDATE);
         $this->sessionVar = $this->dbConn->prepare(UserModel::SET_SESSION_VAR);
         $this->selUsername = $this->dbConn->prepare(UserModel::SELECT_USERNAMES);
+        $this->getAdminEmail = $this->dbConn->prepare(UserModel::SELECT_EMAIL);
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -84,6 +86,11 @@ class UserModel {
     
     public function setSession($sessionID){
         $this->sessionVar->execute(array("sessionUserID" => $sessionID));
+    }
+    
+    public function getAdminEmail(){
+        $this->getAdminEmail->execute();
+        return $this->getAdminEmail->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

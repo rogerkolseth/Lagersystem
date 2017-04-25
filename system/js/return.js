@@ -107,6 +107,7 @@ $(function POSTtransferProducts() {
                 $('#commentContainer').hide();
                 successMessage();
                 updateProductList();
+                $("#returnProducts")[0].reset();
             }
         });
         return false;

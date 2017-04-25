@@ -86,6 +86,9 @@ class Router {
                     
                 case "uploadImageShortcut2" :
                     return new mediaController();
+                
+                case "sendInventarWarning" :
+                    return new EmailController(); 
                         
             }
             
@@ -104,7 +107,8 @@ class Router {
                 case "editStorageEngine" :
                 case "deleteStorageEngine" :
                 case "deleteSingleProd" :   
-                case "emailWarning" :    
+                case "emailWarning" :   
+                case "setWarningLimit" :    
                     return new StorageController();
                     
                 case "userAdm"    :

@@ -83,13 +83,11 @@ class SaleController extends Controller {
         }
         $date = $_REQUEST["date"];
 
-
         if ($fromStorageID == 0) {
             return false;
         } else {
 
             for ($i = 0; $i < sizeof($withdrawProductIDArray); $i++) {
-
 
                 $saleModel = $GLOBALS["saleModel"];
                 $inventoryInfo = $GLOBALS["inventoryModel"];
@@ -97,8 +95,10 @@ class SaleController extends Controller {
                 $saleModel->newSale($fromStorageID, $customerNumber, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $userID, $comment, $date);
                 $inventoryInfo->transferFromStorage($fromStorageID, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i]);
             }
+
             echo json_encode("success");
         }
+
     }
 
     private function getProdQuantity() {

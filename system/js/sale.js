@@ -185,8 +185,10 @@ $(function POSTtransferProducts() {
                 $('.product').remove();
                 $('.selectQuantity').remove();
                 $('#errorMessage').remove();
+                $("#withdrawProducts")[0].reset();
                 successMessage();
                 updateSale();
+                sendEmail();
             }
         });
         return false;
@@ -262,6 +264,16 @@ $(function () {
     });
 });
 
+function sendEmail() {
+    $.ajax({
+        type: 'GET',
+        url: '?page=sendInventarWarning',
+        dataType: 'json',
+        success: function () {
+
+        }
+    });
+}
 
 // Display storage template -->
 
