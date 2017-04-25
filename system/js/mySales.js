@@ -25,6 +25,7 @@ function UpdateSalesTable() {
             success: function (data) {
                 mySalesTemplate(data);
                 userSaleTemplate(data);
+                
             }
         });
     });
@@ -63,6 +64,7 @@ $(function POSTsearchForSale() {
             success: function (data) {
                 $("#searchForSale")[0].reset();
                 mySalesTemplate(data);
+                
             }
         });
         return false;
@@ -121,6 +123,7 @@ $(function POSTeditSaleInfo() {
             dataType: 'json',
             success: function () {
                 $('#editSaleModal').modal('hide');
+                
                 UpdateSalesTable();
             }
         });
@@ -137,7 +140,7 @@ function userSaleTemplate(data) {
     $.each(data.usernames, function (i, item) {
         $usernameTemplate.append('<tr><td id="bordernone">' + item.username +'</td> <td id="bordernone"><input id="chooseUserSale" type="checkbox" name="username[]" value="'+item.userID+'"></td></tr>');
     });
-    $usernameTemplate.append(' <input class="form-control btn btn-primary" type="submit" form="showUserSale"  value="Velg">');
+    $usernameTemplate.append('<div class="pull-right"> <input class="form-control btn btn-primary" type="submit" form="showUserSale"  value="Velg"> </div>');
 }
 
 $(function POSTshowUserSale() {
@@ -152,6 +155,7 @@ $(function POSTshowUserSale() {
             dataType: 'json',
             success: function (data) {
                 mySalesTemplate(data);
+                $('.dropdown.open').removeClass('open');
             }
         });
         return false;

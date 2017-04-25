@@ -145,6 +145,7 @@ $(function POSTshowUserReturn() {
             dataType: 'json',
             success: function (data) {
                 myReturnsTemplate(data);
+                $('.dropdown.open').removeClass('open');
             }
         });
         return false;

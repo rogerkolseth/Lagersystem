@@ -4,10 +4,10 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
-        <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
+        <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group row">
 
             <form id="searchForSale" class="form-inline" action="?page=getMySales" method="post">
-                <div class="form-group col-md-12 row">
+                <div class="form-group col-md-6">
                     <div class="">
                         <input class="form-control" form="searchForSale" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter salg.." autocomplete="off">  
                         <input class="form-control btn btn-primary" form="searchForSale" type="submit" value="Søk">
@@ -20,7 +20,7 @@
             </form>
 
             <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
-
+            <div class="col-md-2 pull-right">
                 <form id="showUserSale" action="?page=showUserSale" method="post">
                     <div class="dropdown form-group" id="UserSaleSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
@@ -35,7 +35,7 @@
                         </div>
                     </div> 
                 </form>
-
+            </div>
 
             <?php } ?>
 
@@ -44,7 +44,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title text-center"><b>Mine uttak</b></h3> 
+                    <h3 class="panel-title text-center"><b>Dine uttak</b></h3> 
                 </div>
                 <table class="table table-responsive"> 
 

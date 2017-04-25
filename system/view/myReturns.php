@@ -3,12 +3,12 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-   <div class="container"> 
+   <div class="container row"> 
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
         
         <form id="searchForReturns" class="form-inline" action="?page=getMyReturns" method="post">
-            <div class="form-group col-md-12 row">
+            <div class="form-group col-md-6">
                 <div class="">
                     <input class="form-control" form="searchForReturns" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter returer.." autocomplete="off">  
                     <input class="form-control btn btn-primary" form="searchForReturns" type="submit" value="Søk">
@@ -21,7 +21,7 @@
         </form>
         
         <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
-
+        <div class="col-md-2 pull-right">
                 <form id="showUserReturn" action="?page=showUserReturns" method="post">
                     <div class="dropdown form-group" id="UserSaleSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
@@ -37,10 +37,10 @@
                     </div> 
                 </form>
 
-
+        </div>
             <?php } ?>
         
-        <br><br><br><br>
+        <br><br><br>
         
         
         <div class="panel panel-primary">
