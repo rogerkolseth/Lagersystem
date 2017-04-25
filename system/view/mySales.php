@@ -4,6 +4,24 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
+        <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
+        <?php } ?>
+        <?php if ($_SESSION["userLevel"] == "User") { ?>
+        
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
+        <?php } ?>
+        
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group row">
 
             <form id="searchForSale" class="form-inline" action="?page=getMySales" method="post">
@@ -12,7 +30,7 @@
                         <input class="form-control" form="searchForSale" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter salg.." autocomplete="off">  
                         <input class="form-control btn btn-primary" form="searchForSale" type="submit" value="Søk">
 
-                        <button onclick="UpdateSalesTable()" class="btn btn-primary " type="button">Alle uttak</button>
+                        <button onclick="UpdateSalesTable()" class="btn btn-primary " type="button">Alle salg</button>
 
                     </div>
 
@@ -44,7 +62,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title text-center"><b>Dine uttak</b></h3> 
+                    <h3 class="panel-title text-center"><b>Dine Salg</b></h3> 
                 </div>
                 <table class="table table-responsive"> 
 
@@ -85,7 +103,59 @@
                 </form>
             </div>
         </div>
-    </div>     
+    </div>
+    
+    <div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <label>
+                            
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/">
+                    </div>
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        <div class="modal fade" id="showHelpModalUser" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <label>
+                            
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/">
+                    </div>
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+        </div>
+        </div>
 
 
     <!-- Display editSale-->                    
