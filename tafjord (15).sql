@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 24. Apr, 2017 12:14 p.m.
+-- Generation Time: 25. Apr, 2017 14:17 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -184,14 +184,6 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dataark for tabell `products`
---
-
-INSERT INTO `products` (`productID`, `productName`, `price`, `categoryID`, `mediaID`, `date`, `macAdresse`) VALUES
-(55, 'FMG', '999.00', 2, 21, '2017-04-13', 'FALSE'),
-(56, 'Dekoder', '1490.00', 2, 21, '2017-04-14', 'FALSE');
-
---
 -- Triggere `products`
 --
 DELIMITER $$
@@ -203,7 +195,11 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `deleteProduct` BEFORE DELETE ON `products` FOR EACH ROW BEGIN IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedProduct) VALUES (9, 'Av produkt', @sessionUserID, NOW(), OLD.productName); END IF; END
+CREATE TRIGGER `deleteProduct_Logg` BEFORE DELETE ON `products` FOR EACH ROW BEGIN IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedProduct) VALUES (9, 'Av produkt', @sessionUserID, NOW(), OLD.productName); END IF; 
+UPDATE sales SET sales.deletedProduct = OLD.productName WHERE sales.productID = OLD.productID;
+UPDATE returns SET returns.deletedProduct = OLD.productName WHERE returns.productID = OLD.productID;
+UPDATE logg SET logg.deletedProduct = OLD.productName WHERE logg.productID = OLD.productID;
+END
 $$
 DELIMITER ;
 DELIMITER $$
@@ -261,7 +257,9 @@ CREATE TABLE `returns` (
   `comment` text,
   `userID` int(11) UNSIGNED NOT NULL,
   `storageID` int(11) UNSIGNED NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `deletedStorage` varchar(255) DEFAULT NULL,
+  `deletedProduct` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -290,7 +288,9 @@ CREATE TABLE `sales` (
   `comment` text,
   `userID` int(11) UNSIGNED NOT NULL,
   `storageID` int(11) UNSIGNED NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `deletedStorage` varchar(255) DEFAULT NULL,
+  `deletedProduct` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -324,6 +324,7 @@ CREATE TABLE `storage` (
 
 INSERT INTO `storage` (`storageID`, `storageName`, `negativeSupport`, `warningLimit`) VALUES
 (1, 'Hovedlager', 0, 20),
+(2, 'Returlager', 0, 0),
 (63, 'Kundesenter', 1, 11);
 
 --
@@ -338,10 +339,13 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `deleteStorage` BEFORE DELETE ON `storage` FOR EACH ROW BEGIN
+CREATE TRIGGER `deleteStorage_Logg` BEFORE DELETE ON `storage` FOR EACH ROW BEGIN
 IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
 	INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedStorage) VALUES (9, 'Av lager', @sessionUserID, NOW(), OLD.storageName);
     END IF;
+    UPDATE sales SET sales.deletedStorage = OLD.storageName WHERE 	sales.storageID = OLD.storageID;
+    UPDATE returns SET returns.deletedStorage = OLD.storageName WHERE 	returns.storageID = OLD.storageID;
+    UPDATE logg SET logg.deletedStorage = OLD.storageName WHERE logg.storageID = OLD.storageID OR logg.fromStorageID = OLD.storageID;
     END
 $$
 DELIMITER ;
@@ -376,7 +380,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$J4MC9FnFjvAwgA.5cJSb5uZPVwPFseKu29S8spw7dILuzbuxt3jna', 'Administrator', 21, '2017-04-24', 'test123');
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$J4MC9FnFjvAwgA.5cJSb5uZPVwPFseKu29S8spw7dILuzbuxt3jna', 'Administrator', 21, '2017-04-25', 'test123');
 
 --
 -- Triggere `users`
@@ -394,6 +398,7 @@ CREATE TRIGGER `deleteUser_Logg` BEFORE DELETE ON `users` FOR EACH ROW BEGIN
 IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
     INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedUser) VALUES (9, 'Av bruker', @sessionUserID, NOW(), OLD.username);
 END IF;
+UPDATE logg SET logg.deletedUser = OLD.username WHERE logg.userID = OLD.userID OR logg.onUserID = OLD.userID;
 END
 $$
 DELIMITER ;
@@ -539,12 +544,12 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -559,32 +564,32 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 --
 -- Begrensninger for dumpede tabeller
 --
