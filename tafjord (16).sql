@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 25. Apr, 2017 14:17 p.m.
+-- Generation Time: 26. Apr, 2017 00:37 a.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -63,7 +63,10 @@ CREATE TABLE `inventory` (
   `inventoryID` int(11) UNSIGNED NOT NULL,
   `storageID` int(11) UNSIGNED NOT NULL,
   `productID` int(11) UNSIGNED NOT NULL,
-  `quantity` int(11) DEFAULT NULL
+  `quantity` int(11) DEFAULT NULL,
+  `emailWarning` int(11) NOT NULL DEFAULT '5',
+  `inventoryWarning` int(11) NOT NULL DEFAULT '10',
+  `emailStatus` smallint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -73,6 +76,14 @@ DELIMITER $$
 CREATE TRIGGER `removeProFromStorage_Logg` BEFORE DELETE ON `inventory` FOR EACH ROW BEGIN
 IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
     INSERT INTO logg (logg.typeID, logg.desc, logg.fromStorageID, logg.userID, logg.productID, logg.quantity, logg.date) VALUES (9, 'Fjernet produkt fra', OLD.storageID, @sessionUserID, OLD.productID, OLD.quantity, NOW());
+END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `updateEmailStatus` BEFORE UPDATE ON `inventory` FOR EACH ROW BEGIN
+IF NEW.quantity <> OLD.quantity AND NEW.quantity > NEW.inventoryWarning THEN
+  SET NEW.emailStatus = 0 ;
 END IF;
 END
 $$
@@ -314,18 +325,17 @@ DELIMITER ;
 CREATE TABLE `storage` (
   `storageID` int(11) UNSIGNED NOT NULL,
   `storageName` varchar(60) NOT NULL,
-  `negativeSupport` tinyint(4) NOT NULL,
-  `warningLimit` int(11) NOT NULL
+  `negativeSupport` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dataark for tabell `storage`
 --
 
-INSERT INTO `storage` (`storageID`, `storageName`, `negativeSupport`, `warningLimit`) VALUES
-(1, 'Hovedlager', 0, 20),
-(2, 'Returlager', 0, 0),
-(63, 'Kundesenter', 1, 11);
+INSERT INTO `storage` (`storageID`, `storageName`, `negativeSupport`) VALUES
+(1, 'Hovedlager', 0),
+(2, 'Returlager', 0),
+(63, 'Kundesenter', 1);
 
 --
 -- Triggere `storage`
@@ -380,7 +390,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$J4MC9FnFjvAwgA.5cJSb5uZPVwPFseKu29S8spw7dILuzbuxt3jna', 'Administrator', 21, '2017-04-25', 'test123');
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$TebuwWd3UJjHdr//NRwX9.eYGEikNDGg3DIqo1eOKGuX5AcSyFzHa', 'Administrator', 21, '2017-04-25', 'roger.kolseth@gmail.com');
 
 --
 -- Triggere `users`
@@ -544,12 +554,12 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -564,27 +574,27 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT for table `users`
 --
