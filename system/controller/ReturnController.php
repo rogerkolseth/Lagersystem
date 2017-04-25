@@ -25,6 +25,15 @@ class ReturnController extends Controller {
     }
 
     private function returnPage() {
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        $result = $restrictionModel->getAllStorageRestrictionInfo();
+        foreach ($result as $result):
+            if($result["storageID"] == "2"){
+                $result = "1";
+                $returnRestriction = array("returnRestriction" => $result);
+                return $this->render("return", $returnRestriction);
+            };
+        endforeach;
         return $this->render("return");
     }
 
@@ -33,7 +42,7 @@ class ReturnController extends Controller {
     }
 
     private function returnProduct() {
-        $toStorageID = $_REQUEST["toStorageID"];
+        $toStorageID = "2";
         $returnProductIDArray = $_REQUEST["returnProductID"];
         $returnQuantityArray = $_REQUEST["returnQuantity"];
         $customerNumber = $_REQUEST["customerNumber"];
@@ -41,22 +50,22 @@ class ReturnController extends Controller {
         $comment = $_REQUEST["returnComment"];
         $date = $_REQUEST["date"];
 
+        $returnModel = $GLOBALS["returnModel"];
+        $inventoryInfo = $GLOBALS["inventoryModel"];
 
-        if ($toStorageID == 0) {
-            return false;
-        } else {
+        for ($i = 0; $i < sizeof($returnProductIDArray); $i++) {
+            $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $returnProductIDArray[$i]);
 
-            for ($i = 0; $i < sizeof($returnProductIDArray); $i++) {
-
-
-                $returnModel = $GLOBALS["returnModel"];
-                $inventoryInfo = $GLOBALS["inventoryModel"];
-
+            if ($count[0]["COUNT(*)"] < 1) {
+                $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
+                $inventoryInfo->addInventory($toStorageID, $returnProductIDArray[$i], $returnQuantityArray[$i]);
+            } else {
                 $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
                 $inventoryInfo->transferToStorage($toStorageID, $returnProductIDArray[$i], $returnQuantityArray[$i]);
             }
-            echo json_encode("success");
         }
+            echo json_encode("success");
+  
     }
 
     private function getAllMyReturns() {

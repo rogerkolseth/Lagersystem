@@ -1,9 +1,15 @@
 <?php require("view/header.php"); ?>
 
+<?php
+if (isset($GLOBALS["returnRestriction"])){
+$restriction = $GLOBALS["returnRestriction"];
+}
+?>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
-        
+        <?php 
+                if (isset($GLOBALS["returnRestriction"]) && $restriction == "1"){?>
         <h2 class="text-center">Registrer retur</h2>
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
@@ -13,17 +19,7 @@
                 <label class="pull-left">Retur til:</label>
             </div>
             <div class="col-sm-3 col-md-4 row">
-            
-            <div id="chooseStorage">
-            <select name="toStorageID" form="returnProducts" id="returnRestrictionContainer" class="form-control">
-
-                <!-- Her kommer Handlebars Template-->
-
-            </select>
-            </div> 
-            <div id="singleStorageContainer">
-                            
-            </div>
+                <h4>Returlager</h4>
         </div>
         <div class="col-sm-1 col-md-2">
             <select id="chooseCategoryContainer" class="form-control">
@@ -81,6 +77,10 @@
         
         
     </div>
+        <?php } else { ?>
+        <p> Du har ikkje tilgang til Returlageret </p>       
+       <?php }?>
+                
 </div>
 </div>
 
@@ -112,21 +112,10 @@
 
 <script id="returnProductTemplate" type="text/x-handlebars-template">
     <br>  
-    {{#each storageProduct}} 
+    {{#each productInfo}} 
     <button data-id="{{productID}}" class="btn btn-primary product">{{productName}}</button>
     {{/each}} 
 </script>
-
-<!-- Display storages in drop down meny Template -->
-<script id="returnRestrictionTemplate" type="text/x-handlebars-template">
-<option data-id="0" value="0" class="returnStorage">Velg et lager</option>
-{{#each transferRestriction}}    
-<tr>
-    <option data-id="{{storageID}}" value="{{storageID}}" class="returnStorage">{{storageName}}</option>
-</tr>   
-{{/each}}
-        
-</script>  
 
 
 <script type="text/javascript" src="js/return.js"></script>

@@ -2,7 +2,7 @@
 
 <?php
 if (isset($GLOBALS["errorMessage"])){
-$test = $GLOBALS["errorMessage"];
+$errormessage = $GLOBALS["errorMessage"];
 }
 ?>
 
@@ -36,7 +36,7 @@ $test = $GLOBALS["errorMessage"];
                 if (isset($GLOBALS["errorMessage"])){ ?>
             <div class="alert alert-success">
                 <?php
-                     echo $test; ?>   
+                     echo $errormessage; ?>   
             </div>  <?php
                      }
                 ?>

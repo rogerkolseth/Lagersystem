@@ -2,108 +2,31 @@
 
 $('#returnButton').hide(); // hides transferbutton  
 $('#commentContainer').hide();
-$(function () {
+$('#chooseCategoryContainer').show();
+
+$(function getStorageProduct() {
     $.ajax({
         type: 'GET',
-        url: '?page=getTransferRestriction',
+        url: '?page=getAllProductInfo',
         dataType: 'json',
         success: function (data) {
-            showHide(data);
-            returnRestrictionTemplate(data);
+            returnProductTemplate(data);
         }
     });
+    return false;
 });
 
-
-
-// Display storages in drop down meny Template -->
-
-function returnRestrictionTemplate(data) {
-    var rawTemplate = document.getElementById("returnRestrictionTemplate").innerHTML;
-    var compiledTemplate = Handlebars.compile(rawTemplate);
-    var transferRestrictionGeneratedHTML = compiledTemplate(data);
-
-    var transferContainer = document.getElementById("returnRestrictionContainer");
-    transferContainer.innerHTML = transferRestrictionGeneratedHTML;
-
-}
-
-
-
-// Get the selected storage, and POST this to retrive inventory-->
-
-var givenStorageID;
-$(function POSTfromStorageModal() {
-
-    $('#returnRestrictionContainer').on('change', function () {
-        givenStorageID = $(this).find("option:selected").data('id');
-        $('#returnButton').hide();
-        if (givenStorageID > 0) {
-            $.ajax({
-                type: 'POST',
-                url: '?page=getStorageProduct',
-                data: {givenStorageID: givenStorageID},
-                dataType: 'json',
-                success: function (data) {
-                    returnProductTemplate(data);
-                    $('#returnButton').hide();
-                    $('#commentContainer').hide();
-                    $('.selectQuantity').remove();
-                    $('#chooseCategoryContainer').show();
-                    $('#chooseCategoryContainer').prop('selectedIndex',0);
-                }
-            });
-        } else {
-            $('.product').remove();
-            $('.selectQuantity').remove();
-            $('#commentContainer').hide();
-            $('#returnButton').hide();
-            $('#chooseCategoryContainer').hide();
+function updateProductList() {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getAllProductInfo',
+        dataType: 'json',
+        success: function (data) {
+            returnProductTemplate(data);
         }
-
-        return false;
-
     });
-});
-
-
-
-function displaySingleStorage(givenStorageID) {
-
-    if (givenStorageID > 0) {
-        $.ajax({
-            type: 'POST',
-            url: '?page=getStorageProduct',
-            data: {givenStorageID: givenStorageID},
-            dataType: 'json',
-            success: function (data) {
-                returnProductTemplate(data);
-            }
-        });
-    }
     return false;
 }
-
-
-
-$(function updateResultFromCategory() {
-
-    $('#chooseCategoryContainer').on('change', function () {
-        givenCategoryID = $(this).find("option:selected").data('id');
-
-        $.ajax({
-            type: 'POST',
-            url: '?page=getStoProFromCat',
-            data: {givenCategoryID: givenCategoryID, givenStorageID: givenStorageID},
-            dataType: 'json',
-            success: function (data) {
-                returnProductTemplate(data);
-            }
-        });
-        return false;
-    });
-});
-
 
 // Display products in storage Template -->
 
@@ -178,11 +101,12 @@ $(function POSTtransferProducts() {
                 $displayUsers.empty().append("Kunne ikke overføre");
             },
             success: function (data) {
-                $('.product').remove();
                 $('.selectQuantity').remove();
                 $('#errorMessage').remove();
+                $('#returnButton').hide(); 
+                $('#commentContainer').hide();
                 successMessage();
-                updateReturn();
+                updateProductList();
             }
         });
         return false;
@@ -199,22 +123,6 @@ function successMessage() {
     ;
 }
 
-
-
-function updateReturn() {
-    $('#returnButton').hide();// hides transferbutton 
-    $('#commentContainer').hide();
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '?page=getTransferRestriction',
-            dataType: 'json',
-            success: function (data) {
-                returnRestrictionTemplate(data);
-            }
-        });
-    });
-}
 
 
 
@@ -268,25 +176,20 @@ function chooseCategory(data) {
 }
 
 
+$(function updateResultFromCategory() {
 
-function showHide(data) {
-    var limit = 0;
+    $('#chooseCategoryContainer').on('change', function () {
+        givenCategoryID = $(this).find("option:selected").data('id');
 
-    for (var i = 0; i < data.transferRestriction.length; i++) {
-        limit = limit + 1;
-    }
-
-    if (limit < 2) {
-        $('#chooseStorage').hide();
-        $('#singleStorageContainer').show();
-        var storageID = data.transferRestriction[0].storageID;
-        displaySingleStorage(storageID);
-        $('#singleStorageContainer').append('<p>' + data.transferRestriction[0].storageName + '</p>');
-        $('#singleStorageContainer').append('<input name="toStorageID" data-id="'+storageID+'" value="'+storageID+'" type="hidden"/>');
-        $('#chooseCategoryContainer').show();
-    } else {
-        $('#chooseStorage').show();
-        $('#singleStorageContainer').hide();
-        $('#chooseCategoryContainer').hide();
-    }
-}
+        $.ajax({
+            type: 'POST',
+            url: '?page=getProductFromCategory',
+            data: {givenCategoryID: givenCategoryID},
+            dataType: 'json',
+            success: function (data) {
+                returnProductTemplate(data);
+            }
+        });
+        return false;
+    });
+});
