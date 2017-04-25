@@ -3,7 +3,12 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
-
+<div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
         <div class="col-md-6 row">
             
 
@@ -212,7 +217,83 @@
 
     </div>
 
-</div>   
+</div>
+
+<div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <label>
+                            Bruk denne funksjonen for å søke i loggen.<br>
+                            
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                <img src="image/SøkLogg.PNG">
+                    </div>
+                
+                
+                    <div class="col-md-12">
+                        <label>
+                            Trykk her om du ønsker flere alternativer når du søker i loggen.
+                        </label>
+                        
+                    </div>
+                <div class="col-md-12">
+                    <img src="image/AvansertSøkLogg.PNG">
+                    </div>
+                <div class="col-md-12">
+                    <label>
+                        Her kan du spesifisere søket ditt med mange forskjellige alternativer.
+                    </label>
+                </div>
+                <div class="col-md-12">
+                <img src="image/AvansertSøkAlternativ.PNG">
+                </div>
+                    <div class="col-md-12">
+                    <label>
+                        Trykk her for logginstillinger.
+                    </label>
+                </div>
+                <div class="col-md-12">
+                <img src="image/Logging.PNG">
+                </div>
+                    <div class="col-md-12">
+                    <label>
+                        Her kan du velge hva som skal bli logget i systemet.
+                    </label>
+                </div>
+                <div class="col-md-12">
+                <img src="image/VelgLogging.PNG">
+                </div>
+                    <div class="col-md-12">
+                    <label>
+                        Her vises loggen.
+                    </label>
+                </div>
+                <div class="col-md-12">
+                <img src="image/Logg.PNG">
+                </div>
+                    
+                
+                   
+                    
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+</div>
 
 
 <script id="loggTableTemplate" type="text/x-handlebars-template">

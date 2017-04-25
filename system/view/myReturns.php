@@ -3,7 +3,24 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-   <div class="container row"> 
+   <div class="container row">
+       <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
+        <?php } ?>
+       
+       <?php if ($_SESSION["userLevel"] == "User") { ?>
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
+        <?php } ?>
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
         
@@ -88,7 +105,99 @@
             </form>
         </div>
     </div>
-</div>     
+</div>
+
+<div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <label>
+                            Bruk denne funksjonen for å søke deg frem til returer du ønsker å se.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/SøkRetur.PNG">
+                    </div>
+                    <div class="col-md-12">
+                        <label>
+                            Her kan du velge en eller flere brukere for å se deres returer.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/VelgBrukerSalg.PNG">
+                    </div>
+                    <div class="col-md-12">
+                        <label>
+                            Velg hvilke brukere du vil se returer fra.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/DropdownSalg.PNG">
+                    </div>
+                    <div class="col-md-12">
+                        <label>
+                            I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine returer.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/">
+                    </div>
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+
+<div class="modal fade" id="showHelpModalUser" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <label>
+                            Bruk denne funksjonen for å søke deg frem til returer du ønsker å se.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/SøkRetur.PNG">
+                    </div>
+                    
+                    
+                    <div class="col-md-12">
+                        <label>
+                            I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine returer salg.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/">
+                    </div>
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
     
 
 <!-- Display editSale-->                    

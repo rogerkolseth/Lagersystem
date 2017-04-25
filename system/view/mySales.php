@@ -12,6 +12,7 @@
         </div>
     </div>
         <?php } ?>
+        
         <?php if ($_SESSION["userLevel"] == "User") { ?>
         
         <div class="row">
@@ -19,7 +20,7 @@
             <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
             </label>
         </div>
-    </div>
+        </div>
         <?php } ?>
         
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group row">
@@ -116,12 +117,39 @@
                 <div class="modal-body">
                     <div class="col-md-12">
                         <label>
-                            
+                            Bruk denne funksjonen for å søke deg frem til salg du ønsker å se.
                         </label>
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/">
+                        <img src="image/SøkSalg.PNG">
+                    </div>
+                    <div class="col-md-12">
+                        <label>
+                            Her kan du velge en eller flere brukere for å se deres salg.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/VelgBrukerSalg.PNG">
+                    </div>
+                    <div class="col-md-12">
+                        <label>
+                            Velg hvilke brukere du vil se salg fra.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/DropdownSalg.PNG">
+                    </div>
+                    <div class="col-md-12">
+                        <label>
+                            I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine siste salg.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/DineSalgSalg.PNG">
                     </div>
                 
                 <div class="modal-footer col-md-12">
@@ -130,7 +158,7 @@
             </div>
         </div>
         </div>
-        
+    </div>
         <div class="modal fade" id="showHelpModalUser" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -142,18 +170,32 @@
                 <div class="modal-body">
                     <div class="col-md-12">
                         <label>
-                            
+                            Bruk denne funksjonen for å søke deg frem til salg du ønsker å se.
                         </label>
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/">
+                        <img src="image/SøkSalg.PNG">
+                    </div>
+                    
+                    
+                    <div class="col-md-12">
+                        <label>
+                            I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine siste salg.
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img src="image/DineSalgSalg.PNG">
                     </div>
                 
                 <div class="modal-footer col-md-12">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
+                
+                
             </div>
+        </div>
         </div>
         </div>
 

@@ -4,6 +4,13 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
+        
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
         
@@ -224,6 +231,74 @@
 
 </div>
 
+
+<div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <label>
+                            Bruk denne funksjonen for å søke etter produkter.<br>
+                            Du kan også velge kategori for sortering av produkter
+                        </label>
+                        
+                    </div>
+                    <div class="col-md-12">
+                <img src="image/SøkProdukt.PNG">
+                    </div>
+                
+                
+                    <div class="col-md-12">
+                        <label>
+                            Her oppretter du nye produkter.
+                        </label>
+                        
+                    </div>
+                <div class="col-md-12">
+                    <img src="image/OpprettProdukt.PNG">
+                    </div>
+                <div class="col-md-12">
+                    <label>
+                        Skriv inn info om produktet du vil opprette.
+                    </label>
+                </div>
+                <div class="col-md-12">
+                <img src="image/OpprettProduktModal.PNG">
+                </div>
+                    <div class="col-md-12">
+                    <label>
+                        Dette er en liste over alle produktene i systemet.
+                    </label>
+                </div>
+                <div class="col-md-12">
+                <img src="image/Produkter.PNG">
+                </div>
+                    <div class="col-md-12">
+                    <label>
+                        Dette er alternativer for produkt:<br>
+                        1. <img src="image/EndreBruker.PNG">Endre produkt<br>
+                        2. <img src="image/InformasjonBruker.PNG">Vis informasjon om produkt<br>
+                        3. <img src="image/SlettBruker.PNG">Slett produkt
+                        
+                    </label>
+                </div>
+                
+                   
+                    
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+</div>
 
 <!-- TEMPLATES-->
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">

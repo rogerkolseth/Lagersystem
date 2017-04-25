@@ -261,6 +261,17 @@ if (isset($GLOBALS["errorMessage"])) {
                     <label>Her kan du se de siste salgene gjort av deg.</label>
                     <img id="helpimage" src="image/DineSisteSalg.PNG">
                     </div>
+                    <div class="col-md-6 text-center">
+                        <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
+                            Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
+                        </label>
+                    <img id="helpimage" src="image/Lagerbeholdning.PNG">
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
+                        </label>
+                    <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
+                    </div>
                     
                     
                 </div>

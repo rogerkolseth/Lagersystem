@@ -130,7 +130,7 @@ function userReturnTemplate(data) {
     $.each(data.usernames, function (i, item) {
         $usernameTemplate.append('<tr><td id="bordernone">' + item.username +'</td> <td id="bordernone"><input id="chooseUserReturn" type="checkbox" name="username[]" value="'+item.userID+'"></td></tr>');
     });
-    $usernameTemplate.append(' <input class="form-control btn btn-primary" type="submit" form="showUserReturn"  value="Velg">');
+    $usernameTemplate.append('<div class="pull-right"> <input class="form-control btn btn-primary" type="submit" form="showUserReturn"  value="Velg"> </div>');
 }
 
 $(function POSTshowUserReturn() {

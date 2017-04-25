@@ -124,7 +124,7 @@
                     </div>
                 <div class="col-md-12">
                     <label>
-                        3. Skriv inn kundenummeret og legge til en kommentar.<br>
+                        3. Skriv inn kundenummeret og legg til en kommentar.<br>
                         Du skal også velge antall produkter du vil ta ut.
                     </label>
                 </div>
