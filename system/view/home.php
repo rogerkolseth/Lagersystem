@@ -223,11 +223,12 @@ if (isset($GLOBALS["errorMessage"])) {
                     <div class="col-md-6 text-center">
                         <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
                             Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
-                    </label>
+                        </label>
                     <img id="helpimage" src="image/Lagerbeholdning.PNG">
                     </div>
                     <div class="col-md-6 text-center">
-                    <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.</label>
+                        <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
+                        </label>
                     <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
                     </div>
                 
