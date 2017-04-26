@@ -103,7 +103,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                    <img src="image/OverføreVelgLager.PNG">
+                <img src="image/OverføreVelgLager.PNG">
                     </div>
                 
                 
@@ -133,7 +133,7 @@
             </div>
         </div>
         
-</div>
+</div>    
 
 
 
