@@ -412,7 +412,7 @@ function getCategoryInfo() {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getCategorySearchResult',
+        url: '?page=getCatWithProd',
         dataType: 'json',
         success: function (data) {
             chooseCategory(data);

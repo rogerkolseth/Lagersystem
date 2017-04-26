@@ -12,6 +12,9 @@ class CategoryModel {
     const SEARCH_QUERY = "SELECT * FROM " . CategoryModel::TABLE . " WHERE categoryName LIKE :givenSearchWord ";
     const DELETE_QUERY = "DELETE FROM " . CategoryModel::TABLE . " WHERE categoryID = :givenCategoryID";
     const UPDATE_QUERY = "UPDATE " . CategoryModel::TABLE . " SET categoryName = :givenCategoryName WHERE categoryID = :givenCategoryID"; 
+    const SELECT_CAT_PROD = "SELECT categories.categoryID, categories.categoryName FROM products INNER JOIN categories ON products.categoryID = categories.categoryID GROUP BY categories.categoryName";
+    const SELECT_CAT_MEDIA = "SELECT categories.categoryID, categories.categoryName FROM media INNER JOIN categories ON media.categoryID = categories.categoryID GROUP BY categories.categoryName";
+    const SELECT_CAT_PROD_STO = "SELECT categories.categoryID, categories.categoryName FROM products INNER JOIN categories ON products.categoryID = categories.categoryID INNER JOIN inventory ON inventory.productID = products.productID WHERE inventory.storageID = :givenStorageID GROUP BY categories.categoryName";
 
     
     public function __construct(PDO $dbConn) {
@@ -22,6 +25,9 @@ class CategoryModel {
         $this->selCatID = $this->dbConn->prepare(CategoryModel::SELECT_QUERY_CATID);
         $this->delStmt = $this->dbConn->prepare(CategoryModel::DELETE_QUERY);
         $this->editStmt = $this->dbConn->prepare(CategoryModel::UPDATE_QUERY);
+        $this->catProd = $this->dbConn->prepare(CategoryModel::SELECT_CAT_PROD);
+        $this->catMedia = $this->dbConn->prepare(CategoryModel::SELECT_CAT_MEDIA);
+        $this->catProdSto = $this->dbConn->prepare(CategoryModel::SELECT_CAT_PROD_STO);
 
     }
     
@@ -52,5 +58,19 @@ class CategoryModel {
        return $this->editStmt->execute(array("givenCategoryName" => $givenCategoryName, "givenCategoryID" => $givenCategoryID)); 
     }
     
+    public function getCatWithProd(){
+        $this->catProd->execute();
+        return $this->catProd->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    
+    public function getCatWithMedia(){
+        $this->catMedia->execute();
+        return $this->catMedia->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    
+    public function getCatWithProdAndSto($givenStorageID){
+        $this->catProdSto->execute(array("givenStorageID" => $givenStorageID));
+        return $this->catProdSto->fetchAll(PDO::FETCH_ASSOC); 
+    }
     
 }
