@@ -6,10 +6,10 @@ class StorageModel {
 
     const TABLE = "storage";
     const SELECT_QUERY_STORAGEID = "SELECT * FROM " . StorageModel::TABLE . " WHERE storageID = :givenStorageID";
-    const UPDATE_QUERY = "UPDATE " . StorageModel::TABLE . " SET storageName = :editStorageName,  warningLimit = :editWarningLimit, negativeSupport = :editNegativeSupport WHERE storageID = :editStorageID"; 
+    const UPDATE_QUERY = "UPDATE " . StorageModel::TABLE . " SET storageName = :editStorageName, negativeSupport = :editNegativeSupport WHERE storageID = :editStorageID"; 
     const SELECT_QUERY = "SELECT * FROM " . StorageModel::TABLE;
     const SEARCH_QUERY = "SELECT * FROM " . StorageModel::TABLE . " WHERE storageName LIKE :givenSearchWord ";
-    const INSERT_QUERY = "INSERT INTO " . StorageModel::TABLE . " (storageName, warningLimit, negativeSupport) VALUES (:givenStorageName, :givenWarningLimit, :givenNegativeSupport)";
+    const INSERT_QUERY = "INSERT INTO " . StorageModel::TABLE . " (storageName, negativeSupport) VALUES (:givenStorageName, :givenNegativeSupport)";
     const DELETE_QUERY = "DELETE FROM " . StorageModel::TABLE . " WHERE storageID = :removeStorageID";
     const NEGATIVE_SUPP = "SELECT negativeSupport FROM " . StorageModel::TABLE . " WHERE storageID = :givenStorageID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
@@ -45,8 +45,8 @@ class StorageModel {
 
     
 
-    public function addStorage($givenStorageName, $givenWarningLimit, $givenNegativeSupport) {
-        return $this->addStmt->execute(array("givenStorageName" =>  $givenStorageName, "givenWarningLimit" => $givenWarningLimit, "givenNegativeSupport" => $givenNegativeSupport));
+    public function addStorage($givenStorageName, $givenNegativeSupport) {
+        return $this->addStmt->execute(array("givenStorageName" =>  $givenStorageName, "givenNegativeSupport" => $givenNegativeSupport));
     }    
     
     public function removeStorage($removeStorageID)    {
@@ -56,8 +56,8 @@ class StorageModel {
        return $this->delStmt;
     }
     
-    public function editStorage($editStorageName, $editStorageID, $editWarningLimit, $editNegativeSupport){
-       return $this->editStmt->execute(array("editStorageName" => $editStorageName, "editStorageID" => $editStorageID, "editWarningLimit" => $editWarningLimit, "editNegativeSupport" => $editNegativeSupport)); 
+    public function editStorage($editStorageName, $editStorageID, $editNegativeSupport){
+       return $this->editStmt->execute(array("editStorageName" => $editStorageName, "editStorageID" => $editStorageID, "editNegativeSupport" => $editNegativeSupport)); 
     }
     
     public function getAllStorageInfoFromID($givenStorageID) {

@@ -25,12 +25,18 @@ class UserController extends Controller {
             $this->deleteSingleRes();
         } else if ($page == "editUser"){
             $this->editUserPage();
-        } 
+        } else if ($page == "employeeTraning"){
+            $this->employeeTraningPage();
+        }
             
     }
 
     private function userAdmPage() {
         return $this->render("userAdm");
+    }
+    
+    private function employeeTraningPage() {
+        return $this->render("employeeTraning");
     }
     
     private function editUserPage() {

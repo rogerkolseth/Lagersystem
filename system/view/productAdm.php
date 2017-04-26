@@ -229,6 +229,44 @@
     </div>
 </div>
 
+<!-- WARNING PRODUCT MODAL-->
+
+<div class="modal fade" id="warningProductModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sett varslingsgrense</h4>
+            </div>
+            <form action="?page=setWarningLimit" method="post" id="warningProduct">
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Lagernavn</th>
+                            <th>Epost Varsling</th>
+                            <th>Lager Varsling</th>
+                        </tr>
+                    </thead>
+                    <tbody id="warningProductContainer">
+                            
+                                <!-- Her kommer handlebars Template -->
+      
+                    </tbody>
+                </table>
+
+            <div class="modal-footer">
+                <input class="btn btn-success" type="submit" value="Lagre" form="warningProduct">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 </div>
 
 
@@ -301,6 +339,21 @@
 </div>
 
 <!-- TEMPLATES-->
+
+<!-- Display location of product, and quantity-->
+<script id="warningProductTemplate" type="text/x-handlebars-template">
+    
+    </td><input class="form-control" type="hidden" name="productID" value="{{productLocation.1.productID}}" >
+{{#each productLocation}}
+<tr>
+    <td>{{storageName}}</td><input class="form-control" type="hidden" name="storageID[]" value="{{storageID}}" >
+    <td><input class="form-control" type="number" name="emailWarning[]" value="{{emailWarning}}" required="required" autocomplete="off"></td>
+    <td><input class="form-control" type="number" name="inventoryWarning[]" value="{{inventoryWarning}}" required="required" autocomplete="off">
+    
+</tr>
+{{/each}}      
+</script>
+
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
@@ -430,6 +483,10 @@
 
     <button id="redigerknapp" data-id="{{productID}}" class="delete" data-toggle="tooltip" title="Slett produkt" >
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+
+    <button id="redigerknapp" data-id="{{productID}}" class="warning" data-toggle="tooltip" title="warning" >
+    <span class="glyphicon glyphicon-bell" style="color: black"></span>
     </button>
 
     </td>

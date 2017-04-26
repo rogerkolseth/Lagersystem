@@ -645,13 +645,10 @@ function rowColor() {
 
 // storageInformation    
     $('.quantityColor').filter(function (index) {
-        return parseInt(this.innerHTML) >= 10;
-    }).siblings().andSelf().attr('class', 'bg-success');
-    $('.quantityColor').filter(function (index) {
-        return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5;
+        return parseInt(this.innerHTML) > 6;
     }).siblings().andSelf().attr('class', 'bg-warning');
     $('.quantityColor').filter(function (index) {
-        return parseInt(this.innerHTML) < 5;
+        return parseInt(this.innerHTML) <= 6;
     }).siblings().andSelf().attr('class', 'bg-danger');
 // stocktaking result
 // || 

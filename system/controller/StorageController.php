@@ -27,7 +27,9 @@ class StorageController extends Controller {
             $this->deleteSingleProd();
         } else if ($page == "stocktacking") {
             $this->stocktacking();
-        } 
+        } else if ($page == "setWarningLimit"){
+            $this->setWarningLimit();
+        }
     }
 
     private function storageAdmPage() {
@@ -36,7 +38,6 @@ class StorageController extends Controller {
 
     private function storageCreationEngine() {
         $givenStorageName = $_REQUEST["givenStorageName"];
-        $givenWarningLimit = $_REQUEST["givenWarningLimit"];
         if (isset($_POST['givenNegativeSupport'])) {
             $givenNegativeSupport = $_REQUEST["givenNegativeSupport"];
         } else {
@@ -49,7 +50,7 @@ class StorageController extends Controller {
         $setSessionID->setSession($sessionID);
 
         $storageCreationInfo = $GLOBALS["storageModel"];
-        $added = $storageCreationInfo->addStorage($givenStorageName, $givenWarningLimit, $givenNegativeSupport);
+        $added = $storageCreationInfo->addStorage($givenStorageName, $givenNegativeSupport);
 
         if ($added) {
             echo json_encode("success");
@@ -61,7 +62,6 @@ class StorageController extends Controller {
     private function storageEditEngine() {
         $editStorageID = $_REQUEST["editStorageID"];
         $editStorageName = $_REQUEST["editStorageName"];
-        $editWarningLimit = $_REQUEST["editWarningLimit"];
         if (isset($_POST['editNegativeSupport'])) {
             $editNegativeSupport = $_REQUEST["editNegativeSupport"];
         } else {
@@ -74,7 +74,7 @@ class StorageController extends Controller {
         $sesionLog->setSession($sessionID);
 
         $storageEditInfo = $GLOBALS["storageModel"];
-        $edited = $storageEditInfo->editStorage($editStorageName, $editStorageID, $editWarningLimit, $editNegativeSupport);
+        $edited = $storageEditInfo->editStorage($editStorageName, $editStorageID, $editNegativeSupport);
 
         if ($edited) {
             echo json_encode("success");
@@ -231,6 +231,22 @@ class StorageController extends Controller {
 
             echo json_encode("success");
         }
+    }
+    
+    private function setWarningLimit(){
+        $productID = $_REQUEST["productID"];
+        $storageIDArray = $_REQUEST["storageID"];
+        $emailWarningArray = $_REQUEST["emailWarning"];
+        $inventoryWarningArray = $_REQUEST["inventoryWarning"];
+        
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        
+        for ($i = 0; $i < sizeof($storageIDArray); $i++) {
+            $inventoryInfo->updateWarningLimit($storageIDArray[$i], $emailWarningArray[$i], $inventoryWarningArray[$i], $productID);
+        }
+        
+        echo json_encode("success");
+        
     }
 
 }

@@ -95,6 +95,7 @@
                   
                         </li>
                         <?php }?>
+                        <li><a href="?page=employeeTraning"><span class="glyphicon glyphicon-stats"></span> Opplæring</a></li>
                     </ul>    
      
 

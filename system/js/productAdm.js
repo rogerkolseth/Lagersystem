@@ -463,3 +463,56 @@ Date.prototype.yyyymmdd = function () {
 var d = new Date();
 document.getElementById("date").value = d.yyyymmdd();
 
+// SET WARNING LIMIT -->
+
+// Get the selected product, and opens warningProduct modal-->
+
+$(function POSTeditProductModal() {
+
+    $('#displayProductContainer').delegate('.warning', 'click', function () {
+        var givenProductID = $(this).attr('data-id');
+
+        $.ajax({
+            type: 'POST',
+            url: '?page=getProductLocation',
+            data: {givenProductID: givenProductID},
+            dataType: 'json',
+            success: function (data) {
+                warningProductTemplate(data);
+                $('#warningProductModal').modal('show');
+            }
+        });
+        return false;
+
+    });
+});
+
+function warningProductTemplate(data) {
+    var rawTemplate = document.getElementById("warningProductTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var editProductGeneratedHTML = compiledTemplate(data);
+
+    var productContainer = document.getElementById("warningProductContainer");
+    productContainer.innerHTML = editProductGeneratedHTML;
+}
+
+$(function POSTsearchForProduct() {
+
+    $('#warningProduct').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                $("#warningProduct")[0].reset();
+                $('#warningProductModal').modal('hide');
+                UpdateProductTable();
+            }
+        });
+        return false;
+    });
+});

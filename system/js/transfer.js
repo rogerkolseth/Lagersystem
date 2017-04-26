@@ -162,6 +162,7 @@ $(function POSTtransferProducts() {
                 $('#errorMessage').remove();
                 successMessage();
                 updateTransfer();
+                sendEmail();
             }
         });
         return false;
@@ -248,4 +249,15 @@ function negativeSupportStatus(data) {
             "max": data.prodInfo[0].quantity, // substitute your own
         });
     }
+}
+
+function sendEmail() {
+    $.ajax({
+        type: 'GET',
+        url: '?page=sendInventarWarning',
+        dataType: 'json',
+        success: function () {
+
+        }
+    });
 }

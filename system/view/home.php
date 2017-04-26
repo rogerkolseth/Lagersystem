@@ -480,10 +480,6 @@ if (isset($GLOBALS["errorMessage"])) {
                                             <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
                                         </tr>
                                         <tr>
-                                            <th id="bordernone">Grense for epostvarsling:</th>
-                                            <td id="bordernone"><input class="form-control" type="number" required="required" name="givenWarningLimit" value=""></td>
-                                        </tr>
-                                        <tr>
                                             <th id="bordernone">Lager skal kunne gå i minus:</th>
                                             <td id="bordernone"><input  type="checkbox" name="givenNegativeSupport" value="1"></td>
                                         </tr>

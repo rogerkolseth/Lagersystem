@@ -384,7 +384,7 @@
     <tr>
     <th>Brukernivå: </th>
     
-    <td>
+    <td> 
     <select form="editUser" type="text" required="required" name="editUserLevel" class="form-control" autocomplete="off">
         <option>{{userLevel}}</option>
         <option value="User">User</option>

@@ -82,10 +82,15 @@ class Router {
                 case "getUserRestriction" :  
                 case "editUser" :
                 case "editUserEngine" :
+                case "employeeTraning" :    
                     return new UserController();
                     
                 case "uploadImageShortcut2" :
                     return new mediaController();
+                
+                case "sendInventarWarning" :
+                case "newPassword" :    
+                    return new EmailController(); 
                         
             }
             
@@ -104,7 +109,8 @@ class Router {
                 case "editStorageEngine" :
                 case "deleteStorageEngine" :
                 case "deleteSingleProd" :   
-                case "emailWarning" :    
+                case "emailWarning" :   
+                case "setWarningLimit" :    
                     return new StorageController();
                     
                 case "userAdm"    :
