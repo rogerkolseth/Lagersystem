@@ -92,6 +92,8 @@
     </div>  
 </div> 
     
+    <!-- Help modal -->
+    
     <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -102,9 +104,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             1. Velg hvilke lager du vil ta ut fra.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
@@ -113,23 +115,33 @@
                 </div>
                 
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             2. Velg hvilke produkt(er) du ønsker å ta ut fra lageret.<br>
                             Du kan også velge kategori for å lettere finne produkter.
-                        </label>
+                        </h3>
                         
                     </div>
                 <div class="col-md-12">
                     <img src="image/VelgKategori.PNG">
                     </div>
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         3. Skriv inn kundenummeret og legg til en kommentar.<br>
                         Du skal også velge antall produkter du vil ta ut.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/RegistrerUttak.PNG">
+                </div>
+                
+                <div class="col-md-12">
+                    <h3>
+                        Dette er alternativer for salg:<br>
+                    </h3>
+                    <label>
+                        <img src="image/SlettBruker.PNG">Fjern valgt linje<br>
+                        
+                    </label>
                 </div>
                 
                 <div class="modal-footer col-md-12">

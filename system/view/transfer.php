@@ -87,6 +87,8 @@
 </div>  
     </div>  
 
+<!-- Help modal -->
+
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -97,9 +99,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                         1. Velg hvilke lager du vil overføre fra og til.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
@@ -108,22 +110,32 @@
                 
                 
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             2. Velg hvilke produkt(er) du ønsker å overføre.<br>
                             Du kan også velge kategori for å lettere finne produkter.
-                        </label>
+                        </h3>
                         
                     </div>
                 <div class="col-md-12">
                     <img src="image/VelgProduktOverfør.PNG">
                     </div>
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         3. Velg antall produkter du vil overføre.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/RegistrerOverfør.PNG">
+                </div>
+                    
+                    <div class="col-md-12">
+                    <h3>
+                        Dette er alternativer for overføring:<br>
+                    </h3>
+                    <label>
+                        <img src="image/SlettBruker.PNG">Fjern valgt linje<br>
+                        
+                    </label>
                 </div>
                 
                 <div class="modal-footer col-md-12">

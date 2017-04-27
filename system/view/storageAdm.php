@@ -69,7 +69,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Opprett bruker</h4>
+                    <h4 class="modal-title">Opprett lager</h4>
                 </div>
                 <div class="modal-body">
                     <div>
@@ -336,6 +336,9 @@
 
 </div>
 
+<!-- Help modal -->
+
+
 <div class="modal fade" id="showHelpModal" role="dialog">
     <div class="modal-dialog" style="width: 70%">
         <!-- Innholdet til Modalen -->
@@ -345,45 +348,67 @@
                 <h4 class="modal-title">Hjelp</h4>
             </div>
             <div class="modal-body">
-                <div class="col-md-12">
-                    <label>
+                
+                <div class="col-md-12" >
+                    <h3>
                         Bruk denne funksjonen for å søke etter lager.
-                    </label>
+                    </h3>
 
                 </div>
                 <div class="col-md-12">
                     <img src="image/SøkLager.PNG">
                 </div>
+                
 
 
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         Her oppretter du nye lager.
-                    </label>
+                    </h3>
 
                 </div>
                 <div class="col-md-12">
                     <img src="image/OpprettLager.PNG">
                 </div>
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         Skriv inn info om lageret du vil opprette.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
-                    <img src="image/.PNG">
+                    <img src="image/OpprettLagerModal.PNG">
+                </div>
+                
+                <div class="col-md-12">
+                    <h3>
+                        Her kan du legge inn produkter på hovedlageret.
+                    </h3>
                 </div>
                 <div class="col-md-12">
-                    <label>
+                    <img src="image/Varelevering.PNG">
+                </div>
+                
+                <div class="col-md-12">
+                    <h3>
+                        Velg hvor mange og hvilke produkter du ønsker å ta inn på hovedlageret.
+                    </h3>
+                </div>
+                <div class="col-md-12">
+                    <img src="image/VareleveringModal.PNG">
+                </div>
+                <div class="col-md-12">
+                    <h3>
                         Dette er en liste over alle lagerene i systemet.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                     <img src="image/Lager.PNG">
                 </div>
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         Dette er alternativer for lager:<br>
+                    </h3>
+                    <label>
                         1. <img src="image/EndreBruker.PNG">Endre lager<br>
                         2. <img src="image/InformasjonBruker.PNG">Vis informasjon om lager<br>
                         3. <img src="image/SlettBruker.PNG">Slett lager<br>

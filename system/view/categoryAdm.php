@@ -141,6 +141,7 @@
     </div>
 </div> 
     
+    <!-- Help modal -->
     
     <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
@@ -152,10 +153,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Bruk denne funksjonen for å søke etter kategorier.<br>
                             
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
@@ -164,33 +165,35 @@
                 
                 
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Her oppretter du nye kategorier.
-                        </label>
+                        </h3>
                         
                     </div>
                 <div class="col-md-12">
                     <img src="image/OpprettKategori.PNG">
                     </div>
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         Skriv inn info om kategorien du vil opprette.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/OpprettKategoriModal.PNG">
                 </div>
                     <div class="col-md-12">
-                    <label>
+                    <h3>
                         Dette er en liste over alle kategoriene i systemet.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/Kategorier.PNG">
                 </div>
                     <div class="col-md-12">
-                    <label>
+                        <h3>
                         Dette er alternativer for kategorier:<br>
+                        </h3>
+                        <label>
                         1. <img src="image/EndreBruker.PNG">Endre kategori<br>
                         
                         2. <img src="image/SlettBruker.PNG">Slett kategori

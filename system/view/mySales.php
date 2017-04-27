@@ -106,6 +106,8 @@
         </div>
     </div>
     
+    <!-- Help modal admin -->
+    
     <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -116,41 +118,50 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Bruk denne funksjonen for å søke deg frem til salg du ønsker å se.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
                         <img src="image/SøkSalg.PNG">
                     </div>
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Her kan du velge en eller flere brukere for å se deres salg.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
                         <img src="image/VelgBrukerSalg.PNG">
                     </div>
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Velg hvilke brukere du vil se salg fra.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
                         <img src="image/DropdownSalg.PNG">
                     </div>
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine siste salg.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
                         <img src="image/DineSalgSalg.PNG">
                     </div>
+                    <div class="col-md-12">
+                    <h3>
+                        Dette er alternativer for salg:<br>
+                    </h3>
+                    <label>
+                        <img src="image/EndreBruker.PNG">Endre salg<br>
+                        
+                    </label>
+                </div>
                 
                 <div class="modal-footer col-md-12">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -159,6 +170,9 @@
         </div>
         </div>
     </div>
+    
+    <!-- Help modal bruker -->
+    
         <div class="modal fade" id="showHelpModalUser" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -169,9 +183,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Bruk denne funksjonen for å søke deg frem til salg du ønsker å se.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
@@ -180,14 +194,23 @@
                     
                     
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine siste salg.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
                         <img src="image/DineSalgSalg.PNG">
                     </div>
+                    <div class="col-md-12">
+                    <h3>
+                        Dette er alternativer for salg:<br>
+                    </h3>
+                    <label>
+                        <img src="image/EndreBruker.PNG">Endre salg<br>
+                        
+                    </label>
+                </div>
                 
                 <div class="modal-footer col-md-12">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>

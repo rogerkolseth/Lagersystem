@@ -137,7 +137,7 @@
                     <h4 class="modal-title">Velg lager tilgang(er)</h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-bordered" id="storageRestrictionContainer">
+                    <table class="table" id="storageRestrictionContainer">
 
                         <!-- Handlebars information -->
 
@@ -273,6 +273,8 @@
 
 </div>
 
+<!-- Help modal -->
+
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -283,9 +285,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                         Bruk denne funksjonen for å søke etter brukere.
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
@@ -294,33 +296,35 @@
                 
                 
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Her oppretter du nye brukere.
-                        </label>
+                        </h3>
                         
                     </div>
                 <div class="col-md-12">
                     <img src="image/OpprettBruker.PNG">
                     </div>
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         Skriv inn info om brukeren du vil opprette.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/OpprettBrukerModal.PNG">
                 </div>
                     <div class="col-md-12">
-                    <label>
+                    <h3>
                         Dette er en liste over alle brukerene i systemet.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/Brukere.PNG">
                 </div>
                     <div class="col-md-12">
-                    <label>
+                        <h3>
                         Dette er alternativer for brukere:<br>
+                        </h3>
+                        <label>
                         1. <img src="image/EndreBruker.PNG">Endre bruker<br>
                         2. <img src="image/InformasjonBruker.PNG">Vis informasjon om bruker<br>
                         3. <img src="image/SlettBruker.PNG">Slett bruker<br>
@@ -329,9 +333,9 @@
                 </div>
                 
                     <div class="col-md-12">
-                    <label>
-                        Checkboxen brukes om du ønsker og gi lagertilanger til flere brukere samtidig.
-                    </label>
+                    <h3>
+                        Checkboxen brukes om du ønsker å gi lagertilanger til flere brukere samtidig.
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/CheckboxBruker.PNG">
@@ -353,9 +357,9 @@
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
 {{#each storageInfo}}
     <tr> 
-        <td>{{storageName}}</td> 
+        <td id="bordernone">{{storageName}}</td> 
 
-        <td><input form="editRestriction" class="selectStorageRestriction" id="{{storageID}}" value="{{storageID}}"  name="storageRestrictions[]" type="checkbox"></td>
+        <td id="bordernone"><input form="editRestriction" class="selectStorageRestriction" id="{{storageID}}" value="{{storageID}}"  name="storageRestrictions[]" type="checkbox"></td>
     </tr>
 {{/each}}
 </script>     

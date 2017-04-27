@@ -69,7 +69,7 @@
 
                         <li><a href="?page=mySales"><span class="glyphicon glyphicon-stats"></span> Dine Salg</a></li>
                         <li><a href="?page=myReturns"><span class="glyphicon glyphicon-stats"></span> Dine Returer</a></li>
-                        <li><a href="?page=newEmployee"><span class="glyphicon glyphicon-stats"></span> Test</a></li>
+                        
                            
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
                         <li><a href="?page=logg"><span class="glyphicon glyphicon-paperclip"></span> Logg</a></li>
@@ -95,7 +95,7 @@
                   
                         </li>
                         <?php }?>
-                        <li><a href="?page=employeeTraning"><span class="glyphicon glyphicon-stats"></span> Opplæring</a></li>
+                        <li><a href="?page=employeeTraning"><span class="glyphicon glyphicon glyphicon-info-sign"></span> Opplæring</a></li>
                     </ul>    
      
 

@@ -195,40 +195,40 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12 text-center">
-                        <label>
+                        <h3>
                             Her er forskjellige snarveier til ofte brukte funksjoner.
-                        </label>
+                        </h3>
                         <img style="width: 90%" src="image/Snarvei.PNG">
                     </div>
                     
                     <div class="col-md-6 text-center">
-                        <label>
+                        <h3>
                             Her kan du se hvilke produkter det er lite av og hvilke lager de ligger på.
-                        </label>
+                        </h3>
                         <img id="helpimage" src="image/SnartTomLagerbeholdning.PNG">
                     </div>
                     <div class="col-md-6 text-center">
-                        <label>
+                        <h3>
                             Her kan du se dine siste salg.
-                        </label>
+                        </h3>
                         <img id="helpimage" src="image/DineSisteSalgAdmin.PNG">
                     </div>
                     <div class="col-md-12 text-center">
-                        <label>
+                        <h3>
                             Her kan du se det siste som har blitt logget.
-                        </label>
+                        </h3>
                         <img id="" src="image/SisteHendelser.PNG">
                     </div>
                     
                     <div class="col-md-6 text-center">
-                        <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
+                        <h3>Her kan du se informasjon om produkter i lager du har tilgang til.
                             Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
-                        </label>
+                        </h3>
                     <img id="helpimage" src="image/Lagerbeholdning.PNG">
                     </div>
                     <div class="col-md-6 text-center">
-                        <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
-                        </label>
+                        <h3>Her kan du se en grafisk fremstilling av lagerbeholdningen.
+                        </h3>
                     <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
                     </div>
                 
@@ -253,26 +253,29 @@ if (isset($GLOBALS["errorMessage"])) {
                     <h4 class="modal-title">Hjelp</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="col-md-12 row">
                     <div class="col-md-6 text-center">
-                    <label>Her kan du se de siste salgene gjort av alle brukerene i systemet.</label>
+                    <h3>Her kan du se de siste salgene gjort av alle brukerene i systemet.</h3>
                     <img id="helpimage" src="image/SisteSalg.PNG">
                     </div>
                     <div class="col-md-6 text-center">
-                    <label>Her kan du se de siste salgene gjort av deg.</label>
+                    <h3>Her kan du se de siste salgene gjort av deg.</h3>
                     <img id="helpimage" src="image/DineSisteSalg.PNG">
                     </div>
+                    </div>
+                    <div class="col-md-12 ">
                     <div class="col-md-6 text-center">
-                        <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
-                            Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
-                        </label>
+                        <h3>Her kan du se informasjon om produkter i lager du har tilgang til.</h3>
+                        <p> Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
+                        </p>
                     <img id="helpimage" src="image/Lagerbeholdning.PNG">
                     </div>
                     <div class="col-md-6 text-center">
-                        <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
-                        </label>
+                        <h3>Her kan du se en grafisk fremstilling av lagerbeholdningen.
+                        </h3>
                     <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
                     </div>
-                    
+                    </div>
                     
                 </div>
                 <div class="modal-footer col-md-12">
