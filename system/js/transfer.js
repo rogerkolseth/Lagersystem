@@ -50,7 +50,7 @@ $(function POSTfromTransferModal() {
                     $('#transferButton').hide();
                     $('#chooseCategoryContainer').show();
                     $('#chooseCategoryContainer').prop('selectedIndex',0);
-
+                    getUsedStorageCat(givenStorageID);
                 }
             });
         } else {
@@ -221,16 +221,18 @@ $(function POSTdeleteStorageModal() {
 
 
 
-$(function () {
+function getUsedStorageCat(givenStorageID) {
     $.ajax({
-        type: 'GET',
-        url: '?page=getCategorySearchResult',
-        dataType: 'json',
-        success: function (data) {
-            chooseCategory(data);
-        }
-    });
-});
+            type: 'POST',
+            url: '?page=getCatWithProdAndSto',
+            data: {givenStorageID: givenStorageID},
+            dataType: 'json',
+            success: function (data) {
+                chooseCategory(data);
+            }
+        });
+    return false;
+}
 
 
 // Display storage template -->

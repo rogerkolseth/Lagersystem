@@ -25,7 +25,6 @@ $error = $GLOBALS["errorMessage"];
         
         
             <div class="container">
-            
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
                     
@@ -40,6 +39,7 @@ $error = $GLOBALS["errorMessage"];
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="show-hide" value="">
                                 Vis passord
                             </label>
+                            <a href="#" data-toggle="modal" data-target="#forgottenPasswordModal">Glemt passord?</a>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 Logg inn</button>
                         </form>
@@ -50,15 +50,53 @@ $error = $GLOBALS["errorMessage"];
                             }
                         ?>
                             </div>
+                        <div id="success"></div>
                     </div>
                 </div>
             </div>
             
         </div>
+        
+        <div class="modal fade" id="forgottenPasswordModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Opprett bruker</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <table class="table">
+                            <p> Dersom du har glømt passordet ditt kan du få tilsendt nytt ved å fylle ut 
+                                informasjonen nedenfor. </p>
+                            <form action="?page=newPassword" method="post" id="newPassword">
+
+                                <tr>
+                                    <td id="bordernone"><input class="form-control" type="text" required="required" name="givenUsername" placeholder="Brukernavn" value=""></td>
+                                </tr>
+                                <tr>
+                                    <td id="bordernone"><input class="form-control" type="text" required="required" name="givenEmail" placeholder="E-postadresse" value=""></td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div id="error"></div>
+                    <input class="btn btn-success" form="newPassword" type="submit" value="Send nytt passord">
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div> 
         <script type="text/javascript" src="system/js/hide-show-password.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="system/Bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
 
@@ -75,4 +113,48 @@ var d = new Date();
 document.getElementById("date").value  = d.yyyymmdd();
 
 </script>
+<script>
+    
+$(function sendNewPassword() {
 
+    $('#newPassword').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            error: function () {
+                errorMessage();
+            },
+            success: function () {
+                $("#newPassword")[0].reset();
+                $('#forgottenPasswordModal').modal('hide');
+                successMessageNewPassword();
+            }
+        });
+        return false;
+    });
+});
+
+
+function errorMessage() {
+    $('<div class="alert alert-danger"><strong>Error!</strong> Kunne ikke finne brukernavn eller epostadresse </div>').appendTo('#error')
+            .delay(3000).fadeOut(500, function () {
+        $(this).remove();
+    });
+    ;
+}
+
+
+function successMessageNewPassword() {
+    $('<div class="alert alert-success"><strong>Opprettet!</strong> Nytt passord er sendt til oppgitt E-postadresse </div>').appendTo('#success')
+            .delay(4000).fadeOut(500, function () {
+        $(this).remove();
+    });
+    ;
+}
+
+</script>

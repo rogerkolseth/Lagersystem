@@ -25,7 +25,7 @@ class Router {
 
     public function getController() {
         $page = $this->getPage();
-
+        
         if ((isset($_SESSION["AreLoggedIn"])) && ($_SESSION["AreLoggedIn"] == "true")) {
 
 
@@ -91,6 +91,12 @@ class Router {
                 case "sendInventarWarning" :
                 case "newPassword" :    
                     return new EmailController(); 
+                    
+                case "getCatWithProd" :    
+                case "getCatWithMedia" : 
+                case "getCatWithProdAndSto" :    
+                    return new CategoryController();
+                    
                         
             }
             

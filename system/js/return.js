@@ -154,15 +154,18 @@ $(function POSTdeleteStorageModal() {
 
 
 
-$(function () {
+$( function getUsedStorageCat() {
+    var givenStorageID = '2';
     $.ajax({
-        type: 'GET',
-        url: '?page=getCategorySearchResult',
-        dataType: 'json',
-        success: function (data) {
-            chooseCategory(data);
-        }
-    });
+            type: 'POST',
+            url: '?page=getCatWithProdAndSto',
+            data: {givenStorageID: givenStorageID},
+            dataType: 'json',
+            success: function (data) {
+                chooseCategory(data);
+            }
+        });
+    return false;
 });
 
 

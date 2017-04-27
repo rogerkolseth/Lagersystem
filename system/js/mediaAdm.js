@@ -285,7 +285,7 @@ function getCategoryInfo() {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getCategorySearchResult',
+        url: '?page=getCatWithMedia',
         dataType: 'json',
         success: function (data) {
             chooseCategory(data);

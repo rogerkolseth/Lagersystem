@@ -22,7 +22,13 @@ class CategoryController extends Controller {
             $this->deleteCategoryEngine();
         } else if ($page == "editCategoryEngine"){
             $this->editCategoryEngine();
-        } 
+        } else if ($page == "getCatWithProd"){
+            $this->getCatWithProd();
+        } else if ($page == "getCatWithMedia"){
+            $this->getCatWithMedia();
+        } else if ($page == "getCatWithProdAndSto"){
+            $this->getCatWithProdAndSto();
+        }
          
     }
     
@@ -95,5 +101,30 @@ class CategoryController extends Controller {
         if($edited){
         echo json_encode("success");} else {return false;}
     }
+    
+    private function getCatWithProd(){
+        $categoryModel = $GLOBALS["categoryModel"];
+        $categoryInfo = $categoryModel->getCatWithProd();
+        
+        $data = json_encode(array("category" => $categoryInfo));
+        echo $data;
+    }
+    
+    private function getCatWithMedia(){
+        $categoryModel = $GLOBALS["categoryModel"];
+        $categoryInfo = $categoryModel->getCatWithMedia();
+        
+        $data = json_encode(array("category" => $categoryInfo));
+        echo $data;
+    }
 
+    private function getCatWithProdAndSto(){
+        $givenStorageID = $_REQUEST["givenStorageID"];
+        
+        $categoryModel = $GLOBALS["categoryModel"];
+        $categoryInfo = $categoryModel->getCatWithProdAndSto($givenStorageID);
+        
+        $data = json_encode(array("category" => $categoryInfo));
+        echo $data;
+    }
 }   
