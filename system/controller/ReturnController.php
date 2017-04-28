@@ -19,7 +19,7 @@ class ReturnController extends Controller {
             $this->editMyReturn();
         } else if ($page == "stockDelivery") {
             $this->stockDelivery();
-        } else if ($page == "showUserReturns"){
+        } else if ($page == "showUserReturns") {
             $this->chooseUserReturns();
         }
     }
@@ -28,7 +28,7 @@ class ReturnController extends Controller {
         $restrictionModel = $GLOBALS["restrictionModel"];
         $result = $restrictionModel->getAllStorageRestrictionInfo();
         foreach ($result as $result):
-            if($result["storageID"] == "2"){
+            if ($result["storageID"] == "2") {
                 $result = "1";
                 $returnRestriction = array("returnRestriction" => $result);
                 return $this->render("return", $returnRestriction);
@@ -64,8 +64,7 @@ class ReturnController extends Controller {
                 $inventoryInfo->transferToStorage($toStorageID, $returnProductIDArray[$i], $returnQuantityArray[$i]);
             }
         }
-            echo json_encode("success");
-  
+        echo json_encode("success");
     }
 
     private function getAllMyReturns() {
@@ -123,9 +122,6 @@ class ReturnController extends Controller {
         if (isset($_POST['deliveryMacadresse'])) {
             $macAdresseArray = $_REQUEST["deliveryMacadresse"];
         }
-        //echo json_encode($transferProductIDArray);
-        //echo json_encode($transferQuantityArray);
-        //echo json_encode($regMacAdresseArray);
         $toStorageID = "1";
 
         $type = 5;
@@ -141,29 +137,42 @@ class ReturnController extends Controller {
         for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
 
             $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
-
             if ($count[0]["COUNT(*)"] < 1) {
                 if ($result[0]["typeCheck"] > 0) {
                     $loggModel->stockdelivery($type, $desc, $sessionID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                 }
-                $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                $delivery = $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                if ($regMacAdresseArray[$i] == "1") {
+                    $this->addMacAdresse($transferProductIDArray[$i], $transferQuantityArray[$i], $macAdresseArray[$index], $toStorageID);
+                    $index++;
+                }
             } else {
                 if ($result[0]["typeCheck"] > 0) {
                     $loggModel->stockdelivery($type, $desc, $sessionID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                 }
-                $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
-            }
-            if($regMacAdresseArray[$i] == "1"){
-                for ($x = 0; $x < $transferQuantityArray[$i]; $x++) {
-                    $inventoryID = $inventoryInfo->getInventoryID($transferProductIDArray[$i], $toStorageID);
-                    $add = $inventoryInfo->addMacAdresse($inventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+                $delivery = $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                if ($regMacAdresseArray[$i] == "1") {
+                    $this->addMacAdresse($transferProductIDArray[$i], $transferQuantityArray[$i], $macAdresseArray[$index], $toStorageID);
                     $index++;
                 }
             }
         }
 
-        $data = json_encode("success");
-        echo $data;
+        if ($delivery) {
+            $data = json_encode("success");
+            echo $data;
+        } else {
+            return false;
+        }
+    }
+
+    private function addMacAdresse($transferProductID, $transferQuantity, $macAdresse, $toStorageID) {
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+                for ($x = 0; $x < $transferQuantity; $x++) {
+                    $inventoryID = $inventoryInfo->getInventoryID($transferProductID, $toStorageID);
+                    echo $macAdresse . "," . $inventoryID[0]["inventoryID"];
+                    $added = $inventoryInfo->addMacAdresse($inventoryID[0]["inventoryID"], $macAdresse);
+                }
     }
 
     private function chooseUserReturns() {

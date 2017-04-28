@@ -12,18 +12,14 @@ $(function () {
         }
     });
 });
-
-
 // Display storages in drop down meny Template -->
 
 function transferRestrictionTemplate(data) {
     var rawTemplate = document.getElementById("transferRestrictionTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var transferRestrictionGeneratedHTML = compiledTemplate(data);
-
     var transferContainer = document.getElementById("fromTransferRestrictionContainer");
     transferContainer.innerHTML = transferRestrictionGeneratedHTML;
-
     var transferContainer = document.getElementById("toTransferRestrictionContainer");
     transferContainer.innerHTML = transferRestrictionGeneratedHTML;
 }
@@ -37,7 +33,6 @@ $(function POSTfromTransferModal() {
 
     $('#fromTransferRestrictionContainer').on('change', function () {
         givenStorageID = $(this).find("option:selected").data('id');
-
         if (givenStorageID > 0) {
             $.ajax({
                 type: 'POST',
@@ -49,7 +44,7 @@ $(function POSTfromTransferModal() {
                     $('.selectQuantity').remove();
                     $('#transferButton').hide();
                     $('#chooseCategoryContainer').show();
-                    $('#chooseCategoryContainer').prop('selectedIndex',0);
+                    $('#chooseCategoryContainer').prop('selectedIndex', 0);
                     getUsedStorageCat(givenStorageID);
                 }
             });
@@ -61,17 +56,12 @@ $(function POSTfromTransferModal() {
         }
 
         return false;
-
     });
 });
-
-
-
 $(function updateResultFromCategory() {
 
     $('#chooseCategoryContainer').on('change', function () {
         givenCategoryID = $(this).find("option:selected").data('id');
-
         $.ajax({
             type: 'POST',
             url: '?page=getStoProFromCat',
@@ -84,15 +74,12 @@ $(function updateResultFromCategory() {
         return false;
     });
 });
-
-
 // Display products in storage Template -->
 
 function transferProductTemplate(data) {
     var rawTemplate = document.getElementById("transferProductTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var transferProductGeneratedHTML = compiledTemplate(data);
-
     var transferContainer = document.getElementById("transferProductContainer");
     transferContainer.innerHTML = transferProductGeneratedHTML;
 }
@@ -126,14 +113,10 @@ $(function POSTeditUserModal() {
 
     });
 });
-
-
-
 function transferQuantityTemplate(data) {
     var rawTemplate = document.getElementById("transferQuantityTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var transferProductGeneratedHTML = compiledTemplate(data);
-
     var transferContainer = document.getElementById("transferQuantityContainer");
     transferContainer.innerHTML += transferProductGeneratedHTML;
 }
@@ -146,34 +129,44 @@ $(function POSTtransferProducts() {
 
     $('#transferProducts').submit(function () {
         var toStorageID = $.trim($('#toTransferRestrictionContainer').val());
-        if (toStorageID < 1){
+        if (toStorageID < 1) {
             errorMessage();
         } else {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: data,
-            dataType: 'json',
-            error: function () {
-                //errorMessage();
-            },
-            success: function (data) {
-                $('.product').remove();
-                $('.selectQuantity').remove();
-                $('#errorMessage').remove();
-                successMessage();
-                updateTransfer();
-                sendEmail();
-            }
-        }); 
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                error: function () {
+                    //errorMessage();
+                },
+                success: function (data) {
+                    if (data == "success") {
+                        $('.product').remove();
+                        $('.selectQuantity').remove();
+                        $('#errorMessage').remove();
+                        successMessage();
+                        updateTransfer();
+                        sendEmail();
+                    } else {
+                        missingMacError(data);
+                    }
+                }
+            });
         }
         return false;
     });
 });
 
+function missingMacError(data) {
+    $('<div class="alert alert-danger"><strong>Error!</strong> Finner ikke mac: '+ data + '  </div>').appendTo('#error')
+            .delay(10000).fadeOut(500, function () {
+        $(this).remove();
+    });
+    ;
+}
 
 function successMessage() {
     $('<div class="alert alert-success"><strong>Registrert!</strong> Ditt uttak er registrert </div>').appendTo('#success')
@@ -220,26 +213,22 @@ $(function removeSelectedProduct() {
         $element.fadeOut(150, function () {
             $(this).remove();
         });
-
         var $tr = $(this).closest('tr');
         $tr.fadeOut(150, function () {
             $(this).remove();
         });
     });
 });
-
-
-
 function getUsedStorageCat(givenStorageID) {
     $.ajax({
-            type: 'POST',
-            url: '?page=getCatWithProdAndSto',
-            data: {givenStorageID: givenStorageID},
-            dataType: 'json',
-            success: function (data) {
-                chooseCategory(data);
-            }
-        });
+        type: 'POST',
+        url: '?page=getCatWithProdAndSto',
+        data: {givenStorageID: givenStorageID},
+        dataType: 'json',
+        success: function (data) {
+            chooseCategory(data);
+        }
+    });
     return false;
 }
 
@@ -283,24 +272,23 @@ $(function getNumberOfMac() {
         if (macadresse > 0) {
             var $displayMacadresse = $('#product' + productID);
             $displayMacadresse.empty();
-
-
             for (i = 0; i < quantity; i++) {
-                $displayMacadresse.append('<tr><td><input id="mac'+i+productID+'" class="form-control macadresse" maxlength="17" pattern=".{17,17}" name="deliveryMacadresse[]" form="transferProducts" required title="Må være 12 tegn" value="" placeholder="macadresse"/></td></tr>');
+                $displayMacadresse.append('<tr><td><input id="mac' + i + productID + '" class="form-control macadresse" maxlength="17" pattern=".{17,17}" name="deliveryMacadresse[]" form="transferProducts" required title="Må være 12 tegn" value="" placeholder="macadresse"/></td></tr>');
             }
-        } else {return false;}
+        } else {
+            return false;
+        }
     });
 });
-
 $(function getMacadrInput() {
-    var length=1;
+    var length = 1;
     $('#transferQuantityContainer').delegate(".macadresse", "keyup", function (e) {
         var id = $(this).attr('id');
-        content=$(this).val();
+        content = $(this).val();
         content1 = content.replace(/\:/g, '');
-        length=content1.length;
-        if(((length % 2) === 0) && length < 12 && length > 1){
-            $('#'+id).val($('#'+id).val() + ':');
-            }
+        length = content1.length;
+        if (((length % 2) === 0) && length < 12 && length > 1) {
+            $('#' + id).val($('#' + id).val() + ':');
+        }
     });
 });

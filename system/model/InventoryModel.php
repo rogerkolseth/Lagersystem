@@ -27,7 +27,7 @@ class InventoryModel {
     const GET_InvID = "SELECT inventoryID FROM " . InventoryModel::TABLE . " WHERE storageID = :givenStorgeID AND productID = :givenProductID";
     const INSERT_MAC = "INSERT INTO " . InventoryModel::MACADRESSE_TABLE . " (macAdresse, inventoryID) VALUES (:givenMacAdresse, :givenInventoryID)";
     const DELETE_MAC = "DELETE FROM " . InventoryModel::MACADRESSE_TABLE . " WHERE macAdresse = :givenMacAdresse AND inventoryID = :givenInventoryID";
-
+    const COUNT_MAC = "SELECT COUNT(*) FROM " . InventoryModel::MACADRESSE_TABLE . " WHERE macadresse = :givenMacAdresse AND inventoryID = :givenInventoryID";
     
     public function __construct(PDO $dbConn) {
         $this->dbConn = $dbConn;
@@ -50,6 +50,7 @@ class InventoryModel {
         $this->getInvID = $this->dbConn->prepare(InventoryModel::GET_InvID);
         $this->addMac = $this->dbConn->prepare(InventoryModel::INSERT_MAC);
         $this->removeMac = $this->dbConn->prepare(InventoryModel::DELETE_MAC);
+        $this->countMac = $this->dbConn->prepare(InventoryModel::COUNT_MAC);
     }
     public function getLowInventory() {
         $this->lowInvStmt->execute();
@@ -77,18 +78,15 @@ class InventoryModel {
     }
     
     public function transferFromStorage($givenStorageID, $givenProductID, $givenQuantity){
-        $this->fromStorage->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
-        return $this->fromStorage->fetchAll(PDO::FETCH_ASSOC); 
+        return $this->fromStorage->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity)); 
     }
     
     public function transferToStorage($givenStorageID, $givenProductID, $givenQuantity){
-        $this->toStorage->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
-        return $this->toStorage->fetchAll(PDO::FETCH_ASSOC); 
+        return $this->toStorage->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
     }
     
     public function addInventory($givenStorageID, $givenProductID, $givenQuantity){
-        $this->addStmt->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
-        return $this->addStmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->addStmt->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
     }
     
     public function getProdFromStorageIDAndProductID($givenStorageID, $givenProductID){
@@ -137,6 +135,11 @@ class InventoryModel {
     
     public function removeMacAdresse($inventoryID, $macAdresse){
         return $this->removeMac->execute(array("givenInventoryID" => $inventoryID, "givenMacAdresse" => $macAdresse));  
+    }
+    
+    public function doesMacExist($macAdresse, $inventoryID){
+        $this->countMac->execute(array("givenMacAdresse" => $macAdresse, "givenInventoryID" => $inventoryID)); 
+        return $this->countMac->fetchAll(PDO::FETCH_ASSOC); 
     }
 }   
     

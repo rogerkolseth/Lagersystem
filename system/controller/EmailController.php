@@ -46,7 +46,7 @@ class EmailController extends Controller {
             $mail->Host = 'pop.mimer.no';
             $mail->Port = 465;
 //Set the encryption system to use - ssl (deprecated) or tls
-            $mail->SMTPSecure = 'tls';
+            $mail->SMTPSecure = 'ssl';
 //Whether to use SMTP authentication
             $mail->SMTPAuth = true;
 //Username to use for SMTP authentication - use full email address for gmail
