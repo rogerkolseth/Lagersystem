@@ -78,7 +78,6 @@
 
             </table>
 
-            
             <input form="withdrawProducts" type="hidden" id="date" name="date">
             
             <button form="withdrawProducts" type="submit" class="btn btn-success" id="withdrawButton" hidden>Registrer Uttak</button>
@@ -158,16 +157,20 @@
         <td>{{productName}}</td>
         <input name="withdrawProductID[]" id="{{productID}}" form="withdrawProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input class="form-control negativeSupport" name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
+        <td><input id="{{productID}}" data-id="{{macAdresse}}" class="form-control negativeSupport" name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
          
         <td>
-            <button id="redigerknapp" class="remove" data-toggle="tooltip">
+            <button type="button" id="redigerknapp" data-id="product{{productID}}" class="remove" data-toggle="tooltip">
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
             </button>
-        </td> 
+        </td>
     </tr>
+    
+    <tbody class="selectQuantity" id="product{{productID}}">
+    </tbody>
+   
 {{/each}}
      
 </script>

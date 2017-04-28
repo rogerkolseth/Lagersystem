@@ -101,7 +101,7 @@
                             </tr>
                             <tr>
                                 <th>MacAdresse:</th>
-                                <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
+                                <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="1"></td>
                             </tr>
                             
                             <input form="createProduct" type="hidden" id="date" name="date">

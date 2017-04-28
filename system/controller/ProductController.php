@@ -43,7 +43,7 @@ class ProductController extends Controller {
         if (isset($_POST['givenMacAdresse'])) {
         $givenMacAdresse = $_REQUEST["givenMacAdresse"];
         } else {
-        $givenMacAdresse = "FALSE";    
+        $givenMacAdresse = "0";    
         }
         $sessionID = $_SESSION["userID"];
         $setSessionID = $GLOBALS["userModel"];

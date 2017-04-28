@@ -686,7 +686,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 <td><input class="form-control" name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
 
                 <td>
-                <button id="redigerknapp" class="remove" data-toggle="tooltip" >
+                <button type="button" id="redigerknapp" class="remove" data-toggle="tooltip" >
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
                 </button>
                 </td>    

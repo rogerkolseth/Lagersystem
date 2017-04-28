@@ -153,17 +153,19 @@
         <td>{{productName}}</td>
         <input name="transferProductID[]" id="{{productID}}" form="transferProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input class="form-control negativeSupport" name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
+        <td><input id="{{productID}}" data-id="{{macAdresse}}" class="form-control negativeSupport" name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
+            <input name="regMacadresse[]" form="transferProducts" type="hidden" value="{{macAdresse}}"/>
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
         
         <td>
-            <button id="redigerknapp" class="remove" data-toggle="tooltip">
+            <button type="button" id="redigerknapp" class="remove" data-id="product{{productID}}" data-toggle="tooltip">
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
             </button>
         </td>
-
     </tr>
+    <tbody class="selectQuantity" id="product{{productID}}">
+    </tbody>
 {{/each}}
      
 </script>

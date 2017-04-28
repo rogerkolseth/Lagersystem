@@ -119,6 +119,13 @@ class ReturnController extends Controller {
     private function stockDelivery() {
         $transferProductIDArray = $_REQUEST["deliveryProductID"];
         $transferQuantityArray = $_REQUEST["deliveryQuantity"];
+        $regMacAdresseArray = $_REQUEST["regMacadresse"];
+        if (isset($_POST['deliveryMacadresse'])) {
+            $macAdresseArray = $_REQUEST["deliveryMacadresse"];
+        }
+        //echo json_encode($transferProductIDArray);
+        //echo json_encode($transferQuantityArray);
+        //echo json_encode($regMacAdresseArray);
         $toStorageID = "1";
 
         $type = 5;
@@ -130,8 +137,9 @@ class ReturnController extends Controller {
 
         $result = $loggModel->loggCheck($type);
 
-
+        $index = 0;
         for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
+
             $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
 
             if ($count[0]["COUNT(*)"] < 1) {
@@ -144,6 +152,13 @@ class ReturnController extends Controller {
                     $loggModel->stockdelivery($type, $desc, $sessionID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                 }
                 $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+            }
+            if($regMacAdresseArray[$i] == "1"){
+                for ($x = 0; $x < $transferQuantityArray[$i]; $x++) {
+                    $inventoryID = $inventoryInfo->getInventoryID($transferProductIDArray[$i], $toStorageID);
+                    $add = $inventoryInfo->addMacAdresse($inventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+                    $index++;
+                }
             }
         }
 

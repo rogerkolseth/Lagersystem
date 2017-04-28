@@ -53,6 +53,10 @@ class transferController extends Controller {
         $transferProductIDArray = $_REQUEST["transferProductID"];
         $transferQuantityArray = $_REQUEST["transferQuantity"];
         $toStorageID = $_REQUEST["toStorageID"];
+        $regMacAdresseArray = $_REQUEST["regMacadresse"];
+        if (isset($_POST['deliveryMacadresse'])) {
+            $macAdresseArray = $_REQUEST["deliveryMacadresse"];
+        }
 
         //LOGG
         $type = 8;
@@ -60,14 +64,21 @@ class transferController extends Controller {
         $sessionID = $_SESSION["userID"];
 
 
-        if ($fromStorageID == 0 || $toStorageID == 0) {
-            return false;
-        } else {
-            $loggModel = $GLOBALS["loggModel"];
-            $result = $loggModel->loggCheck($type);
-            $inventoryInfo = $GLOBALS["inventoryModel"];
 
-            for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
+        $loggModel = $GLOBALS["loggModel"];
+        $result = $loggModel->loggCheck($type);
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        
+        if (in_array("1", $regMacAdresseArray)) {
+                $check = $inventoryInfo->doesMacExist();
+                if ($count[0]["COUNT(*)"] < 1) {
+                    return false;
+                }
+            } 
+                
+        $index = 0;
+        for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
+            
                 $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
 
                 if ($count[0]["COUNT(*)"] < 1) {
@@ -83,10 +94,22 @@ class transferController extends Controller {
                     $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                     $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                 }
+                if ($regMacAdresseArray[$i] == "1") {
+                    for ($x = 0; $x < $transferQuantityArray[$i]; $x++) {
+                        $toInventoryID = $inventoryInfo->getInventoryID($transferProductIDArray[$i], $toStorageID);
+                        $fromInventoryID = $inventoryInfo->getInventoryID($transferProductIDArray[$i], $fromStorageID);
+                        $remove = $inventoryInfo->removeMacAdresse($fromInventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+                        if ($remove) {
+                            $add = $inventoryInfo->addMacAdresse($toInventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+                        }
+                        $index++;
+                    }
+                }
             }
-        }
-        $data = json_encode("success");
-        echo $data;
+            $data = json_encode("success");
+            echo $data;
+        
+        
     }
 
 }

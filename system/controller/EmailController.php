@@ -43,20 +43,20 @@ class EmailController extends Controller {
 // 2 = client and server messages
             $mail->SMTPDebug = 0;
 //Set the hostname of the mail server
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = 587;
+            $mail->Host = 'pop.mimer.no';
+            $mail->Port = 465;
 //Set the encryption system to use - ssl (deprecated) or tls
             $mail->SMTPSecure = 'tls';
 //Whether to use SMTP authentication
             $mail->SMTPAuth = true;
 //Username to use for SMTP authentication - use full email address for gmail
-            $mail->Username = "roger.kolseth@gmail.com";
+            $mail->Username = "lager@mimer.no";
 //Password to use for SMTP authentication
-            $mail->Password = "******";
+            $mail->Password = "WR*3Z@s8";
 //Set who the message is to be sent from
-            $mail->setFrom('roger.kolseth@gmail.com', 'Lagersystem');
+            $mail->setFrom('lager@mimer.no', 'Lagersystem');
 //Set who the message is to be sent to
-            $mail->addAddress($email, 'John Doe');
+            $mail->addAddress($email);
 //Set the subject line
             $mail->Subject = "Varsling om lav varebeholdning";
 //Replace the plain text body with one created manually

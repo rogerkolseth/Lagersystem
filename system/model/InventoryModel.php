@@ -7,6 +7,7 @@ class InventoryModel {
 
     
     const TABLE = "inventory";
+    const MACADRESSE_TABLE = "macadresse";
     const FIND_QUERY = "SELECT COUNT(*) FROM " . InventoryModel::TABLE . " WHERE storageID = :givenStorageID AND productID = :givenProductID";
     const ADD_QUERY = "INSERT INTO " . InventoryModel::TABLE . " (storageID, productID, quantity) VALUES (:givenStorageID, :givenProductID, :givenQuantity)";
     const TO_STORAGE = "UPDATE " . InventoryModel::TABLE . " SET quantity = quantity + :givenQuantity WHERE productID = :givenProductID AND storageID = :givenStorageID";
@@ -14,7 +15,7 @@ class InventoryModel {
     const SELECT_QUERY_PRODUCTID = "SELECT storage.storageID, inventory.emailWarning, inventory.inventoryWarning, storage.storageName, inventory.productID, inventory.quantity FROM " . InventoryModel::TABLE . " INNER JOIN storage ON storage.storageID = inventory.storageID WHERE productID = :givenProductID";
     const SELECT_QUERY = "SELECT storageID, products.productName, products.productID, quantity FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID";
     const SELECT_QUERY_STORAGEID = "SELECT storageName, inventory.storageID, products.productName, products.productID, quantity FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID INNER JOIN storage ON storage.storageID = inventory.storageID WHERE inventory.storageID = :givenStorageID";
-    const SELECT_FROM_stoID_proID = "SELECT products.productID, productName, quantity FROM products INNER JOIN " . InventoryModel::TABLE . " on products.productID LIKE inventory.productID WHERE storageID = :givenStorageID AND products.productID = :givenProductID";
+    const SELECT_FROM_stoID_proID = "SELECT products.productID, productName, quantity, products.macAdresse FROM products INNER JOIN " . InventoryModel::TABLE . " on products.productID LIKE inventory.productID WHERE storageID = :givenStorageID AND products.productID = :givenProductID";
     const DELETE_QUERY = "DELETE FROM " . InventoryModel::TABLE . " WHERE storageID = :givenStorageID";
     const DELETE_SINGLE_QUERY = "DELETE FROM " . InventoryModel::TABLE . " WHERE productID = :givenProductID AND storageID = :givenStorageID";
     const UPDATE_QUERY = "UPDATE " . InventoryModel::TABLE . " SET quantity = :givenQuantity WHERE storageID = :givenStorageID AND productID = :givenProductID"; 
@@ -23,7 +24,11 @@ class InventoryModel {
     const EMAIL_WARNING = "SELECT inventory.inventoryID, storage.storageName, products.productName, inventory.quantity, inventory.emailWarning FROM " . InventoryModel::TABLE . " INNER JOIN storage ON storage.storageID = inventory.storageID INNER JOIN products ON products.productID = inventory.productID WHERE quantity < inventory.emailWarning AND inventory.emailStatus = 0";
     const EMAIL_STATUS = "UPDATE " . InventoryModel::TABLE . " SET emailStatus = 1 WHERE inventoryID = :givenInventoryID";
     const UPDATE_WARNING_LIMIT = "UPDATE " . InventoryModel::TABLE . " SET inventoryWarning = :inventoryWarning, emailWarning = :emailWarning WHERE storageID = :storageID AND productID = :productID";
+    const GET_InvID = "SELECT inventoryID FROM " . InventoryModel::TABLE . " WHERE storageID = :givenStorgeID AND productID = :givenProductID";
+    const INSERT_MAC = "INSERT INTO " . InventoryModel::MACADRESSE_TABLE . " (macAdresse, inventoryID) VALUES (:givenMacAdresse, :givenInventoryID)";
+    const DELETE_MAC = "DELETE FROM " . InventoryModel::MACADRESSE_TABLE . " WHERE macAdresse = :givenMacAdresse AND inventoryID = :givenInventoryID";
 
+    
     public function __construct(PDO $dbConn) {
         $this->dbConn = $dbConn;
         $this->selStmt = $this->dbConn->prepare(InventoryModel::SELECT_QUERY);
@@ -42,6 +47,9 @@ class InventoryModel {
         $this->emailAlert = $this->dbConn->prepare(InventoryModel::EMAIL_WARNING);
         $this->warningStatus = $this->dbConn->prepare(InventoryModel::EMAIL_STATUS);
         $this->warningLimit = $this->dbConn->prepare(InventoryModel::UPDATE_WARNING_LIMIT);
+        $this->getInvID = $this->dbConn->prepare(InventoryModel::GET_InvID);
+        $this->addMac = $this->dbConn->prepare(InventoryModel::INSERT_MAC);
+        $this->removeMac = $this->dbConn->prepare(InventoryModel::DELETE_MAC);
     }
     public function getLowInventory() {
         $this->lowInvStmt->execute();
@@ -116,6 +124,19 @@ class InventoryModel {
     
     public function updateWarningLimit($storageIDArray, $emailWarningArray, $inventoryWarningArray, $productID){
         return $this->warningLimit->execute(array("storageID" => $storageIDArray, "emailWarning" => $emailWarningArray, "inventoryWarning" => $inventoryWarningArray, "productID" => $productID));
+    }
+    
+    public function getInventoryID($ProductID, $StorageID){
+        $this->getInvID->execute(array("givenStorgeID" => $StorageID, "givenProductID" => $ProductID)); 
+        return $this->getInvID->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    
+    public function addMacAdresse($inventoryID, $macAdresse){
+        return $this->addMac->execute(array("givenInventoryID" => $inventoryID, "givenMacAdresse" => $macAdresse));  
+    }
+    
+    public function removeMacAdresse($inventoryID, $macAdresse){
+        return $this->removeMac->execute(array("givenInventoryID" => $inventoryID, "givenMacAdresse" => $macAdresse));  
     }
 }   
     
