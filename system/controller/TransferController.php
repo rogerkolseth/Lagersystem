@@ -74,8 +74,8 @@ class transferController extends Controller {
             for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
                 if ($regMacAdresseArray[$i] == "1") {
                     $fromInventoryID = $inventoryInfo->getInventoryID($transferProductIDArray[$i], $fromStorageID);
-                        $checkCount = $inventoryInfo->doesMacExist($macAdresseArray[$index], $fromInventoryID[0]["inventoryID"]);
-                    if ($checkCount[0]["COUNT(*)"] < 1) {
+                        $checkCount = $inventoryInfo->doesMacExist($macAdresseArray[$index], $fromInventoryID[0]["inventoryID"]);         
+                        if ($checkCount[0]["COUNT(*)"] < 1) {
                         $macAdresseMissing[] = $macAdresseArray[$index];
                     }
                     $index++;
