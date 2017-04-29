@@ -950,9 +950,15 @@ $(function POSTtransferProducts() {
 
 // remove product -- >
 
-$(function POSTdeleteStorageModal() {
+$(function removeSelectedProduct() {
 
     $('#deliveryQuantityContainer').delegate('.remove', 'click', function () {
+        var productID = $(this).attr('data-id');
+        var $element = $('#' + productID);
+        $element.fadeOut(150, function () {
+            $(this).remove();
+        });
+
         var $tr = $(this).closest('tr');
         $tr.fadeOut(150, function () {
             $(this).remove();
@@ -967,3 +973,38 @@ function successMessagedelivery() {
     });
     ;
 }
+
+// MAC ADRESSE UTTAK
+
+$(function getNumberOfMac() {
+    $('#deliveryQuantityContainer').delegate(".negativeSupport", "keyup", function (e) {
+        var quantity = $(this).val();
+        var productID = $(this).attr('id');
+        var macadresse = $(this).attr('data-id');
+        if (macadresse > 0) {
+            var $displayMacadresse = $('#product' + productID);
+            $displayMacadresse.empty();
+
+
+            for (i = 0; i < quantity; i++) {
+                $displayMacadresse.append('<tr><td><input id="mac'+i+productID+'" class="form-control macadresse" maxlength="17" pattern=".{17,17}" name="deliveryMacadresse[]" form="stockDelivery" required title="Må være 12 tegn" value="" placeholder="macadresse"/></td></tr>');
+            }
+        } else {return false;}
+    });
+});
+
+
+$(function getMacadrInput() {
+    var length=1;
+    $('#deliveryQuantityContainer').delegate(".macadresse", "keyup", function (e) {
+        var id = $(this).attr('id');
+        content=$(this).val();
+        content1 = content.replace(/\:/g, '');
+        length=content1.length;
+        if(((length % 2) === 0) && length < 12 && length > 1){
+            $('#'+id).val($('#'+id).val() + ':');
+            }
+    });
+});
+
+

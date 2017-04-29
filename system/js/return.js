@@ -141,17 +141,24 @@ document.getElementById("date").value = d.yyyymmdd();
 
 // remove product modal -->
 
-$(function POSTdeleteStorageModal() {
+$(function removeSelectedProduct() {
 
     $('#returnQuantityContainer').delegate('.remove', 'click', function () {
-        var $tr = $(this).closest('tr');
+        var productID = $(this).attr('data-id');
+        var $element = $('#' + productID);
+        $element.fadeOut(150, function () {
+            $(this).remove();
+        });
 
+        var $tr = $(this).closest('tr');
         $tr.fadeOut(150, function () {
             $(this).remove();
         });
+
+
+
     });
 });
-
 
 
 $( function getUsedStorageCat() {
@@ -195,5 +202,24 @@ $(function updateResultFromCategory() {
             }
         });
         return false;
+    });
+});
+
+// MAC ADRESSE RETURN
+
+$(function getNumberOfMac() {
+    $('#returnQuantityContainer').delegate(".negativeSupport", "keyup", function (e) {
+        var quantity = $(this).val();
+        var productID = $(this).attr('id');
+        var macadresse = $(this).attr('data-id');
+        if (macadresse > 0) {
+            var $displayMacadresse = $('#product' + productID);
+            $displayMacadresse.empty();
+
+
+            for (i = 0; i < quantity; i++) {
+                $displayMacadresse.append('<tr><td><input class="form-control" name="returnMacadresse[]" form="returnProducts" required="required" value="" placeholder="macadresse"/></td></tr>');
+            }
+        } else {return false;}
     });
 });

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 26. Apr, 2017 00:37 a.m.
+-- Generation Time: 28. Apr, 2017 13:30 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -39,19 +39,6 @@ INSERT INTO `categories` (`categoryID`, `categoryName`) VALUES
 (2, 'Internett'),
 (4, 'testing'),
 (3, 'TV');
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `checkout`
---
-
-CREATE TABLE `checkout` (
-  `checkOutID` int(11) UNSIGNED NOT NULL,
-  `userID` int(11) UNSIGNED NOT NULL,
-  `macAdresseID` int(11) UNSIGNED NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -152,9 +139,8 @@ INSERT INTO `loggtype` (`typeID`, `typeName`, `typeCheck`) VALUES
 
 CREATE TABLE `macadresse` (
   `macAdresseID` int(11) UNSIGNED NOT NULL,
-  `storageID` int(11) UNSIGNED NOT NULL,
-  `productID` int(11) UNSIGNED NOT NULL,
-  `macAdresse` varchar(50) DEFAULT NULL
+  `macAdresse` varchar(255) NOT NULL,
+  `inventoryID` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -191,7 +177,7 @@ CREATE TABLE `products` (
   `categoryID` int(11) UNSIGNED NOT NULL,
   `mediaID` int(11) UNSIGNED NOT NULL,
   `date` date NOT NULL,
-  `macAdresse` varchar(8) DEFAULT 'FALSE'
+  `macAdresse` smallint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -216,7 +202,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `editProduct_Logg` AFTER UPDATE ON `products` FOR EACH ROW BEGIN
 IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 1) > 0 ) THEN
-    INSERT INTO logg (logg.typeD, logg.desc, logg.UserID, logg.productID, logg.date) VALUES (1, 'Av produkt', @sessionUserID, NEW.productID, NOW());
+    INSERT INTO logg (logg.typeID, logg.desc, logg.UserID, logg.productID, logg.date) VALUES (1, 'Av produkt', @sessionUserID, NEW.productID, NOW());
 END IF;
 END
 $$
@@ -390,7 +376,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$TebuwWd3UJjHdr//NRwX9.eYGEikNDGg3DIqo1eOKGuX5AcSyFzHa', 'Administrator', 21, '2017-04-25', 'roger.kolseth@gmail.com');
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$j6T8Ds15Df/0Vr4cQqw5Q.efaGepSmUcAGK4GmyVKA8QtLVLFwweK', 'Administrator', 21, '2017-04-28', 'roger.kolseth@gmail.com'),
+(89, 'test', 'test', '$2y$10$emWfTKU5Shv.24xf.Fc09.1SOx19KXJwVI5eUTQsmBsQ26SZxqTom', 'User', 21, '2017-04-26', 'roger.kolseth@gmail.com');
 
 --
 -- Triggere `users`
@@ -435,14 +422,6 @@ ALTER TABLE `categories`
   ADD UNIQUE KEY `categoryName` (`categoryName`);
 
 --
--- Indexes for table `checkout`
---
-ALTER TABLE `checkout`
-  ADD PRIMARY KEY (`checkOutID`),
-  ADD KEY `macAdresseID` (`macAdresseID`),
-  ADD KEY `userID` (`userID`);
-
---
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
@@ -474,9 +453,7 @@ ALTER TABLE `loggtype`
 --
 ALTER TABLE `macadresse`
   ADD PRIMARY KEY (`macAdresseID`),
-  ADD UNIQUE KEY `macAdresse` (`macAdresse`),
-  ADD KEY `storageID` (`storageID`),
-  ADD KEY `productID` (`productID`);
+  ADD KEY `macadresse_ibfk_2` (`inventoryID`);
 
 --
 -- Indexes for table `media`
@@ -544,27 +521,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `checkout`
---
-ALTER TABLE `checkout`
-  MODIFY `checkOutID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `categoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=570;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
 ALTER TABLE `macadresse`
-  MODIFY `macAdresseID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `macAdresseID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT for table `media`
 --
@@ -574,42 +546,35 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 --
 -- Begrensninger for dumpede tabeller
 --
-
---
--- Begrensninger for tabell `checkout`
---
-ALTER TABLE `checkout`
-  ADD CONSTRAINT `checkout_ibfk_1` FOREIGN KEY (`macAdresseID`) REFERENCES `macadresse` (`macAdresseID`),
-  ADD CONSTRAINT `checkout_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
 
 --
 -- Begrensninger for tabell `inventory`
@@ -634,8 +599,7 @@ ALTER TABLE `logg`
 -- Begrensninger for tabell `macadresse`
 --
 ALTER TABLE `macadresse`
-  ADD CONSTRAINT `macadresse_ibfk_1` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`),
-  ADD CONSTRAINT `macadresse_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`);
+  ADD CONSTRAINT `macadresse_ibfk_2` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`);
 
 --
 -- Begrensninger for tabell `media`

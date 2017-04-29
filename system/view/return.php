@@ -157,19 +157,22 @@ $restriction = $GLOBALS["returnRestriction"];
 <script id="returnQuantityTemplate" type="text/x-handlebars-template">
 {{#each product}} 
     <tr class="selectQuantity">
-        <th>Produkt:   </th>
+        <th>Produkt:   </th> 
         <td>{{productName}}</td>
         <input name="returnProductID[]" id="{{productID}}" form="returnProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input name="returnQuantity[]" form="returnProducts" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
+        <td><input name="returnQuantity[]" class="form-control negativeSupport" id="{{productID}}" data-id="{{macAdresse}}" form="returnProducts" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
         
         <td>
-            <button id="redigerknapp" class="remove" data-toggle="tooltip">
+            <button type="button" id="redigerknapp" data-id="product{{productID}}" class="remove" data-toggle="tooltip">
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
             </button>
         </td>    
         
     </tr>
+    
+    <tbody class="selectQuantity" id="product{{productID}}">
+    </tbody>
 {{/each}}  
 </script>
 

@@ -50,7 +50,7 @@ $(function POSTfromStorageModal() {
                     $('#withdrawButton').hide();
                     $('#commentContainer').hide();
                     $('#chooseCategoryContainer').show();
-                    $('#chooseCategoryContainer').prop('selectedIndex',0);
+                    $('#chooseCategoryContainer').prop('selectedIndex', 0);
                     getUsedStorageCat(givenStorageID);
                 }
             });
@@ -239,14 +239,21 @@ document.getElementById("date").value = d.yyyymmdd();
 
 
 
-$(function removeSelectedProductModal() {
+$(function removeSelectedProduct() {
 
     $('#withdrawQuantityContainer').delegate('.remove', 'click', function () {
-        var $tr = $(this).closest('tr');
+        var productID = $(this).attr('data-id');
+        var $element = $('#' + productID);
+        $element.fadeOut(150, function () {
+            $(this).remove();
+        });
 
+        var $tr = $(this).closest('tr');
         $tr.fadeOut(150, function () {
             $(this).remove();
         });
+
+
 
     });
 });
@@ -255,14 +262,14 @@ $(function removeSelectedProductModal() {
 
 function getUsedStorageCat(givenStorageID) {
     $.ajax({
-            type: 'POST',
-            url: '?page=getCatWithProdAndSto',
-            data: {givenStorageID: givenStorageID},
-            dataType: 'json',
-            success: function (data) {
-                chooseCategory(data);
-            }
-        });
+        type: 'POST',
+        url: '?page=getCatWithProdAndSto',
+        data: {givenStorageID: givenStorageID},
+        dataType: 'json',
+        success: function (data) {
+            chooseCategory(data);
+        }
+    });
     return false;
 }
 
@@ -301,9 +308,9 @@ function showHide(data) {
         $('#singleStorageContainer').show();
         var storageID = data.transferRestriction[0].storageID;
         displaySingleStorage(storageID);
-        
+
         $('#singleStorageContainer').append('<p>' + data.transferRestriction[0].storageName + '</p>');
-        $('#singleStorageContainer').append('<input name="fromStorageID" data-id="'+storageID+'" value="'+storageID+'" type="hidden"/>');
+        $('#singleStorageContainer').append('<input name="fromStorageID" data-id="' + storageID + '" value="' + storageID + '" type="hidden"/>');
         $('#chooseCategoryContainer').show();
 
     } else {
@@ -313,6 +320,7 @@ function showHide(data) {
     }
 }
 
+
 function negativeSupportStatus(data) {
     if (data.negativeSupport[0].negativeSupport < 1) {
         $('.negativeSupport').attr({
@@ -321,6 +329,35 @@ function negativeSupportStatus(data) {
     }
 }
 
+// MAC ADRESSE UTTAK
+
+$(function getNumberOfMac() {
+    $('#withdrawQuantityContainer').delegate(".negativeSupport", "keyup", function (e) {
+        var quantity = $(this).val();
+        var productID = $(this).attr('id');
+        var macadresse = $(this).attr('data-id');
+        if (macadresse > 0) {
+            var $displayMacadresse = $('#product' + productID);
+            $displayMacadresse.empty();
 
 
+            for (i = 0; i < quantity; i++) {
+                $displayMacadresse.append('<tr><td><input id="mac'+i+'" class="form-control macadresse" maxlength="17" name="withdrawMacadresse[]" form="withdrawProducts" required="required" value="" placeholder="macadresse"/></td></tr>');
 
+            }
+        } else {return false;}
+    });
+});
+
+$(function getMacadrInput() {
+    var length=1;
+    $('#withdrawQuantityContainer').delegate(".macadresse", "keyup", function (e) {
+        var id = $(this).attr('id');
+        content=$(this).val();
+        content1 = content.replace(/\:/g, '');
+        length=content1.length;
+        if(((length % 2) === 0) && length < 12 && length > 1){
+            $('#'+id).val($('#'+id).val() + ':');
+            }
+    });
+});

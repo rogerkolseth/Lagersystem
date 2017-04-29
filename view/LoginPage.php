@@ -150,7 +150,7 @@ function errorMessage() {
 
 
 function successMessageNewPassword() {
-    $('<div class="alert alert-success"><strong>Opprettet!</strong> Nytt passord er sendt til oppgitt E-postadresse </div>').appendTo('#success')
+    $('<div class="alert alert-success"><strong>Sendt!</strong> Nytt passord er sendt til oppgitt E-postadresse </div>').appendTo('#success')
             .delay(4000).fadeOut(500, function () {
         $(this).remove();
     });
