@@ -9,7 +9,7 @@
                     <div class="col-md-12">
                         <h3>Navbar</h3>
                         <p>Dette er navbaren, her kan du navigere rundt på siden. 
-                            Den første siden du ser når du logger på er "Home". Der får du generell informasjon om lager status og salg.</p>
+                            Den første siden du ser når du logger på er "Home". Der får du generell informasjon om lagerstatus og salg.</p>
                     </div>
                     <div class="col-md-12">
                     <img src="image/Navbar.PNG">
