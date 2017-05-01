@@ -31,6 +31,8 @@ class SaleController extends Controller {
             $this->getStoProFromCat();
         } else if ($page == "showUserSale") {
             $this->chooseUserSales();
+        } else if ($page == "getSalesMacFromID") {
+            $this->getSalesMacFromID();
         }
     }
 
@@ -119,22 +121,24 @@ class SaleController extends Controller {
             $index = 0;    
             for ($i = 0; $i < sizeof($withdrawProductIDArray); $i++) {
 
-                $saleModel->newSale($fromStorageID, $customerNumber, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $userID, $comment, $date);
+                $salesID = $saleModel->newSale($fromStorageID, $customerNumber, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $userID, $comment, $date);
                 $inventoryInfo->transferFromStorage($fromStorageID, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i]);
                 
                 if ($regMacAdresseArray[$i] == "1") {
-                    $newIndex = $this->withdrawMacAdresse($withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $macAdresseArray, $fromStorageID, $index);
+                    $newIndex = $this->withdrawMacAdresse($withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $macAdresseArray, $fromStorageID, $index, $salesID);
                     $index = $newIndex;
                 }
             }
             echo json_encode("success");
     }
     
-    private function withdrawMacAdresse($withdrawProductID, $withdrawQuantity, $macAdresseArray, $fromStorageID, $index) {
+    private function withdrawMacAdresse($withdrawProductID, $withdrawQuantity, $macAdresseArray, $fromStorageID, $index, $salesID) {
         $inventoryInfo = $GLOBALS["inventoryModel"];
+        $saleModel = $GLOBALS["saleModel"];
         for ($x = 0; $x < $withdrawQuantity; $x++) {
             $fromInventoryID = $inventoryInfo->getInventoryID($withdrawProductID, $fromStorageID);
             $inventoryInfo->removeMacAdresse($fromInventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+            $saleModel->addSalesMac($salesID, $macAdresseArray[$index]);
             $index++;
         }
         return $index;
@@ -274,6 +278,11 @@ class SaleController extends Controller {
 
         $data = json_encode(array("mySales" => $getUserSale));
         echo $data;
+    }
+    
+    private function getSalesMacFromID(){
+        $givenSalesID = $_REQUEST["givenSalesID"];
+        echo json_encode($givenSalesID);
     }
 
 }

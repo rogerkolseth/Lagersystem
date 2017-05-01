@@ -36,6 +36,13 @@ function UpdateSalesTable() {
 
 
 function mySalesTemplate(data) {
+    Handlebars.registerHelper('if_eq', function(a, b, opts) {
+    if(a == b) 
+        return opts.fn(this);
+    else
+        return opts.inverse(this);
+    });
+
     var rawTemplate = document.getElementById("mySalesTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var mySalesnGeneratedHTML = compiledTemplate(data);
@@ -93,6 +100,24 @@ $(function editMySales() {
         });
         return false;
 
+    });
+});
+
+$(function showMacReturns() {
+    $('#mySalesContainer').delegate('.showMac', 'click', function () {
+        var givenSalesID = $(this).attr('data-id');
+
+        $.ajax({
+            type: 'POST',
+            url: '?page=getSalesMacFromID',
+            data: {givenSalesID: givenSalesID},
+            dataType: 'json',
+            success: function (data) {
+                $('#macSaleModal').modal('show');
+            }
+        });
+        return false;
+        
     });
 });
 

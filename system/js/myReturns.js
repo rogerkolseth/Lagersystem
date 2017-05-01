@@ -33,6 +33,12 @@ function UpdateReturnsTable() {
 
 
 function myReturnsTemplate(data) {
+    Handlebars.registerHelper('if_eq', function (a, b, opts) {
+        if (a == b)
+            return opts.fn(this);
+        else
+            return opts.inverse(this);
+    });
     var rawTemplate = document.getElementById("myReturnsTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var mySalesnGeneratedHTML = compiledTemplate(data);
@@ -88,6 +94,22 @@ $(function editMyReturns() {
     });
 });
 
+$(function showMacReturns() {
+    $('#myReturnsContainer').delegate('.showMac', 'click', function () {
+        var givenReturnsID = $(this).attr('data-id');
+        $.ajax({
+            type: 'POST',
+            url: '?page=getReturnsMacFromID',
+            data: {givenReturnsID: givenReturnsID},
+            dataType: 'json',
+            success: function (data) {
+                $('#macReturnsModal').modal('show');
+            }
+        });
+        return false;
+    });
+});
+
 
 // Display edit sale Template -->
 
@@ -128,7 +150,7 @@ function userReturnTemplate(data) {
     $usernameTemplate.empty();
     $usernameTemplate.append('<tr><td id="bordernone">Alle</td> <td id="bordernone"><input id="chooseUserSale" type="checkbox" name="username[]" value="0"></td></tr>');
     $.each(data.usernames, function (i, item) {
-        $usernameTemplate.append('<tr><td id="bordernone">' + item.username +'</td> <td id="bordernone"><input id="chooseUserReturn" type="checkbox" name="username[]" value="'+item.userID+'"></td></tr>');
+        $usernameTemplate.append('<tr><td id="bordernone">' + item.username + '</td> <td id="bordernone"><input id="chooseUserReturn" type="checkbox" name="username[]" value="' + item.userID + '"></td></tr>');
     });
     $usernameTemplate.append('<div class="pull-right"> <input class="form-control btn btn-primary" type="submit" form="showUserReturn"  value="Velg"> </div>');
 }

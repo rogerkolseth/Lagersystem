@@ -107,6 +107,32 @@
     </div>
 </div>
 
+
+     <div class="modal fade" id="macReturnsModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Macadresse oversikt</h4>
+                </div>
+
+                    <div class="modal-body">
+                        <table class="table" id="macReturnsContainer">
+
+                            mac
+                            <!-- Innhold fra Handlebars Template -->
+
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
 <!-- Help modal admin-->
 
 <div class="modal fade" id="showHelpModal" role="dialog">
@@ -261,7 +287,12 @@
     <td>{{date}}</td>  
     <td><button id="redigerknapp" data-id="{{returnID}}" class="editReturns" data-toggle="tooltip" title="Rediger retur">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>
-    </button> </td>    
+    </button> 
+     {{#if_eq this.macAdresse "1"}}
+     <button id="redigerknapp" data-id="{{returnID}}" class="showMac" data-toggle="tooltip" title="Rediger salg">
+        <span class="glyphicon glyphicon-th-list" style="color: #003366"></span>
+     </button>
+     {{/if_eq}}</td>      
 <tr>
 {{/each}}
 </script>  

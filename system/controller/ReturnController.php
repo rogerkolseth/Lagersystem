@@ -61,22 +61,34 @@ class ReturnController extends Controller {
             $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $returnProductIDArray[$i]);
 
             if ($count[0]["COUNT(*)"] < 1) {
-                $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
+                $returnID = $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
                 $inventoryInfo->addInventory($toStorageID, $returnProductIDArray[$i], $returnQuantityArray[$i]);
                 if ($regMacAdresseArray[$i] == "1") {
-                    $newIndex = $this->addMacAdresse($returnProductIDArray[$i], $returnQuantityArray[$i], $macAdresseArray, $toStorageID, $index);
+                    $newIndex = $this->addReturnMacAdresse($returnProductIDArray[$i], $returnQuantityArray[$i], $macAdresseArray, $toStorageID, $index, $returnID);
                     $index = $newIndex;
                 }
             } else {
-                $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
+                $returnID = $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
                 $inventoryInfo->transferToStorage($toStorageID, $returnProductIDArray[$i], $returnQuantityArray[$i]);
                 if ($regMacAdresseArray[$i] == "1") {
-                    $newIndex = $this->addMacAdresse($returnProductIDArray[$i], $returnQuantityArray[$i], $macAdresseArray, $toStorageID, $index);
+                    $newIndex = $this->addReturnMacAdresse($returnProductIDArray[$i], $returnQuantityArray[$i], $macAdresseArray, $toStorageID, $index, $returnID);
                     $index = $newIndex;
                 }
             }
         }
         echo json_encode("success");
+    }
+    
+    private function addReturnMacAdresse($transferProductID, $transferQuantity, $macAdresseArray, $toStorageID, $index, $returnID) {
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        $returnModel = $GLOBALS["returnModel"];
+                for ($x = 0; $x < $transferQuantity; $x++) {
+                    $inventoryID = $inventoryInfo->getInventoryID($transferProductID, $toStorageID);
+                    $added = $inventoryInfo->addMacAdresse($inventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+                    $returnModel->addReturnMac($returnID, $macAdresseArray[$index]);
+                    $index++;
+                }
+                return $index;
     }
 
     private function getAllMyReturns() {

@@ -378,3 +378,7 @@ $(function getMacadrInput() {
         }
     });
 });
+
+
+
+

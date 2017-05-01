@@ -5,10 +5,11 @@ class SaleModel {
     private $dbConn;
     
     const TABLE = "sales";
+    const MAC_TABEL = "sales_macadresse";
     
-    const SELECT_QUERY = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct  FROM " . SaleModel::TABLE . 
+    const SELECT_QUERY = "SELECT salesID, customerNr, products.productName, products.macAdresse, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct  FROM " . SaleModel::TABLE . 
             " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID";
-    const SELECT_MY_SALES = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct FROM " . SaleModel::TABLE . 
+    const SELECT_MY_SALES = "SELECT salesID, customerNr, products.productName, products.macAdresse, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct FROM " . SaleModel::TABLE . 
             " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID WHERE userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR userID = :givenUserID AND comment LIKE "
             . ":givenProductSearchWord OR userID = :givenUserID AND productName LIKE :givenProductSearchWord OR userID = :givenUserID AND storageName LIKE :givenProductSearchWord ORDER BY date DESC";
     const SELECT_STORAGE = "SELECT * FROM " . SaleModel::TABLE . " WHERE storageID = :givenStorageID";
@@ -21,7 +22,8 @@ class SaleModel {
     
     const SELECT_ALL_LAST_QUERY =  "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, users.username, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
             " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID INNER JOIN users ON sales.userID = users.userID ORDER BY date DESC LIMIT 10";
-    
+    const INSERT_SALE_MAC = "INSERT INTO " . SaleModel::MAC_TABEL . " (salesID, macAdresse) VALUES (:givenSalesID, :givenMacAdresse)";
+
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -33,6 +35,7 @@ class SaleModel {
       $this->selFromID = $this->dbConn->prepare(SaleModel::SELECT_FROM_ID);
       $this->selLast = $this->dbConn->prepare(SaleModel::SELECT_LAST_QUERY);
       $this->selAllLast = $this->dbConn->prepare(SaleModel::SELECT_ALL_LAST_QUERY);
+      $this->addSaleMac = $this->dbConn->prepare(SaleModel::INSERT_SALE_MAC);
     }
     
     public function getAllLastSaleInfo() {
@@ -58,7 +61,8 @@ class SaleModel {
     }
     
     public function newSale($givenStorageID, $givenCustomerNumber, $givenProductID, $givenQuantity, $givenUserID, $givenComment, $givenDate) {
-        return $this->addStmt->execute(array("givenStorageID" =>  $givenStorageID, "givenCustomerNumber" => $givenCustomerNumber, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity, "givenUserID" => $givenUserID, "givenComment" => $givenComment, "givenDate" => $givenDate));
+        $this->addStmt->execute(array("givenStorageID" =>  $givenStorageID, "givenCustomerNumber" => $givenCustomerNumber, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity, "givenUserID" => $givenUserID, "givenComment" => $givenComment, "givenDate" => $givenDate));
+        return  $this->dbConn->lastInsertId();
     }
     
     public function getMySales($givenUserID, $givenProductSearchWord){
@@ -78,7 +82,7 @@ class SaleModel {
         } else {$usernameQuery = "";}
         
         
-        $sql = "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct FROM " . SaleModel::TABLE . 
+        $sql = "SELECT salesID, customerNr, products.productName, products.macAdresse, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct FROM " . SaleModel::TABLE . 
             " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID WHERE $usernameQuery ORDER BY date DESC";
     
         $this->selUserSale = $this->dbConn->prepare($sql);
@@ -86,6 +90,10 @@ class SaleModel {
         $this->selUserSale->execute($usernameArray);
 
         return $this->selUserSale->fetchALL(PDO::FETCH_ASSOC);  
+    }
+    
+    public function addSalesMac($salesID, $macAdresse){
+        return $this->addSaleMac->execute(array("givenSalesID" =>  $salesID, "givenMacAdresse" => $macAdresse)); 
     }
     
 }
