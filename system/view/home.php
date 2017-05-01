@@ -185,7 +185,8 @@ if (isset($GLOBALS["errorMessage"])) {
         <!-- Hjelp modal -->
 
 
-        <div class="modal fade" id="showHelpModal" role="dialog">
+
+<div class="modal fade" id="showHelpModal" role="dialog">
 
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -231,6 +232,7 @@ if (isset($GLOBALS["errorMessage"])) {
                         <h3>Her kan du se en grafisk fremstilling av lagerbeholdningen.
                         </h3>
                     <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
+
 
                     </div>
                     <div class="modal-body">
@@ -278,9 +280,11 @@ if (isset($GLOBALS["errorMessage"])) {
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
         <!-- Hjelp modal bruker -->
 
 

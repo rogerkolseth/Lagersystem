@@ -178,7 +178,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Bruker informasjon</h4>
+                    <h4 class="modal-title">Slett bruker</h4>
                 </div>
                 <form action="?page=deleteUserEngine" method="post" id="deleteUser">
                 <div class="modal-body" id="deleteUserContainer">
@@ -475,11 +475,13 @@
 <!-- delete user template -->
 
 <script id="deleteUserTemplate" type="text/x-handlebars-template">
-    <p> Er du sikker på at du vil slette:  <P>
+    <h4> Du holder på å slette brukeren: </h4>
     {{#each user}}           
     {{name}}  
-    <input form="deleteUser" type="hidden" name="deleteUserID" value="{{userID}}"><br>
-    {{/each}}    
+    <input form="deleteUser" type="hidden" name="deleteUserID" value="{{userID}}">
+        
+    {{/each}}
+        <h4>Er du sikker på at du vil fortsette? </h4>   
 </script>    
 
 <!-- display all users template -->
