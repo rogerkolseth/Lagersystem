@@ -165,7 +165,7 @@ $( function getUsedStorageCat() {
     var givenStorageID = '2';
     $.ajax({
             type: 'POST',
-            url: '?page=getCatWithProdAndSto',
+            url: '?page=getCatWithProd',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {

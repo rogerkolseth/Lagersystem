@@ -106,3 +106,67 @@
         </form>
     </div>
 </div> 
+    
+    
+    <!-- Edit group Modal -->
+
+
+<div class="modal fade" id="editGroupModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Rediger gruppe</h4>
+            </div>
+            <form action="?page=editGroupEngine" method="post" id="editGroup"> 
+
+                <div class="modal-body">
+                    <table class="table" id="editGroupContainer">
+
+
+                        <!-- Innhold fra Handlebars Template -->
+
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <div id="errorEdit"></div>
+                    <input class="btn btn-success" form="editGroup" type="submit" value="Lagre">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
+<script type="text/javascript" src="js/groupAdm.js"></script>   
+
+<!-- display all category template -->
+<script id="displayGroupTemplate" type="text/x-handlebars-template">
+    {{#each group}} 
+    <tr>
+    <td class="text-center col-md-2">  
+
+    <!-- Knapp som aktiverer Model for kategoriredigering  --> 
+
+    <button id="redigerknapp" data-id="{{groupID}}" class="edit" data-toggle="tooltip" title="Rediger gruppe">
+    <span class="glyphicon glyphicon-edit" style="color: green"></span>
+    </button>
+
+    <!-- Knapp som aktiverer Model for sletting av kategori  --> 
+
+    <button id="redigerknapp" data-id="{{groupID}}" class="delete" data-toggle="tooltip" title="Slett gruppe">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button> 
+
+    </td>
+
+    <!-- Printer ut grupper inn i tabellen -->
+
+    <th>Gruppenavn: </th>
+    <td>{{groupName}}</td>
+
+    {{/each}}
+    </tr>        
+</script>

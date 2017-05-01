@@ -163,6 +163,8 @@ class Router {
                     return new LoggController();
                     
                 case "groupAdm":
+                case "addGroupEngine" :
+                case "getGroupSearchResult" :   
                     return new GroupController();
                     }
                 }
