@@ -195,7 +195,8 @@
                                         <tr>
                                             <th></th>
                                             <th>Produkt</th>
-                                            <th>Antall</th>  
+                                            <th>Antall</th> 
+                                            <th>Mac</th>
                                         </tr>
                                     </thead>  
                                     <tbody id="storageProductContainer">
@@ -605,7 +606,13 @@
     </td>
     <th>{{productName}}</th>
     <td class="quantityColor"> {{quantity}}</td>
-
+    <td >
+    {{#if_eq this.macAdresse "1"}}
+        <button id="redigerknapp" data-id="{{productID}}" class="showMac" data-toggle="tooltip" title="Rediger salg">
+        <span class="glyphicon glyphicon-th-list" style="color: #003366"></span>
+        </button>
+        {{/if_eq}}
+    </td>             
     </tr>
     {{/each}}    
 </script>

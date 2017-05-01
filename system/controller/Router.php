@@ -115,7 +115,8 @@ class Router {
                 case "deleteStorageEngine" :
                 case "deleteSingleProd" :   
                 case "emailWarning" :   
-                case "setWarningLimit" :    
+                case "setWarningLimit" :   
+                case "getInventoryMac" :    
                     return new StorageController();
                     
                 case "userAdm"    :

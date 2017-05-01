@@ -467,11 +467,10 @@ document.getElementById("date").value = d.yyyymmdd();
 
 // Get the selected product, and opens warningProduct modal-->
 
-$(function POSTeditProductModal() {
+$(function POSTeditWarningModal() {
 
     $('#displayProductContainer').delegate('.warning', 'click', function () {
         var givenProductID = $(this).attr('data-id');
-
         $.ajax({
             type: 'POST',
             url: '?page=getProductLocation',
