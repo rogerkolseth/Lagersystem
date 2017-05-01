@@ -4,12 +4,12 @@
 
 
     <div class="container"> 
-<div class="row">
-        <div class="pull-right">
-            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
-            </label>
+        <div class="row">
+            <div class="pull-right">
+                <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+                </label>
+            </div>
         </div>
-    </div>
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
 
 
@@ -83,17 +83,17 @@
 </div>
 
 
-    <!-- Delete category Modal-->
+<!-- Delete category Modal-->
 
-    <div class="modal fade" id="deleteCategoryModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Slett kategori</h4>
-                </div>
-                <form action="?page=deleteCategoryEngine" method="post" id="deleteCategory">
+<div class="modal fade" id="deleteCategoryModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Slett kategori</h4>
+            </div>
+            <form action="?page=deleteCategoryEngine" method="post" id="deleteCategory">
                 <div class="modal-body" id="deleteCategoryContainer">
 
                     <!-- Innhold fra Handlebars Template-->
@@ -104,12 +104,12 @@
                     <input form="deleteCategory" class="btn btn-success" type="submit" value="Slett">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
-            </div>
-            </form>
         </div>
-    </div>  
+        </form>
+    </div>
+</div>  
 
-    <!-- Edit category Modal -->
+<!-- Edit category Modal -->
 
 
 <div class="modal fade" id="editCategoryModal" role="dialog">
@@ -121,98 +121,98 @@
                 <h4 class="modal-title">Rediger Kategori</h4>
             </div>
             <form action="?page=editCategoryEngine" method="post" id="editCategory"> 
-            
-            <div class="modal-body">
-                <table class="table" id="editCategoryContainer">
-                    
 
-                <!-- Innhold fra Handlebars Template -->
-                    
-                </table>
-            </div>
-            
-            <div class="modal-footer">
-                <div id="errorEdit"></div>
-                <input class="btn btn-success" form="editCategory" type="submit" value="Lagre">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-            </div>
+                <div class="modal-body">
+                    <table class="table" id="editCategoryContainer">
+
+
+                        <!-- Innhold fra Handlebars Template -->
+
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <div id="errorEdit"></div>
+                    <input class="btn btn-success" form="editCategory" type="submit" value="Lagre">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
             </form>
         </div>
     </div>
 </div> 
-    
-    <!-- Help modal -->
-    
-    <div class="modal fade" id="showHelpModal" role="dialog">
-        <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content row">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Hjelp</h4>
+
+<!-- Help modal -->
+
+<div class="modal fade" id="showHelpModal" role="dialog">
+    <div class="modal-dialog" style="width: 70%">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content row">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Hjelp</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <h3>
+                        Bruk denne funksjonen for å søke etter kategorier.<br>
+
+                    </h3>
+
                 </div>
-                <div class="modal-body">
-                    <div class="col-md-12">
-                        <h3>
-                            Bruk denne funksjonen for å søke etter kategorier.<br>
-                            
-                        </h3>
-                        
-                    </div>
-                    <div class="col-md-12">
-                <img src="image/SøkKategori.PNG" alt="Søkefelt for katefori">
-                    </div>
-                
-                
-                    <div class="col-md-12">
-                        <h3>
-                            Her oppretter du nye kategorier.
-                        </h3>
-                        
-                    </div>
+                <div class="col-md-12">
+                    <img src="image/SøkKategori.PNG" alt="Søkefelt for katefori">
+                </div>
+
+
+                <div class="col-md-12">
+                    <h3>
+                        Her oppretter du nye kategorier.
+                    </h3>
+
+                </div>
                 <div class="col-md-12">
                     <img src="image/OpprettKategori.PNG" alt="Opprett kategori knapp">
-                    </div>
+                </div>
                 <div class="col-md-12">
                     <h3>
                         Skriv inn info om kategorien du vil opprette.
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/OpprettKategoriModal.PNG">
+                    <img src="image/OpprettKategoriModal.PNG">
                 </div>
-                    <div class="col-md-12">
+                <div class="col-md-12">
                     <h3>
                         Dette er en liste over alle kategoriene i systemet.
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/Kategorier.PNG">
+                    <img src="image/Kategorier.PNG">
                 </div>
-                    <div class="col-md-12">
-                        <h3>
+                <div class="col-md-12">
+                    <h3>
                         Dette er alternativer for kategorier:<br>
-                        </h3>
-                        <label>
+                    </h3>
+                    <label>
                         1. <img src="image/EndreBruker.PNG">Endre kategori<br>
-                        
+
                         2. <img src="image/SlettBruker.PNG">Slett kategori
-                        
+
                     </label>
                 </div>
-                
-                   
-                    
-                
+
+
+
+
                 <div class="modal-footer col-md-12">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
             </div>
-            </div>
         </div>
-        
+    </div>
+
 </div>
-    <!-- Display edit category-->                    
+<!-- Display edit category-->                    
 <script id="editCategoryTemplate" type="text/x-handlebars-template">
     {{#each categoryByID}}    
     <input form="editCategory" type="hidden" name="editCategoryID" value="{{categoryID}}">
@@ -246,7 +246,7 @@
     <button id="redigerknapp" data-id="{{categoryID}}" class="edit" data-toggle="tooltip" title="Rediger kategori">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>
     </button>
-    
+
 
     <!-- Knapp som aktiverer Model for sletting av kategori  --> 
 
@@ -266,7 +266,7 @@
     <td>{{categoryName}}</td>
 
 
-    
+
     {{/each}}
     </tr>        
 
