@@ -15,6 +15,7 @@ class ReturnModel {
     const SELECT_FROM_ID = "SELECT * FROM " . ReturnModel::TABLE . " WHERE returnID = :givenReturnID";
     const UPDATE_QUERY = "UPDATE " . ReturnModel::TABLE . " SET customerNr = :editCustomerNr, comment = :editComment  WHERE returnID = :editReturnID" ;
     const INSERT_RETURN_MAC = "INSERT INTO " . ReturnModel::MAC_TABLE . " (returnID, macAdresse) VALUES (:givenReturnID, :givenMacAdresse)";
+    const SELECT_RETURN_MAC = "SELECT * FROM " . ReturnModel::MAC_TABLE . " WHERE returnID = :givenReturnsID";
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -24,7 +25,8 @@ class ReturnModel {
       $this->editStmt = $this->dbConn->prepare(ReturnModel::UPDATE_QUERY);  
       $this->selStmt = $this->dbConn->prepare(ReturnModel::SELECT_QUERY);
       $this->addReturnMac = $this->dbConn->prepare(ReturnModel::INSERT_RETURN_MAC);
-    }
+      $this->getReturnMac = $this->dbConn->prepare(ReturnModel::SELECT_RETURN_MAC);
+      }
     
     public function getAllReturnInfo() {
         $this->selStmt->execute();
@@ -69,6 +71,11 @@ class ReturnModel {
     
     public function addReturnMac($returnID, $macAdresse){
         return $this->addReturnMac->execute(array("givenReturnID" =>  $returnID, "givenMacAdresse" => $macAdresse)); 
+    }
+    
+    public function getMacFromReturnID($givenReturnsID){
+        $this->getReturnMac->execute(array("givenReturnsID" =>  $givenReturnsID));
+        return $this->getReturnMac->fetchAll(PDO::FETCH_ASSOC); 
     }
 }
 

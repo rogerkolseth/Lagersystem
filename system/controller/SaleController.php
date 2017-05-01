@@ -282,7 +282,11 @@ class SaleController extends Controller {
     
     private function getSalesMacFromID(){
         $givenSalesID = $_REQUEST["givenSalesID"];
-        echo json_encode($givenSalesID);
+        $saleModel = $GLOBALS["saleModel"];
+        $macAdresse = $saleModel->getMacFromSaleID($givenSalesID);
+        
+        $data = json_encode(array("mySalesMac" => $macAdresse));
+        echo $data;
     }
 
 }
