@@ -13,3 +13,4 @@ require_once("MediaController.php");
 require_once("LoggController.php");
 require_once("CategoryController.php");
 require_once("EmailController.php");
+require_once("GroupController.php");

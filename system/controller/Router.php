@@ -161,6 +161,9 @@ class Router {
                 case "getAdvanceSearchData" :   
                 case "advanceLoggSearch" :    
                     return new LoggController();
+                    
+                case "groupAdm":
+                    return new GroupController();
                     }
                 }
             
