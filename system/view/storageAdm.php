@@ -142,7 +142,7 @@
     <!-- GET STORAGE INFORMATION MODAL-->
 
     <div class="modal fade" id="showStorageInformationModal" role="dialog">
-        <div class="modal-dialog" style="width: 70%">
+        <div class="modal-dialog" style="width: 90%">
             <!-- Innholdet til Modalen -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -161,26 +161,30 @@
                             </table>
                         </div>
                         <div class="col-md-6">
-
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h2 class="panel-title text-center"><b>Brukere med tilgang</b></h2>
-                                </div>
-                                <table class="table">
-
-                                    <tbody id="storageRestrictionContainer">
-
-
-
-
-                                        <!-- Her kommer handlebars Template -->
-
-
-
-                                    </tbody>    
-                                </table>
-                            </div>
-                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Her e den nye tingelingen vi trengte?</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>Gruppe 1</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>gruppe 2</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>Gruppe sex...huehue</td>
+                                
+                            </tr>
+                            
+                                
+                        </table>
+                        
+                    </div>
+                        
                         <div class="col-md-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -202,7 +206,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-9 col-md-7">
+                    
+                    <div class="col-md-2">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>Brukere med tilgang</b></h2>
+                                </div>
+                                <table class="table">
+
+                                    <tbody id="storageRestrictionContainer">
+
+
+
+
+                                        <!-- Her kommer handlebars Template -->
+
+
+
+                                    </tbody>    
+                                </table>
+                            </div>
+                        </div>
+                    <div class="col-sm-9 col-md-5">
 
                         <canvas id="myChart"></canvas>
 
