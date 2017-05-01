@@ -161,7 +161,7 @@ $(function POSTtransferProducts() {
 });
 
 function missingMacError(data) {
-    $('<div class="alert alert-danger"><strong>Error!</strong> Finner ikke mac: '+ data + '  </div>').appendTo('#error')
+    $('<div class="alert alert-danger"><strong>Error!</strong> Finner ikke mac: <strong>' + data + ' </strong> </div>').appendTo('#error')
             .delay(10000).fadeOut(500, function () {
         $(this).remove();
     });
@@ -169,7 +169,7 @@ function missingMacError(data) {
 }
 
 function successMessage() {
-    $('<div class="alert alert-success"><strong>Registrert!</strong> Ditt uttak er registrert </div>').appendTo('#success')
+    $('<div class="alert alert-success"><strong>Registrert!</strong> Overføringen er registrert </div>').appendTo('#success')
             .delay(2000).fadeOut(500, function () {
         $(this).remove();
     });
@@ -280,6 +280,7 @@ $(function getNumberOfMac() {
         }
     });
 });
+
 $(function getMacadrInput() {
     var length = 1;
     $('#transferQuantityContainer').delegate(".macadresse", "keyup", function (e) {

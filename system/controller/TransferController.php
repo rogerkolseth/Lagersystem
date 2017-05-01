@@ -72,21 +72,24 @@ class transferController extends Controller {
             $macAdresseMissing = array();
             $index = 0;
             for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
+
                 if ($regMacAdresseArray[$i] == "1") {
-                    $fromInventoryID = $inventoryInfo->getInventoryID($transferProductIDArray[$i], $fromStorageID);
-                        $checkCount = $inventoryInfo->doesMacExist($macAdresseArray[$index], $fromInventoryID[0]["inventoryID"]);         
+                    for ($x = 0; $x < $transferQuantityArray[$i]; $x++) {
+                        $fromInventoryID = $inventoryInfo->getInventoryID($transferProductIDArray[$i], $fromStorageID);
+                        $checkCount = $inventoryInfo->doesMacExist($macAdresseArray[$index], $fromInventoryID[0]["inventoryID"]);
                         if ($checkCount[0]["COUNT(*)"] < 1) {
-                        $macAdresseMissing[] = $macAdresseArray[$index];
+                            $macAdresseMissing[] = $macAdresseArray[$index];
+                        }
+                        $index++;
                     }
-                    $index++;
                 }
             }
             if (sizeof($macAdresseMissing) > 0) {
-                $missingMacString = implode(", ",$macAdresseMissing);
+                $missingMacString = implode(", ", $macAdresseMissing);
                 echo json_encode($missingMacString);
                 return false;
             }
-        } 
+        }
 
         $index = 0;
         for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
@@ -100,8 +103,8 @@ class transferController extends Controller {
                 $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                 $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                 if ($regMacAdresseArray[$i] == "1") {
-                    $this->transferMacAdresse($transferProductIDArray[$i], $transferQuantityArray[$i], $macAdresseArray[$index], $toStorageID, $fromStorageID);
-                    $index++;
+                    $newIndex = $this->transferMacAdresse($transferProductIDArray[$i], $transferQuantityArray[$i], $macAdresseArray, $toStorageID, $fromStorageID, $index);
+                    $index = $newIndex;
                 }
             } else {
                 if ($result[0]["typeCheck"] > 0) {
@@ -110,8 +113,8 @@ class transferController extends Controller {
                 $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                 $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                 if ($regMacAdresseArray[$i] == "1") {
-                    $this->transferMacAdresse($transferProductIDArray[$i], $transferQuantityArray[$i], $macAdresseArray[$index], $toStorageID, $fromStorageID);
-                    $index++;
+                    $newIndex = $this->transferMacAdresse($transferProductIDArray[$i], $transferQuantityArray[$i], $macAdresseArray, $toStorageID, $fromStorageID, $index);
+                    $index = $newIndex;
                 }
             }
         }
@@ -119,14 +122,16 @@ class transferController extends Controller {
         echo $data;
     }
 
-    private function transferMacAdresse($transferProductID, $transferQuantity, $macAdresse, $toStorageID, $fromStorageID) {
+    private function transferMacAdresse($transferProductID, $transferQuantity, $macAdresseArray, $toStorageID, $fromStorageID, $index) {
         $inventoryInfo = $GLOBALS["inventoryModel"];
         for ($x = 0; $x < $transferQuantity; $x++) {
             $toInventoryID = $inventoryInfo->getInventoryID($transferProductID, $toStorageID);
             $fromInventoryID = $inventoryInfo->getInventoryID($transferProductID, $fromStorageID);
-            $inventoryInfo->addMacAdresse($toInventoryID[0]["inventoryID"], $macAdresse);
-            $inventoryInfo->removeMacAdresse($fromInventoryID[0]["inventoryID"], $macAdresse);
+            $inventoryInfo->addMacAdresse($toInventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+            $inventoryInfo->removeMacAdresse($fromInventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+            $index++;
         }
+        return $index;
     }
 
 }

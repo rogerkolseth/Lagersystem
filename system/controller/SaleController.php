@@ -76,29 +76,68 @@ class SaleController extends Controller {
         $withdrawQuantityArray = $_REQUEST["withdrawQuantity"];
         $customerNumber = $_REQUEST["customerNumber"];
         $userID = $_SESSION["userID"];
+        $regMacAdresseArray = $_REQUEST["regMacadresse"];
         if (isset($_POST['withdrawComment'])) {
             $comment = $_REQUEST["withdrawComment"];
         } else {
             $comment = "";
+        } if (isset($_POST['withdrawMacadresse'])) {
+            $macAdresseArray = $_REQUEST["withdrawMacadresse"];
         }
         $date = $_REQUEST["date"];
 
-        if ($fromStorageID == 0) {
-            return false;
-        } else {
-
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        
+        if (in_array("1", $regMacAdresseArray)) {
+            $macAdresseMissing = array();
+            
+            $index = 0;
             for ($i = 0; $i < sizeof($withdrawProductIDArray); $i++) {
 
-                $saleModel = $GLOBALS["saleModel"];
-                $inventoryInfo = $GLOBALS["inventoryModel"];
+                if ($regMacAdresseArray[$i] == "1") {
+                    for ($x = 0; $x < $withdrawQuantityArray[$i]; $x++) {
+                        $fromInventoryID = $inventoryInfo->getInventoryID($withdrawProductIDArray[$i], $fromStorageID);
+                        $checkCount = $inventoryInfo->doesMacExist($macAdresseArray[$index], $fromInventoryID[0]["inventoryID"]);
+                        if ($checkCount[0]["COUNT(*)"] < 1) {
+                            $macAdresseMissing[] = $macAdresseArray[$index];
+                        }
+                        $index++;
+                    }
+                }
+            }
+            
+            if (sizeof($macAdresseMissing) > 0) {
+                $missingMacString = implode(", ", $macAdresseMissing);
+                echo json_encode($missingMacString);
+                return false;
+            }
+        }
+        
+        
+            $saleModel = $GLOBALS["saleModel"];
+            
+            $index = 0;    
+            for ($i = 0; $i < sizeof($withdrawProductIDArray); $i++) {
 
                 $saleModel->newSale($fromStorageID, $customerNumber, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $userID, $comment, $date);
                 $inventoryInfo->transferFromStorage($fromStorageID, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i]);
+                
+                if ($regMacAdresseArray[$i] == "1") {
+                    $newIndex = $this->withdrawMacAdresse($withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $macAdresseArray, $fromStorageID, $index);
+                    $index = $newIndex;
+                }
             }
-
             echo json_encode("success");
+    }
+    
+    private function withdrawMacAdresse($withdrawProductID, $withdrawQuantity, $macAdresseArray, $fromStorageID, $index) {
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        for ($x = 0; $x < $withdrawQuantity; $x++) {
+            $fromInventoryID = $inventoryInfo->getInventoryID($withdrawProductID, $fromStorageID);
+            $inventoryInfo->removeMacAdresse($fromInventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+            $index++;
         }
-
+        return $index;
     }
 
     private function getProdQuantity() {

@@ -133,7 +133,7 @@ function successMessageDelete() {
 
 
 function errorMessageDelete() {
-    $('<div class="alert alert-danger"><strong>Error!</strong> Kan ikke slette Hovedlageret. </div>').appendTo('#errorDelete')
+    $('<div class="alert alert-danger"><strong>Error!</strong> Kan ikke slette dette lageret. </div>').appendTo('#errorDelete')
             .delay(2000).fadeOut(500, function () {
         $(this).remove();
     });
