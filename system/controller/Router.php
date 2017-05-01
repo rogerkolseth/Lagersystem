@@ -164,7 +164,10 @@ class Router {
                     
                 case "groupAdm":
                 case "addGroupEngine" :
-                case "getGroupSearchResult" :   
+                case "getGroupSearchResult" :
+                case "getGroupByID" :
+                case "deleteGroupEngine" :   
+                case "editGroupEngine" :    
                     return new GroupController();
                     }
                 }

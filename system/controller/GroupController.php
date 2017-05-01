@@ -11,6 +11,12 @@ class GroupController extends Controller {
             $this->addGroup();
         } else if ($page == "getGroupSearchResult") {
             $this->getGroupSearchResult();
+        } else if ($page == "getGroupByID"){
+            $this->getGroupByID();
+        } else if ($page == "deleteGroupEngine"){
+            $this->deleteGroupEngine();
+        } else if ($page == "editGroupEngine"){
+            $this->editGroupEngine();
         }
     }
 
@@ -41,6 +47,38 @@ class GroupController extends Controller {
 
         $data = json_encode(array("group" => $searchResult));
         echo $data;
+    }
+    
+    private function getGroupByID(){
+        $givenGroupID = $_REQUEST["givenGroupID"];
+        $groupModel = $GLOBALS["groupModel"];
+        
+        $result = $groupModel->getGroupByID($givenGroupID);
+        
+        $data = json_encode(array("groupByID" => $result));
+        echo $data;
+    }
+    
+    private function deleteGroupEngine(){
+        $deleteGroupID = $_REQUEST["deleteGroupID"]; 
+        
+        $groupModel = $GLOBALS["groupModel"];
+        $delited = $groupModel->deleteGroup($deleteGroupID);
+        
+        if($delited){
+        echo json_encode("success");} 
+        else {return false;}
+    }
+    
+    private function editGroupEngine(){
+        $editGroupID = $_REQUEST["editGroupID"];
+        $editGroupName = $_REQUEST["editGroupName"];
+        
+        $groupModel = $GLOBALS["groupModel"];
+        $edited = $groupModel->editGroup($editGroupName, $editGroupID);
+        
+        if($edited){
+        echo json_encode("success");} else {return false;}
     }
 
 }
