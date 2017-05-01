@@ -21,6 +21,8 @@ class ReturnController extends Controller {
             $this->stockDelivery();
         } else if ($page == "showUserReturns") {
             $this->chooseUserReturns();
+        } else if ($page == "getReturnsMacFromID") {
+            $this->getReturnsMacFromID();
         }
     }
 
@@ -221,6 +223,16 @@ class ReturnController extends Controller {
         $getUserReturns = $returnModel->getSelectedUserReturns($usernameArray);
 
         $data = json_encode(array("myReturns" => $getUserReturns));
+        echo $data;
+    }
+    
+    private function getReturnsMacFromID(){
+        $givenReturnsID = $_REQUEST["givenReturnsID"];
+        
+        $returnModel = $GLOBALS["returnModel"];
+        $macAdresse = $returnModel->getMacFromReturnID($givenReturnsID);
+        
+        $data = json_encode(array("mySalesMac" => $macAdresse));
         echo $data;
     }
 

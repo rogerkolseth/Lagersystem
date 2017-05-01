@@ -23,6 +23,7 @@ class SaleModel {
     const SELECT_ALL_LAST_QUERY =  "SELECT salesID, customerNr, products.productName, DATE_FORMAT(sales.date,'%d %b %Y') AS date, users.username, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
             " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID INNER JOIN users ON sales.userID = users.userID ORDER BY date DESC LIMIT 10";
     const INSERT_SALE_MAC = "INSERT INTO " . SaleModel::MAC_TABEL . " (salesID, macAdresse) VALUES (:givenSalesID, :givenMacAdresse)";
+    const SELECT_SALE_MAC = "SELECT * FROM " . SaleModel::MAC_TABEL . " WHERE salesID = :givenSalesID";
 
     
     public function __construct(PDO $dbConn) { 
@@ -36,6 +37,7 @@ class SaleModel {
       $this->selLast = $this->dbConn->prepare(SaleModel::SELECT_LAST_QUERY);
       $this->selAllLast = $this->dbConn->prepare(SaleModel::SELECT_ALL_LAST_QUERY);
       $this->addSaleMac = $this->dbConn->prepare(SaleModel::INSERT_SALE_MAC);
+      $this->getSaleMac = $this->dbConn->prepare(SaleModel::SELECT_SALE_MAC);
     }
     
     public function getAllLastSaleInfo() {
@@ -96,4 +98,8 @@ class SaleModel {
         return $this->addSaleMac->execute(array("givenSalesID" =>  $salesID, "givenMacAdresse" => $macAdresse)); 
     }
     
+    public function getMacFromSaleID($givenSalesID){
+        $this->getSaleMac->execute(array("givenSalesID" =>  $givenSalesID));
+        return $this->getSaleMac->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

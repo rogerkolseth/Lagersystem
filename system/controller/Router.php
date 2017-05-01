@@ -53,6 +53,7 @@ class Router {
                 case "getLastSaleInfo" :
                 case "getAllLastSaleInfo" :
                 case "getStoProFromCat" :    
+                case "getSalesMacFromID" :  
                     return new SaleController();
                     
                 case "return" :
@@ -95,9 +96,7 @@ class Router {
                 case "getCatWithProd" :    
                 case "getCatWithMedia" : 
                 case "getCatWithProdAndSto" :    
-                    return new CategoryController();
-                    
-                        
+                    return new CategoryController();        
             }
             
             if ($_SESSION["userLevel"] == "Administrator") {   
@@ -150,6 +149,7 @@ class Router {
                     return new SaleController();
                     
                 case "showUserReturns" :
+                case "getReturnsMacFromID" :    
                     return new ReturnController();
                     
                 case "logg" :
