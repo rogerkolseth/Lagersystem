@@ -212,6 +212,7 @@
     </div>
 
 </div>
+
 <!-- Display edit category-->                    
 <script id="editCategoryTemplate" type="text/x-handlebars-template">
     {{#each categoryByID}}    
