@@ -19,7 +19,7 @@
         <div id="success"></div>
         <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
             <div class="col-md-12 row">
-                <h4 class="pull-left">Uttak fra:</h4>
+                <h4 class="pull-left"><b>Uttak fra:</b></h4>
             </div>
         <div class="col-sm-3 col-md-4 row">
             

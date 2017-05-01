@@ -22,7 +22,7 @@
     <form id="transferProducts" action="?page=transferProduct" method="post">    
         
         <div class="col-sm-3 col-md-4 row">
-            <label>Overfør Fra:</label>
+            <h4><b>Overfør Fra:</b></h4>
             <select name="fromStorageID" form="transferProducts" id="fromTransferRestrictionContainer" class="form-control">
                 
                 <!-- Her kommer Handlebars Template-->
@@ -30,7 +30,7 @@
             </select>
         </div>
         <div class="col-md-8">
-        <label>Overfør Til:</label>
+            <h4><b>Overfør Til:</b></h4>
         </div>
         <div class="col-sm-3 col-md-4">  
             

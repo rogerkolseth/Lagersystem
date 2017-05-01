@@ -27,7 +27,7 @@ $restriction = $GLOBALS["returnRestriction"];
         <div id="error"></div>
         <form id="returnProducts" action="?page=returnProduct" method="post">
             <div class="col-md-12 row">
-                <label class="pull-left">Retur til:</label>
+                <h4 class="pull-left"><b>Retur til:</b></h4>
             </div>
             <div class="col-sm-3 col-md-4 row">
                 <h4>Returlager</h4>

@@ -25,7 +25,7 @@
              
             <div class="pull-right row">
                 <button class="btn btn-success " onclick="getMediaInfo();" type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
-                <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-warning" type="button">Velg Lager</button>
+                <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-warning displayNone" type="button">Velg Lager</button>
             </div>
             </div>
             
