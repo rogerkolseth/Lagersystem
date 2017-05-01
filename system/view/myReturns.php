@@ -118,11 +118,15 @@
                 </div>
 
                     <div class="modal-body">
-                        <table class="table" id="macReturnsContainer">
-
-                            mac
-                            <!-- Innhold fra Handlebars Template -->
-
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Følgende Macadresse ble registrert inn:</th>
+                                </tr>
+                            </thead>
+                            <tbody id="macReturnsContainer">
+                                
+                            </tbody>
                         </table>
                     </div>
 

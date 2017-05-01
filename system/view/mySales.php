@@ -116,11 +116,15 @@
                 </div>
 
                     <div class="modal-body">
-                        <table class="table" id="macSaleContainer">
-
-                            mac
-                            <!-- Innhold fra Handlebars Template -->
-
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Følgende Macadresse ble registrert ut:</th>
+                                </tr>
+                            </thead>
+                            <tbody id="macSaleContainer">
+                                
+                            </tbody>
                         </table>
                     </div>
 
