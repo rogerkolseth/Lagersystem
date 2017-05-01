@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 28. Apr, 2017 13:30 p.m.
+-- Generation Time: 01. Mai, 2017 21:36 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -274,6 +274,18 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Tabellstruktur for tabell `returns_macadresse`
+--
+
+CREATE TABLE `returns_macadresse` (
+  `returnMacID` int(11) UNSIGNED NOT NULL,
+  `returnID` int(11) UNSIGNED NOT NULL,
+  `macAdresse` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellstruktur for tabell `sales`
 --
 
@@ -301,6 +313,18 @@ END IF;
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `sales_macadresse`
+--
+
+CREATE TABLE `sales_macadresse` (
+  `saleMacID` int(11) UNSIGNED NOT NULL,
+  `salesID` int(11) UNSIGNED NOT NULL,
+  `macAdresse` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -376,7 +400,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$j6T8Ds15Df/0Vr4cQqw5Q.efaGepSmUcAGK4GmyVKA8QtLVLFwweK', 'Administrator', 21, '2017-04-28', 'roger.kolseth@gmail.com'),
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$j6T8Ds15Df/0Vr4cQqw5Q.efaGepSmUcAGK4GmyVKA8QtLVLFwweK', 'Administrator', 21, '2017-05-01', 'roger.kolseth@gmail.com'),
 (89, 'test', 'test', '$2y$10$emWfTKU5Shv.24xf.Fc09.1SOx19KXJwVI5eUTQsmBsQ26SZxqTom', 'User', 21, '2017-04-26', 'roger.kolseth@gmail.com');
 
 --
@@ -490,6 +514,13 @@ ALTER TABLE `returns`
   ADD KEY `returns_ibfk_2` (`userID`);
 
 --
+-- Indexes for table `returns_macadresse`
+--
+ALTER TABLE `returns_macadresse`
+  ADD PRIMARY KEY (`returnMacID`),
+  ADD KEY `returns_macadresse_ibfk_2` (`returnID`);
+
+--
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
@@ -497,6 +528,13 @@ ALTER TABLE `sales`
   ADD KEY `productID` (`productID`),
   ADD KEY `sales_ibfk_3` (`storageID`),
   ADD KEY `sales_ibfk_2` (`userID`);
+
+--
+-- Indexes for table `sales_macadresse`
+--
+ALTER TABLE `sales_macadresse`
+  ADD PRIMARY KEY (`saleMacID`),
+  ADD KEY `sales_macadresse_ibfk_2` (`salesID`);
 
 --
 -- Indexes for table `storage`
@@ -526,17 +564,17 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=570;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=663;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
 ALTER TABLE `macadresse`
-  MODIFY `macAdresseID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `macAdresseID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `media`
 --
@@ -551,22 +589,32 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT for table `returns_macadresse`
+--
+ALTER TABLE `returns_macadresse`
+  MODIFY `returnMacID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+--
+-- AUTO_INCREMENT for table `sales_macadresse`
+--
+ALTER TABLE `sales_macadresse`
+  MODIFY `saleMacID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -630,12 +678,24 @@ ALTER TABLE `returns`
   ADD CONSTRAINT `returns_ibfk_3` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
 
 --
+-- Begrensninger for tabell `returns_macadresse`
+--
+ALTER TABLE `returns_macadresse`
+  ADD CONSTRAINT `returns_macadresse_ibfk_2` FOREIGN KEY (`returnID`) REFERENCES `returns` (`returnID`);
+
+--
 -- Begrensninger for tabell `sales`
 --
 ALTER TABLE `sales`
   ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
   ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
+
+--
+-- Begrensninger for tabell `sales_macadresse`
+--
+ALTER TABLE `sales_macadresse`
+  ADD CONSTRAINT `sales_macadresse_ibfk_2` FOREIGN KEY (`salesID`) REFERENCES `sales` (`salesID`);
 
 --
 -- Begrensninger for tabell `users`
