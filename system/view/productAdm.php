@@ -350,7 +350,7 @@
 <!-- Display location of product, and quantity-->
 <script id="warningProductTemplate" type="text/x-handlebars-template">
     
-    </td><input class="form-control" type="hidden" name="productID" value="{{productLocation.1.productID}}" >
+    </td><input class="form-control" type="hidden" name="productID" value="{{productLocation.0.productID}}" >
 {{#each productLocation}}
 <tr>
     <td id="bordernone">{{storageName}}</td><input class="form-control" type="hidden" name="storageID[]" value="{{storageID}}" >

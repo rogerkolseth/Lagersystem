@@ -612,7 +612,21 @@ function POSTstorageProduct(data) {
     });
 }
 
-
+$(function showInventoryMac() {
+    $('#storageProductContainer').delegate('.showMac', 'click', function () {
+        var givenProductID = $(this).attr('data-id');
+       
+        $.ajax({
+            type: 'POST',
+            url: '?page=getInventoryMac',
+            data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
+            dataType: 'json',
+            success: function () {
+            }
+        });
+        return false;
+    });
+});
 
 $(function deleteStorageInventory() {
     $('#storageProductContainer').delegate('.deleteStorageInventory', 'click', function () {
@@ -648,6 +662,12 @@ function successMessageInv() {
 // Display productInformation Template -->
 
 function storageProductTemplate(data) {
+    Handlebars.registerHelper('if_eq', function(a, b, opts) {
+    if(a == b) 
+        return opts.fn(this);
+    else
+        return opts.inverse(this);
+    });
     var rawTemplate = document.getElementById("storageProductTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var storageProductGeneratedHTML = compiledTemplate(data);

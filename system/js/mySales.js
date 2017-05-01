@@ -42,7 +42,6 @@ function mySalesTemplate(data) {
     else
         return opts.inverse(this);
     });
-
     var rawTemplate = document.getElementById("mySalesTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var mySalesnGeneratedHTML = compiledTemplate(data);

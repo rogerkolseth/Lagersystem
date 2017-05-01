@@ -29,6 +29,8 @@ class StorageController extends Controller {
             $this->stocktacking();
         } else if ($page == "setWarningLimit"){
             $this->setWarningLimit();
+        } else if ($page == "getInventoryMac"){
+            $this->getInventoryMac();
         }
     }
 
@@ -246,7 +248,16 @@ class StorageController extends Controller {
         }
         
         echo json_encode("success");
-        
+    }
+    
+    private function getInventoryMac(){
+        $givenProductID = $_REQUEST["givenProductID"];
+        $givenStorageID = $_REQUEST["givenStorageID"];
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        $inventoryID = $inventoryInfo->getInventoryID($givenProductID, $givenStorageID);
+        $inventoryMac = $inventoryInfo->getInventoryMac($inventoryID[0]["inventoryID"]);
+        echo json_encode(array("inventoryMac" => $inventoryMac));
+        //echo "prod: " .$givenProductID . " , Storage: " .$givenStorageID. " , invID: " .$inventoryID[0]["inventoryID"];
     }
 
 }
