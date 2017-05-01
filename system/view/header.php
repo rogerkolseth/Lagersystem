@@ -91,6 +91,9 @@
                                 <li>
                                     <a href="?page=categoryAdm"><span class="glyphicon glyphicon-picture"></span> Kategori Administrering</a>
                                 </li>
+                                <li>
+                                    <a href="?page=groupAdm"><span class="glyphicon glyphicon-picture"></span> Gruppe Administrering</a>
+                                </li>
                             </ul>
                   
                         </li>
