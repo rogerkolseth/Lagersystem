@@ -116,11 +116,9 @@
                 </div>
 
                     <div class="modal-body">
+                        <p>Følgende Macadresse ble registrert ut: </p>
                         <table class="table" id="macSaleContainer">
-
-                            mac
-                            <!-- Innhold fra Handlebars Template -->
-
+                            <tr>test</tr>
                         </table>
                     </div>
 

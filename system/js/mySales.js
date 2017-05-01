@@ -114,6 +114,13 @@ $(function showMacReturns() {
             dataType: 'json',
             success: function (data) {
                 $('#macSaleModal').modal('show');
+                var $macSaleTemplate = $('#macSaleContainer');
+                $macSaleTemplate.empty();
+                
+                $.each(data.mySalesMac, function (i, item) {
+                alert(item.macAdresse);
+                $macSaleTemplate.append('<tr>'+ item.macAdresse+'</tr>');
+                });
             }
         });
         return false;
