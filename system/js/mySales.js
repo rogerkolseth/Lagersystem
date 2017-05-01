@@ -118,8 +118,7 @@ $(function showMacReturns() {
                 $macSaleTemplate.empty();
                 
                 $.each(data.mySalesMac, function (i, item) {
-                alert(item.macAdresse);
-                $macSaleTemplate.append('<tr>'+ item.macAdresse+'</tr>');
+                $macSaleTemplate.append('<tr><td>'+ item.macAdresse+'</td></tr>');
                 });
             }
         });

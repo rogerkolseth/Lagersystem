@@ -232,7 +232,7 @@ class ReturnController extends Controller {
         $returnModel = $GLOBALS["returnModel"];
         $macAdresse = $returnModel->getMacFromReturnID($givenReturnsID);
         
-        $data = json_encode(array("mySalesMac" => $macAdresse));
+        $data = json_encode(array("myReturnsMac" => $macAdresse));
         echo $data;
     }
 

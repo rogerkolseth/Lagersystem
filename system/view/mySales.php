@@ -116,9 +116,15 @@
                 </div>
 
                     <div class="modal-body">
-                        <p>Følgende Macadresse ble registrert ut: </p>
-                        <table class="table" id="macSaleContainer">
-                            <tr>test</tr>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Følgende Macadresse ble registrert ut:</th>
+                                </tr>
+                            </thead>
+                            <tbody id="macSaleContainer">
+                                
+                            </tbody>
                         </table>
                     </div>
 

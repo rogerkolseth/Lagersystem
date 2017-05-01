@@ -104,6 +104,12 @@ $(function showMacReturns() {
             dataType: 'json',
             success: function (data) {
                 $('#macReturnsModal').modal('show');
+                var $macReturnTemplate = $('#macReturnsContainer');
+                $macReturnTemplate.empty();
+                
+                $.each(data.myReturnsMac, function (i, item) {
+                $macReturnTemplate.append('<tr><td>'+ item.macAdresse+'</td></tr>');
+                });
             }
         });
         return false;
