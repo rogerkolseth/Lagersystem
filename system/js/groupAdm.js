@@ -270,3 +270,63 @@ function groupInformationTemplate(data) {
     var groupContainer = document.getElementById("groupInformationContainer");
     groupContainer.innerHTML = groupInformationGeneratedHTML;
 }
+
+
+// RESTRICTION
+
+// Get storage information-->
+
+function getStorageInfo() {
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllStorageInfo',
+            dataType: 'json',
+            success: function (data) {
+                storageRestrictionTemplate(data);
+            }
+        });
+    });
+}
+
+
+// Genereate userRestriciton template and display it in contaioner-->
+
+function storageRestrictionTemplate(data) {
+    var rawTemplate = document.getElementById("storageRestrictionTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var groupRestrictionGeneratedHTML = compiledTemplate(data);
+
+    var groupContainer = document.getElementById("storageRestrictionContainer");
+    groupContainer.innerHTML = groupRestrictionGeneratedHTML;
+}
+
+
+// Post new restriction-->
+
+$(function POSTrestrictionInfo() {
+    $('#editGroupRestriction').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function () {
+                $('#groupRestrictionModal').modal('hide');
+                successMessageAddRes();
+                UpdateGroupTable();
+            }
+        });
+        return false;
+    });
+});
+
+function successMessageAddRes() {
+    $('<div class="alert alert-success"><strong>Lagret!</strong> Gruppetilgangen(e) er lagret. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function () {
+        $(this).remove();
+    });
+    ;
+}

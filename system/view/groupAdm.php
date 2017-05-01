@@ -151,13 +151,13 @@
                     <h4 class="modal-title">Gruppe informasjon</h4>
                 </div>
                 <div class="modal-body">        
-                        <table class="table">
-                            <tbody id="groupInformationContainer">
+                    <table class="table">
+                        <tbody id="groupInformationContainer">
 
-                                <!-- Her kommer handlebars Template -->
+                            <!-- Her kommer handlebars Template -->
 
-                            </tbody>
-                        </table>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -167,45 +167,83 @@
     </div> 
 
 
-    <script type="text/javascript" src="js/groupAdm.js"></script>   
+    <div class="modal fade" id="groupRestrictionModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <form action="?page=addGroupRestriction" id="editGroupRestriction" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Velg lager tilgang(er)</h4>
+                    </div>
+                    <div class="modal-body">                 
+                        <table class="table" id="storageRestrictionContainer">
 
-    <!-- Display productInformation-->
-    <script id="groupInformationTemplate" type="text/x-handlebars-template">
+                            <!-- Handlebars information -->
+
+
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button form="editGroupRestriction" class="btn btn-success" type="submit">Velg lagertilgang</button> 
+
+                    </div>
+                </form>  
+            </div>
+        </div>
+    </div>      
+
+</div>
+<script type="text/javascript" src="js/groupAdm.js"></script>   
+
+<script id="storageRestrictionTemplate" type="text/x-handlebars-template">
+    {{#each storageInfo}}
+    <tr> 
+    <td id="bordernone">{{storageName}}</td> 
+
+    <td id="bordernone"><input form="editGroupRestriction" class="selectStorageRestriction" id="{{storageID}}" value="{{storageID}}"  name="storageRestrictions[]" type="checkbox"></td>
+    </tr>
+    {{/each}}
+</script>  
+
+<!-- Display productInformation-->
+<script id="groupInformationTemplate" type="text/x-handlebars-template">
     {{#each groupByID}}
     <tr>  
-        <th id="bordernone" class="col-md-6">GruppeID: </th>
-        <td id="bordernone">{{groupID}}</td> 
-        </tr>
-        <tr>
-        <th class="col-md-6">Gruppenavn: </th>
-        <td>{{groupName}}</td>
+    <th id="bordernone" class="col-md-6">GruppeID: </th>
+    <td id="bordernone">{{groupID}}</td> 
+    </tr>
+    <tr>
+    <th class="col-md-6">Gruppenavn: </th>
+    <td>{{groupName}}</td>
     </tr>
     {{/each}}                                                  
-    </script>
+</script>
 
-    <!-- Display edit category-->                    
-    <script id="editGroupTemplate" type="text/x-handlebars-template">
-        {{#each groupByID}}    
-        <input form="editGroup" type="hidden" name="editGroupID" value="{{groupID}}">
-        <tr>
-        <th id="bordernone">Gruppenavn: </th> 
-        <td id="bordernone"><input class="form-control" form="editGroup" required="required" type="text" name="editGroupName" value="{{groupName}}" autocomplete="off"></td> 
-        </tr>
-        {{/each}}            
-    </script>  
+<!-- Display edit category-->                    
+<script id="editGroupTemplate" type="text/x-handlebars-template">
+    {{#each groupByID}}    
+    <input form="editGroup" type="hidden" name="editGroupID" value="{{groupID}}">
+    <tr>
+    <th id="bordernone">Gruppenavn: </th> 
+    <td id="bordernone"><input class="form-control" form="editGroup" required="required" type="text" name="editGroupName" value="{{groupName}}" autocomplete="off"></td> 
+    </tr>
+    {{/each}}            
+</script>  
 
-    <!-- delete category template -->
+<!-- delete category template -->
 
-    <script id="deleteGroupTemplate" type="text/x-handlebars-template">
-        <p> Er du sikker på at du vil slette:  <P>
-        {{#each groupByID}}           
-        {{groupName}}  
-        <input form="deleteGroup" type="hidden" name="deleteGroupID" value="{{groupID}}"><br>
-        {{/each}}    
-    </script>  
+<script id="deleteGroupTemplate" type="text/x-handlebars-template">
+    <p> Er du sikker på at du vil slette:  <P>
+    {{#each groupByID}}           
+    {{groupName}}  
+    <input form="deleteGroup" type="hidden" name="deleteGroupID" value="{{groupID}}"><br>
+    {{/each}}    
+</script>  
 
-    <!-- display all category template -->
-    <script id="displayGroupTemplate" type="text/x-handlebars-template">
+<!-- display all category template -->
+<script id="displayGroupTemplate" type="text/x-handlebars-template">
     {{#each group}} 
     <tr>
     <td class="text-center col-md-2">  
@@ -219,13 +257,15 @@
     <button id="redigerknapp" data-id="{{groupID}}" class="information" data-toggle="tooltip" title="Vis informasjon">
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
     </button>
-    
+
     <!-- Knapp som aktiverer Model for sletting av kategori  --> 
 
     <button id="redigerknapp" data-id="{{groupID}}" class="delete" data-toggle="tooltip" title="Slett gruppe">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button> 
 
+    <label id="{{groupID}}" onclick="getStorageInfo()" data-toggle="modal"data-toggle="tooltip" title="Gi lagertilgang" data-target="#groupRestrictionModal"><img id="keyIcon" src="image/key-icon2.png"></img>
+    </label> 
     </td>
 
     <!-- Printer ut grupper inn i tabellen -->
@@ -235,4 +275,4 @@
 
     {{/each}}
     </tr>        
-    </script>
+</script>
