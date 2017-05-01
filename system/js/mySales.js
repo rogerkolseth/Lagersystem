@@ -116,7 +116,6 @@ $(function showMacReturns() {
                 $('#macSaleModal').modal('show');
                 var $macSaleTemplate = $('#macSaleContainer');
                 $macSaleTemplate.empty();
-                
                 $.each(data.mySalesMac, function (i, item) {
                 $macSaleTemplate.append('<tr><td>'+ item.macAdresse+'</td></tr>');
                 });
