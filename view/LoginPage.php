@@ -34,12 +34,17 @@ $error = $GLOBALS["errorMessage"];
                             <input type="text" class="form-control" placeholder="Brukernavn" name="givenUsername" required autofocus>
                             <input type="password" id="psw" autocomplete="off" class="form-control" placeholder="Passord" name="givenPassword" required>
                             <input form="login" type="hidden" id="date" name="givenLastLogin">
-
+                            <div class="col-md-12 row">
+                                <div class="col-md-6 pull-left">
                             <label class="checkbox">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="show-hide" value="">
                                 Vis passord
                             </label>
+                                </div>
+                                <div class="col-md-6 pull-right" style="margin-top: 4%;">
                             <a href="#" data-toggle="modal" data-target="#forgottenPasswordModal">Glemt passord?</a>
+                            </div>
+                            </div>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 Logg inn</button>
                         </form>
@@ -51,8 +56,11 @@ $error = $GLOBALS["errorMessage"];
                         ?>
                             </div>
                         <div id="success"></div>
+                        
                     </div>
+                    
                 </div>
+                
             </div>
             
         </div>
@@ -63,12 +71,12 @@ $error = $GLOBALS["errorMessage"];
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Opprett bruker</h4>
+                    <h4 class="modal-title">Glemt passord</h4>
                 </div>
                 <div class="modal-body">
                     <div>
                         <table class="table">
-                            <p> Dersom du har glømt passordet ditt kan du få tilsendt nytt ved å fylle ut 
+                            <p>Dersom du har glemt passordet ditt kan du få tilsendt nytt ved å fylle ut 
                                 informasjonen nedenfor. </p>
                             <form action="?page=newPassword" method="post" id="newPassword">
 

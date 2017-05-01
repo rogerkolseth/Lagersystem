@@ -160,7 +160,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                <img src="image/SøkKategori.PNG">
+                <img src="image/SøkKategori.PNG" alt="Søkefelt for katefori">
                     </div>
                 
                 
@@ -171,7 +171,7 @@
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/OpprettKategori.PNG">
+                    <img src="image/OpprettKategori.PNG" alt="Opprett kategori knapp">
                     </div>
                 <div class="col-md-12">
                     <h3>

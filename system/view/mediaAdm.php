@@ -11,6 +11,13 @@ $errormessage = $GLOBALS["errorMessage"];
 
     
     <div class="container"> 
+        
+        <div class="row">
+        <div class="pull-right">
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            </label>
+        </div>
+    </div>
 
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
             
@@ -197,7 +204,76 @@ $errormessage = $GLOBALS["errorMessage"];
             </form>    
         </div>
     </div>
-</div>      
+</div>
+    
+    <div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body row">
+                    
+                        <div class="col-md-12">
+                        <h3>
+                            Søk etter bilder her. <br>
+                            Du kan også velge kategori for å lettere finne bilder.
+                        </h3>
+                        
+                    </div>
+                    <div class="col-md-12">
+                    <img src="image/SøkMedia.PNG">
+                    </div>
+                
+                
+                    <div class="col-md-12">
+                        <h3>
+                            Her legger du til bilder.
+                        </h3>
+                        
+                    </div>
+                <div class="col-md-12">
+                    <img src="image/OpprettBilde.PNG">
+                    </div>
+                <div class="col-md-12">
+                    <h3>
+                        Her skal du velge hvilke bilde du vil laste opp og hvilke kategori det skal ligge under.
+                    </h3>
+                </div>
+                <div class="col-md-12">
+                <img src="image/OpprettBildeModal.PNG">
+                </div>
+                    <div class="col-md-12">
+                    <h3>
+                        Her ser du resultatene fra søket ditt.
+                    </h3>
+                </div>
+                <div class="col-md-12">
+                <img src="image/.PNG">
+                </div>
+                    <div class="col-md-12">
+                        <h3>
+                        Dette er alternativer for media:<br>
+                        </h3>
+                        <label>
+                        1. <img src="image/EndreBruker.PNG">Endre media<br>
+                        
+                        2. <img src="image/SlettBruker.PNG">Slett media<br>
+                        
+                    </label>
+                </div>
+                    
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+</div>
     
     
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
