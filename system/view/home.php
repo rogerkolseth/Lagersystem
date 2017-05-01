@@ -16,9 +16,9 @@ if (isset($GLOBALS["errorMessage"])) {
         }
         ?>
     </div>
-    
-    
-    
+
+
+
 
     <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
         <div id="snarveidiv">
@@ -64,24 +64,24 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
     <div class="container">
-       <?php if ($_SESSION["userLevel"] == "Administrator") { ?> 
-        <div class="row">
-        <div class="pull-right">
-            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
-            </label>
-        </div>
-    </div>
-        
+        <?php if ($_SESSION["userLevel"] == "Administrator") { ?> 
+            <div class="row">
+                <div class="pull-right">
+                    <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+                    </label>
+                </div>
+            </div>
+
         <?php } ?>
-        
+
         <?php if ($_SESSION["userLevel"] == "User") { ?> 
-        <div class="row">
-        <div class="pull-right">
-            <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
-            </label>
-        </div>
-    </div>
-        
+            <div class="row">
+                <div class="pull-right">
+                    <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+                    </label>
+                </div>
+            </div>
+
         <?php } ?>
         <div class="col-md-12">
             <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
@@ -179,108 +179,108 @@ if (isset($GLOBALS["errorMessage"])) {
 
             </div>
         <?php } ?>
-        
-        
-        
+
+
+
         <!-- Hjelp modal -->
-        
-        
+
+
         <div class="modal fade" id="showHelpModal" role="dialog">
-        <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content row">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Hjelp</h4>
+            <div class="modal-dialog" style="width: 70%">
+                <!-- Innholdet til Modalen -->
+                <div class="modal-content row">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Hjelp</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12 text-center">
+                            <label>
+                                Her er forskjellige snarveier til ofte brukte funksjoner.
+                            </label>
+                            <img style="width: 90%" src="image/Snarvei.PNG">
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                            <label>
+                                Her kan du se hvilke produkter det er lite av og hvilke lager de ligger på.
+                            </label>
+                            <img id="helpimage" src="image/SnartTomLagerbeholdning.PNG">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label>
+                                Her kan du se dine siste salg.
+                            </label>
+                            <img id="helpimage" src="image/DineSisteSalgAdmin.PNG">
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <label>
+                                Her kan du se det siste som har blitt logget.
+                            </label>
+                            <img id="" src="image/SisteHendelser.PNG">
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                            <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
+                                Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
+                            </label>
+                            <img id="helpimage" src="image/Lagerbeholdning.PNG">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
+                            </label>
+                            <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
+                        </div>
+
+
+                        <div class="modal-footer col-md-12">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="col-md-12 text-center">
-                        <label>
-                            Her er forskjellige snarveier til ofte brukte funksjoner.
-                        </label>
-                        <img style="width: 90%" src="image/Snarvei.PNG">
-                    </div>
-                    
-                    <div class="col-md-6 text-center">
-                        <label>
-                            Her kan du se hvilke produkter det er lite av og hvilke lager de ligger på.
-                        </label>
-                        <img id="helpimage" src="image/SnartTomLagerbeholdning.PNG">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <label>
-                            Her kan du se dine siste salg.
-                        </label>
-                        <img id="helpimage" src="image/DineSisteSalgAdmin.PNG">
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <label>
-                            Her kan du se det siste som har blitt logget.
-                        </label>
-                        <img id="" src="image/SisteHendelser.PNG">
-                    </div>
-                    
-                    <div class="col-md-6 text-center">
-                        <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
-                            Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
-                        </label>
-                    <img id="helpimage" src="image/Lagerbeholdning.PNG">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
-                        </label>
-                    <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
-                    </div>
-                
-                
-                <div class="modal-footer col-md-12">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                    </div>
-                
             </div>
         </div>
-    </div>
-    </div>
         <!-- Hjelp modal bruker -->
-        
-        
+
+
         <div class="modal fade" id="showHelpModalUser" role="dialog">
             <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content row">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Hjelp</h4>
+                <!-- Innholdet til Modalen -->
+                <div class="modal-content row">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Hjelp</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-6 text-center">
+                            <label>Her kan du se de siste salgene gjort av alle brukerene i systemet.</label>
+                            <img id="helpimage" src="image/SisteSalg.PNG">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label>Her kan du se de siste salgene gjort av deg.</label>
+                            <img id="helpimage" src="image/DineSisteSalg.PNG">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
+                                Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
+                            </label>
+                            <img id="helpimage" src="image/Lagerbeholdning.PNG">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
+                            </label>
+                            <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer col-md-12">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="col-md-6 text-center">
-                    <label>Her kan du se de siste salgene gjort av alle brukerene i systemet.</label>
-                    <img id="helpimage" src="image/SisteSalg.PNG">
-                    </div>
-                    <div class="col-md-6 text-center">
-                    <label>Her kan du se de siste salgene gjort av deg.</label>
-                    <img id="helpimage" src="image/DineSisteSalg.PNG">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
-                            Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
-                        </label>
-                    <img id="helpimage" src="image/Lagerbeholdning.PNG">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
-                        </label>
-                    <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
-                    </div>
-                    
-                    
-                </div>
-                <div class="modal-footer col-md-12">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                    </div>
             </div>
-        </div>
-    </div> 
+        </div> 
 
 
         <!-- LAGERBEHOLDNING -->
@@ -683,15 +683,18 @@ if (isset($GLOBALS["errorMessage"])) {
                 <td>{{productName}}</td>
                 <input name="deliveryProductID[]" id="{{productID}}" form="stockDelivery" type="hidden" value="{{productID}}"/>
                 <th>Antall:</th>
-                <td><input class="form-control" name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
-
+                <td><input id="{{productID}}" data-id="{{macAdresse}}" class="form-control negativeSupport" name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
+                <input name="regMacadresse[]" form="stockDelivery" type="hidden" value="{{macAdresse}}"/>
                 <td>
-                <button type="button" id="redigerknapp" class="remove" data-toggle="tooltip" >
+                <button type="button" id="redigerknapp" class="remove" data-id="product{{productID}}" data-toggle="tooltip" >
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
                 </button>
                 </td>    
 
                 </tr>
+
+                <tbody class="selectQuantity" id="product{{productID}}">
+                </tbody>
                 {{/each}}  
             </script>
 

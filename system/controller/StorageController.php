@@ -86,7 +86,7 @@ class StorageController extends Controller {
     private function deleteStorageEngine() {
         $removeStorageID = $_REQUEST["deleteStorageID"];
 
-        if ($removeStorageID != 1) {
+        if ($removeStorageID != 1 && $removeStorageID != 2) {
             $sessionID = $_SESSION["userID"];
 
             $setSessionID = $GLOBALS["userModel"];

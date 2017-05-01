@@ -24,6 +24,7 @@ $restriction = $GLOBALS["returnRestriction"];
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
         <div id="success"></div>
+        <div id="error"></div>
         <form id="returnProducts" action="?page=returnProduct" method="post">
             <div class="col-md-12 row">
                 <label class="pull-left">Retur til:</label>
@@ -112,7 +113,7 @@ $restriction = $GLOBALS["returnRestriction"];
         <input name="returnProductID[]" id="{{productID}}" form="returnProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
         <td><input name="returnQuantity[]" class="form-control negativeSupport" id="{{productID}}" data-id="{{macAdresse}}" form="returnProducts" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
-        
+            <input name="regMacadresse[]" form="returnProducts" type="hidden" value="{{macAdresse}}"/>
         <td>
             <button type="button" id="redigerknapp" data-id="product{{productID}}" class="remove" data-toggle="tooltip">
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>

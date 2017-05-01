@@ -169,6 +169,10 @@ function withdrawQuantityTemplate(data) {
 $(function POSTtransferProducts() {
 
     $('#withdrawProducts').submit(function () {
+        var toStorageID = $.trim($('#withdrawrRestrictionContainer').val());
+        if (toStorageID < 1) {
+            errorMessage();
+        } else {
         var url = $(this).attr('action');
         var data = $(this).serialize();
 
@@ -182,20 +186,31 @@ $(function POSTtransferProducts() {
                 $displayUsers.empty().append("Kunne ikke overføre");
             },
             success: function (data) {
-                $('.product').remove();
-                $('.selectQuantity').remove();
-                $('#errorMessage').remove();
-                $("#withdrawProducts")[0].reset();
-                successMessage();
-                updateSale();
-                sendEmail();
+                if (data == "success") {
+                    $('.product').remove();
+                    $('.selectQuantity').remove();
+                    $('#errorMessage').remove();
+                    $("#withdrawProducts")[0].reset();
+                    successMessage();
+                    updateSale();
+                    sendEmail();
+                } else {
+                    missingMacError(data);
+                }
             }
         });
+    }
         return false;
     });
 });
 
-
+function missingMacError(data) {
+    $('<div class="alert alert-danger"><strong>Error!</strong> Finner ikke mac: <strong>' + data + ' </strong> </div>').appendTo('#error')
+            .delay(10000).fadeOut(500, function () {
+        $(this).remove();
+    });
+    ;
+}
 
 function successMessage() {
     $('<div class="alert alert-success"><strong>Registrert!</strong> Ditt uttak er registrert </div>').appendTo('#success')
@@ -342,22 +357,24 @@ $(function getNumberOfMac() {
 
 
             for (i = 0; i < quantity; i++) {
-                $displayMacadresse.append('<tr><td><input id="mac'+i+'" class="form-control macadresse" maxlength="17" name="withdrawMacadresse[]" form="withdrawProducts" required="required" value="" placeholder="macadresse"/></td></tr>');
-
+                $displayMacadresse.append('<tr><td><input id="mac' + i + productID + '" class="form-control macadresse" maxlength="17" pattern=".{17,17}" name="withdrawMacadresse[]" form="withdrawProducts" required title="Må være 12 tegn" value="" placeholder="macadresse"/></td></tr>');
             }
-        } else {return false;}
+        } else {
+            return false;
+        }
     });
 });
 
+
 $(function getMacadrInput() {
-    var length=1;
+    var length = 1;
     $('#withdrawQuantityContainer').delegate(".macadresse", "keyup", function (e) {
         var id = $(this).attr('id');
-        content=$(this).val();
+        content = $(this).val();
         content1 = content.replace(/\:/g, '');
-        length=content1.length;
-        if(((length % 2) === 0) && length < 12 && length > 1){
-            $('#'+id).val($('#'+id).val() + ':');
-            }
+        length = content1.length;
+        if (((length % 2) === 0) && length < 12 && length > 1) {
+            $('#' + id).val($('#' + id).val() + ':');
+        }
     });
 });
