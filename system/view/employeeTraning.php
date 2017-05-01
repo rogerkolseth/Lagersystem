@@ -39,7 +39,7 @@
             
                 <div class="col-md-3">
                     
-                        <h3>Dine Salg</h3><br>
+                        <h3>Dine Salg</h3>
                         <p>Dine Salg er siden du bruker hvis du ønsker å se uttakene du har gjort.</p>
                     
                     <div class="col-md-12">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-md-3">
                     
-                        <h3>Dine Returer</h3><br>
+                        <h3>Dine Returer</h3>
                         <p>Dine Returer er siden du bruker hvis du ønsker å se retureren du har gjort.</p>
                     
                     <div class="col-md-12">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-md-3">
                     
-                        <h3>Hjelp</h3><br>
+                        <h3>Hjelp</h3>
                         <p>Hvis du trenger hjelp med hvordan du bruker en side kan du trykke på dette symbolet. Det vil være tilgjengelig på alle sidene og vil fungere som en veiledning for siden du er på.</p>
                     
                     <div class="col-md-12">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-3">
                     
-                        <h3>Bruker innstillinger</h3><br>
+                        <h3>Bruker innstillinger</h3>
                         <p>Hvis du ønsker å bytte passord eller trenger å oppdatere bilde eller epost bruker du "Rediger profil" siden. Det er også her du logger ut.</p>
                     
                     <div class="col-md-12">
