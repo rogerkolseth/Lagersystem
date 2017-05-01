@@ -219,6 +219,8 @@
 
 </div>
 
+<!-- Help modal -->
+
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -229,10 +231,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Bruk denne funksjonen for å søke i loggen.<br>
                             
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
@@ -241,42 +243,42 @@
                 
                 
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Trykk her om du ønsker flere alternativer når du søker i loggen.
-                        </label>
+                        </h3>
                         
                     </div>
                 <div class="col-md-12">
                     <img src="image/AvansertSøkLogg.PNG">
                     </div>
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         Her kan du spesifisere søket ditt med mange forskjellige alternativer.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/AvansertSøkAlternativ.PNG">
                 </div>
                     <div class="col-md-12">
-                    <label>
+                    <h3>
                         Trykk her for logginstillinger.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/Logging.PNG">
                 </div>
                     <div class="col-md-12">
-                    <label>
+                    <h3>
                         Her kan du velge hva som skal bli logget i systemet.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/VelgLogging.PNG">
                 </div>
                     <div class="col-md-12">
-                    <label>
+                    <h3>
                         Her vises loggen.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/Logg.PNG">

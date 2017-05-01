@@ -242,18 +242,20 @@
             <form action="?page=setWarningLimit" method="post" id="warningProduct">
                 <br>
                 <table class="table">
-                    <thead>
+                    
                         <tr>
-                            <th>Lagernavn</th>
-                            <th>Epost Varsling</th>
-                            <th>Lager Varsling</th>
+                            <th id="bordernone">Lagernavn</th>
+                            <th id="bordernone">Epost Varsling</th>
+                            <th id="bordernone">Lager Varsling</th>
                         </tr>
-                    </thead>
-                    <tbody id="warningProductContainer">
-                            
-                                <!-- Her kommer handlebars Template -->
+                    
+                    
+                        <tr id="warningProductContainer">
+                            <!-- Her kommer handlebars Template -->
+                        </tr>   
+                                
       
-                    </tbody>
+                    
                 </table>
 
             <div class="modal-footer">
@@ -269,6 +271,7 @@
 
 </div>
 
+<!-- Help modal -->
 
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
@@ -280,10 +283,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Bruk denne funksjonen for å søke etter produkter.<br>
                             Du kan også velge kategori for sortering av produkter
-                        </label>
+                        </h3>
                         
                     </div>
                     <div class="col-md-12">
@@ -292,36 +295,40 @@
                 
                 
                     <div class="col-md-12">
-                        <label>
+                        <h3>
                             Her oppretter du nye produkter.
-                        </label>
+                        </h3>
                         
                     </div>
                 <div class="col-md-12">
                     <img src="image/OpprettProdukt.PNG">
                     </div>
                 <div class="col-md-12">
-                    <label>
+                    <h3>
                         Skriv inn info om produktet du vil opprette.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
                 <img src="image/OpprettProduktModal.PNG">
                 </div>
+                    
                     <div class="col-md-12">
-                    <label>
+                    <h3>
                         Dette er en liste over alle produktene i systemet.
-                    </label>
+                    </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/Produkter.PNG">
+                <img src="image/Produkter1.PNG">
                 </div>
                     <div class="col-md-12">
-                    <label>
+                        <h3>
                         Dette er alternativer for produkt:<br>
+                        </h3>
+                        <label>
                         1. <img src="image/EndreBruker.PNG">Endre produkt<br>
                         2. <img src="image/InformasjonBruker.PNG">Vis informasjon om produkt<br>
-                        3. <img src="image/SlettBruker.PNG">Slett produkt
+                        3. <img src="image/SlettBruker.PNG">Slett produkt<br>
+                        4. <img src="image/Varsling.PNG">Sett grense for antall produkt før epost varsling
                         
                     </label>
                 </div>
@@ -345,12 +352,12 @@
     
     </td><input class="form-control" type="hidden" name="productID" value="{{productLocation.1.productID}}" >
 {{#each productLocation}}
-<tr>
-    <td>{{storageName}}</td><input class="form-control" type="hidden" name="storageID[]" value="{{storageID}}" >
-    <td><input class="form-control" type="number" name="emailWarning[]" value="{{emailWarning}}" required="required" autocomplete="off"></td>
-    <td><input class="form-control" type="number" name="inventoryWarning[]" value="{{inventoryWarning}}" required="required" autocomplete="off">
+
+    <td id="bordernone">{{storageName}}</td><input class="form-control" type="hidden" name="storageID[]" value="{{storageID}}" >
+    <td id="bordernone"><input class="form-control" type="number" name="emailWarning[]" value="{{emailWarning}}" required="required" autocomplete="off"></td>
+    <td id="bordernone"><input class="form-control" type="number" name="inventoryWarning[]" value="{{inventoryWarning}}" required="required" autocomplete="off">
     
-</tr>
+
 {{/each}}      
 </script>
 
@@ -485,7 +492,7 @@
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button>
 
-    <button id="redigerknapp" data-id="{{productID}}" class="warning" data-toggle="tooltip" title="warning" >
+    <button id="redigerknapp" data-id="{{productID}}" class="warning" data-toggle="tooltip" title="Epost varsling" >
     <span class="glyphicon glyphicon-bell" style="color: black"></span>
     </button>
 

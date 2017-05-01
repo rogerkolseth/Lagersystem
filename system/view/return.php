@@ -98,6 +98,56 @@ $restriction = $GLOBALS["returnRestriction"];
     
 </div>
 
+<!-- Help modal -->
+
+    <div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <h3>
+                            1. Velg hvilke produkter du ønsker å ta retur på.<br> Du kan også velge kategori for å lettere finne et produkt.
+                        </h3>
+                        
+                    </div>
+                    <div class="col-md-12">
+                    <img src="image/VelgProduktRetur.PNG">
+                    </div>
+                </div>
+                
+                    <div class="col-md-12">
+                        <h3>
+                            2. Skriv inn kundenummeret, en kommentar og velg hvor mange produkter du ønsker å ta retur på.<br>
+                            
+                        </h3>
+                        
+                    </div>
+                <div class="col-md-12">
+                    <img src="image/RegistrerRetur_1.PNG">
+                    </div>
+                <div class="col-md-12">
+                    <h3>
+                        Dette er alternativer for returer:<br>
+                    </h3>
+                    <label>
+                        <img src="image/SlettBruker.PNG">Fjern valgt linje<br>
+                        
+                    </label>
+                </div>
+                
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
