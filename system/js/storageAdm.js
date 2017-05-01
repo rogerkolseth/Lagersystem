@@ -936,6 +936,53 @@ $(function POSTselectedProduct() {
     });
 });
 
+
+
+
+
+// Display storage template -->
+$( function getUsedStorageCat() {
+    var givenStorageID = '2';
+    $.ajax({
+            type: 'POST',
+            url: '?page=getCatWithProd',
+            data: {givenStorageID: givenStorageID},
+            dataType: 'json',
+            success: function (data) {
+                chooseCategory(data);
+            }
+        });
+    return false;
+});
+
+
+function chooseCategory(data) {
+    var rawTemplate = document.getElementById("chooseCategoryTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var productTableGeneratedHTML = compiledTemplate(data);
+    var productContainer = document.getElementById("chooseCategoryContainer");
+    productContainer.innerHTML = productTableGeneratedHTML;
+}
+
+
+$(function updateResultFromCategory() {
+
+    $('#chooseCategoryContainer').on('change', function () {
+        givenCategoryID = $(this).find("option:selected").data('id');
+
+        $.ajax({
+            type: 'POST',
+            url: '?page=getProductFromCategory',
+            data: {givenCategoryID: givenCategoryID},
+            dataType: 'json',
+            success: function (data) {
+                returnProductTemplate(data);
+            }
+        });
+        return false;
+    });
+});
+
 function deliveryQuantityTemplate(data) {
     var rawTemplate = document.getElementById("deliveryQuantityTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);

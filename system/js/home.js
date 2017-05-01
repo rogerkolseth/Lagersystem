@@ -13,6 +13,57 @@ function getStorageProduct() {
 }
 
 
+// Display storage template -->
+
+function chooseCategory(data) {
+    var rawTemplate = document.getElementById("chooseCategoryTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var productTableGeneratedHTML = compiledTemplate(data);
+    var productContainer = document.getElementById("chooseCategoryContainer");
+    productContainer.innerHTML = productTableGeneratedHTML;
+}
+$(function updateResultFromCategory() {
+
+    $('#chooseCategoryContainer').on('change', function () {
+        givenCategoryID = $(this).find("option:selected").data('id');
+
+        $.ajax({
+            type: 'POST',
+            url: '?page=getProductFromCategory',
+            data: {givenCategoryID: givenCategoryID},
+            dataType: 'json',
+            success: function (data) {
+                returnProductTemplate(data);
+            }
+        });
+        return false;
+    });
+});
+
+function updateProductList() {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getAllProductInfo',
+        dataType: 'json',
+        success: function (data) {
+            returnProductTemplate(data);
+        }
+    });
+    return false;
+}
+
+// Display products in storage Template -->
+
+function returnProductTemplate(data) {
+    var rawTemplate = document.getElementById("returnProductTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var transferProductGeneratedHTML = compiledTemplate(data);
+
+    var productContainer = document.getElementById("returnProductContainer");
+    productContainer.innerHTML = transferProductGeneratedHTML;
+}
+
+
 //Display products in storage Template -- >
 
 function stockDeliveryTemplate(data) {

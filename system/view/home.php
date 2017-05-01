@@ -682,6 +682,8 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>   
 
+            <!-- Varelevering -->
+            
             <div class="modal fade" id="stockDeliveryModal" role="dialog">
                 <div class="modal-dialog">
                     <!-- Innholdet til Modalen -->
@@ -693,9 +695,15 @@ if (isset($GLOBALS["errorMessage"])) {
                         <form action="?page=stockDelivery" method="post" id="stockDelivery">
                             <div class="modal-body">
                                 <label>Velg produkt(er) som skal inn på Hovedlageret</label>
+                                <div class="col-md-4 pull-right">
+                                <select id="chooseCategoryContainer" class="form-control">
+
+                                </select>
+                                </div>
                                 <div id="stockDeliveryContainer">
 
                                 </div>
+                                
                                 <br><br>
                                 <div>
                                     <table class="table table-responsive" id="deliveryQuantityContainer">
@@ -720,6 +728,12 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>        
 
+            <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
+            <option data-id="0" value="0">Velg Kategori</option>
+            {{#each category}}
+            <option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
+            {{/each}}
+            </script>
 
             <script id="deliveryQuantityTemplate" type="text/x-handlebars-template">
                 {{#each product}} 

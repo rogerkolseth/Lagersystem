@@ -319,6 +319,8 @@
             </div>
         </div>
     </div>   
+    
+    <!-- Varelevering -->
 
     <div class="modal fade" id="stockDeliveryModal" role="dialog">
         <div class="modal-dialog">
@@ -331,6 +333,11 @@
                 <form action="?page=stockDelivery" method="post" id="stockDelivery">
                     <div class="modal-body">
                         <label>Velg produkt(er) som skal inn på Hovedlageret</label>
+                        <div class="col-md-4 pull-right">
+                            <select id="chooseCategoryContainer" class="form-control">
+
+                            </select>
+                        </div>
                         <div id="stockDeliveryContainer">
 
                         </div>
@@ -456,6 +463,13 @@
 </div>
 
 <!-- TEMPLATES -->
+
+<script id="chooseCategoryTemplate" type="text/x-handlebars-template">
+<option data-id="0" value="0">Velg Kategori</option>
+{{#each category}}
+<option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
+{{/each}}
+</script>
 
 <script id="stockDeliveryTemplate" type="text/x-handlebars-template">
     <br>  
