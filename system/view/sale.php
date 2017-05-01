@@ -19,7 +19,7 @@
         <div id="success"></div>
         <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
             <div class="col-md-12 row">
-                <label class="pull-left">Uttak fra:</label>
+                <h4 class="pull-left">Uttak fra:</h4>
             </div>
         <div class="col-sm-3 col-md-4 row">
             
@@ -81,7 +81,7 @@
 
             <input form="withdrawProducts" type="hidden" id="date" name="date">
             
-            <button form="withdrawProducts" type="submit" class="btn btn-success" id="withdrawButton" hidden>Registrer Uttak</button>
+            <button form="withdrawProducts" type="submit" class="btn btn-success" id="withdrawButton">Registrer Uttak</button>
             <p id="errorMessage"></p>
         </div>
         </form>

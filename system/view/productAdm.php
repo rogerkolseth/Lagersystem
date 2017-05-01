@@ -242,18 +242,18 @@
             <form action="?page=setWarningLimit" method="post" id="warningProduct">
                 <br>
                 <table class="table">
-                    
+                    <thead>
                         <tr>
                             <th id="bordernone">Lagernavn</th>
                             <th id="bordernone">Epost Varsling</th>
                             <th id="bordernone">Lager Varsling</th>
                         </tr>
-                    
-                    
-                        <tr id="warningProductContainer">
+                    </thead>
+                    <tbody id="warningProductContainer">
+                        
                             <!-- Her kommer handlebars Template -->
-                        </tr>   
-                                
+                           
+                    </tbody>          
       
                     
                 </table>
@@ -352,11 +352,11 @@
     
     </td><input class="form-control" type="hidden" name="productID" value="{{productLocation.1.productID}}" >
 {{#each productLocation}}
-
+<tr>
     <td id="bordernone">{{storageName}}</td><input class="form-control" type="hidden" name="storageID[]" value="{{storageID}}" >
     <td id="bordernone"><input class="form-control" type="number" name="emailWarning[]" value="{{emailWarning}}" required="required" autocomplete="off"></td>
     <td id="bordernone"><input class="form-control" type="number" name="inventoryWarning[]" value="{{inventoryWarning}}" required="required" autocomplete="off">
-    
+  </tr>  
 
 {{/each}}      
 </script>
