@@ -100,7 +100,7 @@
             
         
          <form id="advanceLoggSearch" class="form-group form-inline" action="?page=advanceLoggSearch" method="post">
-                <div id="advanceSearch" class="advanceSearchToogle" style="margin-top: 2%">
+                <div id="advanceSearch" class="displayNone" style="margin-top: 2%">
                     
                         <div class="dropdown form-group"id="typeSearch">
                             <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">Velg Type</button>

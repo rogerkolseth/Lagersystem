@@ -1,7 +1,7 @@
 // Get storage information with user restriction -->
 
 
-$('#withdrawButton').hide();
+
 $(function () {
     $.ajax({
         type: 'GET',

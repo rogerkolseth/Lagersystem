@@ -81,7 +81,7 @@
 
             <input form="withdrawProducts" type="hidden" id="date" name="date">
             
-            <button form="withdrawProducts" type="submit" class="btn btn-success" id="withdrawButton">Registrer Uttak</button>
+            <button form="withdrawProducts" type="submit" class="btn btn-success displayNone" id="withdrawButton">Registrer Uttak</button>
             <p id="errorMessage"></p>
         </div>
         </form>
@@ -159,7 +159,7 @@
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
-<option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
+<option class="displayNone" data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
 {{/each}}
 </script>
 
