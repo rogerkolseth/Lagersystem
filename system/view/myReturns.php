@@ -3,7 +3,7 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-   <div class="container row">
+   <div class="container">
        <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
         <div class="row">
         <div class="pull-right">

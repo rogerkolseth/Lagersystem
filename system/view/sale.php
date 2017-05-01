@@ -36,7 +36,7 @@
         </div>
             
         <div class="col-sm-1 col-md-2">
-            <select id="chooseCategoryContainer" class="form-control">
+            <select id="chooseCategoryContainer" class="form-control displayNone">
                         
             </select>
         </div>    
@@ -159,7 +159,7 @@
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
-<option class="displayNone" data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
+<option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
 {{/each}}
 </script>
 

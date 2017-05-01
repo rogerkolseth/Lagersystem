@@ -69,7 +69,7 @@
             
             
             
-            <button form="transferProducts" type="submit" class="btn btn-success" id="transferButton">Registrer Overføring</button>
+            <button form="transferProducts" type="submit" class="btn btn-success displayNone" id="transferButton">Registrer Overføring</button>
 
         </div>    
     </form>

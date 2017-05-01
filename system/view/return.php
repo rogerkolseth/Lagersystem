@@ -52,8 +52,8 @@ $restriction = $GLOBALS["returnRestriction"];
         
         <br><br><br>
 
-        <div>
-            <table class="table table-responsive" id="commentContainer">
+        
+            <table class="table table-responsive displayNone" id="commentContainer">
 
                 <tr>
                     <th class="col-md-1" id="bordernone">Kundenr:   </th> 
@@ -67,7 +67,7 @@ $restriction = $GLOBALS["returnRestriction"];
                 </tr>
 
             </table>
-        </div>   
+           
         
         <div>
             <table class="table table-responsive" id="returnQuantityContainer">
@@ -79,7 +79,7 @@ $restriction = $GLOBALS["returnRestriction"];
             
             <input form="returnProducts" type="hidden" id="date" name="date">
             
-            <button form="returnProducts" type="submit" class="btn btn-success" id="returnButton">Registrer Retur</button>
+            <button form="returnProducts" type="submit" class="btn btn-success displayNone" id="returnButton">Registrer Retur</button>
             <p id="errorMessage"></p>
         </div> 
         </form>

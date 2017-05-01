@@ -79,7 +79,7 @@
                         <form action="?page=addProductEngine" method="post" id="createProduct">
                             <tr>
                                 <th id="bordernone">Produktnavn:</th>
-                                <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
+                                <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off" autofocus></td>
                             </tr>
                             <tr>
                                 <th>Pris:</th>
