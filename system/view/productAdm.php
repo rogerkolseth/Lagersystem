@@ -163,7 +163,7 @@
         <div class="modal-content row">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Product informasjon</h4>
+                <h4 class="modal-title">Produkt informasjon</h4>
             </div>
             <div class="modal-body">
                 
@@ -432,7 +432,10 @@
             <th>Opprettet: </th>
             <td>{{date}}</td>
         </tr>
-        
+        <tr>
+            <th>Støtter MacAdresse: </th>
+                <td class="supportMacStatus" id="supportMacStatus"></td>
+            </tr>
         
     </table>
 </div>
@@ -448,7 +451,7 @@
 {{#each productLocation}}
 <tr>
     <td>{{storageName}}</td>
-    <td>{{quantity}}</td>
+    <td class="quantityColor">{{quantity}}</td>
 </tr>
 {{/each}}      
 </script>

@@ -206,6 +206,8 @@ $errormessage = $GLOBALS["errorMessage"];
     </div>
 </div>
     
+    <!-- Help modal -->
+    
     <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -251,7 +253,7 @@ $errormessage = $GLOBALS["errorMessage"];
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/.PNG">
+                <img src="image/MediaOversikt.PNG">
                 </div>
                     <div class="col-md-12">
                         <h3>

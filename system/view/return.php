@@ -128,7 +128,7 @@ $restriction = $GLOBALS["returnRestriction"];
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/RegistrerRetur_1.PNG">
+                    <img src="image/RegistrerReturMac.PNG">
                     </div>
                 <div class="col-md-12">
                     <h3>

@@ -125,7 +125,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/RegistrerOverfør.PNG">
+                <img src="image/OverføreMac.PNG">
                 </div>
                     
                     <div class="col-md-12">

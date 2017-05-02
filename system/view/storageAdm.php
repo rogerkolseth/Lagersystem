@@ -232,8 +232,20 @@
                     <div class="col-sm-9 col-md-5">
 
                         <canvas id="myChart"></canvas>
-
+                        
+                            <table class="table" id="macAdresser" style="display: none">
+                                <thead>
+                                <th><h4>MacAdresser:</h4></th>
+                                </thead>
+                                <tbody id="showProductMacContainer">
+                                    
+                                </tbody>
+                            </table>
+                            
+                        
+                        
                     </div>
+                    
 
                 </div>
                 <div class="modal-footer">
@@ -463,7 +475,14 @@
 </div>
 
 <!-- TEMPLATES -->
-
+<script id="showProductMacTemplate" type="text/x-handlebars-template">
+    {{#each inventoryMac}}
+    <tr>
+    <td>{{macAdresse}}</td>
+    <tr>
+    {{/each}}
+    
+</script>
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
@@ -614,7 +633,7 @@
     {{#each storageProduct}}
     <tr>
     <td >
-    <button id="redigerknapp" data-id="{{productID}}" class="deleteStorageInventory" data-toggle="tooltip" title="Fjern lagertilgang">
+    <button id="redigerknapp" data-id="{{productID}}" class="deleteStorageInventory" data-toggle="tooltip" title="Fjern produkt">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button>
     </td>
@@ -622,7 +641,7 @@
     <td class="quantityColor"> {{quantity}}</td>
     <td >
     {{#if_eq this.macAdresse "1"}}
-        <button id="redigerknapp" data-id="{{productID}}" class="showMac" data-toggle="tooltip" title="Rediger salg">
+        <button id="redigerknapp" data-id="{{productID}}" class="showMac" data-toggle="tooltip" onClick="showMac();" title="Vis MacAdresse for produkter">
         <span class="glyphicon glyphicon-th-list" style="color: #003366"></span>
         </button>
         {{/if_eq}}

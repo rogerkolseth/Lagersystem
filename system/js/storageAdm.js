@@ -401,8 +401,10 @@ $(function POSTstorageInformationModal() {
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
+                document.getElementById('macAdresser').hide;
                 $('#showStorageInformationModal').modal('show');
                 StorageInformationTemplate(data);
+                
                 negativeSupportStatus(data.storage[0].negativeSupport);
             }
         });
@@ -621,7 +623,8 @@ $(function showInventoryMac() {
             url: '?page=getInventoryMac',
             data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
             dataType: 'json',
-            success: function () {
+            success: function (data) {
+                showProductMacTemplate(data);
             }
         });
         return false;
@@ -976,7 +979,7 @@ $(function updateResultFromCategory() {
             data: {givenCategoryID: givenCategoryID},
             dataType: 'json',
             success: function (data) {
-                returnProductTemplate(data);
+                stockDeliveryTemplate(data);
             }
         });
         return false;
@@ -1074,4 +1077,31 @@ $(function getMacadrInput() {
     });
 });
 
+function showMac()
+{
+    document.getElementById('myChart').style.display = 'none';
+    document.getElementById('macAdresser').style.display = 'block';
+    
+}
 
+
+
+function showProductMacTemplate(data) {
+    var rawTemplate = document.getElementById("showProductMacTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var storageRestrictionGeneratedHTML = compiledTemplate(data);
+
+    var storageContainer = document.getElementById("showProductMacContainer");
+    storageContainer.innerHTML = storageRestrictionGeneratedHTML;
+}
+
+$(document).ready(function ()
+{
+    $('#showStorageInformationModal').on('hidden.bs.modal', function (e)
+    {
+        
+        $('#macAdresser').hide();
+        
+        
+    });
+});

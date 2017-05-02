@@ -138,6 +138,9 @@ $(function POSTproductInformationModal() {
             success: function (data) {
                 $('#showProductInformationModal').modal('show');
                 productInformationTemplate(data);
+                supportMacStatus(data.product[0].macAdresse);
+                
+                
 
             }
         });
@@ -171,6 +174,7 @@ function POSTproductLocation(data) {
             dataType: 'json',
             success: function (data) {
                 productLocationTemplate(data);
+                rowColor();
             }
         });
     });
@@ -515,3 +519,28 @@ $(function POSTsearchForProduct() {
         return false;
     });
 });
+
+function rowColor() {
+
+// storageInformation
+    $('.quantityColor').filter(function (index) {
+        return parseInt(this.innerHTML) >= 10;
+    }).siblings().andSelf().attr('class', 'bg-success');
+
+    $('.quantityColor').filter(function (index) {
+        return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5;
+    }).siblings().andSelf().attr('class', 'bg-warning');
+
+    $('.quantityColor').filter(function (index) {
+        return parseInt(this.innerHTML) < 5;
+    }).siblings().andSelf().attr('class', 'bg-danger');
+    }
+    
+    
+    function supportMacStatus(data) {
+    if (data > 0) {
+        $('.supportMacStatus').append('Ja');
+    } else {
+        $('.supportMacStatus').append('Nei');
+    }
+}
