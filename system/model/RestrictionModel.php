@@ -23,7 +23,8 @@ class RestritionModel{
     const DELETE_SINGLE_QUERY = "DELETE FROM " . RestritionModel::TABLE . " WHERE userID = :givenUserID AND storageID = :givenStorageID";
     const FIND_GROUP_EXIST = "SELECT COUNT(*) FROM " . RestritionModel::GROUP_TABLE . " WHERE groupID = :givenGroupID AND userID = :givenUserID";
     const SELECT_GROUP_RES = "SELECT restrictions.resID, storage.storageName, restrictions.groupID, restrictions.storageID FROM " . RestritionModel::TABLE . " INNER JOIN storage ON restrictions.storageID = storage.storageID WHERE groupID = :givenGroupID";
-    
+    const DELETE_GROUP_RES = "DELETE FROM " . RestritionModel::TABLE . " WHERE resID = :restrictionID";
+   
     
     private $addStmt;
     
@@ -43,6 +44,8 @@ class RestritionModel{
     $this->selUserAndGroupRes = $this->dbConn->prepare(RestritionModel::SELECT_USER_GROUP_RES);
     $this->existGroupStm = $this->dbConn->prepare(RestritionModel::FIND_GROUP_EXIST);
     $this->ResFromGroupID = $this->dbConn->prepare(RestritionModel::SELECT_GROUP_RES);
+    $this->delGroupRes = $this->dbConn->prepare(RestritionModel::DELETE_GROUP_RES);
+
     }
     
     /**
