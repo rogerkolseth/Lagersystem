@@ -448,7 +448,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                    <img src="image/Lager.PNG">
+                    <img src="image/Lager_1.PNG">
                 </div>
                 <div class="col-md-12">
                     <h3>
@@ -458,7 +458,7 @@
                         1. <img src="image/EndreBruker.PNG">Endre lager<br>
                         2. <img src="image/InformasjonBruker.PNG">Vis informasjon om lager<br>
                         3. <img src="image/SlettBruker.PNG">Slett lager<br>
-                        4. <img src="image/Varetelling.PNG">Varetelling for lageret
+                        4. <img src="image/Vertelling_1.PNG">Varetelling for lageret
                     </label>
                 </div>
 

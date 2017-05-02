@@ -357,7 +357,7 @@ $(function getNumberOfMac() {
 
 
             for (i = 0; i < quantity; i++) {
-                $displayMacadresse.append('<tr><td><input id="mac' + i + productID + '" class="form-control macadresse" maxlength="17" pattern=".{17,17}" name="withdrawMacadresse[]" form="withdrawProducts" required title="Må være 12 tegn" value="" placeholder="macadresse"/></td></tr>');
+                $displayMacadresse.append('<tr><td><td><td><td><input id="mac' + i + productID + '" class="form-control macadresse" maxlength="17" pattern=".{17,17}" name="withdrawMacadresse[]" form="withdrawProducts" required title="Må være 12 tegn" value="" placeholder="macadresse"/></td></td></td></td></tr>');
             }
         } else {
             return false;

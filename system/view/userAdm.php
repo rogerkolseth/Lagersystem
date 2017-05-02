@@ -258,7 +258,7 @@
                         </tbody>
                     </table>
                         </div> 
-                        <div class="col-md-">
+                        <div class="col-md-6">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -357,7 +357,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/Brukere.PNG">
+                <img src="image/BrukerOversikt.PNG">
                 </div>
                     <div class="col-md-12">
                         <h3>
@@ -367,13 +367,14 @@
                         1. <img src="image/EndreBruker.PNG">Endre bruker<br>
                         2. <img src="image/InformasjonBruker.PNG">Vis informasjon om bruker<br>
                         3. <img src="image/SlettBruker.PNG">Slett bruker<br>
-                        4. <img src="image/LagertilgangBruker.PNG">Gi lagertilanger til bruker
+                        4. <img src="image/LagertilgangBruker.PNG">Gi lagertilanger til bruker<br>
+                        5. <img src="image/GruppeTilgang.PNG">Gi lagertilanger til bruker
                     </label>
                 </div>
                 
                     <div class="col-md-12">
                     <h3>
-                        Checkboxen brukes om du ønsker å gi lagertilanger til flere brukere samtidig.
+                        Checkboxen brukes om du ønsker å gi lager- eller gruppetilganger til flere brukere samtidig.
                     </h3>
                 </div>
                 <div class="col-md-12">
@@ -582,11 +583,11 @@
     <td>{{username}}</td>
 
 
-    <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
+    <!-- Legger inn checkbox for fler valg (ved lagertilganggiving -->
 
   
     
-    <td> <input form="editRestriction" class="selectRestriction" id="setRes{{userID}}" value="{{userID}}" data-toggle="tooltip" title="Gi lagertilgang" name="userRestrictions[]" type="checkbox"></td>
+    <td> <input form="editRestriction" class="selectRestriction" id="setRes{{userID}}" value="{{userID}}" data-toggle="tooltip" title="Gi tilgang" name="userRestrictions[]" type="checkbox"></td>
 
   
 </tr>

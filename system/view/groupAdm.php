@@ -47,6 +47,8 @@
 
         </div>
     </div>
+    
+    <!-- Create groupe modal -->
 
     <div class="modal fade" id="createGroupModal" role="dialog">
         <div class="modal-dialog">
@@ -150,7 +152,9 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Gruppe informasjon</h4>
                 </div>
-                <div class="modal-body">        
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
                     <table class="table">
                         <tbody id="groupInformationContainer">
 
@@ -158,7 +162,8 @@
 
                         </tbody>
                     </table>
-
+                        </div>
+                        <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 class="panel-title text-center"><b>Gruppemedlemmer</b></h2>
@@ -176,7 +181,8 @@
 
                         </table>
                     </div>
-                    
+                        </div>
+                        <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 class="panel-title text-center"><b>Gruppetilganger</b></h2>
@@ -194,9 +200,10 @@
 
                         </table>
                     </div>
-
+                        </div>
                 </div>
-                <div class="modal-footer">
+                </div>
+                <div class="modal-footer col-md-12">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
             </div>
@@ -260,6 +267,82 @@
         </div>
     </div>
 
+</div>
+
+
+<!-- Help modal -->
+
+<div class="modal fade" id="showHelpModal" role="dialog">
+        <div class="modal-dialog" style="width: 70%">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content row">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Hjelp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <h3>
+                            Bruk denne funksjonen for å søke etter grupper.
+                           
+                        </h3>
+                        
+                    </div>
+                    <div class="col-md-12">
+                <img src="image/SøkGruppe.PNG">
+                    </div>
+                
+                
+                    <div class="col-md-12">
+                        <h3>
+                            Her oppretter du nye grupper.
+                        </h3>
+                        
+                    </div>
+                <div class="col-md-12">
+                    <img src="image/OpprettGruppe.PNG">
+                    </div>
+                <div class="col-md-12">
+                    <h3>
+                        Skriv inn info om gruppen du vil opprette.
+                    </h3>
+                </div>
+                <div class="col-md-12">
+                <img src="image/OpprettGruppeModal.PNG">
+                </div>
+                    
+                    <div class="col-md-12">
+                    <h3>
+                        Dette er en liste over alle gruppene i systemet.
+                    </h3>
+                </div>
+                <div class="col-md-12">
+                <img src="image/GruppeOversikt.PNG">
+                </div>
+                    <div class="col-md-12">
+                        <h3>
+                        Dette er alternativer for produkt:<br>
+                        </h3>
+                        <label>
+                        1. <img src="image/EndreBruker.PNG">Endre gruppe<br>
+                        2. <img src="image/InformasjonBruker.PNG">Vis informasjon om gruppe<br>
+                        3. <img src="image/SlettBruker.PNG">Slett gruppe<br>
+                        4. <img src="image/LagertilgangBruker.PNG">Velg lagertilgang for gruppe<br>
+                        5. <img src="image/GruppeMedlem.PNG">Velg brukere som skal være me i gruppen
+                        
+                    </label>
+                </div>
+                
+                   
+                    
+                
+                <div class="modal-footer col-md-12">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        
 </div>
 <script type="text/javascript" src="js/groupAdm.js"></script>   
 <script id="storageGroupResTemplate" type="text/x-handlebars-template">
