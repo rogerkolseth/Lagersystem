@@ -39,7 +39,8 @@ class Router {
                 case "transfer" :
                 case "getTransferRestriction" :
                 case "transferProduct" : 
-                case "transferSingle" :    
+                case "transferSingle" :  
+                case "getuserAndGroupRes" :  
                     return new TransferController();
                     
                 case "sale" :
@@ -168,6 +169,7 @@ class Router {
                 case "getGroupByID" :
                 case "deleteGroupEngine" :   
                 case "editGroupEngine" :    
+                case "addGroupRestriction" :    
                     return new GroupController();
                     }
                 }

@@ -89,8 +89,8 @@ class GroupController extends Controller {
     }
 
     private function addGroupRestriction() {
-        if (isset($_POST['userGroupRestrictions']) && isset($_POST['storageRestrictions'])) {
-            $givenGroup = $_REQUEST['userRestrictions'];
+        if (isset($_POST['givenGroupID']) && isset($_POST['storageRestrictions'])) {
+            $givenGroupID = $_REQUEST['givenGroupID'];
             $givenStorageArray = $_REQUEST['storageRestrictions'];
             $sessionID = $_SESSION["userID"];
 
@@ -98,10 +98,10 @@ class GroupController extends Controller {
             $restrictionModel = $GLOBALS["restrictionModel"];
 
             foreach ($givenStorageArray as $givenStorageID) :
-                $count = $restrictionModel->doesRestrictionExist($givenGroup, $givenStorageID);
+                $count = $restrictionModel->doesRestrictionExist($givenGroupID, $givenStorageID);
                 if ($count[0]["COUNT(*)"] < 1) {
                     $setSessionID->setSession($sessionID);
-                    $data = $restrictionModel->addGroupRestriction($givenGroup, $givenStorageID);
+                    $data = $restrictionModel->addGroupRestriction($givenGroupID, $givenStorageID);
                 }
             endforeach;
             echo json_encode("success");

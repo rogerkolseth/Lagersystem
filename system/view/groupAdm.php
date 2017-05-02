@@ -172,6 +172,7 @@
             <!-- Innholdet til Modalen -->
             <div class="modal-content">
                 <form action="?page=addGroupRestriction" id="editGroupRestriction" method="post">
+                    <div id="groupID"></div>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Velg lager tilgang(er)</h4>
@@ -264,7 +265,7 @@
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button> 
 
-    <label id="{{groupID}}" onclick="getStorageInfo()" data-toggle="modal"data-toggle="tooltip" title="Gi lagertilgang" data-target="#groupRestrictionModal"><img id="keyIcon" src="image/key-icon2.png"></img>
+    <label id="{{groupID}}" class="groupRestriction" data-id="{{groupID}}" data-toggle="modal"data-toggle="tooltip" title="Gi lagertilgang" data-target="#groupRestrictionModal"><img id="keyIcon" src="image/key-icon2.png"></img>
     </label> 
     </td>
 

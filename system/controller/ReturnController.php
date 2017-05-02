@@ -28,7 +28,8 @@ class ReturnController extends Controller {
 
     private function returnPage() {
         $restrictionModel = $GLOBALS["restrictionModel"];
-        $result = $restrictionModel->getAllStorageRestrictionInfo();
+        $userID = $_SESSION["userID"];
+        $result = $restrictionModel->getUserAndGroupRes($userID);
         foreach ($result as $result):
             if ($result["storageID"] == "2") {
                 $result = "1";
