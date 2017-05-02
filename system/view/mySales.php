@@ -23,10 +23,10 @@
         </div>
         <?php } ?>
         
-        <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group row">
+        <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
             <form id="searchForSale" class="form-inline" action="?page=getMySales" method="post">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 row">
                     <div class="">
                         <input class="form-control" form="searchForSale" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter salg.." autocomplete="off">  
                         <input class="form-control btn btn-primary" form="searchForSale" type="submit" value="Søk">

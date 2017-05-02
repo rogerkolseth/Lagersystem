@@ -142,7 +142,7 @@
     <!-- GET STORAGE INFORMATION MODAL-->
 
     <div class="modal fade" id="showStorageInformationModal" role="dialog">
-        <div class="modal-dialog" style="width: 90%">
+        <div class="modal-dialog test1233" id="test1231">
             <!-- Innholdet til Modalen -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -160,32 +160,30 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-6">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Her e den nye tingelingen vi trengte?</th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td>Gruppe 1</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>gruppe 2</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Gruppe sex...huehue</td>
-                                
-                            </tr>
-                            
-                                
-                        </table>
+                        <div class="col-md-5">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>Grupper med tilgang</b></h2>
+                                </div>
+                                <table class="table">
+
+                                    <tbody>
+                                        <tr>
+                                            <td>Gruppe 1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gruppe 2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gruppe 3</td>
+                                        </tr>
+                                    </tbody>    
+                                </table>
+                            </div>
                         
                     </div>
                         
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h2 class="panel-title text-center"><b>Produkt i lager</b></h2>
@@ -229,19 +227,20 @@
                                 </table>
                             </div>
                         </div>
-                    <div class="col-sm-9 col-md-5">
+                    <div class="col-md-5">
 
                         <canvas id="myChart"></canvas>
-                        
-                            <table class="table" id="macAdresser" style="display: none">
-                                <thead>
-                                <th><h4>MacAdresser:</h4></th>
-                                </thead>
+                        <div class="panel panel-default displayNone" id="macAdresser">
+                            <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>MacAdresser:</b></h2>
+                                </div>
+                            <table class="table" id="macAdresser">
+                                
                                 <tbody id="showProductMacContainer">
                                     
                                 </tbody>
                             </table>
-                            
+                        </div>
                         
                         
                     </div>
