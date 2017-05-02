@@ -37,7 +37,18 @@ class SaleController extends Controller {
     }
 
     private function salePage() {
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        $userID = $_SESSION["userID"];
+        $result = $restrictionModel->getUserAndGroupRes($userID);
+        
+        if(sizeof($result) > "0"){
+           $result = "1";
+                $saleRestriction = array("saleRestriction" => $result); 
+                return $this->render("sale", $saleRestriction);
+        };
+
         return $this->render("sale");
+    
     }
 
     private function getMySalesPage() {

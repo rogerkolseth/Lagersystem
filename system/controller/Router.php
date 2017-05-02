@@ -39,7 +39,6 @@ class Router {
                 case "transfer" :
                 case "getTransferRestriction" :
                 case "transferProduct" : 
-                case "transferSingle" :  
                 case "getuserAndGroupRes" :  
                     return new TransferController();
                     

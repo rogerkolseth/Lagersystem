@@ -90,7 +90,7 @@ $restriction = $GLOBALS["transferRestriction"];
 
     </div>
         <?php } else { ?>
-        <p> Du må ha tilgang til 2 eller fleire lager for å kunne overføre  </p>       
+        <p> Du må ha tilgang til 2 eller fleire lager for å kunne overføre.  </p>       
        <?php }?>
 </div>  
     </div>  
