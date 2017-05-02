@@ -209,12 +209,13 @@
                     <h4 class="modal-title">Bruker informasjon</h4>
                 </div>
                 <div class="modal-body">
+                    
                     <div id="userInformationContainer">
                         
                         <!-- Innhold fra Handlebars Template-->
                     </div>
-                    <div>
-                    
+                    <div class="col-md-12">
+                        <div class="col-md-6">
                     <table class="table">
                         <thead>
                             <tr>
@@ -228,10 +229,20 @@
 
                         </tbody>
                     </table>
-                
+                        </div> 
+                        <div class="col-md-">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Ny tabell til roger</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        </div>
                 </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer col-md-12">
                     <div id="successRes"></div>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>

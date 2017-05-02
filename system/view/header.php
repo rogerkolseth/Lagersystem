@@ -89,10 +89,10 @@
                                     <a href="?page=mediaAdm"><span class="glyphicon glyphicon-picture"></span> Media Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=categoryAdm"><span class="glyphicon glyphicon-picture"></span> Kategori Administrering</a>
+                                    <a href="?page=categoryAdm"><span class="glyphicon glyphicon-folder-open"></span> Kategori Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=groupAdm"><span class="glyphicon glyphicon-picture"></span> Gruppe Administrering</a>
+                                    <a href="?page=groupAdm"><span class="glyphicon glyphicon-share"></span> Gruppe Administrering</a>
                                 </li>
                             </ul>
                   

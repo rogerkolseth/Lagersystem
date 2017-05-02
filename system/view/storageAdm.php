@@ -150,7 +150,7 @@
                     <h4 class="modal-title">Lager Informasjon</h4>
                 </div>
                 <div class="modal-body row">
-                    <div class="col-sm-3 col-md-5">
+                    <div class="col-md-7">
                         <div class="col-md-12">
                             <table class="table">
                                 <tbody id="storageInformationContainer">
@@ -160,7 +160,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                         <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h2 class="panel-title text-center"><b>Grupper med tilgang</b></h2>
@@ -183,7 +183,7 @@
                         
                     </div>
                         
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h2 class="panel-title text-center"><b>Produkt i lager</b></h2>
@@ -204,9 +204,9 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
                     
-                    <div class="col-md-2">
+                    
+                    <div class="col-md-4">
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -227,6 +227,7 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
                     <div class="col-md-5">
 
                         <canvas id="myChart"></canvas>
@@ -603,10 +604,7 @@
     <th class="col-md-6">Lagernavn: </th>
     <td>{{storageName}}</td>
     </tr>
-    <tr>
-    <th class="col-md-6">Grense for epostvarsling: </th>
-    <td>{{warningLimit}}</td>
-    </tr>
+    
     <th class="col-md-6">Lager kan gå i minus: </th>
     <td class="negativeSupportStatus" id="negativeSupportStatus"></td>
     </tr>
@@ -694,7 +692,7 @@
     <!-- Knapp som aktiverer Model for varetelling av lager  --> 
 
     <button id="redigerknapp" data-id="{{storageID}}" class="update" data-toggle="tooltip" title="Varetelling">
-    <span class="glyphicon glyphicon-check" style="color: #002E5F"></span>
+    <span class="glyphicon glyphicon-flag" style="color: #002E5F"></span>
     </button>
     </td>
 
