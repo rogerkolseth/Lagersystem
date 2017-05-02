@@ -93,14 +93,14 @@ class UserController extends Controller {
             $sessionID = $_SESSION["userID"];
 
             $setSessionID = $GLOBALS["userModel"];
-            $addRestriction = $GLOBALS["restrictionModel"];
-
+            $groupModel = $GLOBALS["groupModel"];
+            
             foreach ($givenUserArray as $givenUserID) :
                 foreach ($givenGroupArray as $givenGroupID) :
-                    $count = $addRestriction->doesGroupRestrictionExist($givenUserID, $givenGroupID);
+                    $count = $groupModel->doesMemberExist($givenGroupID, $givenUserID);
                     if ($count[0]["COUNT(*)"] < 1) {
                         $setSessionID->setSession($sessionID);
-                        $added = $addRestriction->addGroupRestriction($givenUserID, $givenGroupID);
+                        $added = $groupModel->addGroupMember($givenGroupID, $givenUserID);;
                     }
                 endforeach;
             endforeach;
