@@ -7,7 +7,7 @@ class UserController extends Controller {
     public function show($page) {
         if ($page == "userAdm") {
             $this->userAdmPage();
-        }    else if ($page == "addRestriction") {
+        } else if ($page == "addRestriction") {
             $this->addRestriction();
         } else if ($page == "getUserInfo") {
             $this->getUserInfo(); 
