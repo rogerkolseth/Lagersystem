@@ -175,7 +175,8 @@ class Router {
                 case "getGroupMember" :
                 case "getGroupRestriction" :
                 case "deleteGroupMember" :
-                case "deleteGroupRestriction" :    
+                case "deleteGroupRestriction" :
+                case "getGroupRestrictionFromSto" :    
                     return new GroupController();
                     }
                 }

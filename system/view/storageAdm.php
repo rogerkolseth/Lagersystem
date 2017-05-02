@@ -166,18 +166,15 @@
                                     <h2 class="panel-title text-center"><b>Grupper med tilgang</b></h2>
                                 </div>
                                 <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Gruppenavn</th>
+                                        </tr>
+                                    </thead>  
+                                    <tbody id="groupRestrictionContainer">
 
-                                    <tbody>
-                                        <tr>
-                                            <td>Gruppe 1</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gruppe 2</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gruppe 3</td>
-                                        </tr>
-                                    </tbody>    
+                                    </tbody>   
                                 </table>
                             </div>
                         
@@ -475,6 +472,21 @@
 </div>
 
 <!-- TEMPLATES -->
+groupRestrictionContainer
+
+<script id="groupRestrictionTemplate" type="text/x-handlebars-template">
+{{#each groupRestriction}}
+<tr>
+    <td id="bordernone">
+    <button id="redigerknapp" data-id="{{resID}}" class="deleteGroupRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+    </td>
+<td id="bordernone">{{groupName}}</td>
+</tr>    
+    
+{{/each}} 
+</script>
 <script id="showProductMacTemplate" type="text/x-handlebars-template">
     {{#each inventoryMac}}
     <tr>

@@ -393,6 +393,7 @@ $(function POSTstorageInformationModal() {
         POSTstorageRestriction(givenStorageID);
         POSTstorageProduct(givenStorageID);
         chartInventory(givenStorageID);
+        POSTgroupRestriction(givenStorageID);
 
 
         $.ajax({
@@ -547,6 +548,47 @@ function POSTstorageRestriction(data) {
             }
         });
     });
+}
+
+
+function POSTgroupRestriction(data) {
+    givenStorageID = data;
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            url: '?page=getGroupRestrictionFromSto',
+            data: {givenStorageID: givenStorageID},
+            dataType: 'json',
+            success: function (data) {
+                groupRestrictionTemplate(data);
+            }
+        });
+    });
+}
+
+$(function DeleteGroupRestriction() {
+    $('#groupRestrictionContainer').delegate('.deleteGroupRestriction', 'click', function () {
+        var restrictionID = $(this).attr('data-id');
+        $.ajax({
+            type: 'POST',
+            url: '?page=deleteGroupRestriction',
+            data: {restrictionID: restrictionID},
+            dataType: 'json',
+            success: function (data) {
+                POSTgroupRestriction(givenStorageID);
+            }
+        });
+        return false;
+    });
+});
+
+function groupRestrictionTemplate(data) {
+    var rawTemplate = document.getElementById("groupRestrictionTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var storageRestrictionGeneratedHTML = compiledTemplate(data);
+
+    var storageContainer = document.getElementById("groupRestrictionContainer");
+    storageContainer.innerHTML = storageRestrictionGeneratedHTML;
 }
 
 
