@@ -15,16 +15,16 @@ class RestritionModel{
     const FIND_QUERY = "SELECT COUNT(*) FROM " . RestritionModel::TABLE . " WHERE storageID = :givenStorageID AND userID = :givenUserID";
     const COUNT_QUERY = "SELECT COUNT(*) FROM " . RestritionModel::TABLE . " WHERE userID = :givenUserID";
     const DELETE_STO_ID_QUERY = "DELETE FROM " . RestritionModel::TABLE . " WHERE storageID = :givenStorageID";
-    const INSERT_GROUP_RES = "INSERT INTO " . RestritionModel::GROUP_TABLE . " (userID, groupID) VALUES (:givenUserID, :givenGroupID)";
+    const INSERT_GROUP_RES = "INSERT INTO " . RestritionModel::TABLE . " (storageID, groupID) VALUES (:givenStorageID, :givenGroupID)";
     const SELECT_STORAGE_QUERY = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID";
     const SELECT_USER_QUERY = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID";
-    const INSERT_QUERY = "INSERT INTO " . RestritionModel::TABLE . " (userID, storageID) VALUES (:givenUserID, :givenStorageID)";
+    const INSERT_QUERY = "INSERT INTO " . RestritionModel::TABLE . " (groupID, storageID) VALUES (:givenGroupID, :givenStorageID)";
     const DELETE_QUERY = "DELETE FROM " . RestritionModel::TABLE . " WHERE userID = :removeUserID";
     const DELETE_SINGLE_QUERY = "DELETE FROM " . RestritionModel::TABLE . " WHERE userID = :givenUserID AND storageID = :givenStorageID";
     const FIND_GROUP_EXIST = "SELECT COUNT(*) FROM " . RestritionModel::GROUP_TABLE . " WHERE groupID = :givenGroupID AND userID = :givenUserID";
     const SELECT_GROUP_RES = "SELECT restrictions.resID, storage.storageName, restrictions.groupID, restrictions.storageID FROM " . RestritionModel::TABLE . " INNER JOIN storage ON restrictions.storageID = storage.storageID WHERE groupID = :givenGroupID";
     const DELETE_GROUP_RES = "DELETE FROM " . RestritionModel::TABLE . " WHERE resID = :restrictionID";
-   
+    const GROUP_RES_FROM_STO = "SELECT restrictions.resID, restrictions.groupID, user_group.groupName, restrictions.storageID FROM " . RestritionModel::TABLE . " INNER JOIN user_group ON restrictions.groupID = user_group.groupID WHERE storageID = :givenStorageID";
     
     private $addStmt;
     
@@ -45,6 +45,7 @@ class RestritionModel{
     $this->existGroupStm = $this->dbConn->prepare(RestritionModel::FIND_GROUP_EXIST);
     $this->ResFromGroupID = $this->dbConn->prepare(RestritionModel::SELECT_GROUP_RES);
     $this->delGroupRes = $this->dbConn->prepare(RestritionModel::DELETE_GROUP_RES);
+    $this->ResFromStoID = $this->dbConn->prepare(RestritionModel::GROUP_RES_FROM_STO);
 
     }
     
@@ -101,8 +102,8 @@ class RestritionModel{
         return $this->delResFromSto->execute(array("givenStorageID" => $givenStorageID));   
     }
     
-    public function addGroupRestriction($givenUserID, $givenGroupID){
-        $this->addGroupRes->execute(array("givenUserID" => $givenUserID, "givenGroupID" => $givenGroupID));
+    public function addGroupRestriction($givenGroupID, $givenStorageID){
+        $this->addGroupRes->execute(array("givenStorageID" => $givenStorageID, "givenGroupID" => $givenGroupID));
     }
     
     public function getUserAndGroupRes($givenUserID){
@@ -122,6 +123,11 @@ class RestritionModel{
     
     public function deleteGroupRestriction($restrictionID){
         return $this->delGroupRes->execute(array("restrictionID" => $restrictionID));  
+    }
+    
+    public function getGroupRestrictionFromSto($givenStorageID){
+        $this->ResFromStoID->execute(array("givenStorageID" => $givenStorageID));
+        return $this->ResFromStoID->fetchAll(PDO::FETCH_ASSOC);
     }
     
     

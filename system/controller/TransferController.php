@@ -17,7 +17,7 @@ class transferController extends Controller {
         } else if ($page == "transferSingle") {
             $this->transferSinglePage();
         } else if ($page == "getuserAndGroupRes") {
-        $this->getuserAndGroupRes();
+        $this->getUserAndGroupRes();
         
         }
     }

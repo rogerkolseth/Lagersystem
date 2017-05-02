@@ -29,6 +29,8 @@ class GroupController extends Controller {
             $this->deleteGroupMember();
         } else if ($page == "deleteGroupRestriction") {
             $this->deleteGroupRestriction();
+        } else if ($page == "getGroupRestrictionFromSto") {
+            $this->getGroupRestrictionFromSto();
         } 
     }
 
@@ -179,5 +181,15 @@ class GroupController extends Controller {
         } else {
             return false;
         }
+    }
+    
+    private function getGroupRestrictionFromSto(){
+        $givenStorageID = $_REQUEST['givenStorageID'];
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        
+        $result = $restrictionModel->getGroupRestrictionFromSto($givenStorageID);
+        
+        $data = json_encode(array("groupRestriction" => $result));
+        echo $data;
     }
 }
