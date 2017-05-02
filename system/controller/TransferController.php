@@ -14,8 +14,6 @@ class transferController extends Controller {
             $this->getTransferRestriction();
         } else if ($page == "transferProduct") {
             $this->transferProduct();
-        } else if ($page == "transferSingle") {
-            $this->transferSinglePage();
         } else if ($page == "getuserAndGroupRes") {
         $this->getUserAndGroupRes();
         
@@ -23,24 +21,19 @@ class transferController extends Controller {
     }
 
     private function transferPage() {
-        $givenUserID = $_SESSION["userID"];
-        $restrictionInfo = $GLOBALS["restrictionModel"];
-        $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        $userID = $_SESSION["userID"];
+        $result = $restrictionModel->getUserAndGroupRes($userID);
+        
+        if(sizeof($result) > "1"){
+           $result = "1";
+                $transferRestriction = array("transferRestriction" => $result); 
+                return $this->render("transfer", $transferRestriction);
+        };
 
-        $data = array("restrictionInfo" => $restrictionModel);
-
-        return $this->render("transfer", $data);
+        return $this->render("transfer");
     }
 
-    private function transferSinglePage() {
-        $givenUserID = $_SESSION["userID"];
-        $restrictionInfo = $GLOBALS["restrictionModel"];
-        $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
-
-        $data = array("restrictionInfo" => $restrictionModel);
-
-        return $this->render("transferSingle", $data);
-    }
 
     private function getTransferRestriction() {
         $givenUserID = $_SESSION["userID"];

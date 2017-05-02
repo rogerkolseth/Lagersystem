@@ -1,6 +1,10 @@
 <?php require("view/header.php");?>
 
-
+<?php
+if (isset($GLOBALS["transferRestriction"])){
+$restriction = $GLOBALS["transferRestriction"];
+}
+?>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="container">
         
@@ -11,7 +15,8 @@
         </div>
     </div>
         
-        
+        <?php 
+                if (isset($GLOBALS["transferRestriction"]) && $restriction == "1"){?>        
         
         
         <h2 class="text-center">Overføring</h2>
@@ -84,6 +89,9 @@
 
 
     </div>
+        <?php } else { ?>
+        <p> Du må ha tilgang til 2 eller fleire lager for å kunne overføre  </p>       
+       <?php }?>
 </div>  
     </div>  
 

@@ -62,10 +62,10 @@
 
 
                         <li><a href="?page=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                        <li><a href ="?page=sale"><span class="glyphicon glyphicon-export"></span> Registrer Uttak</a></li>
-                        <li><a href = "?page=return"><span class="glyphicon glyphicon-import"></span> Registrer Retur</a></li>    
+                        <li><a href="?page=sale"><span class="glyphicon glyphicon-export"></span> Registrer Uttak</a></li>
+                        <li><a href="?page=return"><span class="glyphicon glyphicon-import"></span> Registrer Retur</a></li>    
 
-                        <li><a id="transferLink"><span class="glyphicon glyphicon-random"></span> Overføring</a></li>
+                        <li><a href="?page=transfer"><span class="glyphicon glyphicon-random"></span> Overføring</a></li>
 
                         <li><a href="?page=mySales"><span class="glyphicon glyphicon-stats"></span> Dine Salg</a></li>
                         <li><a href="?page=myReturns"><span class="glyphicon glyphicon-stats"></span> Dine Returer</a></li>
@@ -134,19 +134,4 @@ $(document).ready(function(){
  
 </script>
 
-<script>
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '?page=getResCount',
-            dataType: 'json',
-            success: function (data) {
-                    if(data > 1){ 
-                        document.getElementById("transferLink").href = "?page=transfer";
-                 } else {
-                        document.getElementById("transferLink").href = "?page=transferSingle";
-                 } 
-            }
-        });
-    });
-</script>
+
