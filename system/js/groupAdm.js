@@ -168,6 +168,7 @@ $(function POSTeditGroupModal() {
             dataType: 'json',
             success: function (data) {
                 editGroupTemplate(data);
+                
                 $('#editGroupModal').modal('show');
             }
         });
@@ -275,19 +276,26 @@ function groupInformationTemplate(data) {
 // RESTRICTION
 
 // Get storage information-->
+$(function POSTgroupResModal() {
 
-function getStorageInfo() {
-    $(function () {
-        $.ajax({
+    $('#displayGroupContainer').delegate('.groupRestriction', 'click', function () {
+        var givenGroupID = $(this).attr('data-id');
+         $.ajax({
             type: 'GET',
             url: '?page=getAllStorageInfo',
             dataType: 'json',
             success: function (data) {
+                var $displayGroupID = $('#groupID');
+                $displayGroupID.empty();
+                $displayGroupID.append('<input id="'+ givenGroupID +'" name="givenGroupID" class="form-control"  form="editGroupRestriction"  value="'+givenGroupID+'" type="hidden"/>');
+
                 storageRestrictionTemplate(data);
             }
         });
     });
-}
+});
+
+
 
 
 // Genereate userRestriciton template and display it in contaioner-->

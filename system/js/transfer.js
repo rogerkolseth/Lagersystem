@@ -5,7 +5,7 @@ $('#chooseCategoryContainer').hide();
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getTransferRestriction',
+        url: '?page=getuserAndGroupRes',
         dataType: 'json',
         success: function (data) {
             transferRestrictionTemplate(data);
