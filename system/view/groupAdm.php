@@ -158,6 +158,43 @@
 
                         </tbody>
                     </table>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title text-center"><b>Gruppemedlemmer</b></h2>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Brukernavn</th>
+                                </tr>
+                            </thead>  
+                            <tbody id="groupMemberContainer">
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title text-center"><b>Gruppetilganger</b></h2>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Lagernavn</th>
+                                </tr>
+                            </thead>  
+                            <tbody id="storageGroupResContainer">
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -195,8 +232,73 @@
         </div>
     </div>      
 
+    <div class="modal fade" id="userMemberModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <form action="?page=addGroupMember" id="addGroupMember" method="post">
+                    <div id="groupUserID"></div>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Velg bruker(e) som skal inn i gruppen</h4>
+                    </div>
+                    <div class="modal-body">                 
+                        <table class="table" id="userRestrictionContainer">
+
+                            <!-- Handlebars information -->
+
+
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button form="addGroupMember" class="btn btn-success" type="submit">Legg til i gruppen</button> 
+
+                    </div>
+                </form>  
+            </div>
+        </div>
+    </div>
+
 </div>
 <script type="text/javascript" src="js/groupAdm.js"></script>   
+<script id="storageGroupResTemplate" type="text/x-handlebars-template">
+{{#each StorageRestriction}}
+<tr>
+    <td id="bordernone">
+    <button id="redigerknapp" data-id="{{resID}}" class="deleteStorageRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+    </td>
+<td id="bordernone">{{storageName}}</td>
+</tr>    
+    
+{{/each}} 
+</script>
+
+<script id="groupMemberTemplate" type="text/x-handlebars-template">
+{{#each member}}
+<tr>
+    <td id="bordernone">
+    <button id="redigerknapp" data-id="{{memberID}}" class="deleteMember" data-toggle="tooltip" title="Fjern medlem">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+    </td>
+<td id="bordernone">{{username}}</td>
+</tr>    
+    
+{{/each}} 
+</script>
+
+<script id="userRestrictionTemplate" type="text/x-handlebars-template">
+    {{#each users}}
+    <tr> 
+    <td id="bordernone">{{name}}</td> 
+
+    <td id="bordernone"><input form="addGroupMember" class="selectUserRestriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
+    </tr>
+    {{/each}}
+</script>  
 
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
     {{#each storageInfo}}
@@ -267,6 +369,10 @@
 
     <label id="{{groupID}}" class="groupRestriction" data-id="{{groupID}}" data-toggle="modal"data-toggle="tooltip" title="Gi lagertilgang" data-target="#groupRestrictionModal"><img id="keyIcon" src="image/key-icon2.png"></img>
     </label> 
+
+    <button id="redigerknapp" data-id="{{groupID}}" class="addUser" data-toggle="modal"data-toggle="tooltip" data-target="#userMemberModal" title="Legg til bruker">
+    <span class="glyphicon glyphicon-user" style="color: black"></span>
+    </button> 
     </td>
 
     <!-- Printer ut grupper inn i tabellen -->

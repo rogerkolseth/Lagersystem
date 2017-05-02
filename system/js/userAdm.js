@@ -399,8 +399,10 @@ $('#setRestriction').hide();
 $('#displayUserContainer').delegate('.selectRestriction', 'click', function () {
     if ($(".selectRestriction").is(":checked") === true) {
         $('#setRestriction').show();
+        $('#setGroupRestriction').show();
     } else {
         $('#setRestriction').hide();
+        $('#setGroupRestriction').hide();
     }
 });
 
@@ -421,6 +423,8 @@ function getStorageInfo() {
 }
 
 
+
+
 // Genereate userRestriciton template and display it in contaioner-->
 
 function storageRestrictionTemplate(data) {
@@ -430,6 +434,32 @@ function storageRestrictionTemplate(data) {
 
     var userContainer = document.getElementById("storageRestrictionContainer");
     userContainer.innerHTML = userRestrictionGeneratedHTML;
+}
+
+// Get group information-->
+
+function getGroupInfo() {
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getGroupSearchResult',
+            dataType: 'json',
+            success: function (data) {
+                groupRestrictionTemplate(data);
+            }
+        });
+    });
+}
+
+// Genereate groupRestriciton template and display it in contaioner-->
+
+function groupRestrictionTemplate(data) {
+    var rawTemplate = document.getElementById("groupRestrictionTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var userGroupRestrictionGeneratedHTML = compiledTemplate(data);
+
+    var userContainer = document.getElementById("groupRestrictionContainer");
+    userContainer.innerHTML = userGroupRestrictionGeneratedHTML;
 }
 
 
@@ -446,6 +476,7 @@ $(function POSTrestrictionInfo() {
             dataType: 'json',
             success: function () {
                 $('#userRestrictionModal').modal('hide');
+                $('#userGroupRestrictionModal').modal('hide');
                 successMessageAddRes();
                 UpdateUsersTable();
             }
@@ -503,3 +534,12 @@ $(document).ready(function ()
     });
 });
 
+$(document).ready(function ()
+{
+    $('#userGroupRestrictionModal').on('hidden.bs.modal', function (e)
+    {
+        $('input:checkbox').removeAttr('checked');
+        $('#setRestriction').hide();
+        $('#setGroupRestriction').hide();
+    });
+});

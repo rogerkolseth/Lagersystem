@@ -19,7 +19,17 @@ class GroupController extends Controller {
             $this->editGroupEngine();
         } else if ($page == "addGroupRestriction") {
             $this->addGroupRestriction();
-        }
+        } else if ($page == "addGroupMember") {
+            $this->addGroupMember();
+        } else if ($page == "getGroupMember") {
+            $this->getGroupMember();
+        } else if ($page == "getGroupRestriction") {
+            $this->getGroupRestriction();
+        } else if ($page == "deleteGroupMember") {
+            $this->deleteGroupMember();
+        } else if ($page == "deleteGroupRestriction") {
+            $this->deleteGroupRestriction();
+        } 
     }
 
     private function showGroupPage() {
@@ -105,6 +115,69 @@ class GroupController extends Controller {
                 }
             endforeach;
             echo json_encode("success");
+        }
+    }
+    
+    private function addGroupMember() {
+        if (isset($_POST['givenGroupID']) && isset($_POST['userRestrictions'])) {
+            $givenGroupID = $_REQUEST['givenGroupID'];
+            $givenUserArray = $_REQUEST['userRestrictions'];
+            $sessionID = $_SESSION["userID"];
+
+            $setSessionID = $GLOBALS["userModel"];
+            $groupModel = $GLOBALS["groupModel"];
+
+            foreach ($givenUserArray as $givenUserID) :
+                $count = $groupModel->doesMemberExist($givenGroupID, $givenUserID);
+                if ($count[0]["COUNT(*)"] < 1) {
+                    $setSessionID->setSession($sessionID);
+                    $groupModel->addGroupMember($givenGroupID, $givenUserID);
+                }
+            endforeach;
+            echo json_encode("success");
+        }
+    }
+    
+    private function getGroupMember(){
+        $givenGroupID = $_REQUEST['givenGroupID'];
+        $groupModel = $GLOBALS["groupModel"];
+        $members = $groupModel->getGroupMember($givenGroupID);
+        
+        $data = json_encode(array("member" => $members));
+        echo $data;
+    }
+    
+    private function getGroupRestriction(){
+        $givenGroupID = $_REQUEST['givenGroupID'];
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        
+        $result = $restrictionModel->getGroupRestriction($givenGroupID);
+        
+        $data = json_encode(array("StorageRestriction" => $result));
+        echo $data;
+    }
+    
+    private function deleteGroupMember(){
+        $memberID = $_REQUEST['memberID'];
+        $groupModel = $GLOBALS["groupModel"];
+        
+        $deleted = $groupModel->deleteGroupMember($memberID);
+        if ($deleted) {
+            echo json_encode("success");
+        } else {
+            return false;
+        }
+    }
+    
+    private function deleteGroupRestriction(){
+        $restrictionID = $_REQUEST['restrictionID'];
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        
+        $deleted = $restrictionModel->deleteGroupRestriction($restrictionID);
+        if ($deleted) {
+            echo json_encode("success");
+        } else {
+            return false;
         }
     }
 }
