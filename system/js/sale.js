@@ -323,7 +323,7 @@ function showHide(data) {
         $('#singleStorageContainer').show();
         var storageID = data.transferRestriction[0].storageID;
         displaySingleStorage(storageID);
-
+        getUsedStorageCat(storageID);
         $('#singleStorageContainer').append('<p>' + data.transferRestriction[0].storageName + '</p>');
         $('#singleStorageContainer').append('<input name="fromStorageID" data-id="' + storageID + '" value="' + storageID + '" type="hidden"/>');
         $('#chooseCategoryContainer').show();
