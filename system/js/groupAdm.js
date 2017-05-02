@@ -236,7 +236,7 @@ function errorMessageEdit() {
 }
 
 
-// SHOW PRODUCT INFORMATION -->
+// SHOW GROUP INFORMATION -->
 
 // get information from selected product-->
 
@@ -244,6 +244,8 @@ $(function POSTgroupInformationModal() {
 
     $('#displayGroupContainer').delegate('.information', 'click', function () {
         var givenGroupID = $(this).attr('data-id');
+        POSTgroupMember(givenGroupID);
+        POSTgroupRestriction(givenGroupID);
         $.ajax({
             type: 'POST',
             url: '?page=getGroupByID',
@@ -259,6 +261,86 @@ $(function POSTgroupInformationModal() {
 
     });
 });
+var givenGroupID
+function POSTgroupMember(data) {
+    givenGroupID = data;
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            url: '?page=getGroupMember',
+            data: {givenGroupID: givenGroupID},
+            dataType: 'json',
+            success: function (data) {
+                groupMemberTemplate(data);
+            }
+        });
+    });
+}
+
+$(function DeleteGroupMember() {
+    $('#groupMemberContainer').delegate('.deleteMember', 'click', function () {
+        var memberID = $(this).attr('data-id');
+        $.ajax({
+            type: 'POST',
+            url: '?page=deleteGroupMember',
+            data: {memberID: memberID},
+            dataType: 'json',
+            success: function (data) {
+                POSTgroupMember(givenGroupID);
+            }
+        });
+        return false;
+    });
+});
+
+function groupMemberTemplate(data) {
+    var rawTemplate = document.getElementById("groupMemberTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var UserRestrictionGeneratedHTML = compiledTemplate(data);
+
+    var userContainer = document.getElementById("groupMemberContainer");
+    userContainer.innerHTML = UserRestrictionGeneratedHTML;
+}
+
+function POSTgroupRestriction(data) {
+     givenGroupID = data;
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            url: '?page=getGroupRestriction',
+            data: {givenGroupID: givenGroupID},
+            dataType: 'json',
+            success: function (data) {
+                groupRestrictionTemplate(data);
+            }
+        });
+    });
+}
+
+$(function DeleteGroupRestriction() {
+    $('#storageGroupResContainer').delegate('.deleteStorageRestriction', 'click', function () {
+        var restrictionID = $(this).attr('data-id');
+        $.ajax({
+            type: 'POST',
+            url: '?page=deleteGroupRestriction',
+            data: {restrictionID: restrictionID},
+            dataType: 'json',
+            success: function (data) {
+                POSTgroupRestriction(givenGroupID);
+            }
+        });
+        return false;
+    });
+});
+
+function groupRestrictionTemplate(data) {
+    var rawTemplate = document.getElementById("storageGroupResTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var UserRestrictionGeneratedHTML = compiledTemplate(data);
+
+    var userContainer = document.getElementById("storageGroupResContainer");
+    userContainer.innerHTML = UserRestrictionGeneratedHTML;
+}
 
 
 // Display storageInformation Template-->
@@ -338,3 +420,61 @@ function successMessageAddRes() {
     });
     ;
 }
+
+
+// SHOW PRODUCT INFORMATION -->
+
+// get information from selected product-->
+
+$(function GetUserInformationModal() {
+    $('#displayGroupContainer').delegate('.addUser', 'click', function () {
+        var givenGroupID = $(this).attr('data-id');
+
+        $.ajax({
+            type: 'GET',
+            url: '?page=getUserInfo',
+            dataType: 'json',
+            success: function (data) {
+                var $displayGroupID = $('#groupUserID');
+                $displayGroupID.empty();
+                $displayGroupID.append('<input id="'+ givenGroupID +'" name="givenGroupID" class="form-control"  form="addGroupMember"  value="'+givenGroupID+'" type="hidden"/>');
+
+                userRestrictionTemplate(data);
+            }
+        });
+
+
+    });
+});
+
+// Genereate userRestriciton template and display it in contaioner-->
+
+function userRestrictionTemplate(data) {
+    var rawTemplate = document.getElementById("userRestrictionTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var groupRestrictionGeneratedHTML = compiledTemplate(data);
+
+    var groupContainer = document.getElementById("userRestrictionContainer");
+    groupContainer.innerHTML = groupRestrictionGeneratedHTML;
+}
+
+$(function addGroupMember() {
+    $('#addGroupMember').submit(function () {
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function () {
+                $('#userMemberModal').modal('hide');
+                successMessageAddRes();
+                UpdateGroupTable();
+            }
+        });
+        return false;
+    });
+});
+
+

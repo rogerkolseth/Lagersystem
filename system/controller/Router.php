@@ -169,7 +169,13 @@ class Router {
                 case "getGroupByID" :
                 case "deleteGroupEngine" :   
                 case "editGroupEngine" :    
-                case "addGroupRestriction" :    
+                case "addGroupRestriction" :
+                case "getAllGroupInfo" : 
+                case "addGroupMember" :
+                case "getGroupMember" :
+                case "getGroupRestriction" :
+                case "deleteGroupMember" :
+                case "deleteGroupRestriction" :    
                     return new GroupController();
                     }
                 }

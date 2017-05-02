@@ -26,6 +26,8 @@
             <div class="pull-right row">
                 <button class="btn btn-success " onclick="getMediaInfo();" type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
                 <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-warning displayNone" type="button">Velg Lager</button>
+                <button  id="setGroupRestriction" onclick="getGroupInfo()" data-toggle="modal" data-target="#userGroupRestrictionModal" class="btn btn-warning displayNone" type="button">Velg Gruppe</button>
+ 
             </div>
             </div>
             
@@ -152,7 +154,33 @@
                  
             </div>
         </div>
-    </div>      
+    </div>   
+        
+        <div class="modal fade" id="userGroupRestrictionModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Velg gruppe tilgang(er)</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table" id="groupRestrictionContainer">
+
+                        <!-- Handlebars information -->
+
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+
+                    <button form="editRestriction" class="btn btn-success" type="submit">Velg gruppetilgang</button> 
+
+                </div>
+                 
+            </div>
+        </div>
+    </div>    
          
       
      </form>    
@@ -365,6 +393,16 @@
 
 <!-- HANDLEBARS TEMPLATES-->
 
+<script id="groupRestrictionTemplate" type="text/x-handlebars-template">
+{{#each group}}
+    <tr> 
+        <td id="bordernone">{{groupName}}</td> 
+
+        <td id="bordernone"><input form="editRestriction" class="selectGroupRestriction" id="{{groupID}}" value="{{groupID}}"  name="groupRestrictions[]" type="checkbox"></td>
+    </tr>
+{{/each}}
+</script>   
+
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
 {{#each storageInfo}}
     <tr> 
@@ -373,7 +411,7 @@
         <td id="bordernone"><input form="editRestriction" class="selectStorageRestriction" id="{{storageID}}" value="{{storageID}}"  name="storageRestrictions[]" type="checkbox"></td>
     </tr>
 {{/each}}
-</script>     
+</script>
 
 <!-- edit user template-->
 <script id="editUserTemplate" type="text/x-handlebars-template">
@@ -529,6 +567,9 @@
 
     <label for="setRes{{userID}}" id="{{userID}}" onclick="getStorageInfo()" data-toggle="modal"data-toggle="tooltip" title="Gi lagertilgang" data-target="#userRestrictionModal">    <img id="keyIcon" src="image/key-icon2.png"></img>
     </label> 
+
+    <label for="setRes{{userID}}" id="{{userID}}" style="margin-left:8px" onclick="getGroupInfo()" data-toggle="modal"data-toggle="tooltip" title="Gi gruppetilgang" data-target="#userGroupRestrictionModal">    <img id="keyIcon" src="image/user-group.png"></img>
+    </label>
 
     </td>
  
