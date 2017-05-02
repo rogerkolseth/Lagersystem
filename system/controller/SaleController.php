@@ -167,7 +167,7 @@ class SaleController extends Controller {
         } else {
             $givenUserID = $_SESSION["userID"];
             $restrictionInfo = $GLOBALS["restrictionModel"];
-            $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
+            $restrictionModel = $restrictionInfo->getUserAndGroupRes($givenUserID);
 
             $givenStorageID = $restrictionModel[0]['storageID'];
             $negativeSupport = $storageModel->getNegativeSupportStatus($givenStorageID);
@@ -253,7 +253,7 @@ class SaleController extends Controller {
         } else {
             $givenUserID = $_SESSION["userID"];
             $restrictionInfo = $GLOBALS["restrictionModel"];
-            $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
+            $restrictionModel = $restrictionInfo->getUserAndGroupRes($givenUserID);
             $givenStorageID = $restrictionModel[0]['storageID'];
             if ($givenCategoryID == 0) {
                 $result = $inventoryInfo->getAllStorageInventoryByStorageID($givenStorageID);
