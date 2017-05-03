@@ -227,10 +227,11 @@
 <!-- delete category template -->
 
 <script id="deleteCategoryTemplate" type="text/x-handlebars-template">
-    <p> Er du sikker på at du vil slette:  <P>
+    <h4>Du holder på å slette kategorien:</h4>
     {{#each categoryByID}}           
-    {{categoryName}}  
+    <h4><b>{{categoryName}}</b></h4>
     <input form="deleteCategory" type="hidden" name="deleteCategoryID" value="{{categoryID}}"><br>
+    <h4>Er du sikker på at du vil slette denne kategorien?</h4>
     {{/each}}    
 </script>    
 

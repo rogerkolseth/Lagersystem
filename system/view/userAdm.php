@@ -546,7 +546,7 @@
 <script id="deleteUserTemplate" type="text/x-handlebars-template">
     <h4> Du holder på å slette brukeren: </h4>
     {{#each user}}           
-    {{name}}  
+    <h4><b>{{name}}</b></h4>
     <input form="deleteUser" type="hidden" name="deleteUserID" value="{{userID}}">
         
     {{/each}}

@@ -662,10 +662,12 @@ groupRestrictionContainer
 
 <!-- Display what storage you are deleting-->
 <script id="deleteStorageTemplate" type="text/x-handlebars-template">
-    <p> Er du sikker på at du vil slette  <P>
+    <h4>Du holder på å slette:</h4>
     {{#each storage}}
-    {{storageName}}
-    <input type="hidden" form="deleteStorage" name="deleteStorageID" value="{{storageID}}">    
+    <h4><b>{{storageName}}</b></h4>
+    <input type="hidden" form="deleteStorage" name="deleteStorageID" value="{{storageID}}"> 
+                
+    <h4>Alle produkter og tilganger til lageret vil bli slettet,<br> er du sikker på at du vil fortsette?</h4>
     {{/each}} 
 </script>   
 

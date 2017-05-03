@@ -421,10 +421,11 @@
 <!-- delete category template -->
 
 <script id="deleteGroupTemplate" type="text/x-handlebars-template">
-    <p> Er du sikker på at du vil slette:  <P>
+    <h4>Du holder på å slette gruppen:</h4>
     {{#each groupByID}}           
-    {{groupName}}  
+    <h4><b>{{groupName}}</b></h4>
     <input form="deleteGroup" type="hidden" name="deleteGroupID" value="{{groupID}}"><br>
+    <h4>Er du sikker på at du vil fortsette?</h4>
     {{/each}}    
 </script>  
 

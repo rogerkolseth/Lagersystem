@@ -212,7 +212,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Product informasjon</h4>
+                <h4 class="modal-title">Produkt informasjon</h4>
             </div>
             <form action="?page=deleteProductEngine" method="post" id="deleteProduct">
             <div class="modal-body" id="deleteProductContainer">
@@ -458,10 +458,11 @@
 
 <!-- Display what product you are deleting-->
 <script id="deleteProductTemplate" type="text/x-handlebars-template">
-    <p> Er du sikker på at du vil slette:  <P>
+    <h4>Du holder på å slette:</h4>
 {{#each product}}
-    {{productName}}
-    <input type="hidden" form="deleteProduct" name="deleteProductID" value="{{productID}}">    
+    <h4><b>{{productName}}</b></h4>
+    <input type="hidden" form="deleteProduct" name="deleteProductID" value="{{productID}}">
+    <h4>Alle produkter av denne typen vil bli slettet og fjernet fra lager som inneholder dette produktet,<br> er du sikker på at du vil fortsette?</h4>
 {{/each}} 
 </script>  
 

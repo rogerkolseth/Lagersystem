@@ -189,7 +189,7 @@ $errormessage = $GLOBALS["errorMessage"];
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Slett bilde?</h4>
+                <h4 class="modal-title">Slett bilde</h4>
             </div>
             <form action="?page=deleteMedia" method="post" id="deleteMedia">
             <div class="modal-body" id="deleteMediaContainer">
@@ -287,12 +287,13 @@ $errormessage = $GLOBALS["errorMessage"];
     
 <!-- Display what media you are deleting-->
 <script id="deleteMediaTemplate" type="text/x-handlebars-template">
-    <p> Er du sikker på at du vil slette:  <P>
+    <h4>Du holder på å slette bildet:</h4>
     {{#each mediaInfo}}
-    <b>{{mediaName}}</b>
+    <h4><b>{{mediaName}}</b></h4>
     <input type="hidden" form="deleteMedia" name="deleteMediaID" value="{{mediaID}}">    
     <br><br>
-    <img class="img-responsive" src="image/{{mediaName}}" alt="Home">            
+    <img class="img-responsive" src="image/{{mediaName}}" alt="Home">
+    <h4>Er du sikker på at du vil fortsette?</h4>
     {{/each}} 
 </script>       
 
