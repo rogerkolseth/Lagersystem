@@ -178,6 +178,10 @@ class GroupController extends Controller {
     private function deleteGroupMember(){
         $memberID = $_REQUEST['memberID'];
         $groupModel = $GLOBALS["groupModel"];
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
         
         $deleted = $groupModel->deleteGroupMember($memberID);
         if ($deleted) {
