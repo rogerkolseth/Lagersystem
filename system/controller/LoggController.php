@@ -88,15 +88,16 @@ class LoggController extends Controller {
         $storageModel = $GLOBALS["storageModel"];
         $userModel = $GLOBALS["userModel"];
         $productModel = $GLOBALS["productModel"];
+        $groupModel = $GLOBALS["groupModel"];
         
         $userInfo = $userModel->getAllUserInfo();
         $storageInfo = $storageModel->getAll();
-        $givenProductSearchWord = "%%";
-        $productInfo = $productModel->getSearchResult($givenProductSearchWord);
+        $givenSearchWord = "%%";
+        $productInfo = $productModel->getSearchResult($givenSearchWord);
+        $groupInfo = $groupModel->getSearchResult($givenSearchWord);
         
         
-        
-        $data = json_encode(array("userInfo" => $userInfo, "storageInfo" => $storageInfo, "productInfo" => $productInfo));
+        $data = json_encode(array("userInfo" => $userInfo, "storageInfo" => $storageInfo, "productInfo" => $productInfo, "groupInfo" => $groupInfo));
         echo $data;
         
     }
@@ -123,6 +124,9 @@ class LoggController extends Controller {
         if (isset($_POST['product'])) {
             $productArray = $_REQUEST["product"];
         } else { $productArray = array();}
+        if (isset($_POST['group'])) {
+            $groupArray = $_REQUEST["group"];
+        } else { $groupArray = array();}
         if (empty(!$_POST['date'])) {
             $dateArray = $_REQUEST["date"];
             $date = explode("/", $dateArray);
@@ -132,7 +136,7 @@ class LoggController extends Controller {
         
         
         $loggModel = $GLOBALS["loggModel"];
-        $search = $loggModel->advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray, $fromDate, $toDate);
+        $search = $loggModel->advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray, $groupArray, $fromDate, $toDate);
         
         $data = json_encode(array("allLoggInfo" => $search));
         echo $data;
