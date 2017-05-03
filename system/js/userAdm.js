@@ -136,6 +136,7 @@ $(function POSTuserInformationModal() {
 
         var givenUserID = $(this).attr('data-id');
         POSTuserRestriction(givenUserID);
+        POSTgroupMembership(givenUserID);
         $.ajax({
             type: 'POST',
             url: '?page=getUserByID',
@@ -170,7 +171,45 @@ function POSTuserRestriction(data) {
     });
 }
 
+function POSTgroupMembership(data) {
+    givenUserID = data;
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            url: '?page=getGroupMembershipFromUserID',
+            data: {givenUserID: givenUserID},
+            dataType: 'json',
+            success: function (data) {
+                groupMembershipTemplate(data);
+            }
+        });
+    });
+}
 
+$(function DeleteGroupMembership() {
+    $('#groupMembershipContainer').delegate('.deleteGroupMembership', 'click', function () {
+        var memberID = $(this).attr('data-id');
+        $.ajax({
+            type: 'POST',
+            url: '?page=deleteGroupMember',
+            data: {memberID: memberID},
+            dataType: 'json',
+            success: function (data) {
+                POSTgroupMembership(givenUserID);
+            }
+        });
+        return false;
+    });
+});
+
+function groupMembershipTemplate(data) {
+    var rawTemplate = document.getElementById("groupMembershipTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var userRestrictionGeneratedHTML = compiledTemplate(data);
+
+    var userContainer = document.getElementById("groupMembershipContainer");
+    userContainer.innerHTML = userRestrictionGeneratedHTML;
+}
 
 $(function deleteUserRestriction() {
     $('#userRestrictionContainer').delegate('.deleteRestriction', 'click', function () {

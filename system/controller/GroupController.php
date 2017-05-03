@@ -31,6 +31,8 @@ class GroupController extends Controller {
             $this->deleteGroupRestriction();
         } else if ($page == "getGroupRestrictionFromSto") {
             $this->getGroupRestrictionFromSto();
+        } else if ($page == "getGroupMembershipFromUserID") {
+            $this->getGroupMembershipFromUserID();
         } 
     }
 
@@ -190,6 +192,16 @@ class GroupController extends Controller {
         $result = $restrictionModel->getGroupRestrictionFromSto($givenStorageID);
         
         $data = json_encode(array("groupRestriction" => $result));
+        echo $data;
+    }
+    
+    private function getGroupMembershipFromUserID(){
+        $givenUserID = $_REQUEST['givenUserID'];
+        $groupModel = $GLOBALS["groupModel"];
+        
+        $result = $groupModel->getGroupMembershipFromUserID($givenUserID);
+        
+        $data = json_encode(array("groupMembership" => $result));
         echo $data;
     }
 }

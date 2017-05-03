@@ -263,9 +263,14 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Ny tabell til roger</th>
+                                    <th>Gruppemedlemskap</th>
                                 </tr>
                             </thead>
+                            <tbody id="groupMembershipContainer"> 
+                           
+                                    <!-- Innhold fra Handlebars Template-->
+
+                        </tbody>
                         </table>
                         </div>
                 </div>
@@ -393,6 +398,20 @@
 
 
 <!-- HANDLEBARS TEMPLATES-->
+
+<script id="groupMembershipTemplate" type="text/x-handlebars-template">
+{{#each groupMembership}}
+<tr>
+    <td id="bordernone">
+    <button id="redigerknapp" data-id="{{memberID}}" class="deleteGroupMembership" data-toggle="tooltip" title="Fjern gruppetilgang">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+    </td>
+<td id="bordernone">{{groupName}}</td>
+</tr>    
+    
+{{/each}} 
+</script>
 
 <script id="groupRestrictionTemplate" type="text/x-handlebars-template">
 {{#each group}}
