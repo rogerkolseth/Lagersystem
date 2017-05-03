@@ -245,7 +245,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>
         </div>
-    </div>
+    
         <!-- Hjelp modal bruker -->
 
 
