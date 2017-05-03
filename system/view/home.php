@@ -850,6 +850,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 <th>Gammelt antall</th>
                 <th>Nytt antall</th>
                 <th>Differanse</th>
+                <th>Gruppenavn</th>    
                 <th>Brukernavn</th>
                 <th>På bruker</th>
                 <th>Produkt</th>    
@@ -869,6 +870,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 <td>{{oldQuantity}}</td>
                 <td>{{newQuantity}}</td>
                 <td>{{differential}}</td>  
+                <td>{{groupName}}{{deletedGroup}}</td>     
                 <td>{{username}}</td>
                 <td>{{onUsername}}</td>
                 <td>{{productName}}</td>

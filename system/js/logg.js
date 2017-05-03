@@ -202,6 +202,7 @@ $(function () {
             userSearchTemplate(data);
             storageSearchTemplate(data);
             productSearchTemplate(data);
+            groupSearchTemplate(data);
         }
     });
 });
@@ -247,6 +248,15 @@ function productSearchTemplate(data) {
     $productTemplate.empty();
     $.each(data.productInfo, function (i, item) {
         $productTemplate.append('<tr><td id="bordernone">' + item.productName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="product[]" value="'+item.productID+'"></td></tr>');
+
+    });
+}
+
+function groupSearchTemplate(data) {
+    var $grouptTemplate = $('#groupContainer');
+    $grouptTemplate.empty();
+    $.each(data.groupInfo, function (i, item) {
+        $grouptTemplate.append('<tr><td id="bordernone">' + item.groupName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="group[]" value="'+item.groupID+'"></td></tr>');
 
     });
 }

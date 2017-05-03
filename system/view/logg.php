@@ -152,6 +152,20 @@
                                 </table>
                         </div>
                     </div>
+                    
+                    <div class="dropdown form-group" id="groupSearch">
+                        <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
+                            Velg Gruppe
+                        </button>
+                        <div class="dropdown-menu">
+                       
+                            
+                            <li class="dropdown-header"><h4>Velg grupper:</h4></li>
+                                <table class="table" id="groupContainer">
+                        
+                                </table>
+                        </div>
+                    </div>
 
                     <div class="dropdown form-group" id="usernameSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
@@ -310,6 +324,7 @@
     <th>Gammelt Antall</th>
     <th>Nytt Antall</th>
     <th>Differanse</th>
+    <th>Gruppenavn</th>    
     <th>Brukernavn</th>
     <th>På bruker</th>
     <th>Produkt</th>    
@@ -328,7 +343,8 @@
     <td>{{quantity}}</td>
     <td>{{oldQuantity}}</td>
     <td>{{newQuantity}}</td>
-    <td>{{differential}}</td>  
+    <td>{{differential}}</td> 
+    <td>{{groupName}}{{deletedGroup}}</td>    
     <td>{{username}}</td>
     <td>{{onUsername}}{{deletedUser}}</td>
     <td>{{productName}}{{deletedProduct}}</td>
