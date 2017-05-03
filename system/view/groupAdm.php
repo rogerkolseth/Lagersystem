@@ -169,12 +169,7 @@
                             <h2 class="panel-title text-center"><b>Gruppemedlemmer</b></h2>
                         </div>
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Brukernavn</th>
-                                </tr>
-                            </thead>  
+                             
                             <tbody id="groupMemberContainer">
 
                             </tbody>
@@ -188,12 +183,7 @@
                             <h2 class="panel-title text-center"><b>Gruppetilganger</b></h2>
                         </div>
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Lagernavn</th>
-                                </tr>
-                            </thead>  
+                              
                             <tbody id="storageGroupResContainer">
 
                             </tbody>

@@ -244,34 +244,34 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>Lagertilgang</b></h2>
+                                </div>
                     <table class="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Lagertilgang</th>
-                            </tr>
-                        </thead>
+                        
                         <tbody id="userRestrictionContainer"> 
                            
                                     <!-- Innhold fra Handlebars Template-->
 
                         </tbody>
                     </table>
+                            </div>
                         </div> 
                         <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>Gruppemedlemskap</b></h2>
+                                </div>
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Gruppemedlemskap</th>
-                                </tr>
-                            </thead>
+                            
                             <tbody id="groupMembershipContainer"> 
                            
                                     <!-- Innhold fra Handlebars Template-->
 
                         </tbody>
                         </table>
+                            </div>
                         </div>
                 </div>
                 </div>

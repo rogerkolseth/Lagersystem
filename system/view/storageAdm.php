@@ -166,12 +166,7 @@
                                     <h2 class="panel-title text-center"><b>Grupper med tilgang</b></h2>
                                 </div>
                                 <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Gruppenavn</th>
-                                        </tr>
-                                    </thead>  
+                                     
                                     <tbody id="groupRestrictionContainer">
 
                                     </tbody>   
