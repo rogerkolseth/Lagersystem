@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 02. Mai, 2017 13:16 p.m.
+-- Generation Time: 03. Mai, 2017 11:59 a.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -50,6 +50,26 @@ CREATE TABLE `group_members` (
   `userID` int(11) UNSIGNED NOT NULL,
   `groupID` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Triggere `group_members`
+--
+DELIMITER $$
+CREATE TRIGGER `createGroupMember` AFTER INSERT ON `group_members` FOR EACH ROW BEGIN
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 3) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.groupID, logg.userID, logg.onUserID, logg.date) VALUES (3, 'Innmeldt bruker', NEW.groupID, @sessionUserID, NEW.userID, NOW());
+END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `deleteGroupMember` BEFORE DELETE ON `group_members` FOR EACH ROW BEGIN
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 3) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.groupID, logg.userID, logg.onUserID, logg.date) VALUES (3, 'Utmeldt bruker', OLD.groupID, @sessionUserID, OLD.userID, NOW());
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -104,6 +124,7 @@ CREATE TABLE `logg` (
   `oldQuantity` int(11) DEFAULT NULL,
   `newQuantity` int(11) DEFAULT NULL,
   `differential` int(11) DEFAULT NULL,
+  `groupID` int(11) UNSIGNED DEFAULT NULL,
   `userID` int(11) UNSIGNED DEFAULT NULL,
   `onUserID` int(11) UNSIGNED DEFAULT NULL,
   `productID` int(11) UNSIGNED DEFAULT NULL,
@@ -111,7 +132,8 @@ CREATE TABLE `logg` (
   `customerNr` int(11) DEFAULT NULL,
   `deletedUser` varchar(255) DEFAULT NULL,
   `deletedStorage` varchar(255) DEFAULT NULL,
-  `deletedProduct` varchar(255) DEFAULT NULL
+  `deletedProduct` varchar(255) DEFAULT NULL,
+  `deletedGroup` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -194,7 +216,6 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `productName`, `price`, `categoryID`, `mediaID`, `date`, `macAdresse`) VALUES
-(56, 'Dekoder', '1490.00', 3, 21, '2017-04-14', 0),
 (62, 'FMG', '999.00', 2, 21, '2017-04-25', 0),
 (63, 'TestMac', '444.00', 2, 21, '2017-04-26', 1),
 (64, 'testMac2', '4444.00', 2, 21, '2017-04-26', 1),
@@ -212,7 +233,9 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `deleteProduct_Logg` BEFORE DELETE ON `products` FOR EACH ROW BEGIN IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedProduct) VALUES (9, 'Av produkt', @sessionUserID, NOW(), OLD.productName); END IF; 
+CREATE TRIGGER `deleteProduct_Logg` BEFORE DELETE ON `products` FOR EACH ROW BEGIN 
+DELETE FROM inventory WHERE inventory.productID = OLD.productID;
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedProduct) VALUES (9, 'Av produkt', @sessionUserID, NOW(), OLD.productName); END IF; 
 UPDATE sales SET sales.deletedProduct = OLD.productName WHERE sales.productID = OLD.productID;
 UPDATE returns SET returns.deletedProduct = OLD.productName WHERE returns.productID = OLD.productID;
 UPDATE logg SET logg.deletedProduct = OLD.productName WHERE logg.productID = OLD.productID;
@@ -393,7 +416,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `editStorage_Logg` AFTER UPDATE ON `storage` FOR EACH ROW BEGIN 
 IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 1) > 0 ) THEN
-	INSERT INTO logg (logg.typeID, logg.desc, logg.UserID, logg.storageID, logg.date) VALUES (1, 'Av produkt', @sessionUserID, NEW.storageID, NOW()); 
+	INSERT INTO logg (logg.typeID, logg.desc, logg.UserID, logg.storageID, logg.date) VALUES (1, 'Av lager', @sessionUserID, NEW.storageID, NOW()); 
 END IF;
 END
 $$
@@ -421,8 +444,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(68, 'Roger Kolseth', 'rogkol', '$2y$10$j6T8Ds15Df/0Vr4cQqw5Q.efaGepSmUcAGK4GmyVKA8QtLVLFwweK', 'Administrator', 21, '2017-05-02', 'roger.kolseth@gmail.com'),
-(89, 'test', 'test', '$2y$10$emWfTKU5Shv.24xf.Fc09.1SOx19KXJwVI5eUTQsmBsQ26SZxqTom', 'User', 21, '2017-04-26', 'roger.kolseth@gmail.com');
+(68, 'Roger Kolseth', 'rogkol', '$2y$10$j6T8Ds15Df/0Vr4cQqw5Q.efaGepSmUcAGK4GmyVKA8QtLVLFwweK', 'Administrator', 21, '2017-05-03', 'roger.kolseth@gmail.com');
 
 --
 -- Triggere `users`
@@ -437,6 +459,7 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `deleteUser_Logg` BEFORE DELETE ON `users` FOR EACH ROW BEGIN
+DELETE FROM group_members WHERE OLD.userID = group_members.userID;
 IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
     INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedUser) VALUES (9, 'Av bruker', @sessionUserID, NOW(), OLD.username);
 END IF;
@@ -465,6 +488,37 @@ CREATE TABLE `user_group` (
   `groupID` int(11) UNSIGNED NOT NULL,
   `groupName` varchar(255) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Triggere `user_group`
+--
+DELIMITER $$
+CREATE TRIGGER `createGroup` AFTER INSERT ON `user_group` FOR EACH ROW BEGIN
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 4) > 0 ) THEN
+    INSERT INTO logg (logg.typeID, logg.desc, logg.groupID, logg.userID, logg.date) VALUES (4, 'Ny gruppe', NEW.groupID, @sessionUserID, NOW());
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `deleteGroup` BEFORE DELETE ON `user_group` FOR EACH ROW BEGIN
+DELETE FROM group_members WHERE OLD.groupID = group_members.groupID;
+DELETE FROM restrictions WHERE OLD.groupID = restrictions.groupID;
+UPDATE logg SET logg.deletedGroup = OLD.groupName WHERE logg.groupID = OLD.groupID;
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 9) > 0 ) THEN
+	INSERT INTO logg (logg.typeID, logg.desc, logg.userID, logg.date, logg.deletedGroup) VALUES (9, 'Av grupper', @sessionUserID, NOW(), OLD.groupName);
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `editGroup` AFTER UPDATE ON `user_group` FOR EACH ROW BEGIN 
+IF ((SELECT loggtype.typeCheck FROM loggtype WHERE loggtype.typeID = 1) > 0 ) THEN
+	INSERT INTO logg (logg.typeID, logg.desc, logg.UserID, logg.groupID, logg.date) VALUES (1, 'Av gruppe', @sessionUserID, NEW.groupID, NOW()); 
+END IF;
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -504,7 +558,8 @@ ALTER TABLE `logg`
   ADD KEY `logg_ibfk_4` (`toStorageID`),
   ADD KEY `logg_ibfk_5` (`onUserID`),
   ADD KEY `logg_ibfk_6` (`productID`),
-  ADD KEY `logg_ibfk_7` (`typeID`);
+  ADD KEY `logg_ibfk_7` (`typeID`),
+  ADD KEY `logg_ibfk_8` (`groupID`);
 
 --
 -- Indexes for table `loggtype`
@@ -613,7 +668,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `group_members`
 --
 ALTER TABLE `group_members`
-  MODIFY `memberID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `memberID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `inventory`
 --
@@ -623,7 +678,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=673;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=725;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -643,7 +698,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 --
 -- AUTO_INCREMENT for table `returns`
 --
@@ -678,7 +733,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_group`
 --
 ALTER TABLE `user_group`
-  MODIFY `groupID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `groupID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Begrensninger for dumpede tabeller
 --
@@ -701,6 +756,7 @@ ALTER TABLE `inventory`
 -- Begrensninger for tabell `logg`
 --
 ALTER TABLE `logg`
+  ADD CONSTRAINT `logg_ibfk_8` FOREIGN KEY (`groupID`) REFERENCES `user_group` (`groupID`),
   ADD CONSTRAINT `logg_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `logg_ibfk_2` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`),
   ADD CONSTRAINT `logg_ibfk_3` FOREIGN KEY (`fromStorageID`) REFERENCES `storage` (`storageID`),

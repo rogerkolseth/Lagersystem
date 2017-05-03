@@ -44,6 +44,11 @@ class GroupController extends Controller {
         $givenGroupName = $_REQUEST["givenGroupName"];
 
         $groupModel = $GLOBALS["groupModel"];
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+
         $added = $groupModel->addGroup($givenGroupName);
         if ($added) {
             echo json_encode("success");
@@ -78,6 +83,11 @@ class GroupController extends Controller {
     private function deleteGroupEngine() {
         $deleteGroupID = $_REQUEST["deleteGroupID"];
 
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+        
         $groupModel = $GLOBALS["groupModel"];
         $delited = $groupModel->deleteGroup($deleteGroupID);
 
@@ -91,6 +101,10 @@ class GroupController extends Controller {
     private function editGroupEngine() {
         $editGroupID = $_REQUEST["editGroupID"];
         $editGroupName = $_REQUEST["editGroupName"];
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
 
         $groupModel = $GLOBALS["groupModel"];
         $edited = $groupModel->editGroup($editGroupName, $editGroupID);
@@ -176,6 +190,11 @@ class GroupController extends Controller {
     private function deleteGroupRestriction(){
         $restrictionID = $_REQUEST['restrictionID'];
         $restrictionModel = $GLOBALS["restrictionModel"];
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+
         
         $deleted = $restrictionModel->deleteGroupRestriction($restrictionID);
         if ($deleted) {
