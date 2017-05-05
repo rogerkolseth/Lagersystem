@@ -547,7 +547,7 @@ groupRestrictionContainer
     </tbody>
     <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
     <input form="stocktaking" name="givenQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
-    <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+    <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{oldQuantity}}"> 
     <input form="stocktaking" name="differanceArray[]" type="hidden" value="{{differance}}">
     {{/each}}
 
