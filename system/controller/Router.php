@@ -2,6 +2,22 @@
 
 // Controller layer - the router selects controller to use depending on URL and request parameters
 
+// include all controllers we have
+require_once("LoginController.php");
+require_once("HomeController.php");
+require_once("UserController.php");
+require_once("StorageController.php");
+require_once("ProductController.php");
+require_once("TransferController.php");
+require_once("SaleController.php");
+require_once("ReturnController.php");
+require_once("MediaController.php");
+require_once("LoggController.php");
+require_once("CategoryController.php");
+require_once("EmailController.php");
+require_once("GroupController.php");
+
+
 class Router {
 
     // Returns the requested page name
@@ -11,7 +27,6 @@ class Router {
         if (isset($_REQUEST["page"])) {
             $page = $_REQUEST["page"];
         } else {
-            // $page = GLOBALS["DEFAULT_PAGE"];
             $page = "home";
         }
         return $page;
