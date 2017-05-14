@@ -217,4 +217,7 @@ $restriction = $GLOBALS["saleRestriction"];
     {{/each}} 
 </script>
 
+<script>
+
+</script>
 <script type="text/javascript" src="js/sale.js"></script>

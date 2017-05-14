@@ -15,7 +15,7 @@ class GroupModel {
     const INSERT_GROUP_MEMB = "INSERT INTO " . GroupModel::TABLE_MEMB . " (userID, groupID) VALUES (:givenUserID, :givenGroupID)";
     const SELECT_GROUP_MEMB = "SELECT users.userID, users.username, group_members.groupID, group_members.memberID FROM " . GroupModel::TABLE_MEMB . " INNER JOIN users ON group_members.userID = users.userID WHERE groupID = :givenGroupID";
     const DELETE_GROUP_MEMB = "DELETE FROM " . GroupModel::TABLE_MEMB . " WHERE memberID = :givenMemberID";
-    const GROUP_MEMB_FROM_USERID = "SELECT group_members.userID, user_group.groupName, group_members.groupID, group_members.memberID FROM " . GroupModel::TABLE_MEMB . " INNER JOIN user_group ON group_members.groupID = user_group.groupID WHERE userID = 68";
+    const GROUP_MEMB_FROM_USERID = "SELECT group_members.userID, user_group.groupName, group_members.groupID, group_members.memberID FROM " . GroupModel::TABLE_MEMB . " INNER JOIN user_group ON group_members.groupID = user_group.groupID WHERE userID = :givenUserID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
     

@@ -97,7 +97,11 @@ class LoggController extends Controller {
         $groupInfo = $groupModel->getSearchResult($givenSearchWord);
         
         
-        $data = json_encode(array("userInfo" => $userInfo, "storageInfo" => $storageInfo, "productInfo" => $productInfo, "groupInfo" => $groupInfo));
+        $data = json_encode(array(
+            "userInfo" => $userInfo, 
+            "storageInfo" => $storageInfo, 
+            "productInfo" => $productInfo, 
+            "groupInfo" => $groupInfo));
         echo $data;
         
     }
