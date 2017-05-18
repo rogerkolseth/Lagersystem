@@ -4,7 +4,7 @@ require_once("Controller.php");
 
 class EmailController extends Controller {
 
-    public function show($page) {
+    public function show($request) {
         if ($page == "sendInventarWarning") {
             $this->sendEmailWarning();
         } 

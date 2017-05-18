@@ -7,8 +7,8 @@ class ProductController extends Controller {
 
     // Render "Overview" view
 
-    public function show($page) {
-        switch ($page) {
+    public function show($request) {
+        switch ($request) {
             case "productAdm" :
                 return $this->productAdmPage();
             case "addProductEngine" :

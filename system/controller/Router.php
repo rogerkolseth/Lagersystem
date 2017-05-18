@@ -2,34 +2,21 @@
 
 // Controller layer - the router selects controller to use depending on URL and request parameters
 
-// include all controllers we have
-require_once("LoginController.php");
-require_once("HomeController.php");
-require_once("UserController.php");
-require_once("StorageController.php");
-require_once("ProductController.php");
-require_once("TransferController.php");
-require_once("SaleController.php");
-require_once("ReturnController.php");
-require_once("MediaController.php");
-require_once("LoggController.php");
-require_once("CategoryController.php");
-require_once("EmailController.php");
-require_once("GroupController.php");
+
 
 
 class Router {
 
     // Returns the requested page name
 
-    public function getPage() {
+    public function getRequest() {
         // Get page from request, or use default
         if (isset($_REQUEST["page"])) {
-            $page = $_REQUEST["page"];
+            $request = $_REQUEST["page"];
         } else {
-            $page = "home";
+            $request = "home";
         }
-        return $page;
+        return $request;
     }
 
     public function getLoginController() {
@@ -39,12 +26,12 @@ class Router {
     // Decide wich page to show
 
     public function getController() {
-        $page = $this->getPage();
+        $request = $this->getRequest();
         
         if ((isset($_SESSION["AreLoggedIn"])) && ($_SESSION["AreLoggedIn"] == "true")) {
 
 
-            switch ($page) {
+            switch ($request) {
                 case "home":
                     return new HomeController();
                     
@@ -115,7 +102,7 @@ class Router {
             }
             
             if ($_SESSION["userLevel"] == "Administrator") {   
-                    switch ($page) {
+                    switch ($request) {
                 case "productAdm" :
                 case "addProductEngine" :
                 case "editProductEngine" :

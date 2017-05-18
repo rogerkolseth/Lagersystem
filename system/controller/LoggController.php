@@ -4,8 +4,8 @@ require_once("Controller.php");
 
 class LoggController extends Controller {
 
-    public function show($page) {
-        switch ($page) {
+    public function show($request) {
+        switch ($request) {
             case "logg" :
                 return $this->loggPage();
             case "getAllLoggInfo" :

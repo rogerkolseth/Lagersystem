@@ -7,8 +7,8 @@ class CategoryController extends Controller {
 
     // view "Overview" view
 
-    public function show($page) {
-        switch ($page) {
+    public function show($request) {
+        switch ($request) {
             case "categoryAdm" :
                 return $this->showHomePage();
             case "addCategoryEngine" :

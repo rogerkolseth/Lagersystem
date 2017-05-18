@@ -4,11 +4,11 @@ require_once("Controller.php");
 
 class StorageController extends Controller {
 
-    public function show($page) {
-        switch ($page) {
+    public function show($request) {
+        switch ($request) {
             case "storageAdm" :
                 return $this->storageAdmPage();
-            case $page == "addStorageEngine" :
+            case "addStorageEngine" :
                 return $this->storageCreationEngine();
             case "editStorageEngine" :
                 return $this->storageEditEngine();

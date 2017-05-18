@@ -4,9 +4,9 @@ require_once("Controller.php");
 
 class SaleController extends Controller {
 
-    public function show($page) {
+    public function show($request) {
 
-        switch ($page) {
+        switch ($request) {
             case "getMySales" :
                 return $this->getAllMySales();
             case "sale" :
@@ -46,7 +46,7 @@ class SaleController extends Controller {
         if (sizeof($result) > "0") {
             $result = "1";
             $saleRestriction = array("saleRestriction" => $result);
-            return $this->view("sale", $saleRestriction);
+            $this->data($saleRestriction);
         };
 
         return $this->view("sale");

@@ -7,8 +7,8 @@ class HomeController extends Controller {
 
     // Render "Overview" view
 
-    public function show($page) {
-        if ($page == "home"){
+    public function show($request) {
+        if ($request == "home"){
             $this->showHomePage();
         } 
          

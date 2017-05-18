@@ -4,12 +4,12 @@ require_once("Controller.php");
 
 class mediaController extends Controller {
 
-    public function show($page) {
+    public function show($request) {
         $viewMediaAdm = "mediaAdm";
         $viewHome = "home";
         $viewEditUser = "editUser";
         
-        switch ($page) {
+        switch ($request) {
             case "mediaAdm" :
                 return $this->mediaPage();
             case "uploadImage" :

@@ -20,7 +20,7 @@ $_SESSION["userLevel"] = "";
  
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
-
+require_once("system/controller/includedControllers.php");
 require_once("system/controller/Router.php");
  
 // View layer - The same footer for all pages
@@ -30,7 +30,8 @@ require_once("system/controller/Router.php");
 // require_once("config");
 
 // Model layer - Database functions
- require_once("system/model/DBconnect.php");
+require_once("system/model/includedModels.php");
+require_once("system/model/DBconnect.php");
 
 
 //Creates a new Router
@@ -40,7 +41,7 @@ $router = new Router();
 $controller = $router->getLoginController();
 
 //Calls the show function of the logincontroller
-$controller->show($router->getPage());
+$controller->show($router->getRequest());
 
 
 

@@ -7,8 +7,8 @@ class transferController extends Controller {
 
     // Render "Overview" view
 
-    public function show($page) {
-        switch ($page) {
+    public function show($request) {
+        switch ($request) {
             case "transfer" :
                 return $this->transferPage();
             case "getTransferRestriction" :
@@ -28,7 +28,7 @@ class transferController extends Controller {
         if(sizeof($result) > "1"){
            $result = "1";
                 $transferRestriction = array("transferRestriction" => $result); 
-                return $this->view("transfer", $transferRestriction);
+                $this->data($transferRestriction);
         };
 
         return $this->view("transfer");

@@ -4,8 +4,8 @@ require_once("Controller.php");
 
 class UserController extends Controller {
 
-    public function show($page) {
-        switch ($page) {
+    public function show($request) {
+        switch ($request) {
             case "userAdm" :
                 return $this->userAdmPage();
             case "addRestriction" :

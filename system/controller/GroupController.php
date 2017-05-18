@@ -4,8 +4,8 @@ require_once("Controller.php");
 
 class GroupController extends Controller {
 
-    public function show($page) {
-        switch ($page) {
+    public function show($request) {
+        switch ($request) {
             case "groupAdm" :
                 return $this->showGroupPage();
             case "addGroupEngine" :

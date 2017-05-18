@@ -4,8 +4,8 @@ require_once("Controller.php");
 
 class ReturnController extends Controller {
 
-    public function show($page) {
-        switch ($page) {
+    public function show($request) {
+        switch ($request) {
             case "return" :
                 return $this->returnPage();
             case "myReturns" :
@@ -35,7 +35,7 @@ class ReturnController extends Controller {
             if ($result["storageID"] == "2") {
                 $result = "1";
                 $returnRestriction = array("returnRestriction" => $result);
-                return $this->view("return", $returnRestriction);
+                $this->data($returnRestriction);
             };
         endforeach;
         return $this->view("return");

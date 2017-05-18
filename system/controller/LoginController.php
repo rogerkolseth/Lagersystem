@@ -4,10 +4,10 @@ require_once("Controller.php");
 
 class LoginController extends Controller {
 
-    public function show($page) {
-        if ($page == "newPassword") {
+    public function show($request) {
+        if ($request == "newPassword") {
             $this->generateNewPassword();
-        } else if ($page == "loginEngine") {
+        } else if ($request == "loginEngine") {
             $this->loginEngine();       
         } else {
             $this->displayLoginPage();
@@ -54,7 +54,8 @@ class LoginController extends Controller {
 
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
-            return $this->view("LoginPage", $message);
+            $this->data($message);
+            return $this->view("LoginPage");
         }
     }
     
