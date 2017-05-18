@@ -15,7 +15,7 @@ class LoginController extends Controller {
     }
 
     public function displayLoginPage() {
-        return $this->render("LoginPage");
+        return $this->view("LoginPage");
     }
 
     public function loginEngine() {
@@ -54,7 +54,7 @@ class LoginController extends Controller {
 
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
-            return $this->render("LoginPage", $message);
+            return $this->view("LoginPage", $message);
         }
     }
     

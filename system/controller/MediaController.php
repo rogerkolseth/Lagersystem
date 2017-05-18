@@ -5,33 +5,34 @@ require_once("Controller.php");
 class mediaController extends Controller {
 
     public function show($page) {
-        $renderMediaAdm = "mediaAdm";
-        $renderHome = "home";
-        $renderEditUser = "editUser";
+        $viewMediaAdm = "mediaAdm";
+        $viewHome = "home";
+        $viewEditUser = "editUser";
         
-        if ($page == "mediaAdm") {
-            $this->mediaPage();
-        } else if($page == "uploadImage"){
-            $this->uploadImage($renderMediaAdm);
-        } else if ($page == "getAllMediaInfo"){
-            $this->getMediaSearchResult();
-        } else if ($page == "uploadImageShortcut"){
-            $this->uploadImage($renderHome);
-        } else if ($page == "uploadImageShortcut2"){
-            $this->uploadImage($renderEditUser);
-        } else if ($page == "getMediaByID"){
-            $this->getMediaByID();
-        } else if ($page == "editMedia"){
-            $this->editMedia();
-        } else if ($page == "deleteMedia"){
-            $this->deleteMedia();
-        } else if ($page == "getMediaFromCategory"){
-            $this->getMediaFromCategory();
+        switch ($page) {
+            case "mediaAdm" :
+                return $this->mediaPage();
+            case "uploadImage" :
+                return $this->uploadImage($viewMediaAdm);
+            case "getAllMediaInfo" :
+                return $this->getMediaSearchResult();
+            case "uploadImageShortcut" :
+                return $this->uploadImage($viewHome);
+            case "uploadImageShortcut2" :
+                return $this->uploadImage($viewEditUser);
+            case "getMediaByID" :
+                return $this->getMediaByID();
+            case "editMedia" :
+                return $this->editMedia();
+            case "deleteMedia" :
+                return $this->deleteMedia();
+            case "getMediaFromCategory" :
+                return $this->getMediaFromCategory();
         }
     }
 
     private function mediaPage() {
-        return $this->render("mediaAdm");
+        return $this->view("mediaAdm");
     }
     
 
@@ -85,11 +86,11 @@ class mediaController extends Controller {
         $message = array("errorMessage" => $errorMessage);
         
         if($data == "mediaAdm"){
-            return $this->render("mediaAdm", $message);
+            return $this->view("mediaAdm", $message);
         } else if ($data == "home"){
-            return $this->render("home" , $message);
+            return $this->view("home" , $message);
         } else if ($data == "editUser"){
-            return $this->render("editUser", $message);
+            return $this->view("editUser", $message);
         }
         
         

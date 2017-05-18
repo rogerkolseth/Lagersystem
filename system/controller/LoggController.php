@@ -5,25 +5,26 @@ require_once("Controller.php");
 class LoggController extends Controller {
 
     public function show($page) {
-        if ($page == "logg") {
-            $this->loggPage();
-        } else if ($page == "getAllLoggInfo") {
-            $this->getAllLoggInfo();
-        } else if ($page == "getLatestLoggInfo") {
-            $this->getLatestLoggInfo();
-        } else if ($page == "loggCheck"){
-            $this->loggCheck();
-        } else if ($page == "getLoggCheckStatus"){
-            $this->getLoggCheckStatus();
-        } else if ($page == "getAdvanceSearchData"){
-            $this->getAdvanceSearchData();
-        } else if($page == "advanceLoggSearch"){
-            $this->advanceLoggSearch();
+        switch ($page) {
+            case "logg" :
+                return $this->loggPage();
+            case "getAllLoggInfo" :
+                return $this->getAllLoggInfo();
+            case "getLatestLoggInfo" :
+                return $this->getLatestLoggInfo();
+            case "loggCheck" :
+                return $this->loggCheck();
+            case "getLoggCheckStatus" :
+                return $this->getLoggCheckStatus();
+            case "getAdvanceSearchData" :
+                return $this->getAdvanceSearchData();
+            case "advanceLoggSearch" :
+                return $this->advanceLoggSearch();
         }
     }
 
     private function loggPage() {
-        return $this->render("logg");
+        return $this->view("logg");
     }
 
     private function getAllLoggInfo() {

@@ -8,30 +8,31 @@ class ProductController extends Controller {
     // Render "Overview" view
 
     public function show($page) {
-        if ($page == "productAdm") {
-            $this->productAdmPage();
-        } else if ($page == "addProductEngine") {
-            $this->addProductEngine();
-        } else if ($page == "editProductEngine") {
-            $this->editProductEngine();
-        } else if ($page == "deleteProductEngine") {
-            $this->deleteProductEngine();
-        } else if ($page == "getAllProductInfo"){
-            $this->getAllProductInfo();
-        } else if ($page == "getProductByID"){
-            $this->getProductByID();
-        } else if ($page == "getProductLocation") {
-            $this->getProductLocation();
-        } else if ($page == "getLowInventory"){
-            $this->getLowInventory();
-        } else if ($page == "getProductFromCategory"){
-            $this->getProductFromCategory();
+        switch ($page) {
+            case "productAdm" :
+                return $this->productAdmPage();
+            case "addProductEngine" :
+                return $this->addProductEngine();
+            case "editProductEngine" :
+                return $this->editProductEngine();
+            case "deleteProductEngine" :
+                return $this->deleteProductEngine();
+            case "getAllProductInfo" :
+                return $this->getAllProductInfo();
+            case "getProductByID" :
+                return $this->getProductByID();
+            case "getProductLocation" :
+                return $this->getProductLocation();
+            case "getLowInventory" :
+                return $this->getLowInventory();
+            case "getProductFromCategory" :
+                return $this->getProductFromCategory();
         }
     }
     
 
     private function productAdmPage() {
-        return $this->render("productAdm");
+        return $this->view("productAdm");
     }
 
     private function addProductEngine() {

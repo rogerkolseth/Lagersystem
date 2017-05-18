@@ -5,34 +5,36 @@ require_once("Controller.php");
 class SaleController extends Controller {
 
     public function show($page) {
-        if ($page == "sale") {
-            $this->salePage();
-        } else if ($page == "withdrawProduct") {
-            $this->withdrawProduct();
-        } else if ($page == "saleFromStorageID") {
-            $this->saleFromStorageID();
-        } else if ($page == "getProdQuantity") {
-            $this->getProdQuantity();
-        } else if ($page == "mySales") {
-            $this->getMySalesPage();
-        } else if ($page == "getMySales") {
-            $this->getAllMySales();
-        } else if ($page == "getSalesFromID") {
-            $this->getSalesFromID();
-        } else if ($page == "editMySale") {
-            $this->editMySale();
-        } else if ($page == "getResCount") {
-            $this->getResCount();
-        } else if ($page == "getLastSaleInfo") {
-            $this->getLastSaleInfo();
-        } else if ($page == "getAllLastSaleInfo") {
-            $this->getAllLastSaleInfo();
-        } else if ($page == "getStoProFromCat") {
-            $this->getStoProFromCat();
-        } else if ($page == "showUserSale") {
-            $this->chooseUserSales();
-        } else if ($page == "getSalesMacFromID") {
-            $this->getSalesMacFromID();
+
+        switch ($page) {
+            case "getMySales" :
+                return $this->getAllMySales();
+            case "sale" :
+                return $this->salePage();
+            case "withdrawProduct" :
+                return $this->withdrawProduct();
+            case "saleFromStorageID" :
+                return $this->saleFromStorageID();
+            case "getProdQuantity" :
+                return $this->getProdQuantity();
+            case "mySales" :
+                return $this->getMySalesPage();
+            case "getSalesFromID" :
+                return $this->getSalesFromID();
+            case "editMySale" :
+                return $this->editMySale();
+            case "getResCount" :
+                return $this->getResCount();
+            case "getLastSaleInfo" :
+                return $this->getLastSaleInfo();
+            case "getAllLastSaleInfo" :
+                return $this->getAllLastSaleInfo();
+            case "getStoProFromCat" :
+                return $this->getStoProFromCat();
+            case "showUserSale" :
+                return $this->chooseUserSales();
+            case "getSalesMacFromID" :
+                return $this->getSalesMacFromID();
         }
     }
 
@@ -40,19 +42,18 @@ class SaleController extends Controller {
         $restrictionModel = $GLOBALS["restrictionModel"];
         $userID = $_SESSION["userID"];
         $result = $restrictionModel->getUserAndGroupRes($userID);
-        
-        if(sizeof($result) > "0"){
-           $result = "1";
-                $saleRestriction = array("saleRestriction" => $result); 
-                return $this->render("sale", $saleRestriction);
+
+        if (sizeof($result) > "0") {
+            $result = "1";
+            $saleRestriction = array("saleRestriction" => $result);
+            return $this->view("sale", $saleRestriction);
         };
 
-        return $this->render("sale");
-    
+        return $this->view("sale");
     }
 
     private function getMySalesPage() {
-        return $this->render("mySales");
+        return $this->view("mySales");
     }
 
     private function getLastSaleInfo() {
@@ -100,10 +101,10 @@ class SaleController extends Controller {
         $date = $_REQUEST["date"];
 
         $inventoryInfo = $GLOBALS["inventoryModel"];
-        
+
         if (in_array("1", $regMacAdresseArray)) {
             $macAdresseMissing = array();
-            
+
             $index = 0;
             for ($i = 0; $i < sizeof($withdrawProductIDArray); $i++) {
 
@@ -118,31 +119,31 @@ class SaleController extends Controller {
                     }
                 }
             }
-            
+
             if (sizeof($macAdresseMissing) > 0) {
                 $missingMacString = implode(", ", $macAdresseMissing);
                 echo json_encode($missingMacString);
                 return false;
             }
         }
-        
-        
-            $saleModel = $GLOBALS["saleModel"];
-            
-            $index = 0;    
-            for ($i = 0; $i < sizeof($withdrawProductIDArray); $i++) {
 
-                $salesID = $saleModel->newSale($fromStorageID, $customerNumber, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $userID, $comment, $date);
-                $inventoryInfo->transferFromStorage($fromStorageID, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i]);
-                
-                if ($regMacAdresseArray[$i] == "1") {
-                    $newIndex = $this->withdrawMacAdresse($withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $macAdresseArray, $fromStorageID, $index, $salesID);
-                    $index = $newIndex;
-                }
+
+        $saleModel = $GLOBALS["saleModel"];
+
+        $index = 0;
+        for ($i = 0; $i < sizeof($withdrawProductIDArray); $i++) {
+
+            $salesID = $saleModel->newSale($fromStorageID, $customerNumber, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $userID, $comment, $date);
+            $inventoryInfo->transferFromStorage($fromStorageID, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i]);
+
+            if ($regMacAdresseArray[$i] == "1") {
+                $newIndex = $this->withdrawMacAdresse($withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $macAdresseArray, $fromStorageID, $index, $salesID);
+                $index = $newIndex;
             }
-            echo json_encode("success");
+        }
+        echo json_encode("success");
     }
-    
+
     private function withdrawMacAdresse($withdrawProductID, $withdrawQuantity, $macAdresseArray, $fromStorageID, $index, $salesID) {
         $inventoryInfo = $GLOBALS["inventoryModel"];
         $saleModel = $GLOBALS["saleModel"];
@@ -290,12 +291,12 @@ class SaleController extends Controller {
         $data = json_encode(array("mySales" => $getUserSale));
         echo $data;
     }
-    
-    private function getSalesMacFromID(){
+
+    private function getSalesMacFromID() {
         $givenSalesID = $_REQUEST["givenSalesID"];
         $saleModel = $GLOBALS["saleModel"];
         $macAdresse = $saleModel->getMacFromSaleID($givenSalesID);
-        
+
         $data = json_encode(array("mySalesMac" => $macAdresse));
         echo $data;
     }

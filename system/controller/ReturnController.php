@@ -5,24 +5,25 @@ require_once("Controller.php");
 class ReturnController extends Controller {
 
     public function show($page) {
-        if ($page == "return") {
-            $this->returnPage();
-        } else if ($page == "myReturns") {
-            $this->myReturnsPage();
-        } else if ($page == "getMyReturns") {
-            $this->getAllMyReturns();
-        } else if ($page == "returnProduct") {
-            $this->returnProduct();
-        } else if ($page == "getReturnsFromID") {
-            $this->getReturnsFromID();
-        } else if ($page == "editMyReturn") {
-            $this->editMyReturn();
-        } else if ($page == "stockDelivery") {
-            $this->stockDelivery();
-        } else if ($page == "showUserReturns") {
-            $this->chooseUserReturns();
-        } else if ($page == "getReturnsMacFromID") {
-            $this->getReturnsMacFromID();
+        switch ($page) {
+            case "return" :
+                return $this->returnPage();
+            case "myReturns" :
+                return $this->myReturnsPage();
+            case "getMyReturns" :
+                return $this->getAllMyReturns();
+            case "returnProduct" :
+                return $this->returnProduct();
+            case "getReturnsFromID" :
+                return $this->getReturnsFromID();
+            case "editMyReturn" :
+                return $this->editMyReturn();
+            case "stockDelivery" :
+                return $this->stockDelivery();
+            case "showUserReturns" :
+                return $this->chooseUserReturns();
+            case "getReturnsMacFromID" :
+                return $this->getReturnsMacFromID();
         }
     }
 
@@ -34,14 +35,14 @@ class ReturnController extends Controller {
             if ($result["storageID"] == "2") {
                 $result = "1";
                 $returnRestriction = array("returnRestriction" => $result);
-                return $this->render("return", $returnRestriction);
+                return $this->view("return", $returnRestriction);
             };
         endforeach;
-        return $this->render("return");
+        return $this->view("return");
     }
 
     private function myReturnsPage() {
-        return $this->render("myReturns");
+        return $this->view("myReturns");
     }
 
     private function returnProduct() {

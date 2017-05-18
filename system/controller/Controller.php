@@ -3,20 +3,8 @@
 // Represents a controller of our website
 abstract class Controller {
 
-    /**
-     * Renders the page - outputs its content
-     * @param string $page
-     */
-    public abstract function show($page);
 
-    /**
-     * Takes view part (template) and model part (data) and renders the page content
-     *
-     * @param string $templateName name of the template to use
-     * @param array $data optional data array to be passed to template
-     * @return bool true on success
-     */
-    protected function render($templateName, $data = array()) {
+    protected function view($templateName, $data = array()) {
         // Store data in global variables
         foreach ($data as $dataKey => $dataValue) {
             $GLOBALS[$dataKey] = $dataValue;

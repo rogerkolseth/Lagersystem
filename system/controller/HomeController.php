@@ -15,7 +15,7 @@ class HomeController extends Controller {
     }
     
     private function showHomePage(){
-        return $this->render("home");
+        return $this->view("home");
     }
 
 }    

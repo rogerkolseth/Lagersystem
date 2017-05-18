@@ -8,15 +8,15 @@ class transferController extends Controller {
     // Render "Overview" view
 
     public function show($page) {
-        if ($page == "transfer") {
-            $this->transferPage();
-        } else if ($page == "getTransferRestriction") {
-            $this->getTransferRestriction();
-        } else if ($page == "transferProduct") {
-            $this->transferProduct();
-        } else if ($page == "getuserAndGroupRes") {
-        $this->getUserAndGroupRes();
-        
+        switch ($page) {
+            case "transfer" :
+                return $this->transferPage();
+            case "getTransferRestriction" :
+                return $this->getTransferRestriction();
+            case "transferProduct" :
+                return $this->transferProduct();
+            case "getuserAndGroupRes" :
+                return $this->getUserAndGroupRes(); 
         }
     }
 
@@ -28,10 +28,10 @@ class transferController extends Controller {
         if(sizeof($result) > "1"){
            $result = "1";
                 $transferRestriction = array("transferRestriction" => $result); 
-                return $this->render("transfer", $transferRestriction);
+                return $this->view("transfer", $transferRestriction);
         };
 
-        return $this->render("transfer");
+        return $this->view("transfer");
     }
 
 
