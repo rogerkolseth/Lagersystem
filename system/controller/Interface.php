@@ -5,7 +5,7 @@
 
 
 
-class Router {
+class API {
 
     // Returns the requested page name
 

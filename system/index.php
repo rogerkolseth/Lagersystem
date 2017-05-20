@@ -7,16 +7,14 @@
 session_start();
 
 //Checking if AreLoggedIn Session are set and not false. If the AreLoggedIn is false or not set, user are sent back to login.
-if (($_SESSION["AreLoggedIn"] == false) || (!isset($_SESSION["AreLoggedIn"]))) {
-    header("Location:../");
-} else if ($_SESSION["AreLoggedIn"] == true) {
 
+if ($_SESSION["verified"] == true) {
 
 
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
     require_once("controller/includedControllers.php");
-    require_once("controller/Router.php");
+    require_once("controller/Interface.php");
     
 
 // Model layer - Database functions
@@ -24,10 +22,12 @@ if (($_SESSION["AreLoggedIn"] == false) || (!isset($_SESSION["AreLoggedIn"]))) {
     require_once("model/DBconnect.php");
     
 
-    $router = new Router();
+    $interface = new API();
     
-    $controller = $router->getController();
+    $controller = $interface->getController();
 
-    $controller->show($router->getRequest());
+    $controller->show($interface->getRequest());
     
+} else {
+    header("Location:../");
 }

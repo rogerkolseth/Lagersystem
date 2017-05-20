@@ -12,7 +12,7 @@ session_start();
 //Check if the user are logged in, if true the user will be redirected to the main index file.
 
 //init of the AreLoggedIn Session variable, default false
-$_SESSION["AreLoggedIn"] = false;
+$_SESSION["verified"] = false;
 $_SESSION["nameOfUser"] = "";
 $_SESSION["userID"] = "";
 $_SESSION["userLevel"] = "";
@@ -21,7 +21,7 @@ $_SESSION["userLevel"] = "";
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
 require_once("system/controller/includedControllers.php");
-require_once("system/controller/Router.php");
+require_once("system/controller/Interface.php");
  
 // View layer - The same footer for all pages
 // require("view/footer.html");
@@ -35,13 +35,13 @@ require_once("system/model/DBconnect.php");
 
 
 //Creates a new Router
-$router = new Router();
+$interface = new API();
 
 //Gets the logincontroller
-$controller = $router->getLoginController();
+$controller = $interface->getLoginController();
 
 //Calls the show function of the logincontroller
-$controller->show($router->getRequest());
+$controller->show($interface->getRequest());
 
 
 
