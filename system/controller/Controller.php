@@ -17,8 +17,7 @@ abstract class Controller {
      * @return bool true on success
      */
     protected function view($pageName) {
-        
-        // Include template
+        // Include view page
         $pageName = "view/{$pageName}.php";
 
         if (!file_exists($pageName)) {
@@ -30,7 +29,7 @@ abstract class Controller {
     }
     
     protected function data($data = array()){
-        // Store data in global variables
+        // Store data in global variables 
         foreach ($data as $dataKey => $dataValue) {
             $GLOBALS[$dataKey] = $dataValue;
         }

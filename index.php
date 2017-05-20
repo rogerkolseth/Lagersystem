@@ -20,7 +20,7 @@ $_SESSION["userLevel"] = "";
  
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
-require_once("system/controller/includedControllers.php");
+require_once("system/controller/IncludedControllers.php");
 require_once("system/controller/Interface.php");
  
 // View layer - The same footer for all pages
@@ -30,7 +30,7 @@ require_once("system/controller/Interface.php");
 // require_once("config");
 
 // Model layer - Database functions
-require_once("system/model/includedModels.php");
+require_once("system/model/IncludedModels.php");
 require_once("system/model/DBconnect.php");
 
 

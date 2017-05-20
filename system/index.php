@@ -16,12 +16,12 @@ if ($_SESSION["verified"] == true) {
 
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
-    require_once("controller/includedControllers.php");
+    require_once("controller/IncludedControllers.php");
     require_once("controller/Interface.php");
     
 
 // Model layer - Database functions
-    require_once("model/includedModels.php");
+    require_once("model/IncludedModels.php");
     require_once("model/DBconnect.php");
     
 
