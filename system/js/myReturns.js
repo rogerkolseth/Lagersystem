@@ -3,7 +3,7 @@ $(function () {
 
     $.ajax({
         type: 'GET',
-        url: '?page=getMyReturns',
+        url: '?request=getMyReturns',
         dataType: 'json',
         success: function (data) {
             myReturnsTemplate(data);
@@ -20,7 +20,7 @@ function UpdateReturnsTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getMyReturns',
+            url: '?request=getMyReturns',
             dataType: 'json',
             success: function (data) {
                 myReturnsTemplate(data);
@@ -81,7 +81,7 @@ $(function editMyReturns() {
         var givenReturnsID = $(this).attr('data-id');
         $.ajax({
             type: 'POST',
-            url: '?page=getReturnsFromID',
+            url: '?request=getReturnsFromID',
             data: {givenReturnsID: givenReturnsID},
             dataType: 'json',
             success: function (data) {
@@ -99,7 +99,7 @@ $(function showMacReturns() {
         var givenReturnsID = $(this).attr('data-id');
         $.ajax({
             type: 'POST',
-            url: '?page=getReturnsMacFromID',
+            url: '?request=getReturnsMacFromID',
             data: {givenReturnsID: givenReturnsID},
             dataType: 'json',
             success: function (data) {

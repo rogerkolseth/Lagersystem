@@ -30,7 +30,7 @@ $error = $GLOBALS["errorMessage"];
                     
                     <div class="account-wall">
                         <img class="profile-img" src="system/image/TafjordLogo3.png" alt="">
-                        <form class="form-signin" id="login" action="?page=loginEngine" method="post">
+                        <form class="form-signin" id="login" action="?request=loginEngine" method="post">
                             <input type="text" class="form-control" placeholder="Brukernavn" name="givenUsername" required autofocus>
                             <input type="password" id="psw" autocomplete="off" class="form-control" placeholder="Passord" name="givenPassword" required>
                             <input form="login" type="hidden" id="date" name="givenLastLogin">
@@ -78,7 +78,7 @@ $error = $GLOBALS["errorMessage"];
                         <table class="table">
                             <p>Dersom du har glemt passordet ditt kan du få tilsendt nytt ved å fylle ut 
                                 informasjonen nedenfor. </p>
-                            <form action="?page=newPassword" method="post" id="newPassword">
+                            <form action="?request=newPassword" method="post" id="newPassword">
 
                                 <tr>
                                     <td id="bordernone"><input class="form-control" type="text" required="required" name="givenUsername" placeholder="Brukernavn" value=""></td>

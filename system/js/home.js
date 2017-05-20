@@ -3,7 +3,7 @@ $('a#saveToCSV').hide();
 function getStorageProduct() {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllProductInfo',
+        url: '?request=getAllProductInfo',
         dataType: 'json',
         success: function (data) {
             stockDeliveryTemplate(data);
@@ -39,7 +39,7 @@ $(function POSTselectedProduct() {
 
             $.ajax({
                 type: 'POST',
-                url: '?page=getProductByID',
+                url: '?request=getProductByID',
                 data: {givenProductID: givenProductID},
                 dataType: 'json',
                 success: function (data) {
@@ -139,7 +139,7 @@ $(function POSTdeleteStorageModal() {
 function getStorageInfo() {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllStorageInfo',
+        url: '?request=getAllStorageInfo',
         dataType: 'json',
         success: function (data) {
             selectStorageTemplate(data);
@@ -170,7 +170,7 @@ $(function POSTfromStorageModal() {
         if (givenStorageID > 0) {
             $.ajax({
                 type: 'POST',
-                url: '?page=getStorageProduct',
+                url: '?request=getStorageProduct',
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
@@ -296,7 +296,7 @@ function getMediaInfo() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllMediaInfo',
+            url: '?request=getAllMediaInfo',
             dataType: 'json',
             success: function (data) {
 
@@ -319,7 +319,7 @@ function getCategoryInfo() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllCategoryInfo',
+            url: '?request=getAllCategoryInfo',
             dataType: 'json',
             success: function (data) {
 
@@ -353,7 +353,7 @@ $(function () {
 
     $.ajax({
         type: 'GET',
-        url: '?page=getuserAndGroupRes',
+        url: '?request=getuserAndGroupRes',
         dataType: 'json',
         success: function (data) {
 
@@ -432,7 +432,7 @@ $(function POSTfromStorageModals() {
         if (givenStorageID > 0) {
             $.ajax({
                 type: 'POST',
-                url: '?page=getStorageProduct',
+                url: '?request=getStorageProduct',
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
@@ -455,7 +455,7 @@ window.setInterval (function (){
     if (givenStorageID > 0) {
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageProduct',
+            url: '?request=getStorageProduct',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -474,7 +474,7 @@ function displaySingeStorage(givenStorageID) {
     if (givenStorageID > 0) {
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageProduct',
+            url: '?request=getStorageProduct',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -504,7 +504,7 @@ function chartTest(data) {
 
         $.ajax({
             type: 'POST',
-            url: '?page=chartProduct',
+            url: '?request=chartProduct',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -584,7 +584,7 @@ function drawChart(data)
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getLatestLoggInfo',
+        url: '?request=getLatestLoggInfo',
         dataType: 'json',
         success: function (data) {
             displayLoggTable(data);
@@ -607,7 +607,7 @@ function displayLoggTable(data) {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getLowInventory',
+        url: '?request=getLowInventory',
         dataType: 'json',
         success: function (data) {
             displayLowInvTable(data);
@@ -632,7 +632,7 @@ function displayLowInvTable(data) {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getLastSaleInfo',
+        url: '?request=getLastSaleInfo',
         dataType: 'json',
         success: function (data) {
             displayLastSaleTable(data);
@@ -656,7 +656,7 @@ function displayLastSaleTable(data) {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllLastSaleInfo',
+        url: '?request=getAllLastSaleInfo',
         dataType: 'json',
         success: function (data) {
             displayAllLastSaleTable(data);

@@ -81,7 +81,7 @@ function UpdateUsersTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getUserInfo',
+            url: '?request=getUserInfo',
             dataType: 'json',
             success: function (data) {
                 usersTableTemplate(data);
@@ -100,7 +100,7 @@ $('#dropdown').show();
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getUserInfo',
+        url: '?request=getUserInfo',
         dataType: 'json',
         success: function (data) {
             usersTableTemplate(data);
@@ -139,7 +139,7 @@ $(function POSTuserInformationModal() {
         POSTgroupMembership(givenUserID);
         $.ajax({
             type: 'POST',
-            url: '?page=getUserByID',
+            url: '?request=getUserByID',
             data: {givenUserID: givenUserID},
             dataType: 'json',
             success: function (data) {
@@ -161,7 +161,7 @@ function POSTuserRestriction(data) {
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?page=getUserRestriction',
+            url: '?request=getUserRestriction',
             data: {givenUserID: givenUserID},
             dataType: 'json',
             success: function (data) {
@@ -176,7 +176,7 @@ function POSTgroupMembership(data) {
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?page=getGroupMembershipFromUserID',
+            url: '?request=getGroupMembershipFromUserID',
             data: {givenUserID: givenUserID},
             dataType: 'json',
             success: function (data) {
@@ -191,7 +191,7 @@ $(function DeleteGroupMembership() {
         var memberID = $(this).attr('data-id');
         $.ajax({
             type: 'POST',
-            url: '?page=deleteGroupMember',
+            url: '?request=deleteGroupMember',
             data: {memberID: memberID},
             dataType: 'json',
             success: function (data) {
@@ -218,7 +218,7 @@ $(function deleteUserRestriction() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=deleteSingleRes',
+            url: '?request=deleteSingleRes',
             data: {givenUserID: givenUserID, givenStorageID: givenStorageID},
             dataType: 'json',
             success: function () {
@@ -281,7 +281,7 @@ $(function POSTdeleteUserModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getUserByID',
+            url: '?request=getUserByID',
             data: {givenUserID: givenUserID},
             dataType: 'json',
             success: function (data) {
@@ -355,7 +355,7 @@ $(function POSTeditUserModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getUserByID',
+            url: '?request=getUserByID',
             data: {givenUserID: givenUserID},
             dataType: 'json',
             success: function (data) {
@@ -452,7 +452,7 @@ function getStorageInfo() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllStorageInfo',
+            url: '?request=getAllStorageInfo',
             dataType: 'json',
             success: function (data) {
                 storageRestrictionTemplate(data);
@@ -481,7 +481,7 @@ function getGroupInfo() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getGroupSearchResult',
+            url: '?request=getGroupSearchResult',
             dataType: 'json',
             success: function (data) {
                 groupRestrictionTemplate(data);
@@ -540,23 +540,18 @@ function successMessageAddRes() {
 
 
 function getMediaInfo() {
-    var $displayMediaInformation = $('#selectMediaID');
-    $displayMediaInformation.empty();
+    
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllMediaInfo',
+            url: '?request=getAllMediaInfo',
             dataType: 'json',
             success: function (data) {
-
+                var $displayMediaInformation = $('#selectMediaID');
+                    $displayMediaInformation.empty();
                 $.each(data.mediaInfo, function (i, item) {
-
-
                     $displayMediaInformation.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
-
                 });
-
-
             }
         });
     });

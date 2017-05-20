@@ -45,7 +45,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                     </div>
                                     <div class="pull-right">
-                                        <a href="?page=editUser" class="btn btn-warning btn-md" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
+                                        <a href="?request=editUser" class="btn btn-warning btn-md" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
                                         <a href="../" class="btn btn-danger btn-md" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
                                     </div>
                                 </div>
@@ -349,7 +349,7 @@ if (isset($GLOBALS["errorMessage"])) {
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Opprett bruker</h4>
                 </div>
-                <form action="?page=addUserEngine" method="post" id="createUser">
+                <form action="?request=addUserEngine" method="post" id="createUser">
                     <div class="modal-body">
                         <div class="text-center">
                             <table class="table">
@@ -420,7 +420,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 <div class="modal-body">
                     <div>
                         <table class="table">
-                            <form action="?page=addProductEngine" method="post" id="createProduct">
+                            <form action="?request=addProductEngine" method="post" id="createProduct">
                                 <tr>
                                     <th id="bordernone">Produktnavn:</th>
                                     <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
@@ -478,7 +478,7 @@ if (isset($GLOBALS["errorMessage"])) {
                             <h4 class="modal-title">Opprett bruker</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="?page=addStorageEngine" method="post" id="createStorage">
+                            <form action="?request=addStorageEngine" method="post" id="createStorage">
                                 <div style="text-align: center">
                                     <table class="table">                   
                                         <tr>
@@ -495,7 +495,7 @@ if (isset($GLOBALS["errorMessage"])) {
                         </div>
                         <div class="modal-footer">
 
-                            <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager" href="?page=storageAdm">
+                            <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager" href="?request=storageAdm">
 
 
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -520,7 +520,7 @@ if (isset($GLOBALS["errorMessage"])) {
                         <div class="modal-body">
                             <div style="text-align: center">
 
-                                <form action="?page=uploadImageShortcut" id="uploadImage" method="post" enctype="multipart/form-data">
+                                <form action="?request=uploadImageShortcut" id="uploadImage" method="post" enctype="multipart/form-data">
                                     <h4 class="text-center">Velg bilde for å laste opp</h4>
                                     <table class="table">
                                         <tr>
@@ -547,7 +547,7 @@ if (isset($GLOBALS["errorMessage"])) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
+                            <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?request=uploadImage">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                         </div>
                         </form>
@@ -568,7 +568,7 @@ if (isset($GLOBALS["errorMessage"])) {
                             <h4 class="modal-title">Opprett kateogri</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="?page=addCategoryEngine" method="post" id="createCategory">
+                            <form action="?request=addCategoryEngine" method="post" id="createCategory">
                                 <div style="text-align: center">
                                     <table class="table">                   
                                         <tr>
@@ -605,7 +605,7 @@ if (isset($GLOBALS["errorMessage"])) {
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Lagertelling</h4>
                         </div>
-                        <form action="?page=stocktacking" method="post" id="stocktaking">
+                        <form action="?request=stocktacking" method="post" id="stocktaking">
 
                             <div class="modal-body row" >
                                 <div class="col-md-6">
@@ -653,7 +653,7 @@ if (isset($GLOBALS["errorMessage"])) {
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Varelevering</h4>
                         </div>
-                        <form action="?page=stockDelivery" method="post" id="stockDelivery">
+                        <form action="?request=stockDelivery" method="post" id="stockDelivery">
                             <div class="modal-body">
                                 <label>Velg produkt(er) som skal inn på Hovedlageret</label>
                                 <div class="col-md-4 pull-right">
@@ -955,7 +955,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
                             $.ajax({
                                 type: 'POST',
-                                url: '?page=getStorageProduct',
+                                url: '?request=getStorageProduct',
                                 data: {givenStorageID: givenStorageID},
                                 dataType: 'json',
                                 success: function (data) {
@@ -1037,7 +1037,7 @@ $( function getUsedStorageCat() {
     var givenStorageID = '2';
     $.ajax({
             type: 'POST',
-            url: '?page=getCatWithProd',
+            url: '?request=getCatWithProd',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -1064,7 +1064,7 @@ $(function updateResultFromCategory() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getProductFromCategory',
+            url: '?request=getProductFromCategory',
             data: {givenCategoryID: givenCategoryID},
             dataType: 'json',
             success: function (data) {

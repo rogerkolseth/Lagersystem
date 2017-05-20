@@ -14,7 +14,7 @@
 
             <!-- SØK ETTER LAGER -->
 
-            <form class="form-inline" id="searchForStorage" action="?page=getAllStorageInfo" method="post">
+            <form class="form-inline" id="searchForStorage" action="?request=getAllStorageInfo" method="post">
                 <div class="form-group col-md-12 row">
 
                     <input class="form-control" form="searchForStorage"type="text" name="givenStorageSearchWord" value="" placeholder="Søk etter Lager..">  
@@ -74,7 +74,7 @@
                 <div class="modal-body">
                     <div>
                         <table class="table">
-                            <form action="?page=addStorageEngine" method="post" id="createStorage">
+                            <form action="?request=addStorageEngine" method="post" id="createStorage">
 
                                 <tr>
                                     <th id="bordernone">Lagernavn:</th>
@@ -115,7 +115,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Lager informasjon</h4>
                 </div>
-                <form action="?page=editStorageEngine" method="post" id="editStorage"> 
+                <form action="?request=editStorageEngine" method="post" id="editStorage"> 
 
                     <div class="modal-body">
                         <table class="table" id="editStorageContainer">
@@ -263,7 +263,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Lager informasjon</h4>
                 </div>
-                <form action="?page=deleteStorageEngine" method="post" id="deleteStorage">
+                <form action="?request=deleteStorageEngine" method="post" id="deleteStorage">
                     <div class="modal-body" id="deleteStorageContainer">
 
                         <!-- Innhold fra Handlebars Template -->
@@ -294,7 +294,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Lagertelling</h4>
                 </div>
-                <form action="?page=stocktacking" method="post" id="stocktaking">
+                <form action="?request=stocktacking" method="post" id="stocktaking">
 
                     <div class="modal-body row" >
                         <div class="col-md-6">
@@ -334,7 +334,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Varelevering</h4>
                 </div>
-                <form action="?page=stockDelivery" method="post" id="stockDelivery">
+                <form action="?request=stockDelivery" method="post" id="stockDelivery">
                     <div class="modal-body">
                         <label>Velg produkt(er) som skal inn på Hovedlageret</label>
                         <div class="col-md-4 pull-right">

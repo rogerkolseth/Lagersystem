@@ -5,7 +5,7 @@
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllLoggInfo',
+        url: '?request=getAllLoggInfo',
         dataType: 'json',
         success: function (data) {
             displayLoggTable(data);
@@ -17,7 +17,7 @@ $(function () {
 function updateLogTable() {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllLoggInfo',
+        url: '?request=getAllLoggInfo',
         dataType: 'json',
         success: function (data) {
             displayLoggTable(data);
@@ -145,7 +145,7 @@ $(document).ready(function () {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getLoggCheckStatus',
+        url: '?request=getLoggCheckStatus',
         dataType: 'json',
         success: function (data) {
             updateCheckbox(data);
@@ -196,7 +196,7 @@ function toggler() {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAdvanceSearchData',
+        url: '?request=getAdvanceSearchData',
         dataType: 'json',
         success: function (data) {
             userSearchTemplate(data);

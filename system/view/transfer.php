@@ -24,7 +24,7 @@ $restriction = $GLOBALS["transferRestriction"];
         <div id="error"></div>
         <div id="success"></div>
         
-    <form id="transferProducts" action="?page=transferProduct" method="post">    
+    <form id="transferProducts" action="?request=transferProduct" method="post">    
         
         <div class="col-sm-3 col-md-4 row">
             <h4><b>Overfør Fra:</b></h4>

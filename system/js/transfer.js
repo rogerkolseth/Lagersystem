@@ -5,7 +5,7 @@ $('#chooseCategoryContainer').hide();
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getuserAndGroupRes',
+        url: '?request=getuserAndGroupRes',
         dataType: 'json',
         success: function (data) {
             transferRestrictionTemplate(data);
@@ -36,7 +36,7 @@ $(function POSTfromTransferModal() {
         if (givenStorageID > 0) {
             $.ajax({
                 type: 'POST',
-                url: '?page=getStorageProduct',
+                url: '?request=getStorageProduct',
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
@@ -64,7 +64,7 @@ $(function updateResultFromCategory() {
         givenCategoryID = $(this).find("option:selected").data('id');
         $.ajax({
             type: 'POST',
-            url: '?page=getStoProFromCat',
+            url: '?request=getStoProFromCat',
             data: {givenCategoryID: givenCategoryID, givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -99,7 +99,7 @@ $(function POSTeditUserModal() {
 
             $.ajax({
                 type: 'POST',
-                url: '?page=getProdQuantity',
+                url: '?request=getProdQuantity',
                 data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
@@ -193,7 +193,7 @@ function updateTransfer() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getTransferRestriction',
+            url: '?request=getTransferRestriction',
             dataType: 'json',
             success: function (data) {
                 transferRestrictionTemplate(data);
@@ -222,7 +222,7 @@ $(function removeSelectedProduct() {
 function getUsedStorageCat(givenStorageID) {
     $.ajax({
         type: 'POST',
-        url: '?page=getCatWithProdAndSto',
+        url: '?request=getCatWithProdAndSto',
         data: {givenStorageID: givenStorageID},
         dataType: 'json',
         success: function (data) {
@@ -254,7 +254,7 @@ function negativeSupportStatus(data) {
 function sendEmail() {
     $.ajax({
         type: 'GET',
-        url: '?page=sendInventarWarning',
+        url: '?request=sendInventarWarning',
         dataType: 'json',
         success: function () {
 

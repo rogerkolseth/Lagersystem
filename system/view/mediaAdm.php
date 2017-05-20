@@ -22,7 +22,7 @@ $errormessage = $GLOBALS["errorMessage"];
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
             
               
-        <form id="searchForMedia" class="form-inline" action="?page=getAllMediaInfo" method="post">    
+        <form id="searchForMedia" class="form-inline" action="?request=getAllMediaInfo" method="post">    
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForMedia" type="text" name="givenMediaSearchWord" value="" placeholder="Søk etter media..">  
@@ -86,7 +86,7 @@ $errormessage = $GLOBALS["errorMessage"];
                 <div class="modal-body">
                     <div style="text-align: center">
 
-                        <form action="?page=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
+                        <form action="?request=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
                             <h4 class="text-center">Velg bilde for å laste opp</h4>
                         <table class="table">
                             <tr>
@@ -113,7 +113,7 @@ $errormessage = $GLOBALS["errorMessage"];
                     </div>
                 </div>
                 <div class="modal-footer">
-                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
+                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?request=uploadImage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
                 </form>
@@ -164,7 +164,7 @@ $errormessage = $GLOBALS["errorMessage"];
                 <h4 class="modal-title" id="mediaTitle">Rediger media</h4>
             </div>
             <div class="modal-body">
-                <form action="?page=editMedia" method="post" id="editMedia">
+                <form action="?request=editMedia" method="post" id="editMedia">
                   
                 <table class="table" id="editMediaContainer">
                     
@@ -191,7 +191,7 @@ $errormessage = $GLOBALS["errorMessage"];
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Slett bilde</h4>
             </div>
-            <form action="?page=deleteMedia" method="post" id="deleteMedia">
+            <form action="?request=deleteMedia" method="post" id="deleteMedia">
             <div class="modal-body" id="deleteMediaContainer">
                   
                 <!-- Innhold fra Handlebars Template -->

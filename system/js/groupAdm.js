@@ -34,7 +34,7 @@ function errorMessageCreate() {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getGroupSearchResult',
+        url: '?request=getGroupSearchResult',
         dataType: 'json',
         success: function (data) {
             groupTableTemplate(data);
@@ -49,7 +49,7 @@ function UpdateGroupTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getGroupSearchResult',
+            url: '?request=getGroupSearchResult',
             dataType: 'json',
             success: function (data) {
                 groupTableTemplate(data);
@@ -97,7 +97,7 @@ $(function POSTdeleteUserModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getGroupByID',
+            url: '?request=getGroupByID',
             data: {givenGroupID: givenGroupID},
             dataType: 'json',
             success: function (data) {
@@ -163,7 +163,7 @@ $(function POSTeditGroupModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getGroupByID',
+            url: '?request=getGroupByID',
             data: {givenGroupID: givenGroupID},
             dataType: 'json',
             success: function (data) {
@@ -248,7 +248,7 @@ $(function POSTgroupInformationModal() {
         POSTgroupRestriction(givenGroupID);
         $.ajax({
             type: 'POST',
-            url: '?page=getGroupByID',
+            url: '?request=getGroupByID',
             data: {givenGroupID: givenGroupID},
             dataType: 'json',
             success: function (data) {
@@ -267,7 +267,7 @@ function POSTgroupMember(data) {
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?page=getGroupMember',
+            url: '?request=getGroupMember',
             data: {givenGroupID: givenGroupID},
             dataType: 'json',
             success: function (data) {
@@ -282,7 +282,7 @@ $(function DeleteGroupMember() {
         var memberID = $(this).attr('data-id');
         $.ajax({
             type: 'POST',
-            url: '?page=deleteGroupMember',
+            url: '?request=deleteGroupMember',
             data: {memberID: memberID},
             dataType: 'json',
             success: function (data) {
@@ -307,7 +307,7 @@ function POSTgroupRestriction(data) {
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?page=getGroupRestriction',
+            url: '?request=getGroupRestriction',
             data: {givenGroupID: givenGroupID},
             dataType: 'json',
             success: function (data) {
@@ -322,7 +322,7 @@ $(function DeleteGroupRestriction() {
         var restrictionID = $(this).attr('data-id');
         $.ajax({
             type: 'POST',
-            url: '?page=deleteGroupRestriction',
+            url: '?request=deleteGroupRestriction',
             data: {restrictionID: restrictionID},
             dataType: 'json',
             success: function (data) {
@@ -364,7 +364,7 @@ $(function POSTgroupResModal() {
         var givenGroupID = $(this).attr('data-id');
          $.ajax({
             type: 'GET',
-            url: '?page=getAllStorageInfo',
+            url: '?request=getAllStorageInfo',
             dataType: 'json',
             success: function (data) {
                 var $displayGroupID = $('#groupID');
@@ -432,7 +432,7 @@ $(function GetUserInformationModal() {
 
         $.ajax({
             type: 'GET',
-            url: '?page=getUserInfo',
+            url: '?request=getUserInfo',
             dataType: 'json',
             success: function (data) {
                 var $displayGroupID = $('#groupUserID');

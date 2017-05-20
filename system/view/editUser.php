@@ -21,7 +21,7 @@ $test = $GLOBALS["errorMessage"];
         <h3 style="margin-bottom: 4%">Rediger bruker</h3>
         
         
-        <form action="?page=editUserEngine" method="post" id="editUser">
+        <form action="?request=editUserEngine" method="post" id="editUser">
         <table class="table" id="displayUserContainer">
             
         </table>
@@ -51,7 +51,7 @@ $test = $GLOBALS["errorMessage"];
                 <div class="modal-body">
                     <div style="text-align: center">
 
-                        <form action="?page=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
+                        <form action="?request=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
                             <h4 class="text-center">Velg bilde for å laste opp</h4>
                         <table class="table">
                             <tr>
@@ -78,7 +78,7 @@ $test = $GLOBALS["errorMessage"];
                     </div>
                 </div>
                 <div class="modal-footer">
-                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
+                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?request=uploadImage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
                 </form>

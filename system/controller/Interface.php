@@ -2,17 +2,17 @@
 
 // Controller layer - the router selects controller to use depending on URL and request parameters
 
-
+// This interface is based on code from Datamodellering og databaseapplikasjoner classes
 
 
 class API {
 
-    // Returns the requested page name
+    // Returns the requested response
 
     public function getRequest() {
-        // Get page from request, or use default
-        if (isset($_REQUEST["page"])) {
-            $request = $_REQUEST["page"];
+        // Get request from request, or use default
+        if (isset($_REQUEST["request"])) {
+            $request = $_REQUEST["request"];
         } else {
             $request = "home";
         }
@@ -28,7 +28,7 @@ class API {
     public function getController() {
         $request = $this->getRequest();
         
-        if ((isset($_SESSION["AreLoggedIn"])) && ($_SESSION["AreLoggedIn"] == "true")) {
+        if ($_SESSION["verified"] == true) {
 
 
             switch ($request) {

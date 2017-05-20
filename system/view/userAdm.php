@@ -15,7 +15,7 @@
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
         <!-- SØK ETTER BRUKER  -->
-        <form class="form-inline" id="searchForUser" action="?page=getUserInfo" method="post">
+        <form class="form-inline" id="searchForUser" action="?request=getUserInfo" method="post">
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
@@ -46,7 +46,7 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Opprett bruker</h4>
                         </div>
-                        <form action="?page=addUserEngine" method="post" id="createUser">
+                        <form action="?request=addUserEngine" method="post" id="createUser">
                         <div class="modal-body">
                             <div class="text-center">
                                 <table class="table">
@@ -109,7 +109,7 @@
 
     <!-- DISPLAY USER CONTAINER    -->       
     <br>
-     <form action="?page=addRestriction" id="editRestriction" method="post">
+     <form action="?request=addRestriction" id="editRestriction" method="post">
 
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -208,7 +208,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Slett bruker</h4>
                 </div>
-                <form action="?page=deleteUserEngine" method="post" id="deleteUser">
+                <form action="?request=deleteUserEngine" method="post" id="deleteUser">
                 <div class="modal-body" id="deleteUserContainer">
 
                     <!-- Innhold fra Handlebars Template-->
@@ -295,7 +295,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Bruker informasjon</h4>
                 </div>
-                <form action="?page=editUserEngine" method="post" id="editUser">
+                <form action="?request=editUserEngine" method="post" id="editUser">
                 <div class="modal-body text-center">
                     <table class="table" id="editUserContainer">
 

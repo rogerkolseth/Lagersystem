@@ -35,7 +35,7 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     
-                    <a class="navbar-left" href="?page=home" style="margin-left: 25px; margin-top: 10px;">
+                    <a class="navbar-left" href="?request=home" style="margin-left: 25px; margin-top: 10px;">
                         <img src="image/TafjordLogo.png" alt="Home">
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#usernav"><span class="glyphicon glyphicon-user"></span> 
                         <?php echo  $_SESSION["nameOfUser"]; ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="?page=editUser">Rediger profil</a></li>
+                            <li><a href="?request=editUser">Rediger profil</a></li>
                             <li><a href="../">Logout</a></li>
                         </ul>
                     </li> 
@@ -61,44 +61,44 @@
                     
 
 
-                        <li><a href="?page=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                        <li><a href="?page=sale"><span class="glyphicon glyphicon-export"></span> Registrer Uttak</a></li>
-                        <li><a href="?page=return"><span class="glyphicon glyphicon-import"></span> Registrer Retur</a></li>    
+                        <li><a href="?request=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="?request=sale"><span class="glyphicon glyphicon-export"></span> Registrer Uttak</a></li>
+                        <li><a href="?request=return"><span class="glyphicon glyphicon-import"></span> Registrer Retur</a></li>    
 
-                        <li><a href="?page=transfer"><span class="glyphicon glyphicon-random"></span> Overføring</a></li>
+                        <li><a href="?request=transfer"><span class="glyphicon glyphicon-random"></span> Overføring</a></li>
 
-                        <li><a href="?page=mySales"><span class="glyphicon glyphicon-stats"></span> Dine Salg</a></li>
-                        <li><a href="?page=myReturns"><span class="glyphicon glyphicon-stats"></span> Dine Returer</a></li>
+                        <li><a href="?request=mySales"><span class="glyphicon glyphicon-stats"></span> Dine Salg</a></li>
+                        <li><a href="?request=myReturns"><span class="glyphicon glyphicon-stats"></span> Dine Returer</a></li>
                         
                            
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
-                        <li><a href="?page=logg"><span class="glyphicon glyphicon-paperclip"></span> Logg</a></li>
+                        <li><a href="?request=logg"><span class="glyphicon glyphicon-paperclip"></span> Logg</a></li>
                         <li><a id="show-hide-toogle" href="#"><span class="glyphicon glyphicon-wrench"></span> Administrering<span class="caret"></span></a>
                         
                             <ul id="dropdown" class="nav nav-second-level" hidden>
                                 <li>
-                                    <a href="?page=userAdm"><span class="glyphicon glyphicon-user"></span> Bruker Administrering</a>
+                                    <a href="?request=userAdm"><span class="glyphicon glyphicon-user"></span> Bruker Administrering</a>
                                 </li>
                                 <li>
-                                    <a  href="?page=storageAdm"><span class="glyphicon glyphicon-home"></span> Lager Administrering</a>
+                                    <a  href="?request=storageAdm"><span class="glyphicon glyphicon-home"></span> Lager Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=productAdm"><span class="glyphicon glyphicon-shopping-cart"></span> Produkt Administrering</a>
+                                    <a href="?request=productAdm"><span class="glyphicon glyphicon-shopping-cart"></span> Produkt Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=mediaAdm"><span class="glyphicon glyphicon-picture"></span> Media Administrering</a>
+                                    <a href="?request=mediaAdm"><span class="glyphicon glyphicon-picture"></span> Media Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=categoryAdm"><span class="glyphicon glyphicon-folder-open"></span> Kategori Administrering</a>
+                                    <a href="?request=categoryAdm"><span class="glyphicon glyphicon-folder-open"></span> Kategori Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=groupAdm"><span class="glyphicon glyphicon-share"></span> Gruppe Administrering</a>
+                                    <a href="?request=groupAdm"><span class="glyphicon glyphicon-share"></span> Gruppe Administrering</a>
                                 </li>
                             </ul>
                   
                         </li>
                         <?php }?>
-                        <li><a href="?page=employeeTraning"><span class="glyphicon glyphicon glyphicon-info-sign"></span> Opplæring</a></li>
+                        <li><a href="?request=employeeTraning"><span class="glyphicon glyphicon glyphicon-info-sign"></span> Opplæring</a></li>
                     </ul>    
      
 

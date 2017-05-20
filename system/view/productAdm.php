@@ -16,7 +16,7 @@
         
         <!-- SØK ETTER PRODUKT-->
         
-        <form id="searchForProduct" class="form-inline" action="?page=getAllProductInfo" method="post">
+        <form id="searchForProduct" class="form-inline" action="?request=getAllProductInfo" method="post">
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForProduct" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter produkt..">  
@@ -76,7 +76,7 @@
                 <div class="modal-body">
                     <div>
                         <table class="table">
-                        <form action="?page=addProductEngine" method="post" id="createProduct">
+                        <form action="?request=addProductEngine" method="post" id="createProduct">
                             <tr>
                                 <th id="bordernone">Produktnavn:</th>
                                 <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off" autofocus></td>
@@ -134,7 +134,7 @@
                 <h4 class="modal-title">Produkt informasjon</h4>
             </div>
             
-            <form action="?page=editProductEngine" method="post" id="editProduct">
+            <form action="?request=editProductEngine" method="post" id="editProduct">
             <div class="modal-body" >
                 <table class="table">
                     <tbody id="editProductContainer">
@@ -214,7 +214,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Produkt informasjon</h4>
             </div>
-            <form action="?page=deleteProductEngine" method="post" id="deleteProduct">
+            <form action="?request=deleteProductEngine" method="post" id="deleteProduct">
             <div class="modal-body" id="deleteProductContainer">
                 
                 <!-- Innhold fra Handlebars Template -->
@@ -239,7 +239,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Sett varslingsgrense</h4>
             </div>
-            <form action="?page=setWarningLimit" method="post" id="warningProduct">
+            <form action="?request=setWarningLimit" method="post" id="warningProduct">
                 <br>
                 <table class="table">
                     <thead>
@@ -473,13 +473,11 @@
     <tr> 
     <td class="text-center col-md-2">  
 
-
     <!-- Knapp som aktiverer Model for produktredigering  --> 
 
     <button id="redigerknapp" data-id="{{productID}}" class="edit" data-toggle="tooltip" title="Rediger produkt">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>
     </button>
-
 
     <!-- Knapp som aktiverer Model for å vise productinformasjon  --> 
 
@@ -487,10 +485,7 @@
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
     </button>
 
-
     <!-- Knapp som aktiverer Model for sletting av produkt  --> 
-
-
 
     <button id="redigerknapp" data-id="{{productID}}" class="delete" data-toggle="tooltip" title="Slett produkt" >
     <span class="glyphicon glyphicon-remove" style="color: red"></span>

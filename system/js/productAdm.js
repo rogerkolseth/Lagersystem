@@ -3,10 +3,11 @@
 // GET productInformation -->
 
 $('#dropdown').show();
+
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllProductInfo',
+        url: '?request=getAllProductInfo',
         dataType: 'json',
         success: function (data) {
             productTableTemplate(data);
@@ -22,7 +23,7 @@ function UpdateProductTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllProductInfo',
+            url: '?request=getAllProductInfo',
             dataType: 'json',
             success: function (data) {
                 productTableTemplate(data);
@@ -35,7 +36,6 @@ function UpdateProductTable() {
 // Display product template -->
 
 function productTableTemplate(data) {
-
     var rawTemplate = document.getElementById("displayProductTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var productTableGeneratedHTML = compiledTemplate(data);
@@ -58,7 +58,7 @@ $(function POSTdeleteProductModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getProductByID',
+            url: '?request=getProductByID',
             data: {givenProductID: givenProductID},
             dataType: 'json',
             success: function (data) {
@@ -132,7 +132,7 @@ $(function POSTproductInformationModal() {
         POSTproductLocation(givenProductID);
         $.ajax({
             type: 'POST',
-            url: '?page=getProductByID',
+            url: '?request=getProductByID',
             data: {givenProductID: givenProductID},
             dataType: 'json',
             success: function (data) {
@@ -169,7 +169,7 @@ function POSTproductLocation(data) {
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?page=getProductLocation',
+            url: '?request=getProductLocation',
             data: {givenProductID: givenProductID},
             dataType: 'json',
             success: function (data) {
@@ -205,7 +205,7 @@ $(function POSTeditProductModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getProductByID',
+            url: '?request=getProductByID',
             data: {givenProductID: givenProductID},
             dataType: 'json',
             success: function (data) {
@@ -369,7 +369,7 @@ function getMediaInfo() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllMediaInfo',
+            url: '?request=getAllMediaInfo',
             dataType: 'json',
             success: function (data) {
 
@@ -394,7 +394,7 @@ function getCategoryInfo() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllCategoryInfo',
+            url: '?request=getAllCategoryInfo',
             dataType: 'json',
             success: function (data) {
 
@@ -416,7 +416,7 @@ function getCategoryInfo() {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getCatWithProd',
+        url: '?request=getCatWithProd',
         dataType: 'json',
         success: function (data) {
             chooseCategory(data);
@@ -444,7 +444,7 @@ $(function updateResultFromCategory() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getProductFromCategory',
+            url: '?request=getProductFromCategory',
             data: {givenCategoryID: givenCategoryID},
             dataType: 'json',
             success: function (data) {
@@ -477,7 +477,7 @@ $(function POSTeditWarningModal() {
         var givenProductID = $(this).attr('data-id');
         $.ajax({
             type: 'POST',
-            url: '?page=getProductLocation',
+            url: '?request=getProductLocation',
             data: {givenProductID: givenProductID},
             dataType: 'json',
             success: function (data) {

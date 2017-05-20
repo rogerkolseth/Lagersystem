@@ -4,6 +4,9 @@
 // The main index.php file that glues it all togheter
 ////////////////////////////////////////////////
 //Creates a new Session with the client
+
+// This index-file is based on code from Datamodellering og databaseapplikasjoner classes
+
 session_start();
 
 //Checking if AreLoggedIn Session are set and not false. If the AreLoggedIn is false or not set, user are sent back to login.

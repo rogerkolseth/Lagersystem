@@ -22,7 +22,7 @@ $restriction = $GLOBALS["saleRestriction"];
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group ">
         <div id="error"></div>
         <div id="success"></div>
-        <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
+        <form id="withdrawProducts" action="?request=withdrawProduct" method="post">
             <div class="col-md-12 row">
                 <h4 class="pull-left"><b>Uttak fra:</b></h4>
             </div>

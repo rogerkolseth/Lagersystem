@@ -7,7 +7,7 @@ $('#chooseCategoryContainer').show();
 $(function getStorageProduct() {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllProductInfo',
+        url: '?request=getAllProductInfo',
         dataType: 'json',
         success: function (data) {
             returnProductTemplate(data);
@@ -19,7 +19,7 @@ $(function getStorageProduct() {
 function updateProductList() {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllProductInfo',
+        url: '?request=getAllProductInfo',
         dataType: 'json',
         success: function (data) {
             returnProductTemplate(data);
@@ -55,7 +55,7 @@ $(function POSTselectedProduct() {
 
             $.ajax({
                 type: 'POST',
-                url: '?page=getProductByID',
+                url: '?request=getProductByID',
                 data: {givenProductID: givenProductID},
                 dataType: 'json',
                 success: function (data) {
@@ -165,7 +165,7 @@ $( function getUsedStorageCat() {
     var givenStorageID = '2';
     $.ajax({
             type: 'POST',
-            url: '?page=getCatWithProd',
+            url: '?request=getCatWithProd',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -194,7 +194,7 @@ $(function updateResultFromCategory() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getProductFromCategory',
+            url: '?request=getProductFromCategory',
             data: {givenCategoryID: givenCategoryID},
             dataType: 'json',
             success: function (data) {

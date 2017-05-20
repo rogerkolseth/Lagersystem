@@ -12,7 +12,7 @@
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
 
 
-            <form id="searchForGroup" class="form-inline" action="?page=getGroupSearchResult" method="post">    
+            <form id="searchForGroup" class="form-inline" action="?request=getGroupSearchResult" method="post">    
                 <div class="form-group col-md-12 row">
 
                     <input class="form-control" form="searchForGroup" type="text" name="givenGroupSearchWord" value="" placeholder="Søk etter gruppe..">  
@@ -59,7 +59,7 @@
                     <h4 class="modal-title">Opprett gruppe</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="?page=addGroupEngine" method="post" id="createGroup">
+                    <form action="?request=addGroupEngine" method="post" id="createGroup">
                         <div style="text-align: center">
                             <table class="table">                   
                                 <tr>
@@ -93,7 +93,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Slett gruppe</h4>
                 </div>
-                <form action="?page=deleteGroupEngine" method="post" id="deleteGroup">
+                <form action="?request=deleteGroupEngine" method="post" id="deleteGroup">
                     <div class="modal-body" id="deleteGroupContainer">
 
                         <!-- Innhold fra Handlebars Template-->
@@ -121,7 +121,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Rediger gruppe</h4>
                 </div>
-                <form action="?page=editGroupEngine" method="post" id="editGroup"> 
+                <form action="?request=editGroupEngine" method="post" id="editGroup"> 
 
                     <div class="modal-body">
                         <table class="table" id="editGroupContainer">
@@ -205,7 +205,7 @@
         <div class="modal-dialog">
             <!-- Innholdet til Modalen -->
             <div class="modal-content">
-                <form action="?page=addGroupRestriction" id="editGroupRestriction" method="post">
+                <form action="?request=addGroupRestriction" id="editGroupRestriction" method="post">
                     <div id="groupID"></div>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -233,7 +233,7 @@
         <div class="modal-dialog">
             <!-- Innholdet til Modalen -->
             <div class="modal-content">
-                <form action="?page=addGroupMember" id="addGroupMember" method="post">
+                <form action="?request=addGroupMember" id="addGroupMember" method="post">
                     <div id="groupUserID"></div>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>

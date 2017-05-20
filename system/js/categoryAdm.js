@@ -28,7 +28,7 @@ $(function POSTstorageInfo() {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getCategorySearchResult',
+        url: '?request=getCategorySearchResult',
         dataType: 'json',
         success: function (data) {
             categoryTableTemplate(data);
@@ -43,7 +43,7 @@ function UpdateCategoryTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getCategorySearchResult',
+            url: '?request=getCategorySearchResult',
             dataType: 'json',
             success: function (data) {
                 categoryTableTemplate(data);
@@ -100,7 +100,7 @@ $(function POSTdeleteUserModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getCategoryByID',
+            url: '?request=getCategoryByID',
             data: {givenCategoryID: givenCategoryID},
             dataType: 'json',
             success: function (data) {
@@ -184,7 +184,7 @@ $(function POSTeditCategoryModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getCategoryByID',
+            url: '?request=getCategoryByID',
             data: {givenCategoryID: givenCategoryID},
             dataType: 'json',
             success: function (data) {

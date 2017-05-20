@@ -8,7 +8,7 @@ html,body
     margin-right: 3%;
 }
 
- .sidebar .caret {
+.sidebar .caret {
     float: right;
 }
 .fontSizeTableContainer
@@ -22,15 +22,15 @@ html,body
 #keyIcon
 {
     cursor: pointer;
-    
+
     width: 20px;
     height: 18px;
-    
+
 }
 #questionmark
 {
     cursor: pointer;
-    
+
     width: 27px;
     height: 25px;
 }
@@ -55,12 +55,12 @@ html,body
 #handhover
 {
     cursor: pointer;
-    
+
 }
 
 #redigerknapp
 {
-    
+
     -webkit-appearance: none;
     -moz-appearance: none;
     outline: none;
@@ -70,31 +70,31 @@ html,body
 }
 
 @media (min-width: 768px) {
-.container{
-  background-color: #FFFFFF;
-  width: 90%;
-  padding: 3%;
-  border-radius: 7px;
-  margin-right: 10%;
+    .container{
+        background-color: #FFFFFF;
+        width: 90%;
+        padding: 3%;
+        border-radius: 7px;
+        margin-right: 10%;
 
-}
+    }
 }
 .main {
     margin-top: 2%;
     padding-left: 4%;
-    
+
 }
 
 .sidebar .sidebar-nav.navbar-collapse {
-  padding-left: 0;
-  padding-right: 0;
-  
+    padding-left: 0;
+    padding-right: 0;
+
 }
 
 .navbar-default .navbar-nav>.open>a, 
 .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-color: #FFFFFF;
-background:#002E5F; 
+    color: #FFFFFF;
+    background:#002E5F; 
 }
 
 .navbar-default .navbar-nav>li>a{
@@ -107,11 +107,11 @@ background:#002E5F;
 
 
 @media (min-width: 768px) {   
-.container-fluid{
-    background-color: #002E5F;
-    position: fixed;
-    width: 100%;
-}
+    .container-fluid{
+        background-color: #002E5F;
+        position: fixed;
+        width: 100%;
+    }
 }
 
 .container-fluid{
@@ -124,31 +124,31 @@ background:#002E5F;
 
 
 .sidebar ul li {
-  border-bottom: 0.5px solid rgba(0,46,95,.1);
- 
+    border-bottom: 0.5px solid rgba(0,46,95,.1);
+
 }
 .sidebar ul li a.active {
-  background-color: #eeeeee;
-  
+    background-color: #eeeeee;
+
 }
 
 
 @media (min-width: 768px) {
-  .sidebar {
-    z-index: 1;
-    position: fixed;
-    width: 250px;
-    margin-top: 50px;
-    border-right: 2px solid #002E5F;
-    min-height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+    .sidebar {
+        z-index: 1;
+        position: fixed;
+        width: 250px;
+        margin-top: 50px;
+        border-right: 2px solid #002E5F;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
 }
 
 .img-thumbnail{
-height: 120px;
-width: 140px;
+    height: 120px;
+    width: 140px;
 }
 
 .jumbotron{
@@ -165,9 +165,9 @@ width: 140px;
 }
 
 .displayNone{
-     display:none;
+    display:none;
 }
-  
+
 .test1233
 {
     width: 90%;
