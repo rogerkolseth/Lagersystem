@@ -8,9 +8,8 @@
 class API {
 
     // Returns the requested response
-
     public function getRequest() {
-        // Get request from request, or use default
+        // Get result from request, or display home page
         if (isset($_REQUEST["request"])) {
             $request = $_REQUEST["request"];
         } else {
@@ -23,21 +22,16 @@ class API {
         return new LoginController();
     }
 
-    // Decide wich page to show
-
+    // Decide wich controller to handle requset
     public function getController() {
         $request = $this->getRequest();
         
         if ($_SESSION["verified"] == true) {
 
-
             switch ($request) {
                 case "home":
                     return new HomeController();
-                    
-                case "loginEngine":
-                    return new LoginController();
-                    
+                         
                 case "transfer" :
                 case "getTransferRestriction" :
                 case "transferProduct" : 
@@ -88,6 +82,9 @@ class API {
                 case "employeeTraning" :    
                     return new UserController();
                     
+                case "loginEngine":
+                    return new LoginController();
+                        
                 case "uploadImageShortcut2" :
                     return new mediaController();
                 

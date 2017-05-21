@@ -2,11 +2,8 @@
 
 require_once("Controller.php");
 
-// Represents home page
 class ProductController extends Controller {
-
-    // Render "Overview" view
-
+    // Decide wich funksjon to run
     public function show($request) {
         switch ($request) {
             case "productAdm" :
@@ -78,6 +75,7 @@ class ProductController extends Controller {
     }
 
     private function deleteProductEngine() {
+        //get posted variables
         $removeProductID = $_REQUEST["deleteProductID"];
         
         $sessionID = $_SESSION["userID"];
@@ -85,9 +83,11 @@ class ProductController extends Controller {
         $setSessionID = $GLOBALS["userModel"];
         $setSessionID->setSession($sessionID);
 
+        //get involved model and run modefunction
         $removeProduct = $GLOBALS["productModel"];
         $delited = $removeProduct->removeProduct($removeProductID);
         
+        //returns "success" if delited
         if($delited){
         echo json_encode("success");} 
         else {return false;}
@@ -121,7 +121,10 @@ class ProductController extends Controller {
         $categoryModel = $GLOBALS["categoryModel"];
         $categoryInfo = $categoryModel->getAllCategoryInfo();
         
-        $data = json_encode(array("product" => $productModel, "media" => $mediaInfo, "category" => $categoryInfo));
+        $data = json_encode(array(
+            "product" => $productModel, 
+            "media" => $mediaInfo, 
+            "category" => $categoryInfo));
         echo $data;
     }
     
