@@ -33,7 +33,6 @@ $error = $GLOBALS["errorMessage"];
                         <form class="form-signin" id="login" action="?request=loginEngine" method="post">
                             <input type="text" class="form-control" placeholder="Brukernavn" name="givenUsername" required autofocus>
                             <input type="password" id="psw" autocomplete="off" class="form-control" placeholder="Passord" name="givenPassword" required>
-                            <input form="login" type="hidden" id="date" name="givenLastLogin">
                             <div class="col-md-12 row">
                                 <div class="col-md-6 pull-left">
                             <label class="checkbox">
@@ -109,18 +108,7 @@ $error = $GLOBALS["errorMessage"];
 </html>
 
 
-<script>
-Date.prototype.yyyymmdd = function() {
-   var yyyy = this.getFullYear();
-   var mm = this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : (this.getMonth() + 1); // getMonth() is zero-based
-   var dd  = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
-   return "".concat(yyyy).concat(mm).concat(dd);
-  };
 
-var d = new Date();
-document.getElementById("date").value  = d.yyyymmdd();
-
-</script>
 <script>
     
 $(function sendNewPassword() {

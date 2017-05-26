@@ -775,7 +775,7 @@ if (isset($GLOBALS["errorMessage"])) {
             <script id="stockDeliveryTemplate" type="text/x-handlebars-template">
                 <br>  
                 {{#each productInfo}} 
-                <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+                <button data-id="{{productID}}" class="btn btn-primary product">{{productName}}</button>
                 {{/each}} 
             </script>
 
