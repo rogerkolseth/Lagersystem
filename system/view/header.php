@@ -36,7 +36,7 @@
                 <div class="navbar-header">
                     
                     <a class="navbar-left" href="?page=home" style="margin-left: 25px; margin-top: 10px;">
-                        <img src="image/TafjordLogo.png" alt="Home">
+                        <img src="image/TafjordLogo.png" alt="Tafjord Logo Snarvei Home">
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">

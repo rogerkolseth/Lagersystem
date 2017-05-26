@@ -29,7 +29,7 @@ $error = $GLOBALS["errorMessage"];
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
                     
                     <div class="account-wall">
-                        <img class="profile-img" src="system/image/TafjordLogo3.png" alt="">
+                        <img class="profile-img" src="system/image/TafjordLogo3.png" alt="Tafjord Logo">
                         <form class="form-signin" id="login" action="?page=loginEngine" method="post">
                             <input type="text" class="form-control" placeholder="Brukernavn" name="givenUsername" required autofocus>
                             <input type="password" id="psw" autocomplete="off" class="form-control" placeholder="Passord" name="givenPassword" required>
