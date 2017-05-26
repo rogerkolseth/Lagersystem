@@ -11,7 +11,7 @@ class UserModel {
     const SEARCH_QUERY = "SELECT * FROM " . UserModel::TABLE . " WHERE name LIKE :givenSearchWord OR username LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email, mediaID) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail, :givenMediaID)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
-    const UPDATE_LOGINDATE = "UPDATE " . UserModel::TABLE . " SET lastLogin = :givenLastLogin WHERE username = :givenUsername";
+    const UPDATE_LOGINDATE = "UPDATE " . UserModel::TABLE . " SET lastLogin = NOW() WHERE username = :givenUsername";
     const SELECT_USERNAMES = "SELECT userID, username FROM " . UserModel::TABLE;
     const SELECT_EMAIL = "SELECT users.email FROM users WHERE users.userLevel = 'Administrator'";
     const FIND_USER = "SELECT userID FROM " . UserModel::TABLE . " WHERE username = :givenUsername AND email =:givenEmail";
@@ -84,8 +84,8 @@ class UserModel {
        return $this->delStmt;
     }
     
-    public function updateLastLogin($givenLastLogin, $givenUsername){
-        return $this->lastLogin->execute(array("givenLastLogin" => $givenLastLogin, "givenUsername" => $givenUsername));
+    public function updateLastLogin($givenUsername){
+        return $this->lastLogin->execute(array("givenUsername" => $givenUsername));
     }
     
     public function setSession($sessionID){

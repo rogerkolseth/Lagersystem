@@ -180,7 +180,7 @@
                         <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 class="panel-title text-center"><b>Gruppetilganger</b></h2>
+                            <h2 class="panel-title text-center"><b>Lagertilganger</b></h2>
                         </div>
                         <table class="table">
                               

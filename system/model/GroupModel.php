@@ -6,10 +6,10 @@ class GroupModel {
 
     const TABLE = "user_group";
     const TABLE_MEMB = "group_members";
+    const DELETE_QUERY = "DELETE FROM " . GroupModel::TABLE . " WHERE groupID = :givenGroupID";
+    const SELECT_GROUPID = "SELECT * FROM " . GroupModel::TABLE . " WHERE groupID = :givenGroupID";
     const INSERT_QUERY = "INSERT INTO " . GroupModel::TABLE . " (groupName) VALUES (:givenGroupName)";
     const SEARCH_QUERY = "SELECT * FROM " . GroupModel::TABLE . " WHERE groupName LIKE :givenSearchWord ";
-    const SELECT_GROUPID = "SELECT * FROM " . GroupModel::TABLE . " WHERE groupID = :givenGroupID";
-    const DELETE_QUERY = "DELETE FROM " . GroupModel::TABLE . " WHERE groupID = :givenGroupID";
     const UPDATE_QUERY = "UPDATE " . GroupModel::TABLE . " SET groupName = :givenGroupName WHERE groupID = :givenGroupID"; 
     const FIND_GROUP_MEMB = "SELECT COUNT(*) FROM " . GroupModel::TABLE_MEMB . " WHERE groupID = :givenGroupID AND userID = :givenUserID";
     const INSERT_GROUP_MEMB = "INSERT INTO " . GroupModel::TABLE_MEMB . " (userID, groupID) VALUES (:givenUserID, :givenGroupID)";

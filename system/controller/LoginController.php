@@ -20,17 +20,16 @@ class LoginController extends Controller {
 
     public function loginEngine() {
 
-        if (isset($_POST['givenUsername']) && ($_POST['givenPassword']) && ($_POST['givenLastLogin'])) {
+        if (isset($_POST['givenUsername']) && ($_POST['givenPassword'])) {
             $givenUsername = $_REQUEST["givenUsername"];
             $givenPassword = $_REQUEST["givenPassword"];
-            $givenLastLogin = $_REQUEST["givenLastLogin"];
 
             $type = 2;
             $desc = "Bruker logget inn";
 
             $loggModel = $GLOBALS["loggModel"];
             $userModel = $GLOBALS["userModel"];
-            $userModel->updateLastLogin($givenLastLogin, $givenUsername);
+            $userModel->updateLastLogin($givenUsername);
             $result = $loggModel->loggCheck($type);
             $Users = $userModel->getAllUserInfo();
 
@@ -47,15 +46,18 @@ class LoginController extends Controller {
                     }
                 }
             }
-            if ($_SESSION["verified"] == true) {
+             if (($_SESSION["verified"] == true) && (!isset($_POST['API'])) ) {
                 header("Location:system/index.php");
-            }
-
-
+            } else if (isset($_POST['API']) && ($_SESSION["verified"] == true)){
+                $_SESSION["API"] = true;
+                echo json_encode("success");
+            } else {
+                
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
             $this->data($message);
             return $this->view("LoginPage");
+            }
         }
     }
     
