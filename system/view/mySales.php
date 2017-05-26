@@ -25,7 +25,7 @@
         
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
-            <form id="searchForSale" class="form-inline" action="?page=getMySales" method="post">
+            <form id="searchForSale" class="form-inline" action="?request=getMySales" method="post">
                 <div class="form-group col-md-6 row">
                     <div class="">
                         <input class="form-control" form="searchForSale" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter salg.." autocomplete="off">  
@@ -40,7 +40,7 @@
 
             <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
             <div class="col-md-2 pull-right">
-                <form id="showUserSale" action="?page=showUserSale" method="post">
+                <form id="showUserSale" action="?request=showUserSale" method="post">
                     <div class="dropdown form-group" id="UserSaleSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
                             Velg brukere
@@ -86,7 +86,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Salgsinformasjon</h4>
                 </div>
-                <form action="?page=editMySale" method="post" id="editSale"> 
+                <form action="?request=editMySale" method="post" id="editSale"> 
 
                     <div class="modal-body">
                         <table class="table" id="editSaleContainer">

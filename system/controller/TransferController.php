@@ -7,40 +7,33 @@ class transferController extends Controller {
 
     // Render "Overview" view
 
-    public function show($page) {
-        if ($page == "transfer") {
-            $this->transferPage();
-        } else if ($page == "getTransferRestriction") {
-            $this->getTransferRestriction();
-        } else if ($page == "transferProduct") {
-            $this->transferProduct();
-        } else if ($page == "transferSingle") {
-            $this->transferSinglePage();
-        } else if ($page == "getuserAndGroupRes") {
-        $this->getUserAndGroupRes();
-        
+    public function show($request) {
+        switch ($request) {
+            case "transfer" :
+                return $this->transferPage();
+            case "getTransferRestriction" :
+                return $this->getTransferRestriction();
+            case "transferProduct" :
+                return $this->transferProduct();
+            case "getuserAndGroupRes" :
+                return $this->getUserAndGroupRes(); 
         }
     }
 
     private function transferPage() {
-        $givenUserID = $_SESSION["userID"];
-        $restrictionInfo = $GLOBALS["restrictionModel"];
-        $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        $userID = $_SESSION["userID"];
+        $result = $restrictionModel->getUserAndGroupRes($userID);
+        
+        if(sizeof($result) > "1"){
+           $result = "1";
+                $transferRestriction = array("transferRestriction" => $result); 
+                $this->data($transferRestriction);
+        };
 
-        $data = array("restrictionInfo" => $restrictionModel);
-
-        return $this->render("transfer", $data);
+        return $this->view("transfer");
     }
 
-    private function transferSinglePage() {
-        $givenUserID = $_SESSION["userID"];
-        $restrictionInfo = $GLOBALS["restrictionModel"];
-        $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
-
-        $data = array("restrictionInfo" => $restrictionModel);
-
-        return $this->render("transferSingle", $data);
-    }
 
     private function getTransferRestriction() {
         $givenUserID = $_SESSION["userID"];

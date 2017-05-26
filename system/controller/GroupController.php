@@ -4,44 +4,52 @@ require_once("Controller.php");
 
 class GroupController extends Controller {
 
-    public function show($page) {
-        if ($page == "groupAdm") {
-            $this->showGroupPage();
-        } else if ($page == "addGroupEngine") {
-            $this->addGroup();
-        } else if ($page == "getGroupSearchResult") {
-            $this->getGroupSearchResult();
-        } else if ($page == "getGroupByID") {
-            $this->getGroupByID();
-        } else if ($page == "deleteGroupEngine") {
-            $this->deleteGroupEngine();
-        } else if ($page == "editGroupEngine") {
-            $this->editGroupEngine();
-        } else if ($page == "addGroupRestriction") {
-            $this->addGroupRestriction();
-        } else if ($page == "addGroupMember") {
-            $this->addGroupMember();
-        } else if ($page == "getGroupMember") {
-            $this->getGroupMember();
-        } else if ($page == "getGroupRestriction") {
-            $this->getGroupRestriction();
-        } else if ($page == "deleteGroupMember") {
-            $this->deleteGroupMember();
-        } else if ($page == "deleteGroupRestriction") {
-            $this->deleteGroupRestriction();
-        } else if ($page == "getGroupRestrictionFromSto") {
-            $this->getGroupRestrictionFromSto();
+    public function show($request) {
+        switch ($request) {
+            case "groupAdm" :
+                return $this->showGroupPage();
+            case "addGroupEngine" :
+                return $this->addGroup();
+            case "getGroupSearchResult" :
+                return $this->getGroupSearchResult();
+            case "getGroupByID" :
+                return $this->getGroupByID();
+            case "deleteGroupEngine" :
+                return $this->deleteGroupEngine();
+            case "editGroupEngine" :
+                return $this->editGroupEngine();
+            case "addGroupRestriction" :
+                return $this->addGroupRestriction();
+            case "addGroupMember" :
+                return $this->addGroupMember();
+            case "getGroupMember" :
+                return $this->getGroupMember();
+            case "getGroupRestriction" :
+                return $this->getGroupRestriction();
+            case "deleteGroupMember" :
+                return $this->deleteGroupMember();
+            case "deleteGroupRestriction" :
+                return $this->deleteGroupRestriction();
+            case "getGroupRestrictionFromSto" :
+                return $this->getGroupRestrictionFromSto();
+            case "getGroupMembershipFromUserID" :
+                return $this->getGroupMembershipFromUserID();
         } 
     }
 
     private function showGroupPage() {
-        return $this->render("groupAdm");
+        return $this->view("groupAdm");
     }
 
     private function addGroup() {
         $givenGroupName = $_REQUEST["givenGroupName"];
 
         $groupModel = $GLOBALS["groupModel"];
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+
         $added = $groupModel->addGroup($givenGroupName);
         if ($added) {
             echo json_encode("success");
@@ -76,6 +84,11 @@ class GroupController extends Controller {
     private function deleteGroupEngine() {
         $deleteGroupID = $_REQUEST["deleteGroupID"];
 
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+        
         $groupModel = $GLOBALS["groupModel"];
         $delited = $groupModel->deleteGroup($deleteGroupID);
 
@@ -89,6 +102,10 @@ class GroupController extends Controller {
     private function editGroupEngine() {
         $editGroupID = $_REQUEST["editGroupID"];
         $editGroupName = $_REQUEST["editGroupName"];
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
 
         $groupModel = $GLOBALS["groupModel"];
         $edited = $groupModel->editGroup($editGroupName, $editGroupID);
@@ -162,6 +179,10 @@ class GroupController extends Controller {
     private function deleteGroupMember(){
         $memberID = $_REQUEST['memberID'];
         $groupModel = $GLOBALS["groupModel"];
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
         
         $deleted = $groupModel->deleteGroupMember($memberID);
         if ($deleted) {
@@ -174,6 +195,11 @@ class GroupController extends Controller {
     private function deleteGroupRestriction(){
         $restrictionID = $_REQUEST['restrictionID'];
         $restrictionModel = $GLOBALS["restrictionModel"];
+        $sessionID = $_SESSION["userID"];
+
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+
         
         $deleted = $restrictionModel->deleteGroupRestriction($restrictionID);
         if ($deleted) {
@@ -190,6 +216,16 @@ class GroupController extends Controller {
         $result = $restrictionModel->getGroupRestrictionFromSto($givenStorageID);
         
         $data = json_encode(array("groupRestriction" => $result));
+        echo $data;
+    }
+    
+    private function getGroupMembershipFromUserID(){
+        $givenUserID = $_REQUEST['givenUserID'];
+        $groupModel = $GLOBALS["groupModel"];
+        
+        $result = $groupModel->getGroupMembershipFromUserID($givenUserID);
+        
+        $data = json_encode(array("groupMembership" => $result));
         echo $data;
     }
 }

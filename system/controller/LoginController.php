@@ -4,10 +4,10 @@ require_once("Controller.php");
 
 class LoginController extends Controller {
 
-    public function show($page) {
-        if ($page == "newPassword") {
+    public function show($request) {
+        if ($request == "newPassword") {
             $this->generateNewPassword();
-        } else if ($page == "loginEngine") {
+        } else if ($request == "loginEngine") {
             $this->loginEngine();       
         } else {
             $this->displayLoginPage();
@@ -15,7 +15,7 @@ class LoginController extends Controller {
     }
 
     public function displayLoginPage() {
-        return $this->render("LoginPage");
+        return $this->view("LoginPage");
     }
 
     public function loginEngine() {
@@ -37,7 +37,7 @@ class LoginController extends Controller {
             foreach ($Users as $User) {
                 if ($User["username"] == $givenUsername) {
                     if (password_verify($givenPassword, $User["password"])) {
-                        $_SESSION["AreLoggedIn"] = "true";
+                        $_SESSION["verified"] = "true";
                         $_SESSION["nameOfUser"] = $User["name"];
                         $_SESSION["userID"] = $User["userID"];
                         $_SESSION["userLevel"] = $User["userLevel"];
@@ -47,14 +47,15 @@ class LoginController extends Controller {
                     }
                 }
             }
-            if ($_SESSION["AreLoggedIn"] == true) {
+            if ($_SESSION["verified"] == true) {
                 header("Location:system/index.php");
             }
 
 
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
-            return $this->render("LoginPage", $message);
+            $this->data($message);
+            return $this->view("LoginPage");
         }
     }
     

@@ -8,7 +8,7 @@ $('a#saveToCSV').hide();
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllStorageInfo',
+        url: '?request=getAllStorageInfo',
         dataType: 'json',
         success: function (data) {
             storageTableTemplate(data);
@@ -23,7 +23,7 @@ function UpdateStorageTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllStorageInfo',
+            url: '?request=getAllStorageInfo',
             dataType: 'json',
             success: function (data) {
                 storageTableTemplate(data);
@@ -64,7 +64,7 @@ $(function POSTdeleteStorageModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageByID',
+            url: '?request=getStorageByID',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -153,7 +153,7 @@ $(function POSTstocktakingModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageProduct',
+            url: '?request=getStorageProduct',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -398,7 +398,7 @@ $(function POSTstorageInformationModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageByID',
+            url: '?request=getStorageByID',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -426,7 +426,7 @@ function chartInventory(data) {
 
         $.ajax({
             type: 'POST',
-            url: '?page=chartProduct',
+            url: '?request=chartProduct',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -540,7 +540,7 @@ function POSTstorageRestriction(data) {
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageRestriction',
+            url: '?request=getStorageRestriction',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -556,7 +556,7 @@ function POSTgroupRestriction(data) {
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?page=getGroupRestrictionFromSto',
+            url: '?request=getGroupRestrictionFromSto',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -571,7 +571,7 @@ $(function DeleteGroupRestriction() {
         var restrictionID = $(this).attr('data-id');
         $.ajax({
             type: 'POST',
-            url: '?page=deleteGroupRestriction',
+            url: '?request=deleteGroupRestriction',
             data: {restrictionID: restrictionID},
             dataType: 'json',
             success: function (data) {
@@ -600,7 +600,7 @@ $(function deleteUserRestriction() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=deleteSingleRes',
+            url: '?request=deleteSingleRes',
             data: {givenUserID: givenUserID, givenStorageID: givenStorageID},
             dataType: 'json',
             success: function () {
@@ -644,7 +644,7 @@ function POSTstorageProduct(data) {
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageProduct',
+            url: '?request=getStorageProduct',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -662,7 +662,7 @@ $(function showInventoryMac() {
        
         $.ajax({
             type: 'POST',
-            url: '?page=getInventoryMac',
+            url: '?request=getInventoryMac',
             data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -680,7 +680,7 @@ $(function deleteStorageInventory() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=deleteSingleProd',
+            url: '?request=deleteSingleProd',
             data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
             dataType: 'json',
             success: function () {
@@ -770,7 +770,7 @@ $(function POSTeditStorageModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageByID',
+            url: '?request=getStorageByID',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -938,7 +938,7 @@ function updateCheckbox(data){
 function getStorageProduct() {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllProductInfo',
+        url: '?request=getAllProductInfo',
         dataType: 'json',
         success: function (data) {
             stockDeliveryTemplate(data);
@@ -969,7 +969,7 @@ $(function POSTselectedProduct() {
 
             $.ajax({
                 type: 'POST',
-                url: '?page=getProductByID',
+                url: '?request=getProductByID',
                 data: {givenProductID: givenProductID},
                 dataType: 'json',
                 success: function (data) {
@@ -990,7 +990,7 @@ $( function getUsedStorageCat() {
     var givenStorageID = '2';
     $.ajax({
             type: 'POST',
-            url: '?page=getCatWithProd',
+            url: '?request=getCatWithProd',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -1017,7 +1017,7 @@ $(function updateResultFromCategory() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getProductFromCategory',
+            url: '?request=getProductFromCategory',
             data: {givenCategoryID: givenCategoryID},
             dataType: 'json',
             success: function (data) {
@@ -1099,7 +1099,7 @@ $(function getNumberOfMac() {
 
 
             for (i = 0; i < quantity; i++) {
-                $displayMacadresse.append('<tr><td><input id="mac'+i+productID+'" class="form-control macadresse" maxlength="17" pattern=".{17,17}" name="deliveryMacadresse[]" form="stockDelivery" required title="Må være 12 tegn" value="" placeholder="macadresse"/></td></tr>');
+                $displayMacadresse.append('<tr><td><td><td><td><input id="mac'+i+productID+'" class="form-control macadresse" maxlength="17" pattern=".{17,17}" name="deliveryMacadresse[]" form="stockDelivery" required title="Må være 12 tegn" value="" placeholder="macadresse"/></td></td></td></td></tr>');
             }
         } else {return false;}
     });

@@ -14,7 +14,7 @@ function userTableTemplate(data) {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getUserByID',
+        url: '?request=getUserByID',
         dataType: 'json',
         success: function (data) {
             userTableTemplate(data);
@@ -55,7 +55,7 @@ function getCategoryInfo() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllCategoryInfo',
+            url: '?request=getAllCategoryInfo',
             dataType: 'json',
             success: function (data) {
 

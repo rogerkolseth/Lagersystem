@@ -4,38 +4,39 @@ require_once("Controller.php");
 
 class StorageController extends Controller {
 
-    public function show($page) {
-        if ($page == "storageAdm") {
-            $this->storageAdmPage();
-        } else if ($page == "addStorageEngine") {
-            $this->storageCreationEngine();
-        } else if ($page == "editStorageEngine") {
-            $this->storageEditEngine();
-        } else if ($page == "deleteStorageEngine") {
-            $this->deleteStorageEngine();
-        } else if ($page == "getAllStorageInfo") {
-            $this->getAllStorageInfo();
-        } else if ($page == "getStorageByID") {
-            $this->getStorageByID();
-        } else if ($page == "getStorageRestriction") {
-            $this->getStorageRestriction();
-        } else if ($page == "getStorageProduct") {
-            $this->getStorageProduct();
-        } else if ($page == "chartProduct") {
-            $this->chartProduct();
-        } else if ($page == "deleteSingleProd") {
-            $this->deleteSingleProd();
-        } else if ($page == "stocktacking") {
-            $this->stocktacking();
-        } else if ($page == "setWarningLimit"){
-            $this->setWarningLimit();
-        } else if ($page == "getInventoryMac"){
-            $this->getInventoryMac();
+    public function show($request) {
+        switch ($request) {
+            case "storageAdm" :
+                return $this->storageAdmPage();
+            case "addStorageEngine" :
+                return $this->storageCreationEngine();
+            case "editStorageEngine" :
+                return $this->storageEditEngine();
+            case "deleteStorageEngine" :
+                return $this->deleteStorageEngine();
+            case "getAllStorageInfo" :
+                return $this->getAllStorageInfo();
+            case "getStorageByID" :
+                return $this->getStorageByID();
+            case "getStorageRestriction" :
+                return $this->getStorageRestriction();
+            case "getStorageProduct" :
+                return $this->getStorageProduct();
+            case "chartProduct" :
+                return $this->chartProduct();
+            case "deleteSingleProd" :
+                return $this->deleteSingleProd();
+            case "stocktacking" :
+                return $this->stocktacking();
+            case "setWarningLimit" :
+                return $this->setWarningLimit();
+            case "getInventoryMac" :
+                return $this->getInventoryMac();
         }
     }
 
     private function storageAdmPage() {
-        return $this->render("storageAdm");     
+        return $this->view("storageAdm");     
     }
 
     private function storageCreationEngine() {

@@ -15,7 +15,7 @@
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
         <!-- SØK ETTER BRUKER  -->
-        <form class="form-inline" id="searchForUser" action="?page=getUserInfo" method="post">
+        <form class="form-inline" id="searchForUser" action="?request=getUserInfo" method="post">
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
@@ -46,7 +46,7 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Opprett bruker</h4>
                         </div>
-                        <form action="?page=addUserEngine" method="post" id="createUser">
+                        <form action="?request=addUserEngine" method="post" id="createUser">
                         <div class="modal-body">
                             <div class="text-center">
                                 <table class="table">
@@ -109,7 +109,7 @@
 
     <!-- DISPLAY USER CONTAINER    -->       
     <br>
-     <form action="?page=addRestriction" id="editRestriction" method="post">
+     <form action="?request=addRestriction" id="editRestriction" method="post">
 
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -208,7 +208,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Slett bruker</h4>
                 </div>
-                <form action="?page=deleteUserEngine" method="post" id="deleteUser">
+                <form action="?request=deleteUserEngine" method="post" id="deleteUser">
                 <div class="modal-body" id="deleteUserContainer">
 
                     <!-- Innhold fra Handlebars Template-->
@@ -244,29 +244,34 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>Lagertilgang</b></h2>
+                                </div>
                     <table class="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Lagertilgang</th>
-                            </tr>
-                        </thead>
+                        
                         <tbody id="userRestrictionContainer"> 
                            
                                     <!-- Innhold fra Handlebars Template-->
 
                         </tbody>
                     </table>
+                            </div>
                         </div> 
                         <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"><b>Gruppemedlemskap</b></h2>
+                                </div>
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Ny tabell til roger</th>
-                                </tr>
-                            </thead>
+                            
+                            <tbody id="groupMembershipContainer"> 
+                           
+                                    <!-- Innhold fra Handlebars Template-->
+
+                        </tbody>
                         </table>
+                            </div>
                         </div>
                 </div>
                 </div>
@@ -290,7 +295,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Bruker informasjon</h4>
                 </div>
-                <form action="?page=editUserEngine" method="post" id="editUser">
+                <form action="?request=editUserEngine" method="post" id="editUser">
                 <div class="modal-body text-center">
                     <table class="table" id="editUserContainer">
 
@@ -393,6 +398,20 @@
 
 
 <!-- HANDLEBARS TEMPLATES-->
+
+<script id="groupMembershipTemplate" type="text/x-handlebars-template">
+{{#each groupMembership}}
+<tr>
+    <td id="bordernone">
+    <button id="redigerknapp" data-id="{{memberID}}" class="deleteGroupMembership" data-toggle="tooltip" title="Fjern gruppetilgang">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+    </td>
+<td id="bordernone">{{groupName}}</td>
+</tr>    
+    
+{{/each}} 
+</script>
 
 <script id="groupRestrictionTemplate" type="text/x-handlebars-template">
 {{#each group}}
@@ -527,7 +546,7 @@
 <script id="deleteUserTemplate" type="text/x-handlebars-template">
     <h4> Du holder på å slette brukeren: </h4>
     {{#each user}}           
-    {{name}}  
+    <h4><b>{{name}}</b></h4>
     <input form="deleteUser" type="hidden" name="deleteUserID" value="{{userID}}">
         
     {{/each}}

@@ -3,7 +3,7 @@ $(function () {
 
     $.ajax({
         type: 'GET',
-        url: '?page=getMySales',
+        url: '?request=getMySales',
         dataType: 'json',
         success: function (data) {
             mySalesTemplate(data);
@@ -20,7 +20,7 @@ function UpdateSalesTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getMySales',
+            url: '?request=getMySales',
             dataType: 'json',
             success: function (data) {
                 mySalesTemplate(data);
@@ -87,7 +87,7 @@ $(function editMySales() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getSalesFromID',
+            url: '?request=getSalesFromID',
             data: {givenSalesID: givenSalesID},
             dataType: 'json',
             success: function (data) {
@@ -108,7 +108,7 @@ $(function showMacReturns() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getSalesMacFromID',
+            url: '?request=getSalesMacFromID',
             data: {givenSalesID: givenSalesID},
             dataType: 'json',
             success: function (data) {

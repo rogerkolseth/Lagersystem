@@ -3,7 +3,7 @@ $('#dropdown').show();
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllMediaInfo',
+        url: '?request=getAllMediaInfo',
         dataType: 'json',
         success: function (data) {
             mediaDisplayTemplate(data);
@@ -18,7 +18,7 @@ function UpdateMediaTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllMediaInfo',
+            url: '?request=getAllMediaInfo',
             dataType: 'json',
             success: function (data) {
                 mediaDisplayTemplate(data);
@@ -70,7 +70,7 @@ function showMedia(givenMediaID) {
     $('#showMediaInformationModal').modal('show');
     $.ajax({
         type: 'POST',
-        url: '?page=getMediaByID',
+        url: '?request=getMediaByID',
         data: {givenMediaID: givenMediaID},
         dataType: 'json',
         success: function (data) {
@@ -106,7 +106,7 @@ $(function POSTeditMediaModal() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getMediaByID',
+            url: '?request=getMediaByID',
             data: {givenMediaID: givenMediaID},
             dataType: 'json',
             success: function (data) {
@@ -181,7 +181,7 @@ $(function POSTdeleteMediaeModal() {
         $('#deleteMediaModal').modal('show');
         $.ajax({
             type: 'POST',
-            url: '?page=getMediaByID',
+            url: '?request=getMediaByID',
             data: {givenMediaID: givenMediaID},
             dataType: 'json',
             success: function (data) {
@@ -263,7 +263,7 @@ function getCategoryInfo() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getAllCategoryInfo',
+            url: '?request=getAllCategoryInfo',
             dataType: 'json',
             success: function (data) {
 
@@ -285,7 +285,7 @@ function getCategoryInfo() {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getCatWithMedia',
+        url: '?request=getCatWithMedia',
         dataType: 'json',
         success: function (data) {
             chooseCategory(data);
@@ -313,7 +313,7 @@ $(function updateResultFromCategory() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getMediaFromCategory',
+            url: '?request=getMediaFromCategory',
             data: {givenCategoryID: givenCategoryID},
             dataType: 'json',
             success: function (data) {

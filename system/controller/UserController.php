@@ -4,42 +4,43 @@ require_once("Controller.php");
 
 class UserController extends Controller {
 
-    public function show($page) {
-        if ($page == "userAdm") {
-            $this->userAdmPage();
-        } else if ($page == "addRestriction") {
-            $this->addRestriction();
-        } else if ($page == "getUserInfo") {
-            $this->getUserInfo();
-        } else if ($page == "addUserEngine") {
-            $this->userCreationEngine();
-        } else if ($page == "getUserByID") {
-            $this->getUserByID();
-        } else if ($page == "getUserRestriction") {
-            $this->getUserRestriction();
-        } else if ($page == "deleteUserEngine") {
-            $this->deleteUserEngine();
-        } else if ($page == "editUserEngine") {
-            $this->userEditEngine();
-        } else if ($page == "deleteSingleRes") {
-            $this->deleteSingleRes();
-        } else if ($page == "editUser") {
-            $this->editUserPage();
-        } else if ($page == "employeeTraning") {
-            $this->employeeTraningPage();
+    public function show($request) {
+        switch ($request) {
+            case "userAdm" :
+                return $this->userAdmPage();
+            case "addRestriction" :
+                return $this->addRestriction();
+            case "getUserInfo" :
+                return $this->getUserInfo();
+            case "addUserEngine" :
+                return $this->userCreationEngine();
+            case "getUserByID" :
+                return $this->getUserByID();
+            case "getUserRestriction" :
+                return $this->getUserRestriction();
+            case "deleteUserEngine" :
+                return $this->deleteUserEngine();
+            case "editUserEngine" :
+                return $this->userEditEngine();
+            case "deleteSingleRes" :
+                return $this->deleteSingleRes();
+            case "editUser" :
+                return $this->editUserPage();
+            case "employeeTraning" :
+                return $this->employeeTraningPage();
         }
     }
 
     private function userAdmPage() {
-        return $this->render("userAdm");
+        return $this->view("userAdm");
     }
 
     private function employeeTraningPage() {
-        return $this->render("employeeTraning");
+        return $this->view("employeeTraning");
     }
 
     private function editUserPage() {
-        return $this->render("editUser");
+        return $this->view("editUser");
     }
 
     private function userEditEngine() {
@@ -93,14 +94,14 @@ class UserController extends Controller {
             $sessionID = $_SESSION["userID"];
 
             $setSessionID = $GLOBALS["userModel"];
-            $addRestriction = $GLOBALS["restrictionModel"];
-
+            $groupModel = $GLOBALS["groupModel"];
+            
             foreach ($givenUserArray as $givenUserID) :
                 foreach ($givenGroupArray as $givenGroupID) :
-                    $count = $addRestriction->doesGroupRestrictionExist($givenUserID, $givenGroupID);
+                    $count = $groupModel->doesMemberExist($givenGroupID, $givenUserID);
                     if ($count[0]["COUNT(*)"] < 1) {
                         $setSessionID->setSession($sessionID);
-                        $added = $addRestriction->addGroupRestriction($givenUserID, $givenGroupID);
+                        $added = $groupModel->addGroupMember($givenGroupID, $givenUserID);;
                     }
                 endforeach;
             endforeach;

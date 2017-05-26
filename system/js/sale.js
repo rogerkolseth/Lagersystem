@@ -5,7 +5,7 @@
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getuserAndGroupRes',
+        url: '?request=getuserAndGroupRes',
         dataType: 'json',
         success: function (data) {
             showHide(data);
@@ -41,7 +41,7 @@ $(function POSTfromStorageModal() {
         if (givenStorageID > 0) {
             $.ajax({
                 type: 'POST',
-                url: '?page=getStorageProduct',
+                url: '?request=getStorageProduct',
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
@@ -74,7 +74,7 @@ function displaySingleStorage(givenStorageID) {
     if (givenStorageID > 0) {
         $.ajax({
             type: 'POST',
-            url: '?page=getStorageProduct',
+            url: '?request=getStorageProduct',
             data: {givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -94,7 +94,7 @@ $(function updateResultFromCategory() {
 
         $.ajax({
             type: 'POST',
-            url: '?page=getStoProFromCat',
+            url: '?request=getStoProFromCat',
             data: {givenCategoryID: givenCategoryID, givenStorageID: givenStorageID},
             dataType: 'json',
             success: function (data) {
@@ -133,7 +133,7 @@ $(function POSTselectedProduct() {
 
             $.ajax({
                 type: 'POST',
-                url: '?page=getProdQuantity',
+                url: '?request=getProdQuantity',
                 data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
@@ -230,7 +230,7 @@ function updateSale() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?page=getTransferRestriction',
+            url: '?request=getTransferRestriction',
             dataType: 'json',
             success: function (data) {
                 withdrawRestrictionTemplate(data);
@@ -278,7 +278,7 @@ $(function removeSelectedProduct() {
 function getUsedStorageCat(givenStorageID) {
     $.ajax({
         type: 'POST',
-        url: '?page=getCatWithProdAndSto',
+        url: '?request=getCatWithProdAndSto',
         data: {givenStorageID: givenStorageID},
         dataType: 'json',
         success: function (data) {
@@ -291,7 +291,7 @@ function getUsedStorageCat(givenStorageID) {
 function sendEmail() {
     $.ajax({
         type: 'GET',
-        url: '?page=sendInventarWarning',
+        url: '?request=sendInventarWarning',
         dataType: 'json',
         success: function () {
 
@@ -323,7 +323,7 @@ function showHide(data) {
         $('#singleStorageContainer').show();
         var storageID = data.transferRestriction[0].storageID;
         displaySingleStorage(storageID);
-
+        getUsedStorageCat(storageID);
         $('#singleStorageContainer').append('<p>' + data.transferRestriction[0].storageName + '</p>');
         $('#singleStorageContainer').append('<input name="fromStorageID" data-id="' + storageID + '" value="' + storageID + '" type="hidden"/>');
         $('#chooseCategoryContainer').show();

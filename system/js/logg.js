@@ -5,7 +5,7 @@
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllLoggInfo',
+        url: '?request=getAllLoggInfo',
         dataType: 'json',
         success: function (data) {
             displayLoggTable(data);
@@ -17,7 +17,7 @@ $(function () {
 function updateLogTable() {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllLoggInfo',
+        url: '?request=getAllLoggInfo',
         dataType: 'json',
         success: function (data) {
             displayLoggTable(data);
@@ -145,7 +145,7 @@ $(document).ready(function () {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getLoggCheckStatus',
+        url: '?request=getLoggCheckStatus',
         dataType: 'json',
         success: function (data) {
             updateCheckbox(data);
@@ -196,12 +196,13 @@ function toggler() {
 $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAdvanceSearchData',
+        url: '?request=getAdvanceSearchData',
         dataType: 'json',
         success: function (data) {
             userSearchTemplate(data);
             storageSearchTemplate(data);
             productSearchTemplate(data);
+            groupSearchTemplate(data);
         }
     });
 });
@@ -247,6 +248,15 @@ function productSearchTemplate(data) {
     $productTemplate.empty();
     $.each(data.productInfo, function (i, item) {
         $productTemplate.append('<tr><td id="bordernone">' + item.productName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="product[]" value="'+item.productID+'"></td></tr>');
+
+    });
+}
+
+function groupSearchTemplate(data) {
+    var $grouptTemplate = $('#groupContainer');
+    $grouptTemplate.empty();
+    $.each(data.groupInfo, function (i, item) {
+        $grouptTemplate.append('<tr><td id="bordernone">' + item.groupName +'</td> <td id="bordernone"><input id="typeContainer" type="checkbox" name="group[]" value="'+item.groupID+'"></td></tr>');
 
     });
 }

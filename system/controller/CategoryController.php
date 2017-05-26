@@ -5,35 +5,36 @@ require_once("Controller.php");
 // Represents home page
 class CategoryController extends Controller {
 
-    // Render "Overview" view
+    // view "Overview" view
 
-    public function show($page) {
-        if ($page == "categoryAdm"){
-            $this->showHomePage();
-        } else if ($page == "addCategoryEngine"){
-            $this->addCategory();
-        } else if ($page == "getAllCategoryInfo"){
-            $this->getAllCategoryInfo();
-        } else if ($page == "getCategorySearchResult"){
-            $this->getCategorySearchResult();
-        } else if ($page == "getCategoryByID"){
-            $this->getCategoryByID();
-        } else if ($page == "deleteCategoryEngine"){
-            $this->deleteCategoryEngine();
-        } else if ($page == "editCategoryEngine"){
-            $this->editCategoryEngine();
-        } else if ($page == "getCatWithProd"){
-            $this->getCatWithProd();
-        } else if ($page == "getCatWithMedia"){
-            $this->getCatWithMedia();
-        } else if ($page == "getCatWithProdAndSto"){
-            $this->getCatWithProdAndSto();
+    public function show($request) {
+        switch ($request) {
+            case "categoryAdm" :
+                return $this->showHomePage();
+            case "addCategoryEngine" :
+                return $this->addCategory();
+            case "getAllCategoryInfo" :
+                return $this->getAllCategoryInfo();
+            case "getCategorySearchResult" :
+                return $this->getCategorySearchResult();
+            case "getCategoryByID" :
+                return $this->getCategoryByID();
+            case "deleteCategoryEngine" :
+                return $this->deleteCategoryEngine();
+            case "editCategoryEngine" :
+                return $this->editCategoryEngine();
+            case "getCatWithProd" :
+                return $this->getCatWithProd();
+            case "getCatWithMedia" :
+                return $this->getCatWithMedia();
+            case "getCatWithProdAndSto" :
+                return $this->getCatWithProdAndSto();
         }
          
     }
     
     private function showHomePage(){
-        return $this->render("categoryAdm");
+        return $this->view("categoryAdm");
     }
     
     private function addCategory(){

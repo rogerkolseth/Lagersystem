@@ -4,26 +4,27 @@ require_once("Controller.php");
 
 class LoggController extends Controller {
 
-    public function show($page) {
-        if ($page == "logg") {
-            $this->loggPage();
-        } else if ($page == "getAllLoggInfo") {
-            $this->getAllLoggInfo();
-        } else if ($page == "getLatestLoggInfo") {
-            $this->getLatestLoggInfo();
-        } else if ($page == "loggCheck"){
-            $this->loggCheck();
-        } else if ($page == "getLoggCheckStatus"){
-            $this->getLoggCheckStatus();
-        } else if ($page == "getAdvanceSearchData"){
-            $this->getAdvanceSearchData();
-        } else if($page == "advanceLoggSearch"){
-            $this->advanceLoggSearch();
+    public function show($request) {
+        switch ($request) {
+            case "logg" :
+                return $this->loggPage();
+            case "getAllLoggInfo" :
+                return $this->getAllLoggInfo();
+            case "getLatestLoggInfo" :
+                return $this->getLatestLoggInfo();
+            case "loggCheck" :
+                return $this->loggCheck();
+            case "getLoggCheckStatus" :
+                return $this->getLoggCheckStatus();
+            case "getAdvanceSearchData" :
+                return $this->getAdvanceSearchData();
+            case "advanceLoggSearch" :
+                return $this->advanceLoggSearch();
         }
     }
 
     private function loggPage() {
-        return $this->render("logg");
+        return $this->view("logg");
     }
 
     private function getAllLoggInfo() {
@@ -88,15 +89,20 @@ class LoggController extends Controller {
         $storageModel = $GLOBALS["storageModel"];
         $userModel = $GLOBALS["userModel"];
         $productModel = $GLOBALS["productModel"];
+        $groupModel = $GLOBALS["groupModel"];
         
         $userInfo = $userModel->getAllUserInfo();
         $storageInfo = $storageModel->getAll();
-        $givenProductSearchWord = "%%";
-        $productInfo = $productModel->getSearchResult($givenProductSearchWord);
+        $givenSearchWord = "%%";
+        $productInfo = $productModel->getSearchResult($givenSearchWord);
+        $groupInfo = $groupModel->getSearchResult($givenSearchWord);
         
         
-        
-        $data = json_encode(array("userInfo" => $userInfo, "storageInfo" => $storageInfo, "productInfo" => $productInfo));
+        $data = json_encode(array(
+            "userInfo" => $userInfo, 
+            "storageInfo" => $storageInfo, 
+            "productInfo" => $productInfo, 
+            "groupInfo" => $groupInfo));
         echo $data;
         
     }
@@ -123,6 +129,9 @@ class LoggController extends Controller {
         if (isset($_POST['product'])) {
             $productArray = $_REQUEST["product"];
         } else { $productArray = array();}
+        if (isset($_POST['group'])) {
+            $groupArray = $_REQUEST["group"];
+        } else { $groupArray = array();}
         if (empty(!$_POST['date'])) {
             $dateArray = $_REQUEST["date"];
             $date = explode("/", $dateArray);
@@ -132,7 +141,7 @@ class LoggController extends Controller {
         
         
         $loggModel = $GLOBALS["loggModel"];
-        $search = $loggModel->advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray, $fromDate, $toDate);
+        $search = $loggModel->advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray, $groupArray, $fromDate, $toDate);
         
         $data = json_encode(array("allLoggInfo" => $search));
         echo $data;

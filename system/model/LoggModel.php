@@ -8,24 +8,26 @@ class LoggModel {
     const CHECK_TABLE = "loggtype";
     
     const SELECT_QUERY = 
-         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, g.groupName, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, l.deletedGroup, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
         ."LEFT JOIN users as u1 ON l.userID = u1.userID "
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
-        ."LEFT JOIN loggtype as lt ON l.typeID = lt.typeID "    
+        ."LEFT JOIN loggtype as lt ON l.typeID = lt.typeID " 
+        ."LEFT JOIN user_group as g ON l.groupID = g.groupID "   
         ."LEFT JOIN products as p ON l.productID = p.productID WHERE lt.typeName LIKE :givenSearchWord OR l.desc LIKE :givenSearchWord OR s1.storageName LIKE :givenSearchWord OR s2.storageName LIKE :givenSearchWord OR s3.storageName LIKE :givenSearchWord OR l.quantity LIKE :givenSearchWord "
-            . "OR l.oldQuantity LIKE :givenSearchWord OR l.newQuantity LIKE :givenSearchWord OR l.differential LIKE :givenSearchWord OR u1.username LIKE :givenSearchWord OR u2.username OR p.productName LIKE :givenSearchWord OR customerNr LIKE :givenSearchWord ORDER BY date DESC LIMIT 100";
+            . "OR l.oldQuantity LIKE :givenSearchWord OR l.newQuantity LIKE :givenSearchWord OR l.differential LIKE :givenSearchWord OR u1.username LIKE :givenSearchWord OR u2.username OR p.productName LIKE :givenSearchWord OR customerNr LIKE :givenSearchWord OR g.groupName LIKE :givenSearchWord ORDER BY date DESC LIMIT 100";
     
     const SELECT_LATEST_QUERY = 
-         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+         "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, g.groupName, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, l.deletedGroup, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
         ."LEFT JOIN users as u1 ON l.userID = u1.userID "
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
-        ."LEFT JOIN loggtype as lt ON l.typeID = lt.typeID "     
+        ."LEFT JOIN loggtype as lt ON l.typeID = lt.typeID "  
+        ."LEFT JOIN user_group as g ON l.groupID = g.groupID "    
         ."LEFT JOIN products as p ON l.productID = p.productID ORDER BY date DESC LIMIT 10 ";
     
     const INSERT_QUERY = "INSERT INTO " . LoggModel::TABLE . " (typeID, desc, storageID, fromStorageID, toStorageID, quantity, oldQuantity, newQuantity, differential, userID, onUserID, productID, date, customerNr) "
@@ -101,7 +103,7 @@ class LoggModel {
         return $this->chechStatus->fetchALL(PDO::FETCH_ASSOC);    
     }
     
-    public function advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray, $fromDateArray, $toDateArray){
+    public function advanceSearch($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray, $groupArray, $fromDateArray, $toDateArray){
         if(empty(!$loggTypeArray)){
         $type = implode(',', array_fill(0, count($loggTypeArray), '?'));
         $typeQuery = "l.typeID IN ($type)";
@@ -137,25 +139,31 @@ class LoggModel {
         $productQuery = "AND l.productID IN ($product)";
         } else {$productQuery = "";}
         
+        if(empty(!$groupArray)){
+        $group = implode(',', array_fill(0, count($groupArray), '?'));
+        $goupQuery = "AND g.groupID IN ($group)";
+        } else {$goupQuery = "";}
+        
         if(empty(!$fromDateArray) && empty(!$toDateArray)){
         $fromDate = implode(',', array_fill(0, count($fromDateArray), '?'));
         $toDate = implode(',', array_fill(0, count($toDateArray), '?'));
         $fromDateQuery = "AND (l.date BETWEEN $fromDate";
         $toDateQuery = "AND $toDate)";
-        $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray,[$fromDateArray], [$toDateArray]);
+        $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $groupArray, $productArray,[$fromDateArray], [$toDateArray]);
         } else {$fromDateQuery = ""; $toDateQuery= "";
-        $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $productArray);
+        $params = array_merge($loggTypeArray, $storageArray, $toStorageArray, $fromStorageArray, $usernameArray, $onUserArray, $groupArray, $productArray);
         }
         
         
-        $sql = "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
+        $sql = "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, g.groupName, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, l.deletedGroup, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
         ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
         ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
         ."LEFT JOIN users as u1 ON l.userID = u1.userID "
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
         ."LEFT JOIN loggtype as lt ON l.typeID = lt.typeID "    
-        ."LEFT JOIN products as p ON l.productID = p.productID WHERE $typeQuery $storageQuery $toStorageQuery $fromStorageQuery $usernameQuery $onUserQuery $productQuery $fromDateQuery $toDateQuery ORDER BY date DESC";
+        ."LEFT JOIN user_group as g ON l.groupID = g.groupID "
+        ."LEFT JOIN products as p ON l.productID = p.productID WHERE $typeQuery $storageQuery $toStorageQuery $fromStorageQuery $usernameQuery $onUserQuery $goupQuery $productQuery $fromDateQuery $toDateQuery ORDER BY date DESC";
         
         $this->advSearch = $this->dbConn->prepare($sql);
         

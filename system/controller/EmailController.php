@@ -4,7 +4,7 @@ require_once("Controller.php");
 
 class EmailController extends Controller {
 
-    public function show($page) {
+    public function show($request) {
         if ($page == "sendInventarWarning") {
             $this->sendEmailWarning();
         } 
@@ -18,13 +18,15 @@ class EmailController extends Controller {
         if (empty(!$result)) {
             $email = $userModel->getAdminEmail();
 
+            foreach ($result as $update):
+                $inventoryInfo->updateWarningStatus($update["inventoryID"]);
+            endforeach;
+            
             foreach ($email as $email):
                 $this->emailWarning($result, $email["email"]);
             endforeach;
 
-            foreach ($result as $update):
-                $inventoryInfo->updateWarningStatus($update["inventoryID"]);
-            endforeach;
+            
         } else {
             return false;
         }

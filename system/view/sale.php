@@ -1,6 +1,10 @@
 <?php require("view/header.php"); ?>
 
-
+<?php
+if (isset($GLOBALS["saleRestriction"])){
+$restriction = $GLOBALS["saleRestriction"];
+}
+?>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="container">
         <div class="row">
@@ -10,14 +14,15 @@
         </div>
     </div>
 
-
+<?php 
+                if (isset($GLOBALS["saleRestriction"]) && $restriction == "1"){?>    
     <!-- DIV som holder på all informasjon til venstre på skjermen  -->
     <h2 class="text-center">Registrer uttak</h2>
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group ">
         <div id="error"></div>
         <div id="success"></div>
-        <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
+        <form id="withdrawProducts" action="?request=withdrawProduct" method="post">
             <div class="col-md-12 row">
                 <h4 class="pull-left"><b>Uttak fra:</b></h4>
             </div>
@@ -90,6 +95,9 @@
 
 
     </div>  
+    <?php } else { ?>
+        <p> Du må ha tilgang til 1 eller fleire lager for å kunne registere uttak.  </p>       
+       <?php }?>
 </div> 
     
     <!-- Help modal -->
@@ -209,4 +217,7 @@
     {{/each}} 
 </script>
 
+<script>
+
+</script>
 <script type="text/javascript" src="js/sale.js"></script>

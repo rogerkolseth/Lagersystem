@@ -18,7 +18,7 @@ class RestritionModel{
     const INSERT_GROUP_RES = "INSERT INTO " . RestritionModel::TABLE . " (storageID, groupID) VALUES (:givenStorageID, :givenGroupID)";
     const SELECT_STORAGE_QUERY = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID";
     const SELECT_USER_QUERY = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID";
-    const INSERT_QUERY = "INSERT INTO " . RestritionModel::TABLE . " (groupID, storageID) VALUES (:givenGroupID, :givenStorageID)";
+    const INSERT_QUERY = "INSERT INTO " . RestritionModel::TABLE . " (userID, storageID) VALUES (:givenUserID, :givenStorageID)";
     const DELETE_QUERY = "DELETE FROM " . RestritionModel::TABLE . " WHERE userID = :removeUserID";
     const DELETE_SINGLE_QUERY = "DELETE FROM " . RestritionModel::TABLE . " WHERE userID = :givenUserID AND storageID = :givenStorageID";
     const FIND_GROUP_EXIST = "SELECT COUNT(*) FROM " . RestritionModel::GROUP_TABLE . " WHERE groupID = :givenGroupID AND userID = :givenUserID";

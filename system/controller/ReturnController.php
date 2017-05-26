@@ -4,25 +4,26 @@ require_once("Controller.php");
 
 class ReturnController extends Controller {
 
-    public function show($page) {
-        if ($page == "return") {
-            $this->returnPage();
-        } else if ($page == "myReturns") {
-            $this->myReturnsPage();
-        } else if ($page == "getMyReturns") {
-            $this->getAllMyReturns();
-        } else if ($page == "returnProduct") {
-            $this->returnProduct();
-        } else if ($page == "getReturnsFromID") {
-            $this->getReturnsFromID();
-        } else if ($page == "editMyReturn") {
-            $this->editMyReturn();
-        } else if ($page == "stockDelivery") {
-            $this->stockDelivery();
-        } else if ($page == "showUserReturns") {
-            $this->chooseUserReturns();
-        } else if ($page == "getReturnsMacFromID") {
-            $this->getReturnsMacFromID();
+    public function show($request) {
+        switch ($request) {
+            case "return" :
+                return $this->returnPage();
+            case "myReturns" :
+                return $this->myReturnsPage();
+            case "getMyReturns" :
+                return $this->getAllMyReturns();
+            case "returnProduct" :
+                return $this->returnProduct();
+            case "getReturnsFromID" :
+                return $this->getReturnsFromID();
+            case "editMyReturn" :
+                return $this->editMyReturn();
+            case "stockDelivery" :
+                return $this->stockDelivery();
+            case "showUserReturns" :
+                return $this->chooseUserReturns();
+            case "getReturnsMacFromID" :
+                return $this->getReturnsMacFromID();
         }
     }
 
@@ -34,14 +35,14 @@ class ReturnController extends Controller {
             if ($result["storageID"] == "2") {
                 $result = "1";
                 $returnRestriction = array("returnRestriction" => $result);
-                return $this->render("return", $returnRestriction);
+                $this->data($returnRestriction);
             };
         endforeach;
-        return $this->render("return");
+        return $this->view("return");
     }
 
     private function myReturnsPage() {
-        return $this->render("myReturns");
+        return $this->view("myReturns");
     }
 
     private function returnProduct() {
@@ -59,7 +60,7 @@ class ReturnController extends Controller {
         $returnModel = $GLOBALS["returnModel"];
         $inventoryInfo = $GLOBALS["inventoryModel"];
 
-        $index = 0;  
+        $index = 0;
         for ($i = 0; $i < sizeof($returnProductIDArray); $i++) {
             $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $returnProductIDArray[$i]);
 
@@ -81,17 +82,17 @@ class ReturnController extends Controller {
         }
         echo json_encode("success");
     }
-    
+
     private function addReturnMacAdresse($transferProductID, $transferQuantity, $macAdresseArray, $toStorageID, $index, $returnID) {
         $inventoryInfo = $GLOBALS["inventoryModel"];
         $returnModel = $GLOBALS["returnModel"];
-                for ($x = 0; $x < $transferQuantity; $x++) {
-                    $inventoryID = $inventoryInfo->getInventoryID($transferProductID, $toStorageID);
-                    $added = $inventoryInfo->addMacAdresse($inventoryID[0]["inventoryID"], $macAdresseArray[$index]);
-                    $returnModel->addReturnMac($returnID, $macAdresseArray[$index]);
-                    $index++;
-                }
-                return $index;
+        for ($x = 0; $x < $transferQuantity; $x++) {
+            $inventoryID = $inventoryInfo->getInventoryID($transferProductID, $toStorageID);
+            $added = $inventoryInfo->addMacAdresse($inventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+            $returnModel->addReturnMac($returnID, $macAdresseArray[$index]);
+            $index++;
+        }
+        return $index;
     }
 
     private function getAllMyReturns() {
@@ -195,12 +196,12 @@ class ReturnController extends Controller {
 
     private function addMacAdresse($transferProductID, $transferQuantity, $macAdresseArray, $toStorageID, $index) {
         $inventoryInfo = $GLOBALS["inventoryModel"];
-                for ($x = 0; $x < $transferQuantity; $x++) {
-                    $inventoryID = $inventoryInfo->getInventoryID($transferProductID, $toStorageID);
-                    $added = $inventoryInfo->addMacAdresse($inventoryID[0]["inventoryID"], $macAdresseArray[$index]);
-                    $index++;
-                }
-                return $index;
+        for ($x = 0; $x < $transferQuantity; $x++) {
+            $inventoryID = $inventoryInfo->getInventoryID($transferProductID, $toStorageID);
+            $added = $inventoryInfo->addMacAdresse($inventoryID[0]["inventoryID"], $macAdresseArray[$index]);
+            $index++;
+        }
+        return $index;
     }
 
     private function chooseUserReturns() {
@@ -226,13 +227,13 @@ class ReturnController extends Controller {
         $data = json_encode(array("myReturns" => $getUserReturns));
         echo $data;
     }
-    
-    private function getReturnsMacFromID(){
+
+    private function getReturnsMacFromID() {
         $givenReturnsID = $_REQUEST["givenReturnsID"];
-        
+
         $returnModel = $GLOBALS["returnModel"];
         $macAdresse = $returnModel->getMacFromReturnID($givenReturnsID);
-        
+
         $data = json_encode(array("myReturnsMac" => $macAdresse));
         echo $data;
     }

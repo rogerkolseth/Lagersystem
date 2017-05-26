@@ -13,7 +13,7 @@
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
 
 
-            <form id="searchForCategory" class="form-inline" action="?page=getCategorySearchResult" method="post">    
+            <form id="searchForCategory" class="form-inline" action="?request=getCategorySearchResult" method="post">    
                 <div class="form-group col-md-12 row">
 
                     <input class="form-control" form="searchForCategory" type="text" name="givenCategorySearchWord" value="" placeholder="Søk etter kategori..">  
@@ -57,7 +57,7 @@
                     <h4 class="modal-title">Opprett kateogri</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="?page=addCategoryEngine" method="post" id="createCategory">
+                    <form action="?request=addCategoryEngine" method="post" id="createCategory">
                         <div style="text-align: center">
                             <table class="table">                   
                                 <tr>
@@ -93,7 +93,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Slett kategori</h4>
             </div>
-            <form action="?page=deleteCategoryEngine" method="post" id="deleteCategory">
+            <form action="?request=deleteCategoryEngine" method="post" id="deleteCategory">
                 <div class="modal-body" id="deleteCategoryContainer">
 
                     <!-- Innhold fra Handlebars Template-->
@@ -120,7 +120,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Rediger Kategori</h4>
             </div>
-            <form action="?page=editCategoryEngine" method="post" id="editCategory"> 
+            <form action="?request=editCategoryEngine" method="post" id="editCategory"> 
 
                 <div class="modal-body">
                     <table class="table" id="editCategoryContainer">
@@ -227,10 +227,11 @@
 <!-- delete category template -->
 
 <script id="deleteCategoryTemplate" type="text/x-handlebars-template">
-    <p> Er du sikker på at du vil slette:  <P>
+    <h4>Du holder på å slette kategorien:</h4>
     {{#each categoryByID}}           
-    {{categoryName}}  
+    <h4><b>{{categoryName}}</b></h4>
     <input form="deleteCategory" type="hidden" name="deleteCategoryID" value="{{categoryID}}"><br>
+    <h4>Er du sikker på at du vil slette denne kategorien?</h4>
     {{/each}}    
 </script>    
 

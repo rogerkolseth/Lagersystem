@@ -15,7 +15,11 @@ class GroupModel {
     const INSERT_GROUP_MEMB = "INSERT INTO " . GroupModel::TABLE_MEMB . " (userID, groupID) VALUES (:givenUserID, :givenGroupID)";
     const SELECT_GROUP_MEMB = "SELECT users.userID, users.username, group_members.groupID, group_members.memberID FROM " . GroupModel::TABLE_MEMB . " INNER JOIN users ON group_members.userID = users.userID WHERE groupID = :givenGroupID";
     const DELETE_GROUP_MEMB = "DELETE FROM " . GroupModel::TABLE_MEMB . " WHERE memberID = :givenMemberID";
-
+    const GROUP_MEMB_FROM_USERID = "SELECT group_members.userID, user_group.groupName, group_members.groupID, group_members.memberID FROM " . GroupModel::TABLE_MEMB . " INNER JOIN user_group ON group_members.groupID = user_group.groupID WHERE userID = :givenUserID";
+    const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
+    const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
+    
+    
     public function __construct(PDO $dbConn) {
         $this->dbConn = $dbConn;
         $this->addStmt = $this->dbConn->prepare(GroupModel::INSERT_QUERY);
@@ -27,6 +31,9 @@ class GroupModel {
         $this->addGroupMemb = $this->dbConn->prepare(GroupModel::INSERT_GROUP_MEMB);
         $this->selGroupMemb = $this->dbConn->prepare(GroupModel::SELECT_GROUP_MEMB);
         $this->delGroupMemb = $this->dbConn->prepare(GroupModel::DELETE_GROUP_MEMB);
+        $this->selGroupMembFromUser = $this->dbConn->prepare(GroupModel::GROUP_MEMB_FROM_USERID);
+        $this->disabCons = $this->dbConn->prepare(GroupModel::DISABLE_CONS);
+        $this->actCons = $this->dbConn->prepare(GroupModel::ACTIVATE_CONS);
     }
     
     public function addGroup($givenGroupName) {
@@ -44,7 +51,10 @@ class GroupModel {
     }
     
     public function deleteGroup($givenGroupID) {
-       return $this->delStmt->execute(array("givenGroupID" => $givenGroupID));
+       $this->disabCons->execute(); 
+       $this->delStmt->execute(array("givenGroupID" => $givenGroupID));
+       $this->actCons->execute();
+       return $this->delStmt;
     }
     
     public function editGroup($editGroupName, $editGroupID){
@@ -67,5 +77,10 @@ class GroupModel {
     
     public function deleteGroupMember($memberID){
         return $this->delGroupMemb->execute(array("givenMemberID" => $memberID));
+    }
+    
+    public function getGroupMembershipFromUserID($givenUserID){
+        $this->selGroupMembFromUser->execute(array("givenUserID" => $givenUserID));
+        return $this->selGroupMembFromUser->fetchAll(PDO::FETCH_ASSOC); 
     }
 }
