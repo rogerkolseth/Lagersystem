@@ -38,6 +38,9 @@ class SaleController extends Controller {
         }
     }
 
+    /**
+     * Display sale page
+     */ 
     private function salePage() {
         // get restriction model
         $restrictionModel = $GLOBALS["restrictionModel"];

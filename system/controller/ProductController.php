@@ -38,6 +38,7 @@ class ProductController extends Controller {
      * add product information to database
      */      
     private function addProductEngine() {
+        // get POSTed values
         $givenProductName = $_REQUEST["givenProductName"];
         $givenPrice = $_REQUEST["givenPrice"];
         $givenCategoryID = $_REQUEST["givenCategoryID"];
@@ -45,21 +46,26 @@ class ProductController extends Controller {
         if (isset($_POST['givenMacAdresse'])) {
         $givenMacAdresse = $_REQUEST["givenMacAdresse"];
         } else {
-        $givenMacAdresse = "0";    
+        $givenMacAdresse = "0"; // if product dont use mac, givenMacAdresse = 0
         }
-        $sessionID = $_SESSION["userID"];
-        $setSessionID = $GLOBALS["userModel"];
-        $setSessionID->setSession($sessionID);
+        $sessionID = $_SESSION["userID"];   // get userID from session
+        $setSessionID = $GLOBALS["userModel"];  // get usermodel
+        $setSessionID->setSession($sessionID);  //set global variable in database
         
-        $productCreationInfo = $GLOBALS["productModel"];
+        $productCreationInfo = $GLOBALS["productModel"];    // get product model
+        // add product information to database
         $added = $productCreationInfo->addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenMacAdresse);
-        
+        // if success, echo response to view
         if($added){
         echo json_encode("success");} 
         else {return false;}
     }
 
+    /**
+     * edit product information in database
+     */   
     private function editProductEngine() {
+        // get POSTed values
         $editProductName = $_REQUEST["editProductName"];
         $editPrice = $_REQUEST["editPrice"];
         $editCategoryID = $_REQUEST["editCategoryID"];
@@ -67,23 +73,29 @@ class ProductController extends Controller {
         $editProductID = $_REQUEST["editProductID"];
         $sessionID = $_SESSION["userID"];
         
-        $sesionLog = $GLOBALS["userModel"];
-        $productEditInfo = $GLOBALS["productModel"];
-        $sesionLog->setSession($sessionID);
+        $sesionLog = $GLOBALS["userModel"];     // get user model
+        $productEditInfo = $GLOBALS["productModel"];    // get product model
+        $sesionLog->setSession($sessionID); // set global variable in database
         
+        //update product information in database
         $edited = $productEditInfo->editProduct($editProductName, $editProductID, $editPrice, $editCategoryID, $editMediaID);
         
+        // if success, echo a response to view
         if($edited){
         echo json_encode("success");} 
         else {return false;}
     }
 
+    /**
+     * delete product information in database
+     */ 
     private function deleteProductEngine() {
         //get posted variables
         $removeProductID = $_REQUEST["deleteProductID"];
         
         $sessionID = $_SESSION["userID"];
 
+        // set global variable in database
         $setSessionID = $GLOBALS["userModel"];
         $setSessionID->setSession($sessionID);
 
@@ -97,34 +109,46 @@ class ProductController extends Controller {
         else {return false;}
     }
     
+    /**
+     * get all product information in database
+     */ 
     private function getAllProductInfo() {
         $productInfo = $GLOBALS["productModel"];
-
+        
+        // if searchword is posted, get result from model
         if (isset($_POST['givenProductSearchWord'])) {
             $givenProductSearchWord = "%{$_REQUEST["givenProductSearchWord"]}%";
             $productModel = $productInfo->getSearchResult($givenProductSearchWord);
-        } else {
+        } else { 
+            // else get all product result from model
             $givenProductSearchWord = "%%";
             $productModel = $productInfo->getSearchResult($givenProductSearchWord);
         }
         
+        // Echo result as an array to view
         $data = json_encode(array("productInfo" => $productModel));
-
         echo $data;
     }
     
+    /**
+     * Get al product info from productID
+     */ 
     private function getProductByID(){
-        $givenProductID = $_REQUEST["givenProductID"];
+        $givenProductID = $_REQUEST["givenProductID"]; // get posted value
 
-        $productInfo = $GLOBALS["productModel"];
+        // get all product info from productID
+        $productInfo = $GLOBALS["productModel"]; 
         $productModel = $productInfo->getAllProductInfoFromID($givenProductID);
 
+        // get all media information
         $mediaModel = $GLOBALS["mediaModel"];
         $mediaInfo = $mediaModel->getAllMediaInfo();
         
+        // get all category information
         $categoryModel = $GLOBALS["categoryModel"];
         $categoryInfo = $categoryModel->getAllCategoryInfo();
         
+        // echo result to view as an nested array
         $data = json_encode(array(
             "product" => $productModel, 
             "media" => $mediaInfo, 
@@ -132,38 +156,49 @@ class ProductController extends Controller {
         echo $data;
     }
     
+    /**
+     * Get location of product (which storage contains this product)
+     */ 
     private function getProductLocation(){
+        //get posted variables
         $givenProductID = $_REQUEST['givenProductID'];
 
+        //get productloaction from model, from productID
         $inventoryInfo = $GLOBALS["inventoryModel"];
         $inventoryModel = $inventoryInfo->getAllProductLocationByProductID($givenProductID);
-
+        
+        // echo result as an array to view
         $data = json_encode(array("productLocation" => $inventoryModel));
         echo $data; 
     }
     
-    private function getLowInventory()
-    {
+    /**
+     * get storage and productss with low inventory status, 
+     */ 
+    private function getLowInventory(){
+        // get low inventory information from model
         $inventoryModel = $GLOBALS["inventoryModel"];
-        
         $inventoryInfo = $inventoryModel->getLowInventory();
         
+        //echo result as an array to view
         $data = json_encode(array("lowInv" => $inventoryInfo));
-        
         echo $data;
     }
 
+    /**
+     * Get products within a given category
+     */ 
     private function getProductFromCategory(){
-        $givenCategoryID = $_REQUEST["givenCategoryID"]; 
-        if($givenCategoryID == 0){
-            $this->getAllProductInfo();
+        $givenCategoryID = $_REQUEST["givenCategoryID"]; // get POSTed value
+        if($givenCategoryID == 0){ // if 0, user have selected "show all"
+            $this->getAllProductInfo(); // runs getAllProductInfo function
         } else {
         $productInfo = $GLOBALS["productModel"];
-        
+        //get all product within category from model
         $result = $productInfo->getProductFromCategory($givenCategoryID);
         
+        // echo result as an array to view
         $data = json_encode(array("productInfo" => $result));
-
         echo $data;
         }
     }
