@@ -4,7 +4,9 @@ require_once("Controller.php"); //include controller
 
 class mediaController extends Controller {
 
-    //Decide wich function to run based on passed $requset variable
+    /**
+     * Decide wich function to run based on passed $requset variable
+     */
     public function show($request) {
         $viewMediaAdm = "mediaAdm";
         $viewHome = "home";
@@ -32,13 +34,17 @@ class mediaController extends Controller {
         }
     }
 
-    // display media administrator page
+    /**
+     * display media administrator page
+     */
     private function mediaPage() {
         return $this->view("mediaAdm");
     }
     
-    // function to upload image. Code based example code from w3school.com
-    // https://www.w3schools.com/php/php_file_upload.asp
+    /**
+     *  function to upload image. Code based example code from w3school.com
+     * https://www.w3schools.com/php/php_file_upload.asp
+    */ 
     
     private function uploadImage($data) {
         $givenCaterogyID = $_REQUEST["givenCategoryID"];
@@ -100,7 +106,11 @@ class mediaController extends Controller {
         }
     }
     
-   // add media information to database
+   /**
+    * add media information to database
+    * @param type $fileName
+    * @param type $givenCaterogy 
+    */
     private function addMedia($fileName, $givenCaterogy){
         $sessionID = $_SESSION["userID"];   // get userID from session
         $setSessionID = $GLOBALS["userModel"];  //get user model

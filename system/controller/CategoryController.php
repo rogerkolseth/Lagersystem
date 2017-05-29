@@ -28,16 +28,19 @@ class CategoryController extends Controller {
                 return $this->getCatWithMedia();
             case "getCatWithProdAndSto" :
                 return $this->getCatWithProdAndSto();
-        }
-         
+        } 
     }
     
+    /**
+     * display category administration page
+     */ 
     private function showHomePage(){
-        //display category administration page
         return $this->view("categoryAdm");
     }
     
-    // adds a new category
+    /**
+     *  adds a new category
+     */ 
     private function addCategory(){
         $givenCategoryName = $_REQUEST["givenCategoryName"]; // get POSTed category name
         
@@ -48,7 +51,9 @@ class CategoryController extends Controller {
        }     
     }
     
-    // gets all categories
+    /** 
+    * gets all categories
+    */ 
     private function getAllCategoryInfo(){
         $categoryModel = $GLOBALS["categoryModel"]; // gets category mode
         $categoryInfo = $categoryModel->getAllCategoryInfo(); // gets all categories from model
@@ -58,7 +63,9 @@ class CategoryController extends Controller {
         echo $data;
     }
     
-    // search for categories
+    /**
+    * search for categories
+    */ 
     private function getCategorySearchResult(){
         $categoryModel = $GLOBALS["categoryModel"]; // gets category model
         
@@ -77,7 +84,9 @@ class CategoryController extends Controller {
         echo $data;
     }
     
-    // gets category info from ID
+    /** 
+     * gets category info from ID
+     */
     private function getCategoryByID(){
         $givenCategoryID = $_REQUEST["givenCategoryID"]; // gets POSTed categoryID
         $categoryModel = $GLOBALS["categoryModel"]; // gets category Model
@@ -89,7 +98,9 @@ class CategoryController extends Controller {
         echo $data;
     }
     
-    //delete a spesific category
+    /**
+     * delete a spesific category
+     */
     private function deleteCategoryEngine(){
         $deleteCategoryID = $_REQUEST["deleteCategoryID"];  //gets POSTed categoryID to delete
         
@@ -101,7 +112,9 @@ class CategoryController extends Controller {
         else {return false;}
     }
     
-    //edit a spesific category
+    /**
+     * edit a spesific category
+     */
     private function editCategoryEngine(){
         $editCategoryID = $_REQUEST["editCategoryID"]; //gets POSTed categoryID to edit
         $editCategoryName = $_REQUEST["editCategoryName"]; // gets new categoryname
@@ -113,7 +126,9 @@ class CategoryController extends Controller {
         echo json_encode("success");} else {return false;} //if success, echo a respond to view
     }
     
-    // gets categories containing a product
+    /**
+     * gets categories containing a product
+     */
     private function getCatWithProd(){
         $categoryModel = $GLOBALS["categoryModel"]; // get category model
         $categoryInfo = $categoryModel->getCatWithProd(); // gets all categories containing a product
@@ -123,7 +138,9 @@ class CategoryController extends Controller {
         echo $data;
     }
     
-    // gets categories containing a media
+    /**
+     * gets categories containing a media
+     */
     private function getCatWithMedia(){
         $categoryModel = $GLOBALS["categoryModel"]; // get categorymodel
         $categoryInfo = $categoryModel->getCatWithMedia(); //gets all categories containing a media
@@ -133,7 +150,9 @@ class CategoryController extends Controller {
         echo $data;
     }
 
-    // gets categories containing a product inside a spesific storage
+    /**
+     * gets categories containing a product inside a spesific storage
+     */
     private function getCatWithProdAndSto(){
         $givenStorageID = $_REQUEST["givenStorageID"]; // get POSTed storageID
         

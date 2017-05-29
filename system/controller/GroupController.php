@@ -38,12 +38,16 @@ class GroupController extends Controller {
         } 
     }
 
-    // display group administration page
+    /**
+     * display group administration page
+     */
     private function showGroupPage() {
         return $this->view("groupAdm");
     }
 
-    // creates a new group
+    /**
+     *  creates a new group
+     */
     private function addGroup() {
         $givenGroupName = $_REQUEST["givenGroupName"]; // gets POSTed group name
 
@@ -59,7 +63,9 @@ class GroupController extends Controller {
         }
     }
 
-    // search for groups or get all groups result
+    /**
+     *  search for groups or get all groups result
+     */
     private function getGroupSearchResult() {
         $groupModel = $GLOBALS["groupModel"]; // get group model
 
@@ -77,7 +83,9 @@ class GroupController extends Controller {
         echo $data;
     }
 
-    // gets group information from group ID
+    /**
+     *  gets group information from group ID
+     */
     private function getGroupByID() {
         $givenGroupID = $_REQUEST["givenGroupID"];  //gets POSTed group ID
         $groupModel = $GLOBALS["groupModel"];   // get group model
@@ -89,7 +97,9 @@ class GroupController extends Controller {
         echo $data;
     }
 
-    // delete an exicting group
+    /**
+     * delete an exicting group
+     */
     private function deleteGroupEngine() {
         $deleteGroupID = $_REQUEST["deleteGroupID"]; // gets POSTed group ID
 
@@ -109,7 +119,9 @@ class GroupController extends Controller {
         }
     }
 
-    // edit an exicting group
+    /**
+     * edit an exicting group
+     */
     private function editGroupEngine() {
         $editGroupID = $_REQUEST["editGroupID"];    // get POSTed group ID
         $editGroupName = $_REQUEST["editGroupName"];    // get POSTed group name
@@ -129,7 +141,9 @@ class GroupController extends Controller {
         }
     }
 
-    // Give group restrictions to a storage
+    /**
+     *  Give group restrictions to a storage
+     */
     private function addGroupRestriction() {
         if (isset($_POST['givenGroupID']) && isset($_POST['storageRestrictions'])) {
             $givenGroupID = $_REQUEST['givenGroupID'];  // get POSTed group ID
@@ -153,7 +167,9 @@ class GroupController extends Controller {
         }
     }
     
-    // add new group member
+    /**
+     *  add new group member
+     */
     private function addGroupMember() {
         if (isset($_POST['givenGroupID']) && isset($_POST['userRestrictions'])) {
             $givenGroupID = $_REQUEST['givenGroupID'];  // gets POSTed groupID
@@ -177,7 +193,9 @@ class GroupController extends Controller {
         }
     }
     
-    // get members in a spesific group
+    /**
+     *  get members in a spesific group
+     */
     private function getGroupMember(){
         $givenGroupID = $_REQUEST['givenGroupID'];  // gets POSTed group ID
         $groupModel = $GLOBALS["groupModel"]; // get group model
@@ -188,7 +206,9 @@ class GroupController extends Controller {
         echo $data;
     }
     
-    // get storage restrictions to a spesific group
+    /**
+     *  get storage restrictions to a spesific group
+     */
     private function getGroupRestriction(){
         $givenGroupID = $_REQUEST['givenGroupID'];  // get group ID
         $restrictionModel = $GLOBALS["restrictionModel"];   // get restriction model
@@ -200,7 +220,9 @@ class GroupController extends Controller {
         echo $data;
     }
     
-    // delete a spesific groupmember
+    /**
+     * delete a spesific groupmember
+     */
     private function deleteGroupMember(){
         $memberID = $_REQUEST['memberID'];  // get POSTed memberID
         $groupModel = $GLOBALS["groupModel"];   // get group model
@@ -217,7 +239,9 @@ class GroupController extends Controller {
         }
     }
     
-    // delete a sepsific groups restriction to a spesific storage
+    /**
+     * delete a sepsific groups restriction to a spesific storage
+     */
     private function deleteGroupRestriction(){
         $restrictionID = $_REQUEST['restrictionID'];    // get POSTed restriction ID
         $restrictionModel = $GLOBALS["restrictionModel"];   // get restriction model
@@ -236,7 +260,9 @@ class GroupController extends Controller {
         }
     }
     
-    // get all group restrictions from a storage 
+    /**
+     *  get all group restrictions from a storage 
+     */
     private function getGroupRestrictionFromSto(){
         $givenStorageID = $_REQUEST['givenStorageID'];  // gets POSTed storageID
         $restrictionModel = $GLOBALS["restrictionModel"];   // get restriction model
@@ -249,7 +275,9 @@ class GroupController extends Controller {
         echo $data;
     }
     
-    // get all group memberships from a given userID
+    /**
+     *  get all group memberships from a given userID
+     */
     private function getGroupMembershipFromUserID(){
         $givenUserID = $_REQUEST['givenUserID']; // get POSTed userID
         $groupModel = $GLOBALS["groupModel"];   // get group Model

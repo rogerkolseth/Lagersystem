@@ -13,7 +13,9 @@ class HomeController extends Controller {
          
     }
     
-    // display home page
+    /**
+     * display home page
+     */
     private function showHomePage(){
         return $this->view("home");
     }

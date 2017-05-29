@@ -5,7 +5,10 @@
 
 class API {
 
-    // Returns the requestion passed from view
+    /**
+     * 
+     * @return string Returns the requestion passed from view
+     */
     public function getRequest() {
         // gets request passed from view, if no request is passed 
         // set request as "home" (display home page)
@@ -17,11 +20,18 @@ class API {
         return $request; // returns request result
     }
 
-    public function getLoginController() { // get the login controller class
+    /**
+     * 
+     * @return \LoginController get the login controller class
+     */
+    public function getLoginController() { 
         return new LoginController();
     }
 
-    // Decide wich controller to handle requset
+    /**
+     * 
+     *  Decide wich controller to handle requset
+     */
     public function getController() {
         $request = $this->getRequest();     // gets value of request
         

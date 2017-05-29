@@ -2,10 +2,11 @@
 
 class MediaModel {
     
-    private $dbConn;
+    private $dbConn;    //database connection variable
     
-    const TABLE = "media";
+    const TABLE = "media";  // table to access
     
+    // query to run, can include binded variables
     const SEARCH_QUERY = "SELECT * FROM " . MediaModel::TABLE . " WHERE mediaName LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . MediaModel::TABLE . " (mediaName, categoryID) VALUES (:givenFileName, :givenCaterogy)";
     const ID_QUERY = "SELECT * FROM " . MediaModel::TABLE . " INNER JOIN categories ON media.categoryID = categories.categoryID WHERE mediaID LIKE :givenMediaID";
@@ -18,7 +19,8 @@ class MediaModel {
     
     
     public function __construct(PDO $dbConn) { 
-      $this->dbConn = $dbConn;
+      $this->dbConn = $dbConn;  // connect to database
+      // prepare the statements
       $this->searchStmt = $this->dbConn->prepare(MediaModel::SEARCH_QUERY);
       $this->addStmt = $this->dbConn->prepare(MediaModel::INSERT_QUERY);
       $this->byIdStmt = $this->dbConn->prepare(MediaModel::ID_QUERY);
@@ -30,38 +32,63 @@ class MediaModel {
       $this->mediaFromCat = $this->dbConn->prepare(MediaModel::MEDIA_FROM_CATID);
     }
     
+    /**
+     * Get media search result
+     */ 
     public function getMediaSearchResult($givenSearchWord){
+        //bind variable to the parameter as strings, and execute SQL statement
         $this->searchStmt->execute(array("givenSearchWord" => $givenSearchWord));
-        return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);
-
-       
+        return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);   // return fetched result
     }
     
+    /**
+     * add new media info to database
+     */ 
     public function addMedia($fileName, $givenCaterogy) {
+        //bind variable to the parameter as strings, and execute SQL statement
         return $this->addStmt->execute(array("givenFileName" => $fileName, "givenCaterogy" => $givenCaterogy));
     }
     
+    /**
+     * Get media info grom mediaID
+     */ 
     public function getMediaByID($givenMediaID){
+        //bind variable to the parameter as strings, and execute SQL statement
         $this->byIdStmt->execute(array("givenMediaID" => $givenMediaID));
-        return $this->byIdStmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->byIdStmt->fetchAll(PDO::FETCH_ASSOC); // return fetched result
     }
     
+    /**
+     * Edit a registered media 
+     */ 
     public function editMedia($editMediaID, $editMediaName, $editCategory){
+        //bind variable to the parameter as strings, and execute SQL statement
        return $this->editStmt->execute(array("editMediaID" => $editMediaID, "editMediaName" => $editMediaName, "editCategory" => $editCategory)); 
     }
     
-    public function deletetMediaByID($deleteMediaID)    {
-       return $this->delStmt->execute(array("deleteMediaID" => $deleteMediaID));
+    /**
+     * Delete a existing media
+     */ 
+    public function deletetMediaByID($deleteMediaID){
+        //bind variable to the parameter as strings, and execute SQL statement
+       return $this->delStmt->execute(array("deleteMediaID" => $deleteMediaID));    
     }
     
+    /**
+     * Get all media information
+     */ 
     public function getAllMediaInfo(){
-        $this->selStmt->execute();
-        return $this->selStmt->fetchAll(PDO::FETCH_ASSOC); 
+        $this->selStmt->execute();  // execute SQL statement
+        return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);  // return fetched result
     }
     
+    /**
+     * Get media within a given category
+     */ 
     public function getMediaFromCategory($givenCategoryID) {
+        //bind variable to the parameter as strings, and execute SQL statement
         $this->mediaFromCat->execute(array("givenCategoryID" => $givenCategoryID));
-        return $this->mediaFromCat->fetchAll(PDO::FETCH_ASSOC);
+        return $this->mediaFromCat->fetchAll(PDO::FETCH_ASSOC); // return fetched result
     } 
 }
 

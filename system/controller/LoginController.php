@@ -4,7 +4,9 @@ require_once("Controller.php"); //include controller
 
 class LoginController extends Controller {
     
-    //Decide wich function to run based on passed $requset variable
+    /**
+     * Decide wich function to run based on passed $requset variable
+     */
     public function show($request) {
         if ($request == "newPassword") {
             $this->generateNewPassword();
@@ -17,12 +19,16 @@ class LoginController extends Controller {
         } 
     }
 
-    // display login page
+    /**
+     * display login page
+     */
     public function displayLoginPage() {
         return $this->view("LoginPage");
     }
 
-    // verifie user
+    /**
+     *  verifie user
+     */
     public function loginEngine() {
 
         if (isset($_POST['givenUsername']) && ($_POST['givenPassword'])) {
@@ -72,12 +78,16 @@ class LoginController extends Controller {
         }
     }
     
+    /**
+     *  destroy session on logout
+     */
     private function logOutEngine(){
-        // destroy session on logout
         session_destroy();
     }
     
-    // generate new random password 
+    /**
+     * generate new random password 
+     */
     private function generateNewPassword() {
         $givenUsername = $_REQUEST["givenUsername"]; // get POSTed username
         $givenEmail = $_REQUEST["givenEmail"];  // get POSTed email
@@ -104,7 +114,9 @@ class LoginController extends Controller {
         }
     }
 
-        // generate new password, gotten from stackoverflow: https://stackoverflow.com/questions/4356289/php-random-string-generator
+        /**
+         *  generate new password, gotten from stackoverflow: https://stackoverflow.com/questions/4356289/php-random-string-generator
+         */
     private function generateRandomPassword($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -115,7 +127,9 @@ class LoginController extends Controller {
         return $randomString;
     }
 
-    // sends new email, configure file taken from PHP maile git page: https://github.com/PHPMailer/PHPMailer
+    /**
+     *  sends new email, configure file taken from PHP maile git page: https://github.com/PHPMailer/PHPMailer
+     */
     private function emailNewPassword($newPassword, $email) {
         require 'system/PHPMailer/PHPMailer-master/PHPMailerAutoload.php';
 //Create a new PHPMailer instance

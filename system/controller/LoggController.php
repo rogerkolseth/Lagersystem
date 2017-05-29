@@ -4,7 +4,9 @@ require_once("Controller.php");     //include controller
 
 class LoggController extends Controller {
 
-    //Decide wich function to run based on passed $requset variable
+    /**
+     * Decide wich function to run based on passed $requset variable
+     */
     public function show($request) {
         switch ($request) {
             case "logg" :
@@ -24,12 +26,16 @@ class LoggController extends Controller {
         }
     }
 
-    // dispaly logg page
+    /**
+     *  dispaly logg page
+     */
     private function loggPage() {
         return $this->view("logg");
     }
 
-    // gets all log result from a search word, or get all logs
+    /**
+     *  gets all log result from a search word, or get all logs
+     */
     private function getAllLoggInfo() {
         $loggModel = $GLOBALS["loggModel"]; // get logg model
 
@@ -47,7 +53,9 @@ class LoggController extends Controller {
         echo $data;
     }
 
-    // get 10 latest loggs
+    /**
+     *  get 10 latest loggs
+     */
     private function getLatestLoggInfo() {
         $loggModel = $GLOBALS["loggModel"]; // get logg model
         $loggLateInfo = $loggModel->getLatestLoggInfo();    // get 10 latest loggs from model
@@ -57,7 +65,9 @@ class LoggController extends Controller {
         echo $data;
     }
 
-    // edit what type of loggs to logg
+    /**
+     *  edit what type of loggs to logg
+     */
     private function loggCheck() {
         // gets POSTed values
         $edit = $_REQUEST["Redigering"];
@@ -89,7 +99,9 @@ class LoggController extends Controller {
         
     }
     
-    // get result of what types is marked to be logged 
+    /**
+     *  get result of what types is marked to be logged 
+     */
     private function getLoggCheckStatus(){
         $loggModel = $GLOBALS["loggModel"]; // get log model
         $status = $loggModel->getLoggCheckStatus(); // get log status (what to log)
@@ -99,7 +111,9 @@ class LoggController extends Controller {
         echo $data;
     }
     
-    // get information to be used in advance searcho
+    /**
+     *  get information to be used in advance searcho
+     */
     private function getAdvanceSearchData(){
         // get involved models
         $storageModel = $GLOBALS["storageModel"];
@@ -123,7 +137,9 @@ class LoggController extends Controller {
         
     }
     
-    // get result from an advance search
+    /**
+     *  get result from an advance search
+     */
     private function advanceLoggSearch(){
         // check if value is posted, else create empty array
         if (isset($_POST['loggType'])) {

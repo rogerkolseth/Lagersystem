@@ -4,14 +4,18 @@ require_once("Controller.php"); //include controller
 
 class EmailController extends Controller {
     
-    //Decide wich function to run based on passed $requset variable
+    /**
+     * Decide wich function to run based on passed $requset variable
+     */
     public function show($request) {
         if ($page == "sendInventarWarning") {
             $this->sendEmailWarning();
         } 
     }
 
-       // sends email with storages with lov inventory status 
+       /**
+        * @return boolean sends email with storages with lov inventory status 
+        */
     private function sendEmailWarning() {
         $inventoryInfo = $GLOBALS["inventoryModel"]; // gets inventory model
         $userModel = $GLOBALS["userModel"]; // gets user model
@@ -39,7 +43,11 @@ class EmailController extends Controller {
         }
     }
 
-    //  Configuer setup from PHP mailer : https://github.com/PHPMailer/PHPMailer
+    /**
+     * 
+     * @param type $data
+     * @param type $email Configuer setup from PHP mailer : https://github.com/PHPMailer/PHPMailer
+     */
     private function emailWarning($data, $email) {
         require 'PHPMailer/PHPMailer-master/PHPMailerAutoload.php';
         foreach ($data as $data):

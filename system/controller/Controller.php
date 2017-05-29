@@ -7,8 +7,7 @@
 abstract class Controller {
 
     /**
-     * Renders the page - outputs its content
-     * @param string $request
+     * Hold request variable, for other controller to access
      */
     
     public abstract function show($request);
@@ -16,8 +15,6 @@ abstract class Controller {
     
     /**
      * Inlcudes view page, and make it display for user
-     * @param string of pagename to include (view page name)
-     * @return bool true on success
      */
     
     protected function view($pageName) {
@@ -36,7 +33,6 @@ abstract class Controller {
     
      /**
      * Store data in global variables an make dem accessible from view page
-     * @param array $data, containing data to pass to template
      */
     
     protected function data($data = array()){

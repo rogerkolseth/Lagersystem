@@ -2,10 +2,12 @@
 
 class GroupModel {
     
-    private $dbConn;
+    private $dbConn;    //database connection variable
 
-    const TABLE = "user_group";
-    const TABLE_MEMB = "group_members";
+    const TABLE = "user_group"; // table to access
+    const TABLE_MEMB = "group_members"; // table to access
+    
+    // query to run, can include binded variables
     const DELETE_QUERY = "DELETE FROM " . GroupModel::TABLE . " WHERE groupID = :givenGroupID";
     const SELECT_GROUPID = "SELECT * FROM " . GroupModel::TABLE . " WHERE groupID = :givenGroupID";
     const INSERT_QUERY = "INSERT INTO " . GroupModel::TABLE . " (groupName) VALUES (:givenGroupName)";
@@ -21,7 +23,8 @@ class GroupModel {
     
     
     public function __construct(PDO $dbConn) {
-        $this->dbConn = $dbConn;
+        $this->dbConn = $dbConn;    // connect to database
+        // prepare the statements
         $this->addStmt = $this->dbConn->prepare(GroupModel::INSERT_QUERY);
         $this->searchStmt = $this->dbConn->prepare(GroupModel::SEARCH_QUERY);
         $this->selGroupID = $this->dbConn->prepare(GroupModel::SELECT_GROUPID);
@@ -36,51 +39,91 @@ class GroupModel {
         $this->actCons = $this->dbConn->prepare(GroupModel::ACTIVATE_CONS);
     }
     
+     /**
+     * Add a new group to database
+     */ 
     public function addGroup($givenGroupName) {
+        //bind variable to the parameter as strings, and execute SQL statement
         return $this->addStmt->execute(array("givenGroupName" =>  $givenGroupName));
     } 
     
+     /**
+     * Get all group info from search result
+     */ 
     public function getSearchResult($givenSearchWord) {
+        //bind variable to the parameter as strings, and execute SQL statement
         $this->searchStmt->execute(array("givenSearchWord" => $givenSearchWord));
-        return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);   // return fetched result
     }
     
+     /**
+     * Get all group info from given groupID
+     */ 
     public function getGroupByID($givenGroupID){
+        //bind variable to the parameter as strings, and execute SQL statement
        $this->selGroupID->execute(array("givenGroupID" => $givenGroupID));
-       return $this->selGroupID->fetchAll(PDO::FETCH_ASSOC); 
+       return $this->selGroupID->fetchAll(PDO::FETCH_ASSOC);    // return fetched result
     }
     
+     /**
+     * Delete a group from database
+     */ 
     public function deleteGroup($givenGroupID) {
        $this->disabCons->execute(); 
+       //bind variable to the parameter as strings, and execute SQL statement
        $this->delStmt->execute(array("givenGroupID" => $givenGroupID));
        $this->actCons->execute();
        return $this->delStmt;
     }
     
+     /**
+     * Edit a existing group in database
+     */ 
     public function editGroup($editGroupName, $editGroupID){
+        //bind variable to the parameter as strings, and execute SQL statement
        return $this->editStmt->execute(array("givenGroupName" => $editGroupName, "givenGroupID" => $editGroupID)); 
     }
     
+     /**
+     * Check if user already are member of group
+     */ 
     public function doesMemberExist($givenGroupID, $givenUserID){
+        //bind variable to the parameter as strings, and execute SQL statement
         $this->existGroupMemb->execute(array("givenUserID" => $givenUserID, "givenGroupID" => $givenGroupID));
-        return $this->existGroupMemb->fetchAll(PDO::FETCH_ASSOC); 
+        return $this->existGroupMemb->fetchAll(PDO::FETCH_ASSOC);   // return fetched result
     }
     
+     /**
+     * Add a new group member to given group
+     */ 
     public function addGroupMember($givenGroupID, $givenUserID){
+        //bind variable to the parameter as strings, and execute SQL statement
         $this->addGroupMemb->execute(array("givenUserID" => $givenUserID, "givenGroupID" => $givenGroupID));
     }
     
+     /**
+     * Get all members in a given group
+     */ 
     public function getGroupMember($givenGroupID){
+        //bind variable to the parameter as strings, and execute SQL statement
         $this->selGroupMemb->execute(array("givenGroupID" => $givenGroupID));
-       return $this->selGroupMemb->fetchAll(PDO::FETCH_ASSOC); 
+       return $this->selGroupMemb->fetchAll(PDO::FETCH_ASSOC);  // return fetched result
     }
     
+     /**
+     * Delete a member from a group
+     */ 
     public function deleteGroupMember($memberID){
+        //bind variable to the parameter as strings, and execute SQL statement
         return $this->delGroupMemb->execute(array("givenMemberID" => $memberID));
     }
     
+     /**
+     * Gets all group a given user are member of
+     */ 
     public function getGroupMembershipFromUserID($givenUserID){
+        //bind variable to the parameter as strings, and execute SQL statement
         $this->selGroupMembFromUser->execute(array("givenUserID" => $givenUserID));
-        return $this->selGroupMembFromUser->fetchAll(PDO::FETCH_ASSOC); 
+        return $this->selGroupMembFromUser->fetchAll(PDO::FETCH_ASSOC);     // return fetched result
     }
 }
