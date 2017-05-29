@@ -3,7 +3,7 @@
 require_once("Controller.php");
 
 class ProductController extends Controller {
-    // Decide wich funksjon to run
+    //Decide wich function to run based on passed $requset variable
     public function show($request) {
         switch ($request) {
             case "productAdm" :
@@ -27,11 +27,16 @@ class ProductController extends Controller {
         }
     }
     
-
+    /**
+     * display product administration page
+     */  
     private function productAdmPage() {
         return $this->view("productAdm");
     }
 
+    /**
+     * add product information to database
+     */      
     private function addProductEngine() {
         $givenProductName = $_REQUEST["givenProductName"];
         $givenPrice = $_REQUEST["givenPrice"];
@@ -82,7 +87,7 @@ class ProductController extends Controller {
         $setSessionID = $GLOBALS["userModel"];
         $setSessionID->setSession($sessionID);
 
-        //get involved model and run modefunction
+        //get involved model and run modelfunction
         $removeProduct = $GLOBALS["productModel"];
         $delited = $removeProduct->removeProduct($removeProductID);
         

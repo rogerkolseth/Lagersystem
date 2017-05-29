@@ -1,33 +1,33 @@
 <?php
 
-// Controller layer - the router selects controller to use depending on URL and request parameters
-
-// This interface is based on code from Datamodellering og databaseapplikasjoner classes
-
+// this class is based on teachingcode represented in Datamodellering og databaseapplikasjoner
+// class at NTNU Ålesund
 
 class API {
 
-    // Returns the requested response
+    // Returns the requestion passed from view
     public function getRequest() {
-        // Get result from request, or display home page
-        if (isset($_REQUEST["request"])) {
+        // gets request passed from view, if no request is passed 
+        // set request as "home" (display home page)
+        if (isset($_REQUEST["request"])) { // get posted request
             $request = $_REQUEST["request"];
         } else {
-            $request = "home";
+            $request = "home"; // set default request
         }
-        return $request;
+        return $request; // returns request result
     }
 
-    public function getLoginController() {
+    public function getLoginController() { // get the login controller class
         return new LoginController();
     }
 
     // Decide wich controller to handle requset
     public function getController() {
-        $request = $this->getRequest();
+        $request = $this->getRequest();     // gets value of request
         
-        if ($_SESSION["verified"] == true) {
-
+        if ($_SESSION["verified"] == true) {    // checks if user is logged inn
+            
+            // checks for request and returns controller to handle spesific request
             switch ($request) {
                 case "home":
                     return new HomeController();
@@ -100,6 +100,7 @@ class API {
                     return new CategoryController();        
             }
             
+            // only give access to function if user have userlever "Administrator"
             if ($_SESSION["userLevel"] == "Administrator") {   
                     switch ($request) {
                 case "productAdm" :
@@ -184,6 +185,7 @@ class API {
             
             
         } else {
+            // if user is not verified (not logged in), start login controller to display login page
             return new LoginController();
         }
     }

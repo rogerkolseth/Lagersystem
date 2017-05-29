@@ -1,11 +1,10 @@
 <?php
 
-require_once("Controller.php");
+require_once("Controller.php"); //include controller
 
-// Represents home page
 class HomeController extends Controller {
 
-    // Render "Overview" view
+    //Decide wich function to run based on passed $requset variable
 
     public function show($request) {
         if ($request == "home"){
@@ -14,6 +13,7 @@ class HomeController extends Controller {
          
     }
     
+    // display home page
     private function showHomePage(){
         return $this->view("home");
     }

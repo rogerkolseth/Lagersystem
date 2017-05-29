@@ -1,9 +1,10 @@
 <?php
 
-require_once("Controller.php");
+require_once("Controller.php"); //include controller
 
 class LoginController extends Controller {
-
+    
+    //Decide wich function to run based on passed $requset variable
     public function show($request) {
         if ($request == "newPassword") {
             $this->generateNewPassword();
@@ -16,22 +17,24 @@ class LoginController extends Controller {
         } 
     }
 
+    // display login page
     public function displayLoginPage() {
         return $this->view("LoginPage");
     }
 
+    // verifie user
     public function loginEngine() {
 
         if (isset($_POST['givenUsername']) && ($_POST['givenPassword'])) {
-            $givenUsername = $_REQUEST["givenUsername"];
-            $givenPassword = $_REQUEST["givenPassword"];
+            $givenUsername = $_REQUEST["givenUsername"];    // get POSTed username
+            $givenPassword = $_REQUEST["givenPassword"];    // get POSTed password
 
             $type = 2;
             $desc = "Bruker logget inn";
 
-            $loggModel = $GLOBALS["loggModel"];
-            $userModel = $GLOBALS["userModel"];
-            $userModel->updateLastLogin($givenUsername);
+            $loggModel = $GLOBALS["loggModel"];     //get logg model
+            $userModel = $GLOBALS["userModel"];     // get user model
+            
             $result = $loggModel->loggCheck($type);
             $Users = $userModel->getAllUserInfo();
 
@@ -48,48 +51,60 @@ class LoginController extends Controller {
                     }
                 }
             }
+            $userModel->updateLastLogin($givenUsername);    // update last login
+            
              if (($_SESSION["verified"] == true) && (!isset($_POST['API'])) ) {
+                // check if login request comes from the system or an external page
                 header("Location:system/index.php");
             } else if (isset($_POST['API']) && ($_SESSION["verified"] == true)){
+                // when login from an external page, API must also be posted
                 $_SESSION["API"] = true;
-                echo json_encode("success");
+                echo json_encode("success");    // echo result to view on success
             } else {
                 
+            // if failed to verifie, give user errormessage
             $errorMessage = "Feil brukernavn eller passord";
             $message = array("errorMessage" => $errorMessage);
             $this->data($message);
+            //display loginpage
             return $this->view("LoginPage");
             }
         }
     }
     
     private function logOutEngine(){
+        // destroy session on logout
         session_destroy();
     }
     
+    // generate new random password 
     private function generateNewPassword() {
-        $givenUsername = $_REQUEST["givenUsername"];
-        $givenEmail = $_REQUEST["givenEmail"]; 
+        $givenUsername = $_REQUEST["givenUsername"]; // get POSTed username
+        $givenEmail = $_REQUEST["givenEmail"];  // get POSTed email
         
 
-        $userModel = $GLOBALS["userModel"];
+        $userModel = $GLOBALS["userModel"]; // get user model
+        // check if user exist from given information
         $exist = $userModel->forgottenPassword($givenUsername, $givenEmail);
 
         if (empty(!$exist)) {
+            // if user exist get userID from result
             $userID = $exist[0]["userID"];
 
-            $newPassword = $this->generateRandomPassword();
-            $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+            $newPassword = $this->generateRandomPassword(); // get new password
+            $hash = password_hash($newPassword, PASSWORD_DEFAULT);  // hash password
 
-            $userModel->newPassword($hash, $userID);
+            $userModel->newPassword($hash, $userID);    // update new password in DB
 
+            // send email with new password
             $this->emailNewPassword($newPassword, $givenEmail);
-            echo json_encode("sucess");
+            echo json_encode("sucess"); // echo a response to view on success
         } else {
             return false;
         }
     }
 
+        // generate new password, gotten from stackoverflow: https://stackoverflow.com/questions/4356289/php-random-string-generator
     private function generateRandomPassword($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -100,6 +115,7 @@ class LoginController extends Controller {
         return $randomString;
     }
 
+    // sends new email, configure file taken from PHP maile git page: https://github.com/PHPMailer/PHPMailer
     private function emailNewPassword($newPassword, $email) {
         require 'system/PHPMailer/PHPMailer-master/PHPMailerAutoload.php';
 //Create a new PHPMailer instance

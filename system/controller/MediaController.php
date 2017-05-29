@@ -1,9 +1,10 @@
 <?php
 
-require_once("Controller.php");
+require_once("Controller.php"); //include controller
 
 class mediaController extends Controller {
 
+    //Decide wich function to run based on passed $requset variable
     public function show($request) {
         $viewMediaAdm = "mediaAdm";
         $viewHome = "home";
@@ -31,11 +32,14 @@ class mediaController extends Controller {
         }
     }
 
+    // display media administrator page
     private function mediaPage() {
         return $this->view("mediaAdm");
     }
     
-
+    // function to upload image. Code based example code from w3school.com
+    // https://www.w3schools.com/php/php_file_upload.asp
+    
     private function uploadImage($data) {
         $givenCaterogyID = $_REQUEST["givenCategoryID"];
         $imageName = "";
@@ -83,6 +87,7 @@ class mediaController extends Controller {
             }           
         }
         
+        // display required page, with error message from the upload.
         $message = array("errorMessage" => $errorMessage);
         if($data == "mediaAdm"){
             $this->data($message);
@@ -95,91 +100,115 @@ class mediaController extends Controller {
         }
     }
     
+   // add media information to database
     private function addMedia($fileName, $givenCaterogy){
-        $sessionID = $_SESSION["userID"];
-        $setSessionID = $GLOBALS["userModel"];
-        $setSessionID->setSession($sessionID);
+        $sessionID = $_SESSION["userID"];   // get userID from session
+        $setSessionID = $GLOBALS["userModel"];  //get user model
+        $setSessionID->setSession($sessionID);  //set value as global variable in database
         
-        $mediaModel = $GLOBALS["mediaModel"];
-        $added = $mediaModel->addMedia($fileName, $givenCaterogy);
+        $mediaModel = $GLOBALS["mediaModel"];   // get media model
+        $added = $mediaModel->addMedia($fileName, $givenCaterogy);  //add media to database
         
-        if($added){
-            
-        }
     }
     
+    /**
+     * Get media serach result
+     */
     private function getMediaSearchResult(){
-        $mediaModel = $GLOBALS["mediaModel"];
+        $mediaModel = $GLOBALS["mediaModel"];   // get media model
         
         if (isset($_POST['givenMediaSearchWord'])) {
+            // get media result from model from search word if posted
             $givenStorageSearchWord = "%{$_REQUEST["givenMediaSearchWord"]}%";
             $mediaInfo = $mediaModel->getMediaSearchResult($givenStorageSearchWord);
         } else {
             $givenStorageSearchWord = "%%";
+            // get all media result
             $mediaInfo = $mediaModel->getMediaSearchResult($givenStorageSearchWord);
         }
-        
+        // echo results as an array to view
         $data = json_encode(array("mediaInfo" => $mediaInfo));
-
         echo $data;
     }
     
+    /**
+     * Get media info from ID
+     */    
     private function getMediaByID(){
-        $givenMediaID = $_REQUEST["givenMediaID"];
+        $givenMediaID = $_REQUEST["givenMediaID"]; // get POSTed mediaID
         
-        $mediaModel = $GLOBALS["mediaModel"];
-        $mediaInfo = $mediaModel->getMediaByID($givenMediaID);
+        $mediaModel = $GLOBALS["mediaModel"];   // get media model
+        $mediaInfo = $mediaModel->getMediaByID($givenMediaID);  // get media info from model
         
-        $categoryModel = $GLOBALS["categoryModel"];
-        $categoryInfo = $categoryModel->getAllCategoryInfo();
+        $categoryModel = $GLOBALS["categoryModel"]; // get category model
+        $categoryInfo = $categoryModel->getAllCategoryInfo();   //get all category info
         
+        // echo result as an array to view
         $data = json_encode(array("mediaInfo" => $mediaInfo, "category" => $categoryInfo));
         echo $data;   
     }
     
+    /**
+     * Edit media information
+     */    
     private function editMedia(){
+        // get posted values
         $editMediaID = $_REQUEST["editMediaID"];
         $editMediaName = $_REQUEST["editMediaName"];
         $editCategoryID = $_REQUEST["editCategoryID"];
         
+        // get media model and get media info from ID
         $mediaModel = $GLOBALS["mediaModel"];
         $result = $mediaModel->getMediaByID($editMediaID);
         
+        // edits file name on the server
         $oldName = $result[0]["mediaName"];
         $renamed = rename("image/".$oldName."","image/".$editMediaName);
         
+        // media info in DB
         $edited = $mediaModel->editMedia($editMediaID, $editMediaName, $editCategoryID);
         
+        // echo a result to view if success
         if($edited && $renamed){
             echo json_encode("success");
         } 
         else {return false;}
     }
     
+    /**
+     * delete media information
+     */       
     private function deleteMedia(){
-        $deleteMediaID = $_REQUEST["deleteMediaID"];
+        $deleteMediaID = $_REQUEST["deleteMediaID"]; // get POSTED value
         
-        $mediaModel = $GLOBALS["mediaModel"];
-        $result = $mediaModel->getMediaByID($deleteMediaID);
+        $mediaModel = $GLOBALS["mediaModel"];   // get media model
+        $result = $mediaModel->getMediaByID($deleteMediaID);    // get media info from DB
         
+        // delete media from DB
         $mediaName = $result[0]["mediaName"];
         $deleted = $mediaModel->deletetMediaByID($deleteMediaID);
         
+        // if success, delete file from server and echo respond to view
         if($deleted){
             unlink("image/".$mediaName);
             echo json_encode("success");
         } else {return false;}
     }
     
+    /**
+     * get meida in a given categrórie 
+     */  
     private function getMediaFromCategory(){
-        $givenCategoryID = $_REQUEST["givenCategoryID"]; 
-        if($givenCategoryID == 0){
+        $givenCategoryID = $_REQUEST["givenCategoryID"]; // get POSTed categoryID
+        if($givenCategoryID == 0){  //if 0 (show all), run getMediaSerchResult
             $this->getMediaSearchResult();
         } else {
-        $mediaModel = $GLOBALS["mediaModel"];
+        $mediaModel = $GLOBALS["mediaModel"]; // get media mode
         
+        // gets media result from databse
         $result = $mediaModel->getMediaFromCategory($givenCategoryID);
         
+        // echo result from model to view
         $data = json_encode(array("mediaInfo" => $result));
         echo $data;
         }
