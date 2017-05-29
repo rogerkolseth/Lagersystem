@@ -4,29 +4,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/Xampp/htdocs/Lagersystem/Lagersystem/system/view/header.php</file>
-            <file>file:/D:/Xampp/htdocs/Lagersystem/Lagersystem/system/view/home.php</file>
-            <file>file:/D:/Xampp/htdocs/Lagersystem/Lagersystem/system/view/editUser.php</file>
-            <file>file:/D:/Xampp/htdocs/Lagersystem/Lagersystem/view/LoginPage.php</file>
-            <file>file:/D:/Xampp/htdocs/Lagersystem/Lagersystem/system/js/return.js</file>
-            <file>file:/D:/Xampp/htdocs/Lagersystem/Lagersystem/system/js/transfer.js</file>
-=======
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/userAdm.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/editUser.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/ProductModel.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/GroupModel.php</file>
-            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/editUser.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/TransferController.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/GroupController.php</file>
-            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/home.php</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/editUser.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/transfer.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/return.js</file>
-            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/Interface.php</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/home.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/handlebars-v4.0.5.js</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/Interface.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/mySales.php</file>
-            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/myReturns.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/mediaAdm.php</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/myReturns.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/DBconnect.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/sale.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/sale.js</file>
@@ -36,9 +28,9 @@
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/StorageModel.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/productAdm.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/categoryAdm.js</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/logg.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/HomeController.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/EmailController.php</file>
-            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/logg.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/ReturnController.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/groupAdm.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/home.js</file>
@@ -53,6 +45,7 @@
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/style/home.css</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/header.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/categoryAdm.php</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/ReturnModel.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/index.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/SaleModel.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/LoginController.php</file>
@@ -75,7 +68,6 @@
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/CategoryController.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/MediaController.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/myReturns.php</file>
->>>>>>> c956e6ca473b34824bb3a8e4bd453b2c0b433316
         </group>
     </open-files>
 </project-private>

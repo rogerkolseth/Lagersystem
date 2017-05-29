@@ -98,7 +98,6 @@ class SaleController extends Controller {
         } if (isset($_POST['withdrawMacadresse'])) {
             $macAdresseArray = $_REQUEST["withdrawMacadresse"];
         }
-        $date = $_REQUEST["date"];
 
         $inventoryInfo = $GLOBALS["inventoryModel"];
 
@@ -133,7 +132,7 @@ class SaleController extends Controller {
         $index = 0;
         for ($i = 0; $i < sizeof($withdrawProductIDArray); $i++) {
 
-            $salesID = $saleModel->newSale($fromStorageID, $customerNumber, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $userID, $comment, $date);
+            $salesID = $saleModel->newSale($fromStorageID, $customerNumber, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i], $userID, $comment);
             $inventoryInfo->transferFromStorage($fromStorageID, $withdrawProductIDArray[$i], $withdrawQuantityArray[$i]);
 
             if ($regMacAdresseArray[$i] == "1") {

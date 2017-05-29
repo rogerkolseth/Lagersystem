@@ -84,16 +84,15 @@ class mediaController extends Controller {
         }
         
         $message = array("errorMessage" => $errorMessage);
-        
         if($data == "mediaAdm"){
-            return $this->view("mediaAdm", $message);
+            $this->data($message);
+            return $this->view("mediaAdm");
         } else if ($data == "home"){
-            return $this->view("home" , $message);
+            return $this->view("home");
         } else if ($data == "editUser"){
-            return $this->view("editUser", $message);
+            $this->data($message);
+            return $this->view("editUser");
         }
-        
-        
     }
     
     private function addMedia($fileName, $givenCaterogy){

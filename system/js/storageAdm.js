@@ -1123,7 +1123,6 @@ function showMac()
 {
     document.getElementById('myChart').style.display = 'none';
     document.getElementById('macAdresser').style.display = 'block';
-    //document.getElementById('test1231').style.width = '70%';
     
 }
 
@@ -1142,10 +1141,6 @@ $(document).ready(function ()
 {
     $('#showStorageInformationModal').on('hidden.bs.modal', function (e)
     {
-        
         $('#macAdresser').hide();
-        //document.getElementById('test1231').style.width ='90%';
-        
-        
     });
 });

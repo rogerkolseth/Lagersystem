@@ -241,19 +241,6 @@ function updateSale() {
 
 
 
-Date.prototype.yyyymmdd = function () {
-    var yyyy = this.getFullYear();
-    var mm = this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : (this.getMonth() + 1); // getMonth() is zero-based
-    var dd = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
-    return "".concat(yyyy).concat(mm).concat(dd);
-};
-
-var d = new Date();
-document.getElementById("date").value = d.yyyymmdd();
-
-
-
-
 $(function removeSelectedProduct() {
 
     $('#withdrawQuantityContainer').delegate('.remove', 'click', function () {

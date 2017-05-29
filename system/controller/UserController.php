@@ -28,6 +28,8 @@ class UserController extends Controller {
                 return $this->editUserPage();
             case "employeeTraning" :
                 return $this->employeeTraningPage();
+            case "editLoggedInUser" :
+                return $this->editActiveUserEngine();    
         }
     }
 
@@ -60,6 +62,27 @@ class UserController extends Controller {
             $edited = $userEditInfo->editUser($editName, $editUsername, $hash, $editUserLevel, $editEmail, $editUserID, $editMediaID);
         } else {
             $edited = $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID, $editMediaID);
+        }
+        if ($edited) {
+            echo json_encode("success");
+        } else {
+            return false;
+        }
+    }
+    
+    private function editActiveUserEngine() {
+        $userID = $_SESSION["userID"];
+        $editName = $_REQUEST["editName"];
+        $editPassword = $_REQUEST["editPassword"];
+        $editEmail = $_REQUEST["editEmail"];
+        $editMediaID = $_REQUEST["editMediaID"];
+        $userModel = $GLOBALS["userModel"];
+        $userModel->setSession($userID);
+        if (strlen($editPassword) < 50) {
+            $hash = password_hash($editPassword, PASSWORD_DEFAULT);
+            $edited = $userModel->editActiveUser($editName, $hash, $editEmail, $userID, $editMediaID);
+        } else {
+            $edited = $userModel->editActiveUser($editName, $editPassword, $editEmail, $userID, $editMediaID);
         }
         if ($edited) {
             echo json_encode("success");

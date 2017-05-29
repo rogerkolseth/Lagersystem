@@ -37,7 +37,6 @@ class ProductController extends Controller {
         $givenPrice = $_REQUEST["givenPrice"];
         $givenCategoryID = $_REQUEST["givenCategoryID"];
         $givenMediaID = $_REQUEST["givenMediaID"];
-        $givenProductDate = $_REQUEST["date"];
         if (isset($_POST['givenMacAdresse'])) {
         $givenMacAdresse = $_REQUEST["givenMacAdresse"];
         } else {
@@ -48,7 +47,7 @@ class ProductController extends Controller {
         $setSessionID->setSession($sessionID);
         
         $productCreationInfo = $GLOBALS["productModel"];
-        $added = $productCreationInfo->addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenProductDate, $givenMacAdresse);
+        $added = $productCreationInfo->addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenMacAdresse);
         
         if($added){
         echo json_encode("success");} 

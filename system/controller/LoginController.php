@@ -8,7 +8,9 @@ class LoginController extends Controller {
         if ($request == "newPassword") {
             $this->generateNewPassword();
         } else if ($request == "loginEngine") {
-            $this->loginEngine();       
+            $this->loginEngine();   
+        }else if ($request == "logOut"){ 
+            $this->logOutEngine();
         } else {
             $this->displayLoginPage();
         } 
@@ -59,6 +61,10 @@ class LoginController extends Controller {
             return $this->view("LoginPage");
             }
         }
+    }
+    
+    private function logOutEngine(){
+        session_destroy();
     }
     
     private function generateNewPassword() {

@@ -6,6 +6,7 @@ class UserModel {
 
     const TABLE = "users";
     const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET name = :editName, username = :editUsername, password = :editPassword, userLevel = :editUserLevel, email = :editEmail, mediaID = :editMediaID WHERE userID = :editUserID";
+    const UPDATE_ACTIVE_USER = "UPDATE " . UserModel::TABLE . " SET name = :editName, password = :editPassword, email = :editEmail, mediaID = :editMediaID WHERE userID = :editUserID";
     const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE . " INNER JOIN media ON users.mediaID = media.mediaID";
     const SELECT_QUERY_USERID = "SELECT * FROM " . UserModel::TABLE . " INNER JOIN media ON users.mediaID = media.mediaID WHERE userID = :givenUserID";
     const SEARCH_QUERY = "SELECT * FROM " . UserModel::TABLE . " WHERE name LIKE :givenSearchWord OR username LIKE :givenSearchWord";
@@ -43,6 +44,7 @@ class UserModel {
         $this->getAdminEmail = $this->dbConn->prepare(UserModel::SELECT_EMAIL);
         $this->findUser = $this->dbConn->prepare(UserModel::FIND_USER);
         $this->newPass = $this->dbConn->prepare(UserModel::NEW_PASSWORD);
+        $this->editActiveUser = $this->dbConn->prepare(UserModel::UPDATE_ACTIVE_USER);
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -65,11 +67,16 @@ class UserModel {
         $this->selUserID->execute(array("givenUserID" => $givenUserID));
         return $this->selUserID->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    
+    public function editActiveUser($editName, $editPassword, $editEmail, $editUserID, $editMediaID) {
+        return $this->editActiveUser->execute(array("editName" => $editName, "editPassword" => $editPassword, "editEmail" => $editEmail, "editUserID" => $editUserID, "editMediaID" => $editMediaID));
+    }
+    
     public function editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID, $editMediaID) {
         return $this->editStmt->execute(array("editName" => $editName, "editUsername" => $editUsername, "editPassword" => $editPassword, "editUserLevel" => $editUserLevel, "editEmail" => $editEmail, "editUserID" => $editUserID, "editMediaID" => $editMediaID));
     }
 
+    
     public function addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID, $sessionID) {
         $this->setSession($sessionID);
         $this->addStmt->execute(array("givenName" => $givenName, "givenUsername" => $givenUsername, "givenPassword" => $givenPassword, "givenUserLevel" => $givenUserLevel, "givenEmail" => $givenEmail, "givenMediaID" => $givenMediaID));

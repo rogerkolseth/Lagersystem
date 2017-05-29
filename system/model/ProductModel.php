@@ -11,7 +11,7 @@ class ProductModel {
     const UPDATE_QUERY = "UPDATE " . ProductModel::TABLE . " SET productName = :editProductName, price = :editPrice, categoryID = :editCategoryID, mediaID = :editMediaID WHERE productID = :editProductID" ;
     const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID WHERE productName LIKE :givenSearchWord";
     const PROD_FROM_CATID = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID WHERE categories.categoryID = :givenCategoryID";
-    const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, price, CategoryID, MediaID, date, macAdresse) VALUES (:givenProductName, :givenPrice, :givenCategoryID, :givenMediaID, :givenProductDate, :givenMacAdresse)";
+    const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, price, CategoryID, MediaID, date, macAdresse) VALUES (:givenProductName, :givenPrice, :givenCategoryID, :givenMediaID, NOW(), :givenMacAdresse)";
     const DELETE_QUERY = "DELETE FROM " . ProductModel::TABLE . " WHERE productID = :removeProductID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
@@ -44,8 +44,8 @@ class ProductModel {
        return $this->editStmt->execute(array("editProductName" =>  $editProductName, "editProductID" => $editProductID, "editPrice" => $editPrice, "editCategoryID" => $editCategoryID, "editMediaID" => $editMediaID)); 
     }
     
-    public function addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenProductDate, $givenMacAdresse) {
-        return $this->addStmt->execute(array("givenProductName" =>  $givenProductName, "givenPrice" => $givenPrice, "givenCategoryID" => $givenCategoryID, "givenMediaID" => $givenMediaID, "givenProductDate" => $givenProductDate, "givenMacAdresse" => $givenMacAdresse));
+    public function addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenMacAdresse) {
+        return $this->addStmt->execute(array("givenProductName" =>  $givenProductName, "givenPrice" => $givenPrice, "givenCategoryID" => $givenCategoryID, "givenMediaID" => $givenMediaID, "givenMacAdresse" => $givenMacAdresse));
     }
     
     public function removeProduct($removeProductID)

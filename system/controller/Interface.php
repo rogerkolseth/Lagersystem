@@ -79,10 +79,12 @@ class API {
                 case "getUserRestriction" :  
                 case "editUser" :
                 case "editUserEngine" :
-                case "employeeTraning" :    
+                case "employeeTraning" :   
+                case "editLoggedInUser" :    
                     return new UserController();
                     
                 case "loginEngine":
+                case "logOut" :
                     return new LoginController();
                         
                 case "uploadImageShortcut2" :

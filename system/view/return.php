@@ -77,8 +77,6 @@ $restriction = $GLOBALS["returnRestriction"];
             </table>
 
             
-            <input form="returnProducts" type="hidden" id="date" name="date">
-            
             <button form="returnProducts" type="submit" class="btn btn-success displayNone" id="returnButton">Registrer Retur</button>
             <p id="errorMessage"></p>
         </div> 

@@ -53,7 +53,6 @@ class ReturnController extends Controller {
         $userID = $_SESSION["userID"];
         $regMacAdresseArray = $_REQUEST["regMacadresse"];
         $comment = $_REQUEST["returnComment"];
-        $date = $_REQUEST["date"];
         if (isset($_POST['returnMacadresse'])) {
             $macAdresseArray = $_REQUEST["returnMacadresse"];
         }
@@ -65,14 +64,14 @@ class ReturnController extends Controller {
             $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $returnProductIDArray[$i]);
 
             if ($count[0]["COUNT(*)"] < 1) {
-                $returnID = $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
+                $returnID = $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment);
                 $inventoryInfo->addInventory($toStorageID, $returnProductIDArray[$i], $returnQuantityArray[$i]);
                 if ($regMacAdresseArray[$i] == "1") {
                     $newIndex = $this->addReturnMacAdresse($returnProductIDArray[$i], $returnQuantityArray[$i], $macAdresseArray, $toStorageID, $index, $returnID);
                     $index = $newIndex;
                 }
             } else {
-                $returnID = $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
+                $returnID = $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment);
                 $inventoryInfo->transferToStorage($toStorageID, $returnProductIDArray[$i], $returnQuantityArray[$i]);
                 if ($regMacAdresseArray[$i] == "1") {
                     $newIndex = $this->addReturnMacAdresse($returnProductIDArray[$i], $returnQuantityArray[$i], $macAdresseArray, $toStorageID, $index, $returnID);

@@ -126,6 +126,12 @@ $(function POSTtransferProducts() {
 $(function POSTdeleteStorageModal() {
 
     $('#deliveryQuantityContainer').delegate('.remove', 'click', function () {
+        var productID = $(this).attr('data-id');
+        var $element = $('#' + productID);
+        $element.fadeOut(150, function () {
+            $(this).remove();
+        });
+
         var $tr = $(this).closest('tr');
         $tr.fadeOut(150, function () {
             $(this).remove();
@@ -146,6 +152,7 @@ function getStorageInfo() {
         }
     });
 }
+
 
 
 // Display storages in drop down meny Template -- >
@@ -697,25 +704,17 @@ function rowColor() {
     $('.stockResult').filter(function (index) {
         return parseInt(this.innerHTML) < 5 || parseInt(this.innerHTML) > -5;
     }).siblings().andSelf().attr('class', 'bg-success');
+    
+    $('.inventoryColor').filter(function (index) {
+        return parseInt(this.innerHTML) >= 10;
+    }).siblings().andSelf().attr('class', 'bg-success');
+    $('.inventoryColor').filter(function (index) {
+        return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5;
+    }).siblings().andSelf().attr('class', 'bg-warning');
+    $('.inventoryColor').filter(function (index) {
+        return parseInt(this.innerHTML) < 5 ;
+    }).siblings().andSelf().attr('class', 'bg-danger');
 }
-
-
-
-
-
-Date.prototype.yyyymmdd = function () {
-    var yyyy = this.getFullYear();
-    var mm = this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : (this.getMonth() + 1); // getMonth() is zero-based
-    var dd = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
-    return "".concat(yyyy).concat(mm).concat(dd);
-};
-var d = new Date();
-document.getElementById("dateProd").value = d.yyyymmdd();
-document.getElementById("date").value = d.yyyymmdd();
-
-
-
-
 
 
 

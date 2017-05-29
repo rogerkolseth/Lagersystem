@@ -83,8 +83,6 @@ $restriction = $GLOBALS["saleRestriction"];
                 <!-- Lar deg velge antall enheter -->
 
             </table>
-
-            <input form="withdrawProducts" type="hidden" id="date" name="date">
             
             <button form="withdrawProducts" type="submit" class="btn btn-success displayNone" id="withdrawButton">Registrer Uttak</button>
             <p id="errorMessage"></p>

@@ -11,9 +11,10 @@ $test = $GLOBALS["errorMessage"];
  <div class="container"> 
                  <div id="message">
                 <?php 
-                if (isset($GLOBALS["errorMessage"])){
-                     echo $test;
-                    }
+                if (isset($GLOBALS["errorMessage"])){ ?>
+                     <div class="alert alert-success"> <?php
+                     echo $test; ?>
+                     </div> <?php }
                 ?>
             </div>  
     <div class="col-md-4 col-md-offset-1" >
@@ -21,7 +22,7 @@ $test = $GLOBALS["errorMessage"];
         <h3 style="margin-bottom: 4%">Rediger bruker</h3>
         
         
-        <form action="?request=editUserEngine" method="post" id="editUser">
+        <form action="?request=editLoggedInUser" method="post" id="editUser">
         <table class="table" id="displayUserContainer">
             
         </table>
@@ -51,7 +52,7 @@ $test = $GLOBALS["errorMessage"];
                 <div class="modal-body">
                     <div style="text-align: center">
 
-                        <form action="?request=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
+                        <form action="?request=uploadImageShortcut2" id="uploadImage" method="post" enctype="multipart/form-data">
                             <h4 class="text-center">Velg bilde for å laste opp</h4>
                         <table class="table">
                             <tr>
@@ -90,15 +91,12 @@ $test = $GLOBALS["errorMessage"];
 
 <script id="displayUserTemplate" type="text/x-handlebars-template">
        {{#each user}}
-    <input form="editUser" type="hidden" name="editUserID" value="{{userID}}">
     <tr>
     <th id="bordernone">Navn: </th>
     <td id="bordernone"><input class="form-control" form="editUser" type="text" required="required" name="editName" value="{{name}}"></td>
     </tr>
     
-    <input form="editUser" type="hidden" name="editUsername" value="{{username}}">
-        
-        
+ 
     <tr>
     <th id="bordernone">Passord: </th>
     <td id="bordernone"><input class="form-control" form="editUser" type="password" required="required" name="editPassword" value="{{password}}"></td>
@@ -107,9 +105,6 @@ $test = $GLOBALS["errorMessage"];
     <th id="bordernone">Epost:</th>
     <td id="bordernone"><input class="form-control" form="editUser" type="text" required="required" name="editEmail" value="{{email}}"></td>
     </tr>
-    
-    <input form="editUser" type="hidden" name="editUserLevel" value="{{userLevel}}">
-    
     
     <tr>
     <th id="bordernone">Media: </th>

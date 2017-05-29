@@ -448,8 +448,6 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
                                 </tr>
 
-                                <input form="createProduct" type="hidden" id="dateProd" name="date">
-
                                 </table>
                                 </div>
                                 </div>
@@ -603,7 +601,7 @@ if (isset($GLOBALS["errorMessage"])) {
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Lagertelling</h4>
+                            <h4 class="modal-title">Varetelling</h4>
                         </div>
                         <form action="?request=stocktacking" method="post" id="stocktaking">
 
@@ -828,9 +826,9 @@ if (isset($GLOBALS["errorMessage"])) {
             <script id="chosenStorageTemplate" type="text/x-handlebars-template">
 
                 {{#each storageProduct}}
-                <tr class="quantityColor">
-                <td class="quantityColor">{{productName}}</td>
-                <td class="quantityColor">{{quantity}}</td>
+                <tr class="inventoryColor">
+                <td class="inventoryColor">{{productName}}</td>
+                <td class="inventoryColor">{{quantity}}</td>
                 </tr>
                 {{/each}} 
             </script>
