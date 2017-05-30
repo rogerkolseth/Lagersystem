@@ -1,45 +1,48 @@
-// DISPLAY PRODUCT MAIN TABLE -->
 
-// GET productInformation -->
+$('#dropdown').show();  // opens administrator meny
 
-$('#dropdown').show();
-
-$(function () {
+/**
+ * Get all product information
+ */
+$(function getAllProductInfo() {
     $.ajax({
         type: 'GET',
-        url: '?request=getAllProductInfo',
+        url: '?request=getAllProductInfo',  // request given to controller
         dataType: 'json',
         success: function (data) {
-            productTableTemplate(data);
+            productTableTemplate(data);     // display product table
         }
     });
 });
 
 
-
-// Update product information -->
-
+/**
+ * Update product information table
+ */
 function UpdateProductTable() {
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?request=getAllProductInfo',
+            url: '?request=getAllProductInfo',  // request given to controller
             dataType: 'json',
             success: function (data) {
-                productTableTemplate(data);
+                productTableTemplate(data); // display product table
             }
         });
     });
 }
 
 
-// Display product template -->
-
+/**
+ * display all products
+ * takes given data and poplate template
+ */
 function productTableTemplate(data) {
+    //takes template and populate it with passed array
     var rawTemplate = document.getElementById("displayProductTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var productTableGeneratedHTML = compiledTemplate(data);
-
+    // display template in choosen ID tag
     var productContainer = document.getElementById("displayProductContainer");
     productContainer.innerHTML = productTableGeneratedHTML;
 }
@@ -47,23 +50,22 @@ function productTableTemplate(data) {
 
 
 
-// DELETE PRODUCT -->
-
-// Delete product modal -->
-
-$(function POSTdeleteProductModal() {
-
+/**
+ * Select product to delete
+ */
+$(function deleteProductModal() {
+    //check if delete button inside displayProductContainer is clicked
     $('#displayProductContainer').delegate('.delete', 'click', function () {
-        var givenProductID = $(this).attr('data-id');
-
+        var givenProductID = $(this).attr('data-id'); // get data-id from button
+        
         $.ajax({
             type: 'POST',
-            url: '?request=getProductByID',
-            data: {givenProductID: givenProductID},
-            dataType: 'json',
+            url: '?request=getProductByID', // request given to controller
+            data: {givenProductID: givenProductID}, // data posted to controller
+            dataType: 'json',   
             success: function (data) {
-                deleteProductTemplate(data);
-                $('#deleteProductModal').modal('show');
+                deleteProductTemplate(data);    // display info of selected product
+                $('#deleteProductModal').modal('show'); // show delete product modal
             }
         });
         return false;
@@ -72,25 +74,29 @@ $(function POSTdeleteProductModal() {
 });
 
 
-// Delete product template-->         
-
+/**
+ * display info of product to delete
+ * takes given data and poplate template
+ */
 function deleteProductTemplate(data) {
+    //takes template and populate it with passed array
     var rawTemplate = document.getElementById("deleteProductTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var deleteProductGeneratedHTML = compiledTemplate(data);
-
+    // display template in choosen ID tag
     var productContainer = document.getElementById("deleteProductContainer");
     productContainer.innerHTML = deleteProductGeneratedHTML;
 }
 
 
-// Delete the product that is selected-->
-
+/**
+ * Deletes selected product
+ */
 $(function deleteProductByID() {
-
+    // run if form is submitted
     $('#deleteProduct').submit(function () {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
+        var url = $(this).attr('action');   // get action from form
+        var data = $(this).serialize();     // serialize data in form
 
         $.ajax({
             type: 'POST',
@@ -98,9 +104,9 @@ $(function deleteProductByID() {
             data: data,
             dataType: 'json',
             success: function (data) {
-                successMessageDelete();
-                UpdateProductTable();
-                $('#deleteProductModal').modal('hide');
+                successMessageDelete(); // display success message
+                UpdateProductTable();   // update product table
+                $('#deleteProductModal').modal('hide');     // hide delete modal
 
             }
         });
@@ -109,7 +115,9 @@ $(function deleteProductByID() {
 });
 
 
-
+/**
+ * Display success message on product delete
+ */
 function successMessageDelete() {
     $('<div class="alert alert-success"><strong>Slettet!</strong> Produkt er slettet. </div>').appendTo('#success')
             .delay(2000).fadeOut(500, function () {
@@ -119,29 +127,23 @@ function successMessageDelete() {
 }
 
 
-
-
-// SHOW PRODUCT INFORMATION -->
-
-// get information from selected product-->
-
-$(function POSTproductInformationModal() {
-
+/**
+ * Get selected product information
+ */
+$(function getProductInformation() {
+    //check if information button inside displayProductContainer is clicked
     $('#displayProductContainer').delegate('.information', 'click', function () {
-        var givenProductID = $(this).attr('data-id');
-        POSTproductLocation(givenProductID);
+        var givenProductID = $(this).attr('data-id');   // get data-id from button
+        getProductLocation(givenProductID);     // get product locations
         $.ajax({
             type: 'POST',
-            url: '?request=getProductByID',
-            data: {givenProductID: givenProductID},
+            url: '?request=getProductByID', // request given to controller
+            data: {givenProductID: givenProductID}, // data posted to controller
             dataType: 'json',
             success: function (data) {
-                $('#showProductInformationModal').modal('show');
-                productInformationTemplate(data);
-                supportMacStatus(data.product[0].macAdresse);
-                
-                
-
+                $('#showProductInformationModal').modal('show');    // show product info modal
+                productInformationTemplate(data);   // display product info 
+                supportMacStatus(data.product[0].macAdresse);   // display if product support mac
             }
         });
         return false;
@@ -150,67 +152,73 @@ $(function POSTproductInformationModal() {
 });
 
 
-// Display storageInformation Template-->
-
+/**
+ * display product info
+ * takes given data and poplate template
+ */
 function productInformationTemplate(data) {
+    //takes template and populate it with passed array
     var rawTemplate = document.getElementById("productInformationTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var productInformationGeneratedHTML = compiledTemplate(data);
-
+    // display template in choosen ID tag
     var productContainer = document.getElementById("productInformationContainer");
     productContainer.innerHTML = productInformationGeneratedHTML;
 }
 
 
-// Get productLocation from selected storage-->
-
-function POSTproductLocation(data) {
+/**
+ * Get locations of selected product
+ */
+function getProductLocation(data) {
     var givenProductID = data;
     $(function () {
         $.ajax({
             type: 'POST',
-            url: '?request=getProductLocation',
-            data: {givenProductID: givenProductID},
+            url: '?request=getProductLocation', // request given to controller
+            data: {givenProductID: givenProductID}, // data posted to controller
             dataType: 'json',
             success: function (data) {
-                productLocationTemplate(data);
-                rowColor();
+                productLocationTemplate(data);  // display storage containing selected product
+                rowColor();     // format color of table depinging of inventorystatus
             }
         });
     });
 }
 
 
-// Display product location Template -->
-
+/**
+ * display product location
+ * takes given data and poplate template
+ */
 function productLocationTemplate(data) {
+    //takes template and populate it with passed array
     var rawTemplate = document.getElementById("productLocationTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var storageProductGeneratedHTML = compiledTemplate(data);
-
+    // display template in choosen ID tag
     var storageContainer = document.getElementById("productLocationContainer");
     storageContainer.innerHTML = storageProductGeneratedHTML;
 }
 
 
 
-// EDIT PRODUCT -->
-
-// Get the selected product, and opens editProduct modal-->
-
-$(function POSTeditProductModal() {
-
+/**
+ * Display product to be edited
+ */
+$(function editProductModal() {
+    //check if edit button inside displayProductContainer is clicked
     $('#displayProductContainer').delegate('.edit', 'click', function () {
-        var givenProductID = $(this).attr('data-id');
+        var givenProductID = $(this).attr('data-id');   // get data-id from button
 
         $.ajax({
             type: 'POST',
-            url: '?request=getProductByID',
-            data: {givenProductID: givenProductID},
+            url: '?request=getProductByID', // request given to controller
+            data: {givenProductID: givenProductID}, // data posted to controller
             dataType: 'json',
             success: function (data) {
-                editProductTemplate(data);
-                $('#editProductModal').modal('show');
+                editProductTemplate(data);  // display product to be edited
+                $('#editProductModal').modal('show');   // opens edit modal
             }
         });
         return false;
@@ -219,37 +227,41 @@ $(function POSTeditProductModal() {
 });
 
 
-// Display edit product Template -->
-
+/**
+ * display edit product 
+ * takes given data and poplate template
+ */
 function editProductTemplate(data) {
+    //takes template and populate it with passed array
     var rawTemplate = document.getElementById("editProductTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var editProductGeneratedHTML = compiledTemplate(data);
-
+    // display template in choosen ID tag
     var productContainer = document.getElementById("editProductContainer");
     productContainer.innerHTML = editProductGeneratedHTML;
 }
 
 
-// POST results from editing, and updating the table-->
-
-$(function POSTeditProductInfo() {
-
+/**
+ * Saves changes from editing
+ */
+$(function editProductInfo() {
+    // run if form is submitted
     $('#editProduct').submit(function () {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
+        var url = $(this).attr('action');   // get action from form
+        var data = $(this).serialize();     // serialize data in form
         $.ajax({
             type: 'POST',
             url: url,
             data: data,
             dataType: 'json',
             error: function () {
-                errorMessageEdit();
+                errorMessageEdit();     // display errormessage
             },
             success: function () {
-                $('#editProductModal').modal('hide');
-                successMessageEdit();
-                UpdateProductTable();
+                $('#editProductModal').modal('hide');   // hide edit product modal
+                successMessageEdit();       // display success message
+                UpdateProductTable();       // update product table
             }
         });
         return false;
@@ -258,7 +270,9 @@ $(function POSTeditProductInfo() {
 
 
 
-
+/**
+ * Display success message on editing
+ */
 function successMessageEdit() {
     $('<div class="alert alert-success"><strong>Redigert!</strong> Produkt er redigert. </div>').appendTo('#success')
             .delay(2000).fadeOut(500, function () {
@@ -268,7 +282,9 @@ function successMessageEdit() {
 }
 
 
-
+/**
+ * Display error message on editing
+ */
 function errorMessageEdit() {
     $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt produktnavn </div>').appendTo('#errorEdit')
             .delay(2000).fadeOut(500, function () {
@@ -278,30 +294,28 @@ function errorMessageEdit() {
 }
 
 
-
-
-// CREATE PRODUCT -->
-
-
+/**
+ * Create new product
+ */
 $(function POSTproductInfo() {
-
+    // run if form is submitted
     $('#createProduct').submit(function () {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
+        var url = $(this).attr('action');   // get action from form
+        var data = $(this).serialize();     // serialize data in form
 
         $.ajax({
             type: 'POST',
             url: url,
             data: data,
             dataType: 'json',
-            error: function () {
+            error: function () {    // display error message
                 errorMessage();
             },
             success: function () {
-                $("#createProduct")[0].reset();
-                $('#createProductModal').modal('hide');
-                UpdateProductTable();
-                successMessageCreate();
+                $("#createProduct")[0].reset();     // reset create product form
+                $('#createProductModal').modal('hide');     // hide create product modal
+                UpdateProductTable();       // update product table
+                successMessageCreate();     // display success message
             }
         });
         return false;
@@ -309,8 +323,9 @@ $(function POSTproductInfo() {
 });
 
 
-
-
+/**
+ * Display error message on creation
+ */
 function errorMessage() {
     $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt brukernavn </div>').appendTo('#error')
             .delay(2000).fadeOut(500, function () {
@@ -320,7 +335,9 @@ function errorMessage() {
 }
 
 
-
+/**
+ * Display success message on creating
+ */
 function successMessageCreate() {
     $('<div class="alert alert-success"><strong>Opprettet!</strong> Bruker er opprettet. </div>').appendTo('#success')
             .delay(2000).fadeOut(500, function () {
@@ -330,15 +347,14 @@ function successMessageCreate() {
 }
 
 
-
-// SEARCH FOR PRODUCT -->
-
-
-$(function POSTsearchForProduct() {
-
+/**
+ * Search for a given product
+ */
+$(function searchForProduct() {
+    // run if form is submitted
     $('#searchForProduct').submit(function () {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
+        var url = $(this).attr('action');   // get action from form
+        var data = $(this).serialize();     // serialize data in form
 
         $.ajax({
             type: 'POST',
@@ -346,8 +362,8 @@ $(function POSTsearchForProduct() {
             data: data,
             dataType: 'json',
             success: function (data) {
-                $("#searchForProduct")[0].reset();
-                productTableTemplate(data);
+                $("#searchForProduct")[0].reset();  // resett search form 
+                productTableTemplate(data);     // display search result
             }
         });
         return false;
@@ -355,100 +371,102 @@ $(function POSTsearchForProduct() {
 });
 
 
-
-
+/**
+ * get needed media and category info to create product
+ */
 function createProductInfo() {
     getMediaInfo();
     getCategoryInfo();
 }
 
-
+/**
+ * display media names in dropdown meny
+ */
 function getMediaInfo() {
-    var $displayMediaInformation = $('#selectMediaID');
+    var $displayMediaInformation = $('#selectMediaID'); // set element-id to be populated
     $displayMediaInformation.empty();
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?request=getAllMediaInfo',
+            url: '?request=getAllMediaInfo',    // request given to controller
             dataType: 'json',
             success: function (data) {
-
+                //populate a value on dropdown meny for each media in system
                 $.each(data.mediaInfo, function (i, item) {
-
-
                     $displayMediaInformation.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
-
                 });
-
-
             }
         });
     });
 }
 
 
-
+/**
+ * display category names in dropdown meny
+ */
 function getCategoryInfo() {
-    var $displayCategoryInformation = $('#selectCategoryID');
+    var $displayCategoryInformation = $('#selectCategoryID');   // set element-id to be populated
     $displayCategoryInformation.empty();
     $(function () {
         $.ajax({
             type: 'GET',
-            url: '?request=getAllCategoryInfo',
+            url: '?request=getAllCategoryInfo',     // request given to controller
             dataType: 'json',
             success: function (data) {
-
+                //populate a value on dropdown meny for each media in system
                 $.each(data.categoryInfo, function (i, item) {
-
-
                     $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
-
                 });
-
-
             }
         });
     });
 }
 
-
-
-$(function () {
+/**
+ * Get categories containing a product
+ */
+$(function getCatWithProd() {
     $.ajax({
         type: 'GET',
-        url: '?request=getCatWithProd',
+        url: '?request=getCatWithProd', // request given to controller
         dataType: 'json',
         success: function (data) {
-            chooseCategory(data);
+            chooseCategory(data);   // display categories to choose from
         }
     });
 });
 
 
-// Display storage template -->
-
+/**
+ * display categories containing product
+ * takes given data and poplate template
+ */
 function chooseCategory(data) {
+    //takes template and populate it with passed array
     var rawTemplate = document.getElementById("chooseCategoryTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var productTableGeneratedHTML = compiledTemplate(data);
+    // display template in choosen ID tag
     var productContainer = document.getElementById("chooseCategoryContainer");
     productContainer.innerHTML = productTableGeneratedHTML;
 }
 
 
-
+/**
+ * update product result from category search
+ */
 $(function updateResultFromCategory() {
-
+    //check if user change option in category dropdown 
     $('#chooseCategoryContainer').on('change', function () {
-        givenCategoryID = $(this).find("option:selected").data('id');
+        givenCategoryID = $(this).find("option:selected").data('id');   // get selected categoryID
 
         $.ajax({
             type: 'POST',
-            url: '?request=getProductFromCategory',
-            data: {givenCategoryID: givenCategoryID},
+            url: '?request=getProductFromCategory', // request given to controller
+            data: {givenCategoryID: givenCategoryID},   // data posted to controller
             dataType: 'json',
             success: function (data) {
-                productTableTemplate(data);
+                productTableTemplate(data); // update result in product table
             }
         });
         return false;
@@ -456,44 +474,49 @@ $(function updateResultFromCategory() {
 });
 
 
-
-// SET WARNING LIMIT -->
-
-// Get the selected product, and opens warningProduct modal-->
-
-$(function POSTeditWarningModal() {
-
+/**
+ * Display information of warning limit
+ */
+$(function editWarningLimit() {
+    //check if warning button inside displayProductContainer is clicked
     $('#displayProductContainer').delegate('.warning', 'click', function () {
         var givenProductID = $(this).attr('data-id');
         $.ajax({
             type: 'POST',
-            url: '?request=getProductLocation',
-            data: {givenProductID: givenProductID},
+            url: '?request=getProductLocation', // request given to controller
+            data: {givenProductID: givenProductID}, // data posted to controller
             dataType: 'json',
             success: function (data) {
-                warningProductTemplate(data);
-                $('#warningProductModal').modal('show');
+                warningProductTemplate(data);   // display info of warning limit on selected product
+                $('#warningProductModal').modal('show');    // show warning limit modal
             }
         });
         return false;
-
     });
 });
 
+/**
+ * display warning limit
+ * takes given data and poplate template
+ */
 function warningProductTemplate(data) {
+    //takes template and populate it with passed array
     var rawTemplate = document.getElementById("warningProductTemplate").innerHTML;
     var compiledTemplate = Handlebars.compile(rawTemplate);
     var editProductGeneratedHTML = compiledTemplate(data);
-
+    // display template in choosen ID tag
     var productContainer = document.getElementById("warningProductContainer");
     productContainer.innerHTML = editProductGeneratedHTML;
 }
 
-$(function POSTsearchForProducts() {
-
+/**
+ * Saves changes on warning limit
+ */
+$(function setWarningLimit() {
+    // run if form is submitted
     $('#warningProduct').submit(function () {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
+        var url = $(this).attr('action');   // get action from form
+        var data = $(this).serialize();     // serialize data in form
 
         $.ajax({
             type: 'POST',
@@ -501,32 +524,36 @@ $(function POSTsearchForProducts() {
             data: data,
             dataType: 'json',
             success: function (data) {
-                $("#warningProduct")[0].reset();
-                $('#warningProductModal').modal('hide');
-                UpdateProductTable();
+                $("#warningProduct")[0].reset();    // resett warning limit form
+                $('#warningProductModal').modal('hide');    // hide warning limit modal
+                UpdateProductTable();   // update product tabel
             }
         });
         return false;
     });
 });
 
+/**
+ * Format color on product location tabel based on inventory status
+ */
 function rowColor() {
-
-// storageInformation
+    // if more than 10, row is green
     $('.quantityColor').filter(function (index) {
         return parseInt(this.innerHTML) >= 10;
     }).siblings().andSelf().attr('class', 'bg-success');
 
+    // if between 5 and 10, row is orange
     $('.quantityColor').filter(function (index) {
         return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5;
     }).siblings().andSelf().attr('class', 'bg-warning');
 
+    // if lower than 5, row is red
     $('.quantityColor').filter(function (index) {
         return parseInt(this.innerHTML) < 5;
     }).siblings().andSelf().attr('class', 'bg-danger');
     }
     
-    
+    // display "ja" or "no" depending if product use mac adrese. If 1 = yes, 0 = no
     function supportMacStatus(data) {
     if (data > 0) {
         $('.supportMacStatus').append('Ja');

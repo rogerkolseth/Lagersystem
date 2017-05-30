@@ -83,6 +83,8 @@ $(function getNumberOfMac() {
 /**
  * Format field to mac adresse format: 00:11:22:33:44:55
  */
+// based on example code from stackoverflow:
+// https://stackoverflow.com/questions/16168125/auto-insert-colon-while-entering-mac-address-after-each-2-digit
 $(function getMacadrInput() {
     var length=1;
     // check if a number is passed in 
@@ -590,7 +592,7 @@ function drawChart(data){
     var bars = antall;
     // populate color array
     for (i = 0; i < bars.length; i++) {
-        //You can check for bars[i].value and put your conditions here
+        // chose color of value based on quantity
         if (bars[i] >= 10){
             //green
             farge.push("#5cb85c");
@@ -821,7 +823,7 @@ function stocktakingResultChart(data){
     });
     var bars = antall;
     for (i = 0; i < bars.length; i++) {
-        // chos color of value on differance
+        // chose color of value on differance
         if (bars[i] >= 10 || bars[i] <= -10){
             //green
             farge.push("#d9534f");

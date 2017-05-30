@@ -5,13 +5,12 @@ require_once("Controller.php"); //include controller
 class HomeController extends Controller {
 
     //Decide wich function to run based on passed $requset variable
-
-    public function show($request) {
+    public function __construct($request) {
         if ($request == "home"){
             $this->showHomePage();
         } 
-         
     }
+
     
     /**
      * display home page

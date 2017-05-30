@@ -1,29 +1,39 @@
 <?php require("view/header.php"); ?>
 
-
+<!-- adjusting page content position-->
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
+    <!-- creates a container around page content-->
     <div class="container">
+
         <!-- Show help modal button administrator -->
+
+        <!-- if users userlevel is Administrator, show help modal for admin page-->
+
         <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
-        <div class="row">
-        <div class="pull-right">
-            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
-            </label>
-        </div>
-    </div>
+            <div class="row">
+                <div class="pull-right">
+                    <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+                    </label>
+                </div>
+            </div>
         <?php } ?>
+
         <!-- Show help modal button for users -->
+
+
+        <!-- If users userlevel is user, show help modal for user-->
+
         <?php if ($_SESSION["userLevel"] == "User") { ?>
-        
-        <div class="row">
-        <div class="pull-right">
-            <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
-            </label>
-        </div>
-        </div>
+
+            <div class="row">
+                <div class="pull-right">
+                    <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+                    </label>
+                </div>
+            </div>
         <?php } ?>
-        
+
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
             <!-- Search for sales -->
             <form id="searchForSale" class="form-inline" action="?request=getMySales" method="post">
@@ -41,6 +51,7 @@
             
             <!-- Choose user to see sales -->
             <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+
             <div class="col-md-2 pull-right">
                 <form id="showUserSale" action="?request=showUserSale" method="post">
                     <div class="dropdown form-group" id="UserSaleSearch">
@@ -57,6 +68,8 @@
                     </div> 
                 </form>
             </div>
+
+
 
             <?php } ?>
 
@@ -108,10 +121,12 @@
             </div>
         </div>
     </div>
+
     
     
     <!-- Mac sales modal -->
      <div class="modal fade" id="macSaleModal" role="dialog">
+
         <div class="modal-dialog">
             <!-- Content of modal -->
             <div class="modal-content">
@@ -119,6 +134,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Macadresse oversikt</h4>
                 </div>
+
 
                     <div class="modal-body">
                         <table class="table">
@@ -133,14 +149,15 @@
                         </table>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                    </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
             </div>
         </div>
     </div>
     <!-- Help modal admin -->
-    
+
     <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -154,7 +171,7 @@
                         <h3>
                             Bruk denne funksjonen for å søke deg frem til salg du ønsker å se.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/SøkSalg.PNG" alt="Søk i salg">
@@ -163,7 +180,7 @@
                         <h3>
                             Her kan du velge en eller flere brukere for å se deres salg.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/VelgBrukerSalg.PNG" alt="Velg bruker">
@@ -172,7 +189,7 @@
                         <h3>
                             Velg hvilke brukere du vil se salg fra.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/DropdownSalg.PNG" alt="Dropdown med brukere">
@@ -181,12 +198,13 @@
                         <h3>
                             I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine siste salg.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/DineSalgSalg.PNG" alt="Liste over salg">
                     </div>
                     <div class="col-md-12">
+
                     <h3>
                         Dette er alternativer for salg:<br>
                     </h3>
@@ -198,15 +216,15 @@
                 
                 <div class="modal-footer col-md-12">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+
                 </div>
             </div>
         </div>
-        </div>
     </div>
-    
+
     <!-- Help modal bruker -->
-    
-        <div class="modal fade" id="showHelpModalUser" role="dialog">
+
+    <div class="modal fade" id="showHelpModalUser" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
             <div class="modal-content row">
@@ -219,23 +237,24 @@
                         <h3>
                             Bruk denne funksjonen for å søke deg frem til salg du ønsker å se.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/SøkSalg.PNG" alt="Søk etter salg">
                     </div>
-                    
-                    
+
+
                     <div class="col-md-12">
                         <h3>
                             I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine siste salg.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/DineSalgSalg.PNG" alt="Liste over salg">
                     </div>
                     <div class="col-md-12">
+
                     <h3>
                         Dette er alternativer for salg:<br>
                     </h3>
@@ -247,13 +266,11 @@
                 
                 <div class="modal-footer col-md-12">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+
                 </div>
-                
-                
             </div>
         </div>
-        </div>
-        </div>
+    </div>
 
 
     <!-- Display editSale-->                    

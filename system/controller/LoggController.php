@@ -7,7 +7,7 @@ class LoggController extends Controller {
     /**
      * Decide wich function to run based on passed $requset variable
      */
-    public function show($request) {
+    public function __construct($request) {
         switch ($request) {
             case "logg" :
                 return $this->loggPage();

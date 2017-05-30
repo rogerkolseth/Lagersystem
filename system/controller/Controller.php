@@ -10,7 +10,7 @@ abstract class Controller {
      * Hold request variable, for other controller to access
      */
     
-    public abstract function show($request);
+//    public abstract function show($request);
 
     
     /**

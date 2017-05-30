@@ -7,7 +7,7 @@ class EmailController extends Controller {
     /**
      * Decide wich function to run based on passed $requset variable
      */
-    public function show($request) {
+    public function __construct($request) {
         if ($page == "sendInventarWarning") {
             $this->sendEmailWarning();
         } 
