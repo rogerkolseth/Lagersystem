@@ -6,12 +6,6 @@
 // class at NTNU Ålesund
 abstract class Controller {
 
-    /**
-     * Hold request variable, for other controller to access
-     */
-    
-//    public abstract function show($request);
-
     
     /**
      * Inlcudes view page, and make it display for user
@@ -25,7 +19,7 @@ abstract class Controller {
         if (!file_exists($pageName)) {
             return false;
         } else {
-            include($pageName);
+            require_once($pageName);
             return true;
         }
     }

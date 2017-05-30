@@ -25,7 +25,8 @@ class API {
      * @return \LoginController get the login controller class
      */
     public function getLoginController() { 
-        return new LoginController();
+        $request = $this->getRequest(); 
+        return new LoginController($request);
     }
 
     /**

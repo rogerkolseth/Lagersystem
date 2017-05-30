@@ -30,8 +30,7 @@ $interface = new API();
 //Gets logincontroller
 $controller = $interface->getLoginController();
 
-//Calls the show function of the logincontroller
-$controller->show($interface->getRequest());
+
 
 
 

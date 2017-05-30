@@ -23,10 +23,6 @@ if ($_SESSION["verified"] == true) {
     //Gets getController 
     $controller = $interface->getController();
 
-    //Calls the show function of the logincontroller, if request is registerd in controller
-//    if ($controller instanceof Controller) {
-//        $controller->show($interface->getRequest());
-//    } 
 } else {
     // if "verified" is not true, redirect user to first index page (log in page will be viewed)
   header("Location:../");
