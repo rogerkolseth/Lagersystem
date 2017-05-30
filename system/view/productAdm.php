@@ -14,7 +14,7 @@
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
         
-        <!-- SØK ETTER PRODUKT-->
+        <!-- Search for products-->
         
         <form id="searchForProduct" class="form-inline" action="?request=getAllProductInfo" method="post">
             <div class="form-group col-md-12 row">
@@ -25,6 +25,7 @@
                     <select id="chooseCategoryContainer" class="form-control btn btn-primary">
                         
                     </select>
+                    <!-- Refresh search -->
                     <button onclick="UpdateProductTable()" class="btn btn-primary " type="button">Alle producter</button>
                     
                 <div class="pull-right row">
@@ -49,7 +50,7 @@
              
             <tbody id="displayProductContainer">
 
-                <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                <!-- Content of displayProductContainer handlebars  -->
 
             </tbody>
         </table>   
@@ -67,7 +68,7 @@
 
     <div class="modal fade" id="createProductModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -137,7 +138,7 @@
             <div class="modal-body" >
                 <table class="table">
                     <tbody id="editProductContainer">
-                <!-- Innhold fra Handlebars Template-->
+                <!-- Content of editProductContainer handlebars-->
                     </tbody>
                 </table>
             </div>
@@ -158,7 +159,7 @@
 
 <div class="modal fade" id="showProductInformationModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content row">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -167,7 +168,7 @@
             <div class="modal-body">
                 
                 <div id="productInformationContainer">
-                    <!-- Her kommer handlebars Template -->
+                    <!-- Content of productInformationContainer handlebars -->
                 
                 </div>
                 
@@ -185,7 +186,7 @@
                             
                              
                               
-                                <!-- Her kommer handlebars Template -->
+                                <!-- Content of productLocationContainer handlebars-->
                                 
                             
                                 
@@ -207,7 +208,7 @@
 
 <div class="modal fade" id="deleteProductModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -216,7 +217,7 @@
             <form action="?request=deleteProductEngine" method="post" id="deleteProduct">
             <div class="modal-body" id="deleteProductContainer">
                 
-                <!-- Innhold fra Handlebars Template -->
+                <!-- Content of deleteProductContainer -->
 
             </div>
             <div class="modal-footer">
@@ -232,7 +233,7 @@
 
 <div class="modal fade" id="warningProductModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -250,7 +251,7 @@
                     </thead>
                     <tbody id="warningProductContainer">
                         
-                            <!-- Her kommer handlebars Template -->
+                            <!-- Content of warningProductContainer handlebars -->
                            
                     </tbody>          
       
@@ -274,7 +275,7 @@
 
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -289,7 +290,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                <img src="image/SøkProdukt.PNG">
+                        <img src="image/SøkProdukt.PNG" alt="Søk etter produkt">
                     </div>
                 
                 
@@ -300,7 +301,7 @@
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/OpprettProdukt.PNG">
+                    <img src="image/OpprettProdukt.PNG" alt="Opprett produkt knapp">
                     </div>
                 <div class="col-md-12">
                     <h3>
@@ -308,7 +309,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/OpprettProduktModal.PNG">
+                    <img src="image/OpprettProduktModal.PNG" alt="Opprett produkt modal">
                 </div>
                     
                     <div class="col-md-12">
@@ -317,17 +318,17 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/Produkter1.PNG">
+                    <img src="image/Produkter1.PNG" alt="Liste over produkter">
                 </div>
                     <div class="col-md-12">
                         <h3>
                         Dette er alternativer for produkt:<br>
                         </h3>
                         <label>
-                        1. <img src="image/EndreBruker.PNG">Endre produkt<br>
-                        2. <img src="image/InformasjonBruker.PNG">Vis informasjon om produkt<br>
-                        3. <img src="image/SlettBruker.PNG">Slett produkt<br>
-                        4. <img src="image/Varsling.PNG">Sett grense for antall produkt før epost varsling
+                            1. <img src="image/EndreBruker.PNG" alt="Endre produkt symbol">Endre produkt<br>
+                            2. <img src="image/InformasjonBruker.PNG" alt="Vis informasjon om produkt symbol">Vis informasjon om produkt<br>
+                            3. <img src="image/SlettBruker.PNG" alt="Slett produkt symbol">Slett produkt<br>
+                            4. <img src="image/Varsling.PNG" alt="Varsling av grense symbol">Sett grense for antall produkt før epost varsling
                         
                     </label>
                 </div>
@@ -360,6 +361,7 @@
 {{/each}}      
 </script>
 
+<!-- Handlebars for choose category -->
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
@@ -367,6 +369,7 @@
 {{/each}}
 </script>
 
+<!-- Handlebars for edit products -->
 <script id="editProductTemplate" type="text/x-handlebars-template">
 {{#each product}}    
     <input form="editProduct" type="hidden" name="editProductID" value="{{productID}}">

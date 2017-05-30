@@ -10,6 +10,7 @@ $restriction = $GLOBALS["transferRestriction"];
         
         <div class="row">
         <div class="pull-right">
+            <!-- Show help modal button -->
             <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
             </label>
         </div>
@@ -24,13 +25,14 @@ $restriction = $GLOBALS["transferRestriction"];
         <div id="error"></div>
         <div id="success"></div>
         
+        <!-- Transfere products -->
     <form id="transferProducts" action="?request=transferProduct" method="post">    
         
         <div class="col-sm-3 col-md-4 row">
             <h4><b>Overfør Fra:</b></h4>
             <select name="fromStorageID" form="transferProducts" id="fromTransferRestrictionContainer" class="form-control">
                 
-                <!-- Her kommer Handlebars Template-->
+                <!-- Content of fromTransfereRestrictionContainer handlebars -->
 
             </select>
         </div>
@@ -42,14 +44,14 @@ $restriction = $GLOBALS["transferRestriction"];
             
             <select name="toStorageID" form="transferProducts" id="toTransferRestrictionContainer" class="form-control update">
 
-                <!-- Her kommer Handlebars Template-->
+                <!-- Content of toTransfereRestrictionContainer handlebars -->
                 
             </select>
             
         </div>
         <div class="col-sm-1 col-md-2 row">
             <select id="chooseCategoryContainer" class="form-control">
-                        
+                        <!-- Content of chooseCategoryContainer handlebars -->
             </select>
         </div>  
         
@@ -58,7 +60,7 @@ $restriction = $GLOBALS["transferRestriction"];
         <div id="transferProductContainer">
             
             
-            <!-- Viser Product som er valgt i FRA lager -->
+            <!-- Content of transfereProductContainer handlebars -->
 
 
         </div>
@@ -68,7 +70,7 @@ $restriction = $GLOBALS["transferRestriction"];
         <div>
             <table class="table table-responsive" id="transferQuantityContainer">
 
-            <!-- Lar deg velge antall enheter -->
+            <!-- Content of transfereQuantityContainer handlebars -->
             
             </table>
             
@@ -99,7 +101,7 @@ $restriction = $GLOBALS["transferRestriction"];
 
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -113,7 +115,7 @@ $restriction = $GLOBALS["transferRestriction"];
                         
                     </div>
                     <div class="col-md-12">
-                <img src="image/OverføreVelgLager.PNG">
+                        <img src="image/OverføreVelgLager.PNG" alt="Velg lager">
                     </div>
                 
                 
@@ -125,7 +127,7 @@ $restriction = $GLOBALS["transferRestriction"];
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/VelgProduktOverfør.PNG">
+                    <img src="image/VelgProduktOverfør.PNG" alt="Velg produkt og/eller kategori">
                     </div>
                 <div class="col-md-12">
                     <h3>
@@ -133,7 +135,7 @@ $restriction = $GLOBALS["transferRestriction"];
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/OverføreMac.PNG">
+                    <img src="image/OverføreMac.PNG" alt="Velg antall og info">
                 </div>
                     
                     <div class="col-md-12">
@@ -141,7 +143,7 @@ $restriction = $GLOBALS["transferRestriction"];
                         Dette er alternativer for overføring:<br>
                     </h3>
                     <label>
-                        <img src="image/SlettBruker.PNG">Fjern valgt linje<br>
+                        <img src="image/SlettBruker.PNG" alt="Slett valgt linje symbol">Fjern valgt linje<br>
                         
                     </label>
                 </div>
@@ -157,7 +159,7 @@ $restriction = $GLOBALS["transferRestriction"];
 
 
 
-
+<!-- Handlebars for choose category -->
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
@@ -165,6 +167,7 @@ $restriction = $GLOBALS["transferRestriction"];
 {{/each}}
 </script>
 
+<!-- Handlebars for transfere quantity -->
 <script id="transferQuantityTemplate" type="text/x-handlebars-template">
     
 {{#each prodInfo}}   
@@ -190,6 +193,7 @@ $restriction = $GLOBALS["transferRestriction"];
      
 </script>
 
+<!-- Handlebars transfere products -->
 <script id="transferProductTemplate" type="text/x-handlebars-template">
 <br>
 {{#each storageProduct}}    
@@ -197,6 +201,7 @@ $restriction = $GLOBALS["transferRestriction"];
 {{/each}} 
 </script>
 
+<!-- Handlebars for transfere restrictions -->
 <script id="transferRestrictionTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0" class="transferStorage">Velg et lager</option>
 {{#each transferRestriction}}     

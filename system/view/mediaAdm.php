@@ -14,6 +14,7 @@ $errormessage = $GLOBALS["errorMessage"];
         
         <div class="row">
         <div class="pull-right">
+            <!-- Button for help modal -->
             <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
             </label>
         </div>
@@ -21,7 +22,7 @@ $errormessage = $GLOBALS["errorMessage"];
 
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
             
-              
+              <!-- Search for media -->
         <form id="searchForMedia" class="form-inline" action="?request=getAllMediaInfo" method="post">    
             <div class="form-group col-md-12 row">
                 
@@ -30,15 +31,19 @@ $errormessage = $GLOBALS["errorMessage"];
                     <select id="chooseCategoryContainer" class="form-control btn btn-primary">
                         
                     </select>
+                    <!-- Refresh search -->
                     <button onclick="UpdateMediaTable()" class="btn btn-primary " type="button">Alle medier</button>
                 
                 <div class="pull-right">
+                    
                     <button class="btn btn-success" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>
                 </div>
             </div>
         </form>
             <br><br>
             <div id="success"></div>
+            
+            
             <?php 
                 if (isset($GLOBALS["errorMessage"])){ ?>
             <div class="alert alert-success">
@@ -48,7 +53,7 @@ $errormessage = $GLOBALS["errorMessage"];
                      }
                 ?>
               <br><br>
-
+            <!-- Media overveiw -->
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Mediaoversikt</b></h3>
@@ -58,7 +63,7 @@ $errormessage = $GLOBALS["errorMessage"];
                 <div class="panel-body">
                     <div id="displayMediaContainer">
 
-                        <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                        <!-- Content of displayMediaContainer handlebar  -->
 
                     </div>
 
@@ -77,7 +82,7 @@ $errormessage = $GLOBALS["errorMessage"];
 
     <div class="modal fade" id="uploadImageModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -113,6 +118,8 @@ $errormessage = $GLOBALS["errorMessage"];
                     </div>
                 </div>
                 <div class="modal-footer">
+                    
+                    <!-- Uplaod image button -->
                 <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?request=uploadImage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
@@ -128,7 +135,7 @@ $errormessage = $GLOBALS["errorMessage"];
 
 <div class="modal fade" id="showMediaInformationModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -137,7 +144,7 @@ $errormessage = $GLOBALS["errorMessage"];
             <div class="modal-body">
                 <div id="mediaInformationContainer">
                     
-                <!-- Her kommer bilde Template -->
+                <!-- Content of mediaInformationContainer handlebar -->
                 
                 </div>
                 <br>
@@ -157,7 +164,7 @@ $errormessage = $GLOBALS["errorMessage"];
     
 <div class="modal fade" id="editMediaModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of Modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -168,7 +175,7 @@ $errormessage = $GLOBALS["errorMessage"];
                   
                 <table class="table" id="editMediaContainer">
                     
-                <!-- Her kommer bilde Template -->
+                <!-- Content of editMediaContainer handlebar -->
                 
                </table>
             </div>
@@ -185,7 +192,7 @@ $errormessage = $GLOBALS["errorMessage"];
     
 <div class="modal fade" id="deleteMediaModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -194,7 +201,7 @@ $errormessage = $GLOBALS["errorMessage"];
             <form action="?request=deleteMedia" method="post" id="deleteMedia">
             <div class="modal-body" id="deleteMediaContainer">
                   
-                <!-- Innhold fra Handlebars Template -->
+                <!-- Content of deleteMediaContainer handlebar -->
             </div>    
             <div class="modal-footer">
                 <div id="errorDelete"></div>
@@ -210,7 +217,7 @@ $errormessage = $GLOBALS["errorMessage"];
     
     <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -226,7 +233,7 @@ $errormessage = $GLOBALS["errorMessage"];
                         
                     </div>
                     <div class="col-md-12">
-                    <img src="image/SøkMedia.PNG">
+                        <img src="image/SøkMedia.PNG" alt="Søk etter bilder">
                     </div>
                 
                 
@@ -237,7 +244,7 @@ $errormessage = $GLOBALS["errorMessage"];
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/OpprettBilde.PNG">
+                    <img src="image/OpprettBilde.PNG" alt="Opprett et bilde">
                     </div>
                 <div class="col-md-12">
                     <h3>
@@ -245,7 +252,7 @@ $errormessage = $GLOBALS["errorMessage"];
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/OpprettBildeModal.PNG">
+                    <img src="image/OpprettBildeModal.PNG" alt="Modalen for opprett bilde">
                 </div>
                     <div class="col-md-12">
                     <h3>
@@ -253,16 +260,16 @@ $errormessage = $GLOBALS["errorMessage"];
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/MediaOversikt.PNG">
+                    <img src="image/MediaOversikt.PNG" alt="Søkeresultat">
                 </div>
                     <div class="col-md-12">
                         <h3>
                         Dette er alternativer for media:<br>
                         </h3>
                         <label>
-                        1. <img src="image/EndreBruker.PNG">Endre media<br>
+                            1. <img src="image/EndreBruker.PNG" alt="Endre bruker symbol">Endre media<br>
                         
-                        2. <img src="image/SlettBruker.PNG">Slett media<br>
+                            2. <img src="image/SlettBruker.PNG" alt="Slett bruker symbol">Slett media<br>
                         
                     </label>
                 </div>
@@ -277,7 +284,7 @@ $errormessage = $GLOBALS["errorMessage"];
         
 </div>
     
-    
+    <!-- Handlebar for choosen category -->
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}

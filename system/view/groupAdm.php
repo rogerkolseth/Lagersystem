@@ -4,11 +4,13 @@
 
     <div class="container">
         <div class="row">
+            <!-- Helppage button -->
             <div class="pull-right">
                 <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
                 </label>
             </div>
         </div>
+        <!-- Group search -->
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
 
 
@@ -17,9 +19,10 @@
 
                     <input class="form-control" form="searchForGroup" type="text" name="givenGroupSearchWord" value="" placeholder="Søk etter gruppe..">  
                     <input class="form-control btn btn-primary" form="searchForGroup" type="submit" value="Søk">
-
+                    <!-- Refresh search button -->
                     <button onclick="UpdateGroupTable()" class="btn btn-primary " type="button">Alle grupper</button>
 
+                    <!-- Create group -->
                     <div class="pull-right">
                         <button class="btn btn-success" type="button" data-toggle="modal" data-target="#createGroupModal">Opprett gruppe</button>
                     </div>
@@ -28,7 +31,7 @@
             <br><br>
             <div id="success"></div>
             <br><br>
-
+            <!-- Display all groups -->
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Gruppeoversikt</b></h3>
@@ -37,7 +40,7 @@
 
                     <tbody id="displayGroupContainer">
 
-                        <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                        <!-- Content of displayGroupContainer handlebar  -->
 
                     </tbody>
 
@@ -48,11 +51,11 @@
         </div>
     </div>
     
-    <!-- Create groupe modal -->
+    <!-- Create group modal -->
 
     <div class="modal fade" id="createGroupModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -72,6 +75,8 @@
                 </div>
                 <div class="modal-footer">
                     <div id="errorCreate"></div>
+                    
+                    <!-- Create group button -->
                     <input class="btn btn-success" form="createGroup" type="submit" value="Opprett gruppe">
 
 
@@ -87,7 +92,7 @@
 
     <div class="modal fade" id="deleteGroupModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -96,11 +101,12 @@
                 <form action="?request=deleteGroupEngine" method="post" id="deleteGroup">
                     <div class="modal-body" id="deleteGroupContainer">
 
-                        <!-- Innhold fra Handlebars Template-->
+                        <!-- Content of deleteGroupContainer handlebar -->
 
                     </div>
                     <div class="modal-footer">
                         <div id="errorDelete"></div>
+                        <!-- Delete group button -->
                         <input form="deleteGroup" class="btn btn-success" type="submit" value="Slett">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                     </div>
@@ -115,7 +121,7 @@
 
     <div class="modal fade" id="editGroupModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -127,13 +133,14 @@
                         <table class="table" id="editGroupContainer">
 
 
-                            <!-- Innhold fra Handlebars Template -->
+                            <!-- Content of editGroupContainer handlebar -->
 
                         </table>
                     </div>
 
                     <div class="modal-footer">
                         <div id="errorEdit"></div>
+                        <!-- Save edits to group button -->
                         <input class="btn btn-success" form="editGroup" type="submit" value="Lagre">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                     </div>
@@ -146,7 +153,7 @@
 
     <div class="modal fade" id="showGroupInformationModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -158,7 +165,7 @@
                     <table class="table">
                         <tbody id="groupInformationContainer">
 
-                            <!-- Her kommer handlebars Template -->
+                            <!-- Content of groupInformationContainer handlebar -->
 
                         </tbody>
                     </table>
@@ -171,7 +178,8 @@
                         <table class="table">
                              
                             <tbody id="groupMemberContainer">
-
+                                <!-- Content of groupMemberContainer handlebar -->
+                                
                             </tbody>
 
                         </table>
@@ -185,6 +193,7 @@
                         <table class="table">
                               
                             <tbody id="storageGroupResContainer">
+                                <!-- Content of storageGroupResContainer handlebar -->
 
                             </tbody>
 
@@ -201,9 +210,11 @@
     </div> 
 
 
+    <!-- Group restriction modal -->
+    
     <div class="modal fade" id="groupRestrictionModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <form action="?request=addGroupRestriction" id="editGroupRestriction" method="post">
                     <div id="groupID"></div>
@@ -214,13 +225,13 @@
                     <div class="modal-body">                 
                         <table class="table" id="storageRestrictionContainer">
 
-                            <!-- Handlebars information -->
+                            <!-- Content of storageRestrictionContainer handlebar -->
 
 
                         </table>
                     </div>
                     <div class="modal-footer">
-
+                        <!-- Save group restriction button -->
                         <button form="editGroupRestriction" class="btn btn-success" type="submit">Velg lagertilgang</button> 
 
                     </div>
@@ -229,9 +240,11 @@
         </div>
     </div>      
 
+    <!-- Group member modal -->
+    
     <div class="modal fade" id="userMemberModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of the modal -->
             <div class="modal-content">
                 <form action="?request=addGroupMember" id="addGroupMember" method="post">
                     <div id="groupUserID"></div>
@@ -242,13 +255,14 @@
                     <div class="modal-body">                 
                         <table class="table" id="userRestrictionContainer">
 
-                            <!-- Handlebars information -->
+                            <!-- Content of the userRestrictionContainer handlebar -->
 
 
                         </table>
                     </div>
                     <div class="modal-footer">
-
+                        
+                        <!-- Add member to group button -->
                         <button form="addGroupMember" class="btn btn-success" type="submit">Legg til i gruppen</button> 
 
                     </div>
@@ -264,7 +278,7 @@
 
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -279,7 +293,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                <img src="image/SøkGruppe.PNG">
+                <img src="image/SøkGruppe.PNG" alt="Søk etter gruppe felt">
                     </div>
                 
                 
@@ -290,7 +304,7 @@
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/OpprettGruppe.PNG">
+                    <img src="image/OpprettGruppe.PNG" alt="Opprett gruppe knapp">
                     </div>
                 <div class="col-md-12">
                     <h3>
@@ -298,7 +312,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/OpprettGruppeModal.PNG">
+                    <img src="image/OpprettGruppeModal.PNG" alt="opprett gruppe modal">
                 </div>
                     
                     <div class="col-md-12">
@@ -307,18 +321,18 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/GruppeOversikt.PNG">
+                    <img src="image/GruppeOversikt.PNG" alt="Gruppeoversikt">
                 </div>
                     <div class="col-md-12">
                         <h3>
                         Dette er alternativer for produkt:<br>
                         </h3>
                         <label>
-                        1. <img src="image/EndreBruker.PNG">Endre gruppe<br>
-                        2. <img src="image/InformasjonBruker.PNG">Vis informasjon om gruppe<br>
-                        3. <img src="image/SlettBruker.PNG">Slett gruppe<br>
-                        4. <img src="image/LagertilgangBruker.PNG">Velg lagertilgang for gruppe<br>
-                        5. <img src="image/GruppeMedlem.PNG">Velg brukere som skal være me i gruppen
+                            1. <img src="image/EndreBruker.PNG" alt="Endre bruker symbol">Endre gruppe<br>
+                            2. <img src="image/InformasjonBruker.PNG" alt="Vis brukerinformasjon symbol">Vis informasjon om gruppe<br>
+                            3. <img src="image/SlettBruker.PNG" alt="Slett bruker symbol">Slett gruppe<br>
+                            4. <img src="image/LagertilgangBruker.PNG" alt="Velg lagertilgang symbol">Velg lagertilgang for gruppe<br>
+                            5. <img src="image/GruppeMedlem.PNG" alt="Legg til bruker symbol">Velg brukere som skal være me i gruppen
                         
                     </label>
                 </div>
@@ -334,7 +348,9 @@
         </div>
         
 </div>
-<script type="text/javascript" src="js/groupAdm.js"></script>   
+<script type="text/javascript" src="js/groupAdm.js"></script>
+
+<!-- Storage group restriction handlebar -->
 <script id="storageGroupResTemplate" type="text/x-handlebars-template">
 {{#each StorageRestriction}}
 <tr>
@@ -349,6 +365,7 @@
 {{/each}} 
 </script>
 
+<!-- Handlebar for group members -->
 <script id="groupMemberTemplate" type="text/x-handlebars-template">
 {{#each member}}
 <tr>
@@ -363,6 +380,8 @@
 {{/each}} 
 </script>
 
+<!-- Handlebars for user restriction -->
+
 <script id="userRestrictionTemplate" type="text/x-handlebars-template">
     {{#each users}}
     <tr> 
@@ -372,6 +391,8 @@
     </tr>
     {{/each}}
 </script>  
+
+<!-- Handlebars for storage restrictions  -->
 
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
     {{#each storageInfo}}
@@ -383,7 +404,7 @@
     {{/each}}
 </script>  
 
-<!-- Display productInformation-->
+<!-- Handlebars for display productInformation-->
 <script id="groupInformationTemplate" type="text/x-handlebars-template">
     {{#each groupByID}}
     <tr>  
@@ -397,7 +418,7 @@
     {{/each}}                                                  
 </script>
 
-<!-- Display edit category-->                    
+<!-- Handlebars for display edit category-->                    
 <script id="editGroupTemplate" type="text/x-handlebars-template">
     {{#each groupByID}}    
     <input form="editGroup" type="hidden" name="editGroupID" value="{{groupID}}">
@@ -408,7 +429,7 @@
     {{/each}}            
 </script>  
 
-<!-- delete category template -->
+<!-- Handlebars for delete category template -->
 
 <script id="deleteGroupTemplate" type="text/x-handlebars-template">
     <h4>Du holder på å slette gruppen:</h4>
@@ -419,7 +440,7 @@
     {{/each}}    
 </script>  
 
-<!-- display all category template -->
+<!-- Handlebars for display all category template -->
 <script id="displayGroupTemplate" type="text/x-handlebars-template">
     {{#each group}} 
     <tr>

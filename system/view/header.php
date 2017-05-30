@@ -19,14 +19,7 @@
         <link href="style/home.css" rel="stylesheet">
         <script src="js/handlebars-v4.0.5.js"></script>
         
-        <!-- MetisMenu CSS -->
-   
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        
     </head>
     <body>
 
@@ -43,6 +36,7 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#usernav"><span class="glyphicon glyphicon-user"></span> 
+                            <!-- Display logged in users name -->
                         <?php echo  $_SESSION["nameOfUser"]; ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="?request=editUser">Rediger profil</a></li>
@@ -56,6 +50,7 @@
                 
             </div>
         
+            <!-- Navigation sidebar -->
         <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -72,7 +67,7 @@
                         <li><a href="?request=mySales"><span class="glyphicon glyphicon-stats"></span> Dine Salg</a></li>
                         <li><a href="?request=myReturns"><span class="glyphicon glyphicon-stats"></span> Dine Returer</a></li>
                         
-                           
+                           <!-- Administrator only options -->
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
                         <li><a href="?request=logg"><span class="glyphicon glyphicon-paperclip"></span> Logg</a></li>
                         <li><a id="show-hide-toogle" href="#"><span class="glyphicon glyphicon-wrench"></span> Administrering<span class="caret"></span></a>
@@ -114,9 +109,9 @@
         
       
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="Bootstrap/moment.min.js"></script>
         <script type="text/javascript" src="Bootstrap/daterangepicker.js"></script>
@@ -124,6 +119,7 @@
         <script src="Charts/Chart.js"></script>
 
  
+        <!-- Hide or show dropdown funciton -->
 <script>
 
 

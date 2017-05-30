@@ -6,19 +6,20 @@
     <div class="container"> 
         <div class="row">
             <div class="pull-right">
+                <!-- Questionmark button that shows help modal -->
                 <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
                 </label>
             </div>
         </div>
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
 
-
+                <!-- Search for category  -->
             <form id="searchForCategory" class="form-inline" action="?request=getCategorySearchResult" method="post">    
                 <div class="form-group col-md-12 row">
 
                     <input class="form-control" form="searchForCategory" type="text" name="givenCategorySearchWord" value="" placeholder="Søk etter kategori..">  
                     <input class="form-control btn btn-primary" form="searchForCategory" type="submit" value="Søk">
-
+                    <!-- Button that refreshes search -->
                     <button onclick="UpdateCategoryTable()" class="btn btn-primary " type="button">Alle kategorier</button>
 
                     <div class="pull-right">
@@ -29,7 +30,7 @@
             <br><br>
             <div id="success"></div>
             <br><br>
-
+            <!-- Table of categories --> 
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Kategorioversikt</b></h3>
@@ -38,7 +39,7 @@
 
                     <tbody id="displayCategoryContainer">
 
-                        <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                        <!-- Content of displayCategoryContainer Handlebars  -->
 
                     </tbody>
 
@@ -47,10 +48,12 @@
             </div>
         </div> 
     </div>
-
+    
+        <!-- Modal to create categories -->
+        
     <div class="modal fade" id="createCategoryModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of Modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -59,6 +62,7 @@
                 <div class="modal-body">
                     <form action="?request=addCategoryEngine" method="post" id="createCategory">
                         <div style="text-align: center">
+                            <!-- table to write content -->
                             <table class="table">                   
                                 <tr>
                                     <th id="bordernone">Kateroginavn:</th>
@@ -69,7 +73,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-
+                    <!-- Button to create category -->
                     <input class="btn btn-success" form="createCategory" type="submit" value="Opprett Kategori">
 
 
@@ -87,7 +91,7 @@
 
 <div class="modal fade" id="deleteCategoryModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -96,11 +100,12 @@
             <form action="?request=deleteCategoryEngine" method="post" id="deleteCategory">
                 <div class="modal-body" id="deleteCategoryContainer">
 
-                    <!-- Innhold fra Handlebars Template-->
+                    <!-- Content from deleteCategoryContainer Handlebar -->
 
                 </div>
                 <div class="modal-footer">
                     <div id="errorDelete"></div>
+                    <!-- Delete category button -->
                     <input form="deleteCategory" class="btn btn-success" type="submit" value="Slett">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
@@ -114,7 +119,7 @@
 
 <div class="modal fade" id="editCategoryModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -126,13 +131,14 @@
                     <table class="table" id="editCategoryContainer">
 
 
-                        <!-- Innhold fra Handlebars Template -->
+                        <!-- Content of editCategoryContainer Handlebar -->
 
                     </table>
                 </div>
 
                 <div class="modal-footer">
                     <div id="errorEdit"></div>
+                    <!-- Save button for edit category -->
                     <input class="btn btn-success" form="editCategory" type="submit" value="Lagre">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
@@ -145,7 +151,7 @@
 
 <div class="modal fade" id="showHelpModal" role="dialog">
     <div class="modal-dialog" style="width: 70%">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content row">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -160,7 +166,7 @@
 
                 </div>
                 <div class="col-md-12">
-                    <img src="image/SøkKategori.PNG" alt="Søkefelt for katefori">
+                    <img src="image/SøkKategori.PNG" alt="Søkefelt for kategori">
                 </div>
 
 
@@ -179,7 +185,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                    <img src="image/OpprettKategoriModal.PNG">
+                    <img src="image/OpprettKategoriModal.PNG" alt="Modal for oppretting av kategori">
                 </div>
                 <div class="col-md-12">
                     <h3>
@@ -187,16 +193,16 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                    <img src="image/Kategorier.PNG">
+                    <img src="image/Kategorier.PNG" alt="Liste over kategorier">
                 </div>
                 <div class="col-md-12">
                     <h3>
                         Dette er alternativer for kategorier:<br>
                     </h3>
                     <label>
-                        1. <img src="image/EndreBruker.PNG">Endre kategori<br>
+                        1. <img src="image/EndreBruker.PNG" alt="Endre kategori symbol">Endre kategori<br>
 
-                        2. <img src="image/SlettBruker.PNG">Slett kategori
+                        2. <img src="image/SlettBruker.PNG" alt="Slett kategori symbol">Slett kategori
 
                     </label>
                 </div>
@@ -213,7 +219,7 @@
 
 </div>
 
-<!-- Display edit category-->                    
+<!-- Handlebars for Display edit category-->                    
 <script id="editCategoryTemplate" type="text/x-handlebars-template">
     {{#each categoryByID}}    
     <input form="editCategory" type="hidden" name="editCategoryID" value="{{categoryID}}">
@@ -224,7 +230,7 @@
     {{/each}}            
 </script>  
 
-<!-- delete category template -->
+<!-- Handlebars for delete category template -->
 
 <script id="deleteCategoryTemplate" type="text/x-handlebars-template">
     <h4>Du holder på å slette kategorien:</h4>
@@ -235,7 +241,7 @@
     {{/each}}    
 </script>    
 
-<!-- display all category template -->
+<!-- Handlebars for display all category template -->
 <script id="displayCategoryTemplate" type="text/x-handlebars-template">
 
     {{#each category}} 

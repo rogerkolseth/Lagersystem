@@ -27,7 +27,8 @@ $error = $GLOBALS["errorMessage"];
             <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
-                    
+                    <!-- Login wall for username and password -->
+                    <!-- Code from bootsnipp, Google Style Login by BhaumikPatel adapted to our own project under the MIT license-->
                     <div class="account-wall">
 
                         <img class="profile-img" src="system/image/TafjordLogo3.png" alt="Tafjord Logo">
@@ -43,12 +44,16 @@ $error = $GLOBALS["errorMessage"];
                             </label>
                                 </div>
                                 <div class="col-md-6 pull-right" style="margin-top: 4%;">
+                                    
+                                    <!-- Forgotten password button -->
                             <a href="#" data-toggle="modal" data-target="#forgottenPasswordModal">Glemt passord?</a>
                             </div>
                             </div>
+                            <!-- Login button -->
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 Logg inn</button>
                         </form>
+                        <!-- Error message if wrong username or password -->
                         <?php 
                         if (isset($GLOBALS["errorMessage"])){
                             ?> <div class="alert alert-danger">
@@ -66,9 +71,11 @@ $error = $GLOBALS["errorMessage"];
             
         </div>
         
+        <!-- Forgotten password modal -->
+        
         <div class="modal fade" id="forgottenPasswordModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of the modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -113,6 +120,8 @@ $error = $GLOBALS["errorMessage"];
 
 <script>
     
+    //Send new password funtion
+    
 $(function sendNewPassword() {
 
     $('#newPassword').submit(function () {
@@ -137,7 +146,7 @@ $(function sendNewPassword() {
     });
 });
 
-
+// Error message function when username or email is not found
 function errorMessage() {
     $('<div class="alert alert-danger"><strong>Error!</strong> Kunne ikke finne brukernavn eller epostadresse </div>').appendTo('#error')
             .delay(3000).fadeOut(500, function () {
@@ -146,6 +155,7 @@ function errorMessage() {
     ;
 }
 
+//Success message when new password is sent
 
 function successMessageNewPassword() {
     $('<div class="alert alert-success"><strong>Sendt!</strong> Nytt passord er sendt til oppgitt E-postadresse </div>').appendTo('#success')

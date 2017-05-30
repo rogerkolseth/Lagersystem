@@ -4,23 +4,24 @@
     <div class="container">
     <div class="row">
         <div class="pull-right">
+            <!-- Show help modal button -->
             <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
             </label>
         </div>
     </div>
 
-    <!-- DIV som holder på all informasjon til venstre på skjermen  -->
+    
 
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
-        <!-- SØK ETTER BRUKER  -->
+        <!-- Search user  -->
         <form class="form-inline" id="searchForUser" action="?request=getUserInfo" method="post">
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
                     <input class="form-control btn btn-primary" form="searchForUser" type="submit" value="Søk">
-                                             
+                       <!-- Refresh search -->                      
                 <button onclick="UpdateUsersTable()" class="btn btn-primary" type="button">Alle brukere</button>
              
             <div class="pull-right row">
@@ -36,11 +37,11 @@
         <br><br>
         <div id="success"></div>
 
-            <!-- OPPRETT BRUKER  -->
+            <!-- Create user  -->
 
             <div class="modal fade" id="createUserModal" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
+                    <!-- Content of modal -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -121,18 +122,18 @@
             
             <tbody id="displayUserContainer">
 
-            <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+            <!-- Content of displayUserContainer handlebar  -->
 
             </tbody>    
         </table>
     </div>
          
-        <!-- Set restrictions -->
+        <!-- Set restrictions modal -->
 
     
     <div class="modal fade" id="userRestrictionModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -141,7 +142,7 @@
                 <div class="modal-body">
                     <table class="table" id="storageRestrictionContainer">
 
-                        <!-- Handlebars information -->
+                        <!-- Content of storageRestrictionContainer handlebars -->
 
 
                     </table>
@@ -156,9 +157,11 @@
         </div>
     </div>   
         
+        <!-- Group restriction modal -->
+        
         <div class="modal fade" id="userGroupRestrictionModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -167,7 +170,7 @@
                 <div class="modal-body">
                     <table class="table" id="groupRestrictionContainer">
 
-                        <!-- Handlebars information -->
+                        <!-- Content of groupRestrictionContainer handlebars -->
 
 
                     </table>
@@ -202,7 +205,7 @@
 
     <div class="modal fade" id="deleteUserModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -211,7 +214,7 @@
                 <form action="?request=deleteUserEngine" method="post" id="deleteUser">
                 <div class="modal-body" id="deleteUserContainer">
 
-                    <!-- Innhold fra Handlebars Template-->
+                    <!-- Content of deleteUserContainer handlebars -->
 
                 </div>
                 <div class="modal-footer">
@@ -230,7 +233,7 @@
 
     <div class="modal fade" id="showUserInformationModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -240,7 +243,7 @@
                     
                     <div id="userInformationContainer">
                         
-                        <!-- Innhold fra Handlebars Template-->
+                        <!-- Content of userInformationContainer handlebars -->
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-6">
@@ -252,7 +255,7 @@
                         
                         <tbody id="userRestrictionContainer"> 
                            
-                                    <!-- Innhold fra Handlebars Template-->
+                                    <!-- Content of userRestrictionContainer handlebars -->
 
                         </tbody>
                     </table>
@@ -267,7 +270,7 @@
                             
                             <tbody id="groupMembershipContainer"> 
                            
-                                    <!-- Innhold fra Handlebars Template-->
+                                    <!-- Content of groupMembershipContainer handlebars -->
 
                         </tbody>
                         </table>
@@ -289,7 +292,7 @@
 
     <div class="modal fade" id="editUserModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -299,7 +302,7 @@
                 <div class="modal-body text-center">
                     <table class="table" id="editUserContainer">
 
-                    <!-- Innhold fra Handlebars Template--> 
+                    <!-- Content of edtiUserContainer handlebars--> 
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -321,7 +324,7 @@
 
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -335,7 +338,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                <img src="image/SøkBruker.PNG">
+                        <img src="image/SøkBruker.PNG" alt="Søk i brukere">
                     </div>
                 
                 
@@ -346,7 +349,7 @@
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/OpprettBruker.PNG">
+                    <img src="image/OpprettBruker.PNG" alt="Opprett bruker knapp">
                     </div>
                 <div class="col-md-12">
                     <h3>
@@ -354,7 +357,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/OpprettBrukerModal.PNG">
+                    <img src="image/OpprettBrukerModal.PNG" alt="Opprett bruker modal">
                 </div>
                     <div class="col-md-12">
                     <h3>
@@ -362,18 +365,18 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/BrukerOversikt.PNG">
+                    <img src="image/BrukerOversikt.PNG" alt="Liste over brukere">
                 </div>
                     <div class="col-md-12">
                         <h3>
                         Dette er alternativer for brukere:<br>
                         </h3>
                         <label>
-                        1. <img src="image/EndreBruker.PNG">Endre bruker<br>
-                        2. <img src="image/InformasjonBruker.PNG">Vis informasjon om bruker<br>
-                        3. <img src="image/SlettBruker.PNG">Slett bruker<br>
-                        4. <img src="image/LagertilgangBruker.PNG">Gi lagertilanger til bruker<br>
-                        5. <img src="image/GruppeTilgang.PNG">Gi lagertilanger til bruker
+                            1. <img src="image/EndreBruker.PNG" alt="Endre bruker symbol">Endre bruker<br>
+                            2. <img src="image/InformasjonBruker.PNG" alt="Vis informasjon om bruker symbol">Vis informasjon om bruker<br>
+                            3. <img src="image/SlettBruker.PNG" alt="Slett bruker symbol">Slett bruker<br>
+                            4. <img src="image/LagertilgangBruker.PNG" alt="Lagertilgang symbol">Gi lagertilanger til bruker<br>
+                            5. <img src="image/GruppeTilgang.PNG" alt="Gruppetilgang symbol">Gi lagertilanger til bruker
                     </label>
                 </div>
                 
@@ -383,7 +386,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/CheckboxBruker.PNG">
+                    <img src="image/CheckboxBruker.PNG" alt="Checkbox for tilganger">
                 </div>
                     
                 
@@ -398,7 +401,7 @@
 
 
 <!-- HANDLEBARS TEMPLATES-->
-
+<!-- Handlebars for group memberships -->
 <script id="groupMembershipTemplate" type="text/x-handlebars-template">
 {{#each groupMembership}}
 <tr>
@@ -413,6 +416,7 @@
 {{/each}} 
 </script>
 
+<!-- Handlebars for group restrictions -->
 <script id="groupRestrictionTemplate" type="text/x-handlebars-template">
 {{#each group}}
     <tr> 
@@ -423,6 +427,7 @@
 {{/each}}
 </script>   
 
+<!-- Handlebars for storage restrictions -->
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
 {{#each storageInfo}}
     <tr> 
@@ -433,7 +438,7 @@
 {{/each}}
 </script>
 
-<!-- edit user template-->
+<!-- handlebars for edit user template-->
 <script id="editUserTemplate" type="text/x-handlebars-template">
 
     {{#each user}}
@@ -486,7 +491,7 @@
 </script>   
 
 
-<!-- show user restriction template-->
+<!-- handlebars show user restriction template-->
 <script id="userRestrictionTemplate" type="text/x-handlebars-template">
 {{#each restriction}}
 <tr>
@@ -501,7 +506,7 @@
 {{/each}}      
 </script>
 
-<!-- Show user information template -->
+<!-- handlebars for show user information template -->
 <script id="userInformationTemplate" type="text/x-handlebars-template">
     {{#each user}}
     <div class="col-md-6">
@@ -541,7 +546,7 @@
 </script>    
 
 
-<!-- delete user template -->
+<!-- handlebars for delete user template -->
 
 <script id="deleteUserTemplate" type="text/x-handlebars-template">
     <h4> Du holder på å slette brukeren: </h4>
@@ -553,7 +558,7 @@
         <h4>Er du sikker på at du vil fortsette? </h4>   
 </script>    
 
-<!-- display all users template -->
+<!-- handlebars for display all users template -->
 <script id="displayUserTemplate" type="text/x-handlebars-template">
 
     {{#each users}} 

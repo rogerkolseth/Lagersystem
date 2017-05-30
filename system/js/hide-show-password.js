@@ -1,3 +1,5 @@
+//Code from codepen Javascrip:show/hide password by Gabriele Romanato adapted to our own project under the MIT license
+
 (function (){
     var PasswordToggler = function (element, field){
         this.element = element;

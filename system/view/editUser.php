@@ -21,7 +21,7 @@ $test = $GLOBALS["errorMessage"];
         
         <h3 style="margin-bottom: 4%">Rediger bruker</h3>
         
-        
+        <!-- Gets logged in user -->
         <form action="?request=editLoggedInUser" method="post" id="editUser">
         <table class="table" id="displayUserContainer">
             
@@ -29,7 +29,9 @@ $test = $GLOBALS["errorMessage"];
             <div id="editSaved" style="display: none">
                 <p class="text-success">Endringene er lagret!</p>
             </div>
+            <!-- Button to return to last page -->
             <a href="javascript:history.back()" class="btn btn-danger pull-right">Tilbake</a>
+            <!-- Post edit saved message -->
             <input class="btn btn-success pull-right" style="margin-right: 3%" type="submit" value="Lagre" form="editUser" onclick="document.getElementById('editSaved').style.display = 'block'; javascript:history.go(0)"> 
                 
                  
@@ -41,9 +43,11 @@ $test = $GLOBALS["errorMessage"];
 </div>    
 </div>
 
+        <!-- Uplaod image modal -->
+        
 <div class="modal fade" id="uploadImageModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -61,7 +65,7 @@ $test = $GLOBALS["errorMessage"];
                                 <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
                             </tr>
                         
-                            
+                            <!-- Add new picture -->
                             <tr>                           
                                 <td id="bordernone">
                                     <label class="btn btn-primary" for="fileToUpload">
@@ -79,6 +83,7 @@ $test = $GLOBALS["errorMessage"];
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <!-- Button to submit picture -->
                 <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?request=uploadImage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
@@ -88,6 +93,7 @@ $test = $GLOBALS["errorMessage"];
     </div> 
 
 
+<!-- Handlebar for displaying user -->
 
 <script id="displayUserTemplate" type="text/x-handlebars-template">
        {{#each user}}

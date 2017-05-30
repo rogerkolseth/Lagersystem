@@ -16,7 +16,7 @@ $restriction = $GLOBALS["saleRestriction"];
 
 <?php 
                 if (isset($GLOBALS["saleRestriction"]) && $restriction == "1"){?>    
-    <!-- DIV som holder på all informasjon til venstre på skjermen  -->
+    
     <h2 class="text-center">Registrer uttak</h2>
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group ">
@@ -31,18 +31,19 @@ $restriction = $GLOBALS["saleRestriction"];
             <div id="chooseStorage">
             <select name="fromStorageID" form="withdrawProducts" id="withdrawrRestrictionContainer" class="form-control">
 
-                <!-- Her kommer Handlebars Template-->
+                <!-- Conent of withdrawrRestrictionContainer handlebars-->
 
             </select>
             </div>
             <div id="singleStorageContainer">
-                            
+                       <!-- Content of singleStorageContainer handlebars -->     
             </div>
         </div>
             
         <div class="col-sm-1 col-md-2">
             <select id="chooseCategoryContainer" class="form-control displayNone">
                         
+                <!-- Content of chooseCategoryContainer handlebars -->
             </select>
         </div>    
 
@@ -51,7 +52,7 @@ $restriction = $GLOBALS["saleRestriction"];
         <div id="withdrawProductContainer">
             
 
-            <!-- Viser Product som er valgt i FRA lager -->
+            <!-- Container of withdrawProductContainer handlebar -->
 
 
         </div>        
@@ -80,7 +81,7 @@ $restriction = $GLOBALS["saleRestriction"];
         <div>
             <table class="table table-responsive" id="withdrawQuantityContainer">
 
-                <!-- Lar deg velge antall enheter -->
+                <!-- Content of withdrawQuantityContainer handlebar -->
 
             </table>
             
@@ -93,6 +94,8 @@ $restriction = $GLOBALS["saleRestriction"];
 
 
     </div>  
+    
+    <!-- Message when user dont have permission for more than one storage -->
     <?php } else { ?>
         <p> Du må ha tilgang til 1 eller fleire lager for å kunne registere uttak.  </p>       
        <?php }?>
@@ -102,7 +105,7 @@ $restriction = $GLOBALS["saleRestriction"];
     
     <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -116,7 +119,7 @@ $restriction = $GLOBALS["saleRestriction"];
                         
                     </div>
                     <div class="col-md-12">
-                    <img src="image/VelgLager.PNG">
+                        <img src="image/VelgLager.PNG" alt="Velg et lager">
                     </div>
                 </div>
                 
@@ -128,7 +131,7 @@ $restriction = $GLOBALS["saleRestriction"];
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/VelgKategori.PNG">
+                    <img src="image/VelgKategori.PNG" alt="Velg kategori">
                     </div>
                 <div class="col-md-12">
                     <h3>
@@ -137,7 +140,7 @@ $restriction = $GLOBALS["saleRestriction"];
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/RegistrerOverførMac.PNG">
+                    <img src="image/RegistrerOverførMac.PNG" alt="Registrer antall of info">
                 </div>
                 
                 <div class="col-md-12">
@@ -145,7 +148,7 @@ $restriction = $GLOBALS["saleRestriction"];
                         Dette er alternativer for salg:<br>
                     </h3>
                     <label>
-                        <img src="image/SlettBruker.PNG">Fjern valgt linje<br>
+                        <img src="image/SlettBruker.PNG" alt="Slett valgt linje symbol">Fjern valgt linje<br>
                         
                     </label>
                 </div>
@@ -161,7 +164,7 @@ $restriction = $GLOBALS["saleRestriction"];
     
 </div> 
 
-
+<!-- Handlebars for choose category -->
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
@@ -169,6 +172,7 @@ $restriction = $GLOBALS["saleRestriction"];
 {{/each}}
 </script>
 
+<!-- Handlebars for withdraw quantity -->
 <script id="withdrawQuantityTemplate" type="text/x-handlebars-template">
 {{#each prodInfo}} 
     <tr class="selectQuantity">
@@ -207,7 +211,7 @@ $restriction = $GLOBALS["saleRestriction"];
         
 </script>  
 
-
+<!-- Handlebar for withdraw products -->
 <script id="withdrawProductTemplate" type="text/x-handlebars-template">
     <br>  
     {{#each storageProduct}} 

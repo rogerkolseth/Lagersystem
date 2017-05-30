@@ -5,6 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="pull-right">
+                <!-- Show help button modal -->
                 <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
                 </label>
             </div>
@@ -12,14 +13,14 @@
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">     
 
 
-            <!-- SØK ETTER LAGER -->
+            <!-- Search for storage -->
 
             <form class="form-inline" id="searchForStorage" action="?request=getAllStorageInfo" method="post">
                 <div class="form-group col-md-12 row">
 
                     <input class="form-control" form="searchForStorage"type="text" name="givenStorageSearchWord" value="" placeholder="Søk etter Lager..">  
                     <input class="form-control btn btn-primary" form="searchForStorage" type="submit" value="Søk">
-
+                    <!-- Refresh search -->
                     <button onclick="UpdateStorageTable()" class="btn btn-primary " type="button">Alle lagrer</button>
                     <div class="pull-right">
                         <button class="btn btn-info" type="button" onclick="getStorageProduct();" data-toggle="modal" data-target="#stockDeliveryModal">Varelevering</button>
@@ -43,7 +44,7 @@
 
                     <tbody id="displayStorageContainer">
 
-                        <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                        <!-- Content of displayStorageContainer handlebars  -->
 
                     </tbody>
 
@@ -57,7 +58,7 @@
 
 
 
-    <!-- DIV som holder på all informasjon til høgre på skjermen  -->
+    
 
 
     <!-- CREATE STORAGE MODAL -->
@@ -65,7 +66,7 @@
 
     <div class="modal fade" id="createStorageModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -109,7 +110,7 @@
 
     <div class="modal fade" id="editStorageModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -121,7 +122,7 @@
                         <table class="table" id="editStorageContainer">
 
 
-                            <!-- Innhold fra Handlebars Template -->
+                            <!-- Content of editStorageContainer handlebars -->
 
                         </table>
                     </div>
@@ -143,7 +144,7 @@
 
     <div class="modal fade" id="showStorageInformationModal" role="dialog">
         <div class="modal-dialog test1233" id="test1231">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -155,7 +156,7 @@
                             <table class="table">
                                 <tbody id="storageInformationContainer">
 
-                                    <!-- Her kommer handlebars Template -->
+                                    <!-- Content of storageInformationContainer handlebars -->
 
                                 </tbody>
                             </table>
@@ -168,7 +169,8 @@
                                 <table class="table">
                                      
                                     <tbody id="groupRestrictionContainer">
-
+                                        
+                                        <!-- Content of groupRestrictionContainer handlebars -->
                                     </tbody>   
                                 </table>
                             </div>
@@ -190,6 +192,7 @@
                                         </tr>
                                     </thead>  
                                     <tbody id="storageProductContainer">
+                                        <!-- Content of storageProductContainer handlebars -->
 
                                     </tbody>
 
@@ -211,7 +214,7 @@
 
 
 
-                                        <!-- Her kommer handlebars Template -->
+                                        <!-- Content of storageRestrictionContainer handlebars -->
 
 
 
@@ -221,7 +224,7 @@
                         </div>
                     </div>
                     <div class="col-md-5">
-
+                        <!-- Graph of storage inventory -->
                         <canvas id="myChart"></canvas>
                         <div class="panel panel-default displayNone" id="macAdresser">
                             <div class="panel-heading">
@@ -230,7 +233,7 @@
                             <table class="table" id="macAdresser">
                                 
                                 <tbody id="showProductMacContainer">
-                                    
+                                    <!-- Content of showProductMacContainer handlebars -->
                                 </tbody>
                             </table>
                         </div>
@@ -257,7 +260,7 @@
 
     <div class="modal fade" id="deleteStorageModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -266,7 +269,7 @@
                 <form action="?request=deleteStorageEngine" method="post" id="deleteStorage">
                     <div class="modal-body" id="deleteStorageContainer">
 
-                        <!-- Innhold fra Handlebars Template -->
+                        <!-- Content of deleteStorageContainer handlebars -->
 
                     </div>
                     <p id="errorMessage">
@@ -288,7 +291,7 @@
 
     <div class="modal fade" id="stocktakingModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -299,15 +302,16 @@
                     <div class="modal-body row" >
                         <div class="col-md-6">
                             <table class="table" id="stocktakingContainer">
-                                <!-- Innhold fra Handlebars Template -->
+                                <!-- Content of stocktakingContainer handlebars -->
                             </table>
 
 
                             <table class="table" id="stocktakingResultContainer">
-                                <!-- Innhold fra Handlebars Template -->
+                                <!-- Content of stocktakingResultContainer handlebars -->
                             </table>
                         </div>
                         <div class="col-md-6">
+                            <!-- Graph of the stocktaking results -->
                             <canvas id="stocktakingResultChart"></canvas>
                         </div>
 
@@ -324,11 +328,11 @@
         </div>
     </div>   
     
-    <!-- Varelevering -->
+    <!-- Storage delivery -->
 
     <div class="modal fade" id="stockDeliveryModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -339,17 +343,17 @@
                         <label>Velg produkt(er) som skal inn på Hovedlageret</label>
                         <div class="col-md-4 pull-right">
                             <select id="chooseCategoryContainer" class="form-control">
-
+                                <!-- Content of chooseCategoryContainer handlebars -->
                             </select>
                         </div>
                         <div id="stockDeliveryContainer">
-
+                            <!-- Content of stockDeliveryContainer handlebars -->
                         </div>
                         <br><br>
                         <div>
                             <table class="table table-responsive" id="deliveryQuantityContainer">
 
-                                <!-- Lar deg velge antall enheter -->
+                                <!-- Content of deliveryQuantityContainer handlebars -->
 
                             </table>
 
@@ -379,7 +383,7 @@
 
 <div class="modal fade" id="showHelpModal" role="dialog">
     <div class="modal-dialog" style="width: 70%">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of modal -->
         <div class="modal-content row">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -394,7 +398,7 @@
 
                 </div>
                 <div class="col-md-12">
-                    <img src="image/SøkLager.PNG">
+                    <img src="image/SøkLager.PNG" alt="Søk i lager">
                 </div>
                 
 
@@ -406,7 +410,7 @@
 
                 </div>
                 <div class="col-md-12">
-                    <img src="image/OpprettLager.PNG">
+                    <img src="image/OpprettLager.PNG" alt="Knapp for oppretting av lager">
                 </div>
                 <div class="col-md-12">
                     <h3>
@@ -414,7 +418,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                    <img src="image/OpprettLagerModal.PNG">
+                    <img src="image/OpprettLagerModal.PNG" alt="Opprett lager modal">
                 </div>
                 
                 <div class="col-md-12">
@@ -423,7 +427,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                    <img src="image/Varelevering.PNG">
+                    <img src="image/Varelevering.PNG" alt="Varelevering">
                 </div>
                 
                 <div class="col-md-12">
@@ -432,7 +436,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                    <img src="image/VareleveringModal.PNG">
+                    <img src="image/VareleveringModal.PNG" alt="Varelevering modal">
                 </div>
                 <div class="col-md-12">
                     <h3>
@@ -440,17 +444,17 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                    <img src="image/Lager_1.PNG">
+                    <img src="image/Lager_1.PNG" alt="Lager liste">
                 </div>
                 <div class="col-md-12">
                     <h3>
                         Dette er alternativer for lager:<br>
                     </h3>
                     <label>
-                        1. <img src="image/EndreBruker.PNG">Endre lager<br>
-                        2. <img src="image/InformasjonBruker.PNG">Vis informasjon om lager<br>
-                        3. <img src="image/SlettBruker.PNG">Slett lager<br>
-                        4. <img src="image/Vertelling_1.PNG">Varetelling for lageret
+                        1. <img src="image/EndreBruker.PNG" alt="Endre lager symbol">Endre lager<br>
+                        2. <img src="image/InformasjonBruker.PNG" alt="Vis informasjon symbol">Vis informasjon om lager<br>
+                        3. <img src="image/SlettBruker.PNG" alt="Slett lager symbol">Slett lager<br>
+                        4. <img src="image/Vertelling_1.PNG" alt="Varetelling symbol">Varetelling for lageret
                     </label>
                 </div>
 
@@ -467,8 +471,8 @@
 </div>
 
 <!-- TEMPLATES -->
-groupRestrictionContainer
 
+<!-- Handlebar for group restrictions -->
 <script id="groupRestrictionTemplate" type="text/x-handlebars-template">
 {{#each groupRestriction}}
 <tr>
@@ -482,6 +486,8 @@ groupRestrictionContainer
     
 {{/each}} 
 </script>
+
+<!-- Handlebar for showing mac adress products -->
 <script id="showProductMacTemplate" type="text/x-handlebars-template">
     {{#each inventoryMac}}
     <tr>
@@ -490,13 +496,15 @@ groupRestrictionContainer
     {{/each}}
     
 </script>
+
+<!-- Handlebars for choosing categories -->
 <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0">Velg Kategori</option>
 {{#each category}}
 <option data-id="{{categoryID}}" value="{{categoryID}}">{{categoryName}}</option>
 {{/each}}
 </script>
-
+<!-- Handlebars for stock delivery -->
 <script id="stockDeliveryTemplate" type="text/x-handlebars-template">
     <br>  
     {{#each productInfo}} 
@@ -504,6 +512,7 @@ groupRestrictionContainer
     {{/each}} 
 </script>
 
+<!-- Handlebars for delivery quantaty -->
 <script id="deliveryQuantityTemplate" type="text/x-handlebars-template">
     {{#each product}} 
     <tr class="selectQuantity">
@@ -526,7 +535,7 @@ groupRestrictionContainer
     {{/each}}  
 </script>
 
-<!-- Display stocktacing product-->
+<!--Handlebars for display stocktacing product-->
 <script id="stocktakingResultTemplate" type="text/x-handlebars-template">
     <thead>
     <tr>
@@ -557,7 +566,7 @@ groupRestrictionContainer
 </script>
 
 
-<!-- Display stocktacing product-->
+<!--Handlebars for display stocktacing product-->
 <script id="stocktakingTemplate" type="text/x-handlebars-template">
     <h2>{{storageProduct.0.storageName}}</h2><br>  
     <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
@@ -584,7 +593,7 @@ groupRestrictionContainer
 
 </script>
 
-<!-- Display editStorage-->                    
+<!-- Handlebars for display editStorage-->                    
 <script id="editStorageTemplate" type="text/x-handlebars-template">
     {{#each storage}}    
     <input form="editStorage" type="hidden" name="editStorageID" value="{{storageID}}">
@@ -600,7 +609,7 @@ groupRestrictionContainer
 </script>  
 
 
-<!-- Display StorageInformation-->
+<!-- Handlebars for display StorageInformation-->
 <script id="storageInformationTemplate" type="text/x-handlebars-template">
     {{#each storage}}    
     <tr>  
@@ -618,7 +627,7 @@ groupRestrictionContainer
     {{/each}}                
 </script>   
 
-<!-- Display StorageRetricton-->
+<!-- handlebars for display StorageRetricton-->
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
     {{#each storageRestriction}}
     <tr>
@@ -632,7 +641,7 @@ groupRestrictionContainer
     {{/each}}       
 </script>
 
-<!-- Display StorageProduct-->
+<!-- Handlebars for display StorageProduct-->
 <script id="storageProductTemplate" type="text/x-handlebars-template">
     {{#each storageProduct}}
     <tr>
@@ -655,7 +664,7 @@ groupRestrictionContainer
 </script>
 
 
-<!-- Display what storage you are deleting-->
+<!-- Handlebars for display what storage you are deleting-->
 <script id="deleteStorageTemplate" type="text/x-handlebars-template">
     <h4>Du holder på å slette:</h4>
     {{#each storage}}
@@ -668,7 +677,7 @@ groupRestrictionContainer
 
 
 
-<!-- display all users template -->
+<!-- Handlebars for display all users template -->
 <script id="displayStorageTemplate" type="text/x-handlebars-template">
 
     {{#each storageInfo}} 

@@ -18,7 +18,7 @@ if (isset($GLOBALS["errorMessage"])) {
     </div>
 
 
-
+        <!-- Shortcuts for much used funtion for administrators -->
 
     <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
         <div id="snarveidiv">
@@ -62,7 +62,7 @@ if (isset($GLOBALS["errorMessage"])) {
     <?php } ?>
 
 
-
+        <!-- Administrator help modal -->
     <div class="container">
         <?php if ($_SESSION["userLevel"] == "Administrator") { ?> 
             <div class="row">
@@ -73,7 +73,7 @@ if (isset($GLOBALS["errorMessage"])) {
             </div>
 
         <?php } ?>
-
+        <!-- User help modal -->
         <?php if ($_SESSION["userLevel"] == "User") { ?> 
             <div class="row">
                 <div class="pull-right">
@@ -82,6 +82,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>
 
+        <!-- Storage inventory administrator-->
         <?php } ?>
         <div class="col-md-12">
             <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
@@ -99,12 +100,14 @@ if (isset($GLOBALS["errorMessage"])) {
                                 </tr>
                             </thead>
                             <tbody id="lowInvContainer">
-                                <!-- Handlebars -->
+                                <!-- Content from lowInvContainer handlebars -->
                             </tbody>
                         </table>
                     </div>
 
                 </div>
+            
+            <!-- Last sale user -->
             <?php } ?>
             <?php if ($_SESSION["userLevel"] == "User") { ?>
                 <div class="col-md-6">
@@ -134,6 +137,8 @@ if (isset($GLOBALS["errorMessage"])) {
 
                 </div>
             <?php } ?>
+            
+            <!-- Your last sale -->
             <div class="col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -160,6 +165,8 @@ if (isset($GLOBALS["errorMessage"])) {
 
             </div>
         </div>
+        
+        <!-- Last bit of logg for administrators -->
         <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
             <div class="col-md-12">
 
@@ -182,14 +189,14 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-        <!-- Hjelp modal -->
+        <!-- Help modal administrator -->
 
 
 
 <div class="modal fade" id="showHelpModal" role="dialog">
 
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -200,38 +207,38 @@ if (isset($GLOBALS["errorMessage"])) {
                         <h3>
                             Her er forskjellige snarveier til ofte brukte funksjoner.
                         </h3>
-                        <img style="width: 90%" src="image/Snarvei.PNG">
+                        <img style="width: 90%" src="image/Snarvei.PNG" alt="Snarvei knapper">
                     </div>
                     
                     <div class="col-md-6 text-center">
                         <h3>
                             Her kan du se hvilke produkter det er lite av og hvilke lager de ligger på.
                         </h3>
-                        <img id="helpimage" src="image/SnartTomLagerbeholdning.PNG">
+                        <img id="helpimage" src="image/SnartTomLagerbeholdning.PNG" alt="Snart tom lagerbeholdning">
                     </div>
                     <div class="col-md-6 text-center">
                         <h3>
                             Her kan du se dine siste salg.
                         </h3>
-                        <img id="helpimage" src="image/DineSisteSalgAdmin.PNG">
+                        <img id="helpimage" src="image/DineSisteSalgAdmin.PNG" alt="Dine siste salg">
                     </div>
                     <div class="col-md-12 text-center">
                         <h3>
                             Her kan du se det siste som har blitt logget.
                         </h3>
-                        <img id="" src="image/SisteHendelser.PNG">
+                        <img id="" src="image/SisteHendelser.PNG" alt="Siste hendelser">
                     </div>
                     
                     <div class="col-md-6 text-center">
                         <h3>Her kan du se informasjon om produkter i lager du har tilgang til.
                             Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
                         </h3>
-                    <img id="helpimage" src="image/Lagerbeholdning.PNG">
+                        <img id="helpimage" src="image/Lagerbeholdning.PNG" alt="Lagerbeholdning">
                     </div>
                     <div class="col-md-6 text-center">
                         <h3>Her kan du se en grafisk fremstilling av lagerbeholdningen.
                         </h3>
-                    <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
+                        <img id="helpimage" src="image/LagerbeholdningGraf.PNG" alt="Graf av lagerbeholdning">
 
 
                     </div>
@@ -246,12 +253,12 @@ if (isset($GLOBALS["errorMessage"])) {
             </div>
         </div>
     
-        <!-- Hjelp modal bruker -->
+        <!-- Help modal user -->
 
 
         <div class="modal fade" id="showHelpModalUser" role="dialog">
             <div class="modal-dialog" style="width: 70%">
-                <!-- Innholdet til Modalen -->
+                <!-- Conetent of the modal -->
                 <div class="modal-content row">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -260,22 +267,22 @@ if (isset($GLOBALS["errorMessage"])) {
                     <div class="modal-body">
                         <div class="col-md-6 text-center">
                             <label>Her kan du se de siste salgene gjort av alle brukerene i systemet.</label>
-                            <img id="helpimage" src="image/SisteSalg.PNG">
+                            <img id="helpimage" src="image/SisteSalg.PNG" alt="Siste salg">
                         </div>
                         <div class="col-md-6 text-center">
                             <label>Her kan du se de siste salgene gjort av deg.</label>
-                            <img id="helpimage" src="image/DineSisteSalg.PNG">
+                            <img id="helpimage" src="image/DineSisteSalg.PNG" alt="Dine siste salg">
                         </div>
                         <div class="col-md-6 text-center">
                             <label>Her kan du se informasjon om produkter i lager du har tilgang til.<br>
                                 Om du har tilgang til flere lager vil det her være mulig å velge hvilke lager du vil se.
                             </label>
-                            <img id="helpimage" src="image/Lagerbeholdning.PNG">
+                            <img id="helpimage" src="image/Lagerbeholdning.PNG" alt="Lagerbeholdning">
                         </div>
                         <div class="col-md-6 text-center">
                             <label>Her kan du se en grafisk fremstilling av lagerbeholdningen.
                             </label>
-                            <img id="helpimage" src="image/LagerbeholdningGraf.PNG">
+                            <img id="helpimage" src="image/LagerbeholdningGraf.PNG" alt="lagerbeholdnings graf">
                         </div>
 
 
@@ -289,7 +296,7 @@ if (isset($GLOBALS["errorMessage"])) {
         </div> 
 
 
-        <!-- LAGERBEHOLDNING -->
+        <!-- StorageInventory -->
 
         <div class="col-md-12">
             <div class="col-md-6">
@@ -301,12 +308,12 @@ if (isset($GLOBALS["errorMessage"])) {
                         <div id="chooseStorage">
                             <select name="fromStorageID" id="chooseStorageContainer" class="form-control">
 
-                                <!-- Her kommer Handlebars Template-->
+                                <!-- Content from choosStorageContainer handlebar-->
 
                             </select>
                         </div>
                         <div id="singleStorageContainer">
-
+                            <!-- Content from singleStorageContainer handlebars -->
                         </div>
                     </div>
 
@@ -322,11 +329,12 @@ if (isset($GLOBALS["errorMessage"])) {
 
                         <tbody id="chosenStorageContainer">
 
-                            <!-- Her kommer Handlebars Template-->
+                            <!-- Content from chosenStorageContainer handlebar -->
                         </tbody>
                     </table>
                 </div>
             </div>
+            <!-- Graph of storage inventory -->
             <div class="col-md-6">
 
                 <canvas id="myChart" height="290"></canvas>
@@ -336,14 +344,14 @@ if (isset($GLOBALS["errorMessage"])) {
         </div>
     </div>
 
-    <!-- HER KOMMER INNHOLDET>   -->                
+                    
 
-    <!-- Opprett bruker modal -->
+    <!-- Create user modal -->
 
 
     <div class="modal fade" id="createUserModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -393,6 +401,8 @@ if (isset($GLOBALS["errorMessage"])) {
                     </div>
                     <div class="modal-footer">
                         <p id="errorMessage"></p>
+                        
+                        <!-- Create user button -->
                         <input class="btn btn-success" form="createUser" type="submit" value="Opprett bruker">
 
 
@@ -411,7 +421,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
     <div class="modal fade" id="createProductModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of Modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -452,7 +462,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                 </div>
                                 </div>
                                 <div class="modal-footer">
-
+                                    <!-- Create product button -->
                                     <input class="btn btn-success" form="createProduct" type="submit" value="Opprett Produkt">
 
                                     <button class="btn btn-danger" type="button" data-dismiss="modal">Avslutt</button>
@@ -469,7 +479,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
             <div class="modal fade" id="createStorageModal" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
+                    <!-- Content of Modal -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -492,7 +502,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                 </div>
                         </div>
                         <div class="modal-footer">
-
+                            <!-- Create storage button -->
                             <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager" href="?request=storageAdm">
 
 
@@ -509,7 +519,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
             <div class="modal fade" id="uploadImageModal" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
+                    <!-- Content of Modal -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -559,7 +569,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
             <div class="modal fade" id="createCategoryModal" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
+                    <!-- Content of Modal -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -578,7 +588,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                 </div>
                         </div>
                         <div class="modal-footer">
-
+                            <!-- Create category button -->
                             <input class="btn btn-success" form="createCategory" type="submit" value="Opprett Kategori">
 
 
@@ -590,14 +600,14 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>     
 
-            <!-- Tom modal til Roger -->
+            
 
 
             <!-- STOCKTAKING MODAL -->
 
             <div class="modal fade" id="stocktakingModal" role="dialog">
                 <div class="modal-dialog" style="width: 70%">
-                    <!-- Innholdet til Modalen -->
+                    <!-- Content of Modal -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -611,20 +621,21 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                     <select name="onStorageID" id="chooseStorageStocktakContainer" class="form-control stocktaking marginBStorage">
 
-                                        <!-- Her kommer Handlebars Template-->
+                                        <!-- Content of choosStorageStocktakContainer handlebars-->
 
                                     </select>  
 
                                     <table class="table product" id="stocktakingContainer">
-                                        <!-- Innhold fra Handlebars Template -->
+                                        <!-- Content of stocktakingContainer Handlebar -->
                                     </table>
 
 
                                     <table class="table" id="stocktakingResultContainer">
-                                        <!-- Innhold fra Handlebars Template -->
+                                        <!-- Content of stocktakingResultContainer handlebars -->
                                     </table>
                                 </div>
                                 <div class="col-md-6">
+                                    <!-- Graph of stocktaking result -->
                                     <canvas id="stocktakingResultChart"></canvas>
                                 </div>
 
@@ -632,6 +643,7 @@ if (isset($GLOBALS["errorMessage"])) {
                             </div>
 
                             <div class="modal-footer">
+                                <!-- Export to CSV document -->
                                 <a href="#" id="saveToCSV" class="btn btn-success">Eksporter til csv</a>
                                 <input form="stocktaking" class="btn btn-success" id="saveStocktaking" type="submit" value="Neste">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -641,11 +653,11 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>   
 
-            <!-- Varelevering -->
+            <!-- Productdelivering -->
             
             <div class="modal fade" id="stockDeliveryModal" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
+                    <!-- Content of Modal -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -655,19 +667,20 @@ if (isset($GLOBALS["errorMessage"])) {
                             <div class="modal-body">
                                 <label>Velg produkt(er) som skal inn på Hovedlageret</label>
                                 <div class="col-md-4 pull-right">
+                                    
                                 <select id="chooseCategoryContainer" class="form-control">
-
+                                    <!-- Content of chooseCategoryContainer handlebars -->
                                 </select>
                                 </div>
                                 <div id="stockDeliveryContainer">
-
+                                    <!-- Content of stockDeliveryContainer handlbars -->
                                 </div>
                                 
                                 <br><br>
                                 <div>
                                     <table class="table table-responsive" id="deliveryQuantityContainer">
 
-                                        <!-- Lar deg velge antall enheter -->
+                                        <!-- Content of deliveryQuantityContainer handlebars-->
 
                                     </table>
 
@@ -687,6 +700,8 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>        
 
+            
+            <!-- Choose category handlebar -->
             <script id="chooseCategoryTemplate" type="text/x-handlebars-template">
             <option data-id="0" value="0">Velg Kategori</option>
             {{#each category}}
@@ -694,6 +709,7 @@ if (isset($GLOBALS["errorMessage"])) {
             {{/each}}
             </script>
 
+            <!-- Delivery quantity handlebar -->
             <script id="deliveryQuantityTemplate" type="text/x-handlebars-template">
                 {{#each product}} 
                 <tr class="selectQuantity">
@@ -716,7 +732,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 {{/each}}  
             </script>
 
-            <!-- Display stocktacing product-->
+            <!-- Handlebar of display stocktacing product-->
             <script id="stocktakingResultTemplate" type="text/x-handlebars-template">
                 <thead>
                 <tr>
@@ -747,8 +763,8 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
 
 
-            <!-- Display stocktacing product-->
-            <!-- Display stocktacing product-->
+          
+            <!-- Handlebars of display stocktacing product-->
             <script id="stocktakingTemplate" type="text/x-handlebars-template">
                 <h2>{{storageProduct.0.storageName}}</h2><br>  
                 <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
@@ -770,6 +786,8 @@ if (isset($GLOBALS["errorMessage"])) {
 
             </script>
 
+            
+            <!-- Handlebar of stock delivery -->
             <script id="stockDeliveryTemplate" type="text/x-handlebars-template">
                 <br>  
                 {{#each productInfo}} 
@@ -822,7 +840,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
             </script> 
 
-
+            <!-- Handlebar of chosen storage -->
             <script id="chosenStorageTemplate" type="text/x-handlebars-template">
 
                 {{#each storageProduct}}
@@ -835,7 +853,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-
+            <!-- Handlebar of the log -->
             <script id="loggTableTemplate" type="text/x-handlebars-template">
                 <thead>
                 <tr>
@@ -882,7 +900,7 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
 
 
-
+            <!-- Handlebar for low inventory -->
             <script id="lowInvTemplate" type="text/x-handlebars-template">
 
 
@@ -901,7 +919,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-
+<!-- Handlebar for last sale -->
             <script id="lastSaleTemplate" type="text/x-handlebars-template">
 
 
@@ -920,7 +938,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
             </script>
 
-
+        <!-- Handlebars for all last sales -->
             <script id="allLastSaleTemplate" type="text/x-handlebars-template">
 
                 {{#each allLastSaleInfo}}
@@ -1008,6 +1026,8 @@ if (isset($GLOBALS["errorMessage"])) {
                     });
                 });
             </script>
+            
+            <!-- Destroy graph if allready exist -->
             <script>
                 $(document).ready(function ()
                 {
@@ -1045,6 +1065,7 @@ $( function getUsedStorageCat() {
     return false;
 });
             </script>
+            
 <script>
 function chooseCategory(data) {
     var rawTemplate = document.getElementById("chooseCategoryTemplate").innerHTML;

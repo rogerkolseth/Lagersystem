@@ -4,6 +4,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
+        <!-- Show help modal button administrator -->
         <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
         <div class="row">
         <div class="pull-right">
@@ -12,7 +13,7 @@
         </div>
     </div>
         <?php } ?>
-        
+        <!-- Show help modal button for users -->
         <?php if ($_SESSION["userLevel"] == "User") { ?>
         
         <div class="row">
@@ -24,20 +25,21 @@
         <?php } ?>
         
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
-
+            <!-- Search for sales -->
             <form id="searchForSale" class="form-inline" action="?request=getMySales" method="post">
                 <div class="form-group col-md-6 row">
                     <div class="">
                         <input class="form-control" form="searchForSale" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter salg.." autocomplete="off">  
                         <input class="form-control btn btn-primary" form="searchForSale" type="submit" value="Søk">
-
+                        <!-- Refresh search -->
                         <button onclick="UpdateSalesTable()" class="btn btn-primary " type="button">Alle salg</button>
 
                     </div>
 
                 </div> 
             </form>
-
+            
+            <!-- Choose user to see sales -->
             <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
             <div class="col-md-2 pull-right">
                 <form id="showUserSale" action="?request=showUserSale" method="post">
@@ -49,7 +51,7 @@
 
                             <li class="dropdown-header"><h4>Velg Bruker:</h4></li>
                             <table class="table" id="chooseUserSaleContainer">
-
+                                <!-- Content of chooseUserSaleContainer handlebars -->
                             </table>
                         </div>
                     </div> 
@@ -61,6 +63,7 @@
             <br><br><br>
 
 
+            <!-- List of my sales -->
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Dine Salg</b></h3> 
@@ -69,7 +72,7 @@
 
                     <tbody id="mySalesContainer">
 
-                        <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                        <!-- Content of mySalesContainer handlebars  -->
 
                     </tbody>
                 </table> 
@@ -77,10 +80,10 @@
         </div>    
     </div>    
 
-
+    <!-- Edit sales modal -->
     <div class="modal fade" id="editSaleModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -92,7 +95,7 @@
                         <table class="table" id="editSaleContainer">
 
 
-                            <!-- Innhold fra Handlebars Template -->
+                            <!-- Content of editSaleContainer handlebars -->
 
                         </table>
                     </div>
@@ -106,9 +109,11 @@
         </div>
     </div>
     
+    
+    <!-- Mac sales modal -->
      <div class="modal fade" id="macSaleModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -123,7 +128,7 @@
                                 </tr>
                             </thead>
                             <tbody id="macSaleContainer">
-                                
+                                <!-- Content of macSaleContainer -->
                             </tbody>
                         </table>
                     </div>
@@ -152,7 +157,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/SøkSalg.PNG">
+                        <img src="image/SøkSalg.PNG" alt="Søk i salg">
                     </div>
                     <div class="col-md-12">
                         <h3>
@@ -161,7 +166,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/VelgBrukerSalg.PNG">
+                        <img src="image/VelgBrukerSalg.PNG" alt="Velg bruker">
                     </div>
                     <div class="col-md-12">
                         <h3>
@@ -170,7 +175,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/DropdownSalg.PNG">
+                        <img src="image/DropdownSalg.PNG" alt="Dropdown med brukere">
                     </div>
                     <div class="col-md-12">
                         <h3>
@@ -179,14 +184,14 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/DineSalgSalg.PNG">
+                        <img src="image/DineSalgSalg.PNG" alt="Liste over salg">
                     </div>
                     <div class="col-md-12">
                     <h3>
                         Dette er alternativer for salg:<br>
                     </h3>
                     <label>
-                        <img src="image/EndreBruker.PNG">Endre salg<br>
+                        <img src="image/EndreBruker.PNG" alt="Endre salg symbol">Endre salg<br>
                         
                     </label>
                 </div>
@@ -217,7 +222,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/SøkSalg.PNG">
+                        <img src="image/SøkSalg.PNG" alt="Søk etter salg">
                     </div>
                     
                     
@@ -228,14 +233,14 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/DineSalgSalg.PNG">
+                        <img src="image/DineSalgSalg.PNG" alt="Liste over salg">
                     </div>
                     <div class="col-md-12">
                     <h3>
                         Dette er alternativer for salg:<br>
                     </h3>
                     <label>
-                        <img src="image/EndreBruker.PNG">Endre salg<br>
+                        <img src="image/EndreBruker.PNG" alt="Endre salg symbol">Endre salg<br>
                         
                     </label>
                 </div>
@@ -268,6 +273,7 @@
         {{/each}}            
     </script> 
 
+    <!-- List of my sales -->
     <script id="mySalesTemplate" type="text/x-handlebars-template">        
         <tr>
         <th>KundeNr</th>        

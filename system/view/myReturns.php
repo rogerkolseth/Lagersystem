@@ -2,28 +2,28 @@
 
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
+<!-- Help modal button for administrator -->
    <div class="container">
        <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
         <div class="row">
         <div class="pull-right">
-            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png" alt="Spørsmålstegn knapp"></span>
             </label>
         </div>
     </div>
         <?php } ?>
-       
+       <!-- Help modal button for users -->
        <?php if ($_SESSION["userLevel"] == "User") { ?>
         <div class="row">
         <div class="pull-right">
-            <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+            <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png" alt="Spørsmålstegn knapp"></span>
             </label>
         </div>
     </div>
         <?php } ?>
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
-        
+        <!-- Search for returns -->
         <form id="searchForReturns" class="form-inline" action="?request=getMyReturns" method="post">
             <div class="form-group col-md-6 row">
                 <div class="">
@@ -37,6 +37,8 @@
             </div> 
         </form>
         
+        
+        <!-- Choose user to see returns -->
         <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
         <div class="col-md-2 pull-right">
                 <form id="showUserReturn" action="?request=showUserReturns" method="post">
@@ -48,7 +50,7 @@
 
                             <li class="dropdown-header"><h4>Velg Bruker:</h4></li>
                             <table class="table" id="chooseUserReturnContainer">
-
+                                <!-- Content of chooseUserReturnContainer handlebars -->
                             </table>
                         </div>
                     </div> 
@@ -59,7 +61,7 @@
         
         <br><br><br>
         
-        
+        <!-- My returns list -->
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title text-center"><b>Mine Returer</b></h3>
@@ -68,7 +70,7 @@
             
             <tbody id="myReturnsContainer">
 
-                <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                <!-- Content of myReturnsContainer handlebars -->
 
             </tbody>
         </table> 
@@ -78,10 +80,10 @@
    </div>
 </div>  
 
-
+<!-- Edit Returns modal -->
 <div class="modal fade" id="editReturnsModal" role="dialog">
     <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
+        <!-- Content of the modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -93,7 +95,7 @@
                 <table class="table" id="editReturnContainer">
                     
 
-                <!-- Innhold fra Handlebars Template -->
+                <!-- Content of editReturnContainer handlebars -->
                     
                 </table>
             </div>
@@ -108,9 +110,10 @@
 </div>
 
 
+    <!-- Mac returns modal -->
      <div class="modal fade" id="macReturnsModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -125,6 +128,7 @@
                                 </tr>
                             </thead>
                             <tbody id="macReturnsContainer">
+                                <!-- Content of macReturnsContainer -->
                                 
                             </tbody>
                         </table>
@@ -155,7 +159,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/SøkRetur.PNG">
+                        <img src="image/SøkRetur.PNG" alt="Søk etter returer">
                     </div>
                     <div class="col-md-12">
                         <h3>
@@ -164,7 +168,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/VelgBrukerSalg.PNG">
+                        <img src="image/VelgBrukerSalg.PNG" alt="Velg brukers returer">
                     </div>
                     <div class="col-md-12">
                         <h3>
@@ -173,7 +177,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/DropdownSalg.PNG">
+                        <img src="image/DropdownSalg.PNG" alt="Liste med brukere">
                     </div>
                     <div class="col-md-12">
                         <h3>
@@ -182,14 +186,14 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/RegReturer.PNG">
+                        <img src="image/RegReturer.PNG" alt="Liste over returer">
                     </div>
                     <div class="col-md-12">
                     <h3>
                         Dette er alternativer for returer:<br>
                     </h3>
                     <label>
-                        <img src="image/EndreBruker.PNG">Endre retur<br>
+                        <img src="image/EndreBruker.PNG" alt="Endre retur symbol">Endre retur<br>
                         
                     </label>
                 </div>
@@ -221,7 +225,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/SøkRetur.PNG">
+                        <img src="image/SøkRetur.PNG" alt="Søk etter returer">
                     </div>
                     
                     
@@ -232,14 +236,14 @@
                         
                     </div>
                     <div class="col-md-12">
-                        <img src="image/RegReturer.PNG">
+                        <img src="image/RegReturer.PNG" alt="Liste over returer">
                     </div>
                     <div class="col-md-12">
                     <h3>
                         Dette er alternativer for returer:<br>
                     </h3>
                     <label>
-                        <img src="image/EndreBruker.PNG">Endre retur<br>
+                        <img src="image/EndreBruker.PNG" alt="Endre retur symbol">Endre retur<br>
                         
                     </label>
                 </div>
@@ -270,7 +274,7 @@
     {{/each}}            
 </script> 
     
-   
+   <!-- Handlebars for returns list -->
 <script id="myReturnsTemplate" type="text/x-handlebars-template">        
 <tr>
     <th>KundeNr</th>        

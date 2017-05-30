@@ -5,6 +5,7 @@
     <div class="container">
 <div class="row">
         <div class="pull-right">
+            <!-- Button for show help modal -->
             <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
             </label>
         </div>
@@ -27,7 +28,7 @@
         </div>
         <button  class="btn btn-primary" onclick="toggler();">Avansert søk</button>
         
-        
+        <!-- Button for export to CSV -->
          <a href="#" id="loggToCSV" class="btn btn-success">Eksporter til csv</a>   
             
         <div class="dropdown col-md-1 pull-right" id="loggCheckMenu">
@@ -35,7 +36,7 @@
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="redigerknapp" data-toggle="dropdown" data-target="#loggCheckMenu">
                         <span class="glyphicon glyphicon-cog" style="color: #0f0f0f; font-size: 2em;"></span>
                     </button>
-
+                    <!-- Menu of options to be logged -->
                     <ul class="dropdown-menu">
                         <li class="dropdown-header"><h4>Velg hvilke hendelser som blir logget</h4></li>
                         <form id="loggCheck" class="form-inline" action="?request=loggCheck" method="post">
@@ -98,22 +99,23 @@
 
                 </div>
             
-        
+        <!-- Advanced search -->
          <form id="advanceLoggSearch" class="form-group form-inline" action="?request=advanceLoggSearch" method="post">
                 <div id="advanceSearch" class="displayNone" style="margin-top: 2%">
                     
+                    <!-- Type search -->
                         <div class="dropdown form-group"id="typeSearch">
                             <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">Velg Type</button>
                             
                             <div class="dropdown-menu">
                                 <li class="dropdown-header"><h4>Velg type:</h4></li>
                                 <table class="table" id="typeContainer">
-                                
+                                <!-- Content of typeContainer handlebar -->
                                 </table>
                             </div>
                         </div>
                     
-                    
+                    <!-- Storage search -->
                     
                     <div class="dropdown form-group" id="storageSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
@@ -122,11 +124,13 @@
                         <div class="dropdown-menu">
                             <li class="dropdown-header"><h4>Velg Lager:</h4></li>
                                 <table class="table" id="storageContainer">
-                        
+                                    <!-- Content of storageContainer handlebar -->
                                 </table>
                         </div>
                     </div>
 
+                    
+                    <!-- To storage search -->
                     <div class="dropdown form-group" id="toStorageSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
                             Velg Til Lager
@@ -135,11 +139,12 @@
                             
                             <li class="dropdown-header"><h4>Velg Til Lager:</h4></li>
                                 <table class="table" id="toStorageContainer">
-                        
+                                    <!-- Content of toStorageContainer -->
                                 </table>
                         </div>
                     </div>
 
+                    <!-- From storage search -->
                     <div class="dropdown form-group" id="fromStorageSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
                             Velg Fra Lager
@@ -148,11 +153,12 @@
                         
                             <li class="dropdown-header"><h4>Velg Fra Lager:</h4></li>
                                 <table class="table" id="fromStorageContainer">
-                        
+                                    <!-- Content of fromStorageContainer handlebar -->
                                 </table>
                         </div>
                     </div>
                     
+                    <!-- Group search -->
                     <div class="dropdown form-group" id="groupSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
                             Velg Gruppe
@@ -162,11 +168,12 @@
                             
                             <li class="dropdown-header"><h4>Velg grupper:</h4></li>
                                 <table class="table" id="groupContainer">
-                        
+                                    <!-- Content of groupContainer handlebars -->
                                 </table>
                         </div>
                     </div>
-
+                    
+                    <!-- Username search -->
                     <div class="dropdown form-group" id="usernameSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
                             Velg Bruker
@@ -176,11 +183,12 @@
                             
                             <li class="dropdown-header"><h4>Velg Bruker:</h4></li>
                                 <table class="table" id="usernameContainer">
-                        
+                                    <!-- Content of usernameContainer handlebars -->
                                 </table>
                         </div>
                     </div>
-
+                    
+                    <!-- On user search -->
                     <div class="dropdown form-group" id="onUserSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
                             Velg På Bruker
@@ -189,11 +197,12 @@
               
                             <li class="dropdown-header"><h4>Velg På Bruker:</h4></li>
                                 <table class="table" id="onUserContainer">
-                        
+                                    <!-- Content of onUserContainer handlebars -->
                                 </table>
                         </div>
                     </div> 
 
+                    <!-- Product search -->
                     <div class="dropdown form-group" id="productSearch">
                         <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
                             Velg Produkt
@@ -201,7 +210,7 @@
                         <div class="dropdown-menu">
                             <li class="dropdown-header"><h4>Velg Produkt:</h4></li>
                                 <table class="table" id="productContainer">
-                        
+                                    <!-- Content of productContainer handlebars -->
                                 </table>
                         </div>
                     </div>     
@@ -224,9 +233,9 @@
         <br><br>
 
 
-
+        
         <table class="table fontSizeTableContainer" id="loggTableContainer">
-            <!-- Innhold fra Handlebars Template -->
+            <!-- Content of loggTableContainer handlerbars -->
         </table>
 
     </div>
@@ -237,7 +246,7 @@
 
 <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
-            <!-- Innholdet til Modalen -->
+            <!-- Content of modal -->
             <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -252,7 +261,7 @@
                         
                     </div>
                     <div class="col-md-12">
-                <img src="image/SøkLogg.PNG">
+                        <img src="image/SøkLogg.PNG" alt="Søk i logg">
                     </div>
                 
                 
@@ -263,7 +272,7 @@
                         
                     </div>
                 <div class="col-md-12">
-                    <img src="image/AvansertSøkLogg.PNG">
+                    <img src="image/AvansertSøkLogg.PNG" alt="Avansert søk for logg">
                     </div>
                 <div class="col-md-12">
                     <h3>
@@ -271,7 +280,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/AvansertSøkAlternativ.PNG">
+                    <img src="image/AvansertSøkAlternativ.PNG" alt="Avansert søk for logg alternativer">
                 </div>
                     <div class="col-md-12">
                     <h3>
@@ -279,7 +288,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/Logging.PNG">
+                    <img src="image/Logging.PNG" alt="Logg innstillinger">
                 </div>
                     <div class="col-md-12">
                     <h3>
@@ -287,7 +296,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/VelgLogging.PNG">
+                    <img src="image/VelgLogging.PNG" alt="Velg hva som logges">
                 </div>
                     <div class="col-md-12">
                     <h3>
@@ -295,7 +304,7 @@
                     </h3>
                 </div>
                 <div class="col-md-12">
-                <img src="image/Logg.PNG">
+                    <img src="image/Logg.PNG" alt="Logg liste">
                 </div>
                     
                 
@@ -311,7 +320,7 @@
         
 </div>
 
-
+<!-- Handlebar for logg table -->
 <script id="loggTableTemplate" type="text/x-handlebars-template">
     <thead>
     <tr>
@@ -357,6 +366,8 @@
 
 <script type="text/javascript" src="js/logg.js"></script>
 
+
+<!-- Function for choosing dates in advanced search -->
 <script type="text/javascript">
     $(function () {
 
