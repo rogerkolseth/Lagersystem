@@ -313,6 +313,8 @@ function sendEmail() {
 /**
  * Check if product use mac adresse
  */
+// based on example code from stackoverflow:
+// https://stackoverflow.com/questions/16168125/auto-insert-colon-while-entering-mac-address-after-each-2-digit
 $(function getNumberOfMac() {
     $('#transferQuantityContainer').delegate(".negativeSupport", "keyup", function (e) {
         var quantity = $(this).val();   // get value posted in quantity field

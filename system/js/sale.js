@@ -379,6 +379,8 @@ $(function getNumberOfMac() {
 /**
  * Format to macadresse, 00:11:22:33:44:55
  */
+// based on example code from stackoverflow:
+// https://stackoverflow.com/questions/16168125/auto-insert-colon-while-entering-mac-address-after-each-2-digit
 $(function getMacadrInput() {
     var length = 1;
     // check if a number is passed in
