@@ -21,6 +21,7 @@
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/myReturns.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/DBconnect.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/sale.php</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/style/LoginPageCss.css</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/sale.js</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/storageAdm.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/RestrictionModel.php</file>
@@ -38,13 +39,15 @@
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/logg.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/LoggModel.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/UserController.php</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/includedControllers.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/employeeTraning.php</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/includedModels.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/ProductController.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/js/productAdm.js</file>
-            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/controller/IncludedControllers.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/style/home.css</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/header.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/view/categoryAdm.php</file>
+            <file>file:/G:/XAMPP/htdocs/Lagersystem/system/style/index.css</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/ReturnModel.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/index.php</file>
             <file>file:/G:/XAMPP/htdocs/Lagersystem/system/model/SaleModel.php</file>
