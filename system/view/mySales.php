@@ -1,28 +1,31 @@
 <?php require("view/header.php"); ?>
 
-
+<!-- adjusting page content position-->
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
+    <!-- creates a container around page content-->
     <div class="container">
+        <!-- if users userlevel is Administrator, show help modal for admin page-->
         <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
-        <div class="row">
-        <div class="pull-right">
-            <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
-            </label>
-        </div>
-    </div>
+            <div class="row">
+                <div class="pull-right">
+                    <label data-target="#showHelpModal" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+                    </label>
+                </div>
+            </div>
         <?php } ?>
-        
+
+        <!-- If users userlevel is user, show help modal for user-->
         <?php if ($_SESSION["userLevel"] == "User") { ?>
-        
-        <div class="row">
-        <div class="pull-right">
-            <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
-            </label>
-        </div>
-        </div>
+
+            <div class="row">
+                <div class="pull-right">
+                    <label data-target="#showHelpModalUser" title="Hjelp" data-toggle="modal"><img id="questionmark" src="image/questionmark.png"></span>
+                    </label>
+                </div>
+            </div>
         <?php } ?>
-        
+
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
             <form id="searchForSale" class="form-inline" action="?request=getMySales" method="post">
@@ -39,22 +42,22 @@
             </form>
 
             <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
-            <div class="col-md-2 pull-right">
-                <form id="showUserSale" action="?request=showUserSale" method="post">
-                    <div class="dropdown form-group" id="UserSaleSearch">
-                        <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
-                            Velg brukere
-                        </button>
-                        <div class="dropdown-menu">
+                <div class="col-md-2 pull-right">
+                    <form id="showUserSale" action="?request=showUserSale" method="post">
+                        <div class="dropdown form-group" id="UserSaleSearch">
+                            <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown">
+                                Velg brukere
+                            </button>
+                            <div class="dropdown-menu">
 
-                            <li class="dropdown-header"><h4>Velg Bruker:</h4></li>
-                            <table class="table" id="chooseUserSaleContainer">
+                                <li class="dropdown-header"><h4>Velg Bruker:</h4></li>
+                                <table class="table" id="chooseUserSaleContainer">
 
-                            </table>
-                        </div>
-                    </div> 
-                </form>
-            </div>
+                                </table>
+                            </div>
+                        </div> 
+                    </form>
+                </div>
 
             <?php } ?>
 
@@ -105,8 +108,8 @@
             </div>
         </div>
     </div>
-    
-     <div class="modal fade" id="macSaleModal" role="dialog">
+
+    <div class="modal fade" id="macSaleModal" role="dialog">
         <div class="modal-dialog">
             <!-- Innholdet til Modalen -->
             <div class="modal-content">
@@ -115,27 +118,27 @@
                     <h4 class="modal-title">Macadresse oversikt</h4>
                 </div>
 
-                    <div class="modal-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Følgende Macadresse ble registrert ut:</th>
-                                </tr>
-                            </thead>
-                            <tbody id="macSaleContainer">
-                                
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Følgende Macadresse ble registrert ut:</th>
+                            </tr>
+                        </thead>
+                        <tbody id="macSaleContainer">
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                    </div>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
             </div>
         </div>
     </div>
     <!-- Help modal admin -->
-    
+
     <div class="modal fade" id="showHelpModal" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
@@ -149,7 +152,7 @@
                         <h3>
                             Bruk denne funksjonen for å søke deg frem til salg du ønsker å se.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/SøkSalg.PNG">
@@ -158,7 +161,7 @@
                         <h3>
                             Her kan du velge en eller flere brukere for å se deres salg.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/VelgBrukerSalg.PNG">
@@ -167,7 +170,7 @@
                         <h3>
                             Velg hvilke brukere du vil se salg fra.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/DropdownSalg.PNG">
@@ -176,32 +179,32 @@
                         <h3>
                             I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine siste salg.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/DineSalgSalg.PNG">
                     </div>
                     <div class="col-md-12">
-                    <h3>
-                        Dette er alternativer for salg:<br>
-                    </h3>
-                    <label>
-                        <img src="image/EndreBruker.PNG">Endre salg<br>
-                        
-                    </label>
-                </div>
-                
-                <div class="modal-footer col-md-12">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                        <h3>
+                            Dette er alternativer for salg:<br>
+                        </h3>
+                        <label>
+                            <img src="image/EndreBruker.PNG">Endre salg<br>
+
+                        </label>
+                    </div>
+
+                    <div class="modal-footer col-md-12">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
     </div>
-    
+
     <!-- Help modal bruker -->
-    
-        <div class="modal fade" id="showHelpModalUser" role="dialog">
+
+    <div class="modal fade" id="showHelpModalUser" role="dialog">
         <div class="modal-dialog" style="width: 70%">
             <!-- Innholdet til Modalen -->
             <div class="modal-content row">
@@ -214,41 +217,41 @@
                         <h3>
                             Bruk denne funksjonen for å søke deg frem til salg du ønsker å se.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/SøkSalg.PNG">
                     </div>
-                    
-                    
+
+
                     <div class="col-md-12">
                         <h3>
                             I denne boksen ser du resultatene fra valgene dine.<br> Hvis du ikke har søkt på noe eller valgt noen bruker vil den vise dine siste salg.
                         </h3>
-                        
+
                     </div>
                     <div class="col-md-12">
                         <img src="image/DineSalgSalg.PNG">
                     </div>
                     <div class="col-md-12">
-                    <h3>
-                        Dette er alternativer for salg:<br>
-                    </h3>
-                    <label>
-                        <img src="image/EndreBruker.PNG">Endre salg<br>
-                        
-                    </label>
+                        <h3>
+                            Dette er alternativer for salg:<br>
+                        </h3>
+                        <label>
+                            <img src="image/EndreBruker.PNG">Endre salg<br>
+
+                        </label>
+                    </div>
+
+                    <div class="modal-footer col-md-12">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+
+
                 </div>
-                
-                <div class="modal-footer col-md-12">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                </div>
-                
-                
             </div>
         </div>
-        </div>
-        </div>
+    </div>
 
 
     <!-- Display editSale-->                    

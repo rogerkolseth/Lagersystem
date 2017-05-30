@@ -7,7 +7,7 @@ class mediaController extends Controller {
     /**
      * Decide wich function to run based on passed $requset variable
      */
-    public function show($request) {
+    public function __construct($request) {
         $viewMediaAdm = "mediaAdm";
         $viewHome = "home";
         $viewEditUser = "editUser";

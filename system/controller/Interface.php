@@ -40,13 +40,13 @@ class API {
             // checks for request and returns controller to handle spesific request
             switch ($request) {
                 case "home":
-                    return new HomeController();
+                    return new HomeController($request);
                          
                 case "transfer" :
                 case "getTransferRestriction" :
                 case "transferProduct" : 
                 case "getuserAndGroupRes" :  
-                    return new TransferController();
+                    return new TransferController($request);
                     
                 case "sale" :
                 case "withdrawProduct" :  
@@ -60,7 +60,7 @@ class API {
                 case "getAllLastSaleInfo" :
                 case "getStoProFromCat" :    
                 case "getSalesMacFromID" :  
-                    return new SaleController();
+                    return new SaleController($request);
                     
                 case "return" :
                 case "myReturns" :
@@ -69,12 +69,12 @@ class API {
                 case "getReturnsFromID" :    
                 case "editMyReturn" :
                 case "stockDelivery" :  
-                    return new ReturnController();
+                    return new ReturnController($request);
                     
                 case "getAllProductInfo" :
                 case "getProductByID" :
                 case "getProductLocation" :    
-                    return new ProductController();    
+                    return new ProductController($request);    
                     
                 case "getAllStorageInfo" :  
                 case "getStorageByID" :
@@ -82,7 +82,7 @@ class API {
                 case "getStorageProduct" :  
                 case "chartProduct" :    
                 case "stocktacking" :    
-                    return new StorageController(); 
+                    return new StorageController($request); 
                   
                 case "getUserInfo" :    
                 case "getUserByID" :   
@@ -91,23 +91,23 @@ class API {
                 case "editUserEngine" :
                 case "employeeTraning" :   
                 case "editLoggedInUser" :    
-                    return new UserController();
+                    return new UserController($request);
                     
                 case "loginEngine":
                 case "logOut" :
-                    return new LoginController();
+                    return new LoginController($request);
                         
                 case "uploadImageShortcut2" :
-                    return new mediaController();
+                    return new mediaController($request);
                 
                 case "sendInventarWarning" :
                 case "newPassword" :    
-                    return new EmailController(); 
+                    return new EmailController($request); 
                     
                 case "getCatWithProd" :    
                 case "getCatWithMedia" : 
                 case "getCatWithProdAndSto" :    
-                    return new CategoryController();        
+                    return new CategoryController($request);        
             }
             
             // only give access to function if user have userlever "Administrator"
@@ -119,7 +119,7 @@ class API {
                 case "deleteProductEngine" :  
                 case "getProductFromCategory" :  
                 case "getLowInventory" :
-                    return new ProductController();
+                    return new ProductController($request);
                     
                 case "storageAdm":
                 case "addStorageEngine":
@@ -129,7 +129,7 @@ class API {
                 case "emailWarning" :   
                 case "setWarningLimit" :   
                 case "getInventoryMac" :    
-                    return new StorageController();
+                    return new StorageController($request);
                     
                 case "userAdm"    :
                 case "editUserEngine" :           
@@ -137,7 +137,7 @@ class API {
                 case "addUserEngine" : 
                 case "deleteUserEngine" : 
                 case "deleteSingleRes" :
-                    return new UserController();    
+                    return new UserController($request);    
                     
                 case "mediaAdm" :
                 case "uploadImage" :  
@@ -147,7 +147,7 @@ class API {
                 case "editMedia" :    
                 case "deleteMedia" :
                 case "getMediaFromCategory" :    
-                    return new mediaController();
+                    return new mediaController($request);
                     
                 case "addCategoryEngine" :
                 case "categoryAdm" :  
@@ -156,14 +156,14 @@ class API {
                 case "getCategoryByID" :
                 case "deleteCategoryEngine" :
                 case "editCategoryEngine" :
-                    return new CategoryController();
+                    return new CategoryController($request);
                     
                 case "showUserSale" :
-                    return new SaleController();
+                    return new SaleController($request);
                     
                 case "showUserReturns" :
                 case "getReturnsMacFromID" :    
-                    return new ReturnController();
+                    return new ReturnController($request);
                     
                 case "logg" :
                 case "getAllLoggInfo" :
@@ -172,7 +172,7 @@ class API {
                 case "getLoggCheckStatus" :   
                 case "getAdvanceSearchData" :   
                 case "advanceLoggSearch" :    
-                    return new LoggController();
+                    return new LoggController($request);
                     
                 case "groupAdm":
                 case "addGroupEngine" :
@@ -189,7 +189,7 @@ class API {
                 case "deleteGroupRestriction" :
                 case "getGroupRestrictionFromSto" : 
                 case "getGroupMembershipFromUserID" :    
-                    return new GroupController();
+                    return new GroupController($request);
                     }
                 }
             

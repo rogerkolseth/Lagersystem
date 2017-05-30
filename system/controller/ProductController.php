@@ -4,7 +4,7 @@ require_once("Controller.php");
 
 class ProductController extends Controller {
     //Decide wich function to run based on passed $requset variable
-    public function show($request) {
+    public function __construct($request) {
         switch ($request) {
             case "productAdm" :
                 return $this->productAdmPage();

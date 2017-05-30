@@ -6,7 +6,7 @@ require_once("Controller.php"); //include controller
 class CategoryController extends Controller {
 
     //Decide wich function to run based on passed $requset variable
-    public function show($request) {
+    public function __construct($request) {
         switch ($request) {
             case "categoryAdm" :
                 return $this->showHomePage();
