@@ -31,8 +31,7 @@ class transferController extends Controller {
         // if result is larger than one, make global variable 
         if(sizeof($result) > "1"){
            $result = "1";
-                $transferRestriction = array("transferRestriction" => $result); 
-                $this->data($transferRestriction);
+                $this->data("transferRestriction", $result);
         };
         // display transfer page
         return $this->view("transfer");
