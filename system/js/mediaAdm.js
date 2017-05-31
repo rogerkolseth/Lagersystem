@@ -348,3 +348,9 @@ $(function updateResultFromCategory() {
         return false;
     });
 });
+
+
+
+setTimeout(function(){
+  $('#divID').remove();
+}, 5000);

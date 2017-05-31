@@ -46,7 +46,7 @@ $errormessage = $GLOBALS["errorMessage"];
             
             <?php 
                 if (isset($GLOBALS["errorMessage"])){ ?>
-            <div class="alert alert-success">
+            <div id="successUploud" class="alert alert-success">
                 <?php
                      echo $errormessage; ?>   
             </div>  <?php
