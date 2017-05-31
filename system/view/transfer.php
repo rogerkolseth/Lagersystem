@@ -176,7 +176,7 @@ $restriction = $GLOBALS["transferRestriction"];
         <td>{{productName}}</td>
         <input name="transferProductID[]" id="{{productID}}" form="transferProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input id="{{productID}}" data-id="{{macAdresse}}" class="form-control negativeSupport{{productID}}" name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
+        <td><input id="{{productID}}" data-id="{{macAdresse}}" class="form-control negativeSupport" name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
             <input name="regMacadresse[]" form="transferProducts" type="hidden" value="{{macAdresse}}"/>
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    

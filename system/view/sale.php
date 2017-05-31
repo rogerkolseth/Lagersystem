@@ -180,7 +180,7 @@ $restriction = $GLOBALS["saleRestriction"];
         <td>{{productName}}</td>
         <input name="withdrawProductID[]" id="{{productID}}" form="withdrawProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input id="{{productID}}" data-id="{{macAdresse}}" class="form-control negativeSupport{{productID}}" name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
+        <td><input id="{{productID}}" data-id="{{macAdresse}}" class="form-control negativeSupport" name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" value="" autocomplete="off"/></td> 
             <input name="regMacadresse[]" form="withdrawProducts" type="hidden" value="{{macAdresse}}"/>
 
         <th>Tilgjengelig:</th>
