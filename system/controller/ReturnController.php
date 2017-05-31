@@ -40,8 +40,7 @@ class ReturnController extends Controller {
             if ($result["storageID"] == "2") {
                 $result = "1";
                 // make returnRestriction an global variable to access from view
-                $returnRestriction = array("returnRestriction" => $result);
-                $this->data($returnRestriction);
+                $this->data("returnRestriction", $result);
             };
         endforeach;
         // display return page

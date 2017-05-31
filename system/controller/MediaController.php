@@ -94,14 +94,13 @@ class mediaController extends Controller {
         }
         
         // display required page, with error message from the upload.
-        $message = array("errorMessage" => $errorMessage);
         if($data == "mediaAdm"){
-            $this->data($message);
+            $this->data("errorMessage", $errorMessage);
             return $this->view("mediaAdm");
         } else if ($data == "home"){
             return $this->view("home");
         } else if ($data == "editUser"){
-            $this->data($message);
+            $this->data("errorMessage", $errorMessage);
             return $this->view("editUser");
         }
     }

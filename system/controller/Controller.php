@@ -29,11 +29,8 @@ abstract class Controller {
      * Store data in global variables an make dem accessible from view page
      */
     
-    protected function data($data = array()){
+    protected function data($variableName, $data){
         // Store data in global variables
-        foreach ($data as $dataKey => $dataValue) {
-            $GLOBALS[$dataKey] = $dataValue;
-        }
+            $GLOBALS[$variableName] = $data; 
     }
-
 }

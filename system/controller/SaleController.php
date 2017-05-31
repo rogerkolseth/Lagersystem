@@ -50,8 +50,7 @@ class SaleController extends Controller {
         //If user have more than one storage restriction POST saleRestriction array 
         if (sizeof($result) > "0") {
             $result = "1";
-            $saleRestriction = array("saleRestriction" => $result);
-            $this->data($saleRestriction);
+            $this->data("saleRestriction", $result);
         };
         
         //View sale page
