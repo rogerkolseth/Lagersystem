@@ -282,6 +282,7 @@
     <th>Lager</th>     
     <th>Antall</th>
     <th>Kommentar</th>
+    <th>Brukernavn</th>
     <th>Dato</th>   
     <th></th> 
 </tr>        
@@ -291,7 +292,8 @@
     <td>{{productName}}{{deletedProduct}}</td>
     <td>{{storageName}}{{deletedStorage}}</td>
     <td>{{quantity}}</td>    
-    <td>{{comment}}</td>    
+    <td>{{comment}}</td>  
+    <td>{{username}}</td>     
     <td>{{date}}</td>  
     <td><button id="redigerknapp" data-id="{{returnID}}" class="editReturns" data-toggle="tooltip" title="Rediger retur">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>

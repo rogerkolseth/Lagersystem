@@ -11,9 +11,9 @@ class ReturnModel {
      // query to run, can include binded variables
     const SELECT_QUERY = "SELECT returnID, customerNr, products.productName, products.macAdresse, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
             " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID";
-    const SELECT_MY_RETURNS = "SELECT returnID, customerNr, products.productName, products.macAdresse, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
-            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID WHERE userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR userID = :givenUserID AND comment LIKE "
-            . ":givenProductSearchWord OR userID = :givenUserID AND productName LIKE :givenProductSearchWord OR userID = :givenUserID AND storageName LIKE :givenProductSearchWord ORDER BY returnID DESC";
+    const SELECT_MY_RETURNS = "SELECT returnID, customerNr, products.productName, users.username, products.macAdresse, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
+            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID INNER JOIN users ON returns.userID = users.userID WHERE returns.userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR returns.userID = :givenUserID AND comment LIKE "
+            . ":givenProductSearchWord OR returns.userID = :givenUserID AND productName LIKE :givenProductSearchWord OR returns.userID = :givenUserID AND storageName LIKE :givenProductSearchWord ORDER BY returnID DESC";
     const INSERT_QUERY = "INSERT INTO " . ReturnModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, NOW(), :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
     const SELECT_FROM_ID = "SELECT * FROM " . ReturnModel::TABLE . " WHERE returnID = :givenReturnID";
     const UPDATE_QUERY = "UPDATE " . ReturnModel::TABLE . " SET customerNr = :editCustomerNr, comment = :editComment  WHERE returnID = :editReturnID" ;
@@ -82,12 +82,12 @@ class ReturnModel {
         // check if array contains value
        if(empty(!$usernameArray)){
         $userID = implode(',', array_fill(0, count($usernameArray), '?'));  // create a '?' for each value
-        $usernameQuery = "userID IN ($userID)"; // create part of query for binded value
+        $usernameQuery = "returns.userID IN ($userID)"; // create part of query for binded value
         } else {$usernameQuery = "";}   // adding this query if array is empty
         
         // query to run
-        $sql = "SELECT returnID, customerNr, products.productName, products.macAdresse, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
-            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID WHERE $usernameQuery ORDER BY date DESC";
+        $sql = "SELECT returnID, customerNr, products.productName, users.username ,products.macAdresse, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
+            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID INNER JOIN users ON returns.userID = users.userID WHERE $usernameQuery ORDER BY date DESC";
     
         $this->selUserReturn = $this->dbConn->prepare($sql);    // prepare the statement
         
