@@ -120,9 +120,10 @@ $(function POSTeditUserModal() {
                 data: {givenProductID: givenProductID, givenStorageID: givenStorageID}, // post data
                 dataType: 'json',
                 success: function (data) {
-                    negativeSupportStatus(data);    // check if storage can have nagative inventory
                     transferQuantityTemplate(data); //display quantity selection
                     $('#transferButton').show();    // display withdraw button
+                     negativeSupportStatus(data);    // check if storage can have nagative inventory
+
                 }   
             });
             return false;
@@ -290,7 +291,7 @@ function chooseCategory(data) {
 function negativeSupportStatus(data) {
     // if 0 (no negative support), set max value of quantity equals product quantity
     if (data.negativeSupport[0].negativeSupport < 1) {
-        $('.negativeSupport').attr({
+        $('.negativeSupport'+data.prodInfo[0].productID).attr({
             "max": data.prodInfo[0].quantity, 
         });
     }
