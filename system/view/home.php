@@ -879,7 +879,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 <tr>
                 <td>{{typeName}}</td>
                 <td>{{desc}}</td>
-                <td>{{storageName}}</td>
+                <td>{{storageName}}{{deletedStorage}}</td>
                 <td>{{toStorage}}</td>
                 <td>{{fromStorage}}</td>
                 <td>{{quantity}}</td>
@@ -888,8 +888,8 @@ if (isset($GLOBALS["errorMessage"])) {
                 <td>{{differential}}</td>  
                 <td>{{groupName}}{{deletedGroup}}</td>     
                 <td>{{username}}</td>
-                <td>{{onUsername}}</td>
-                <td>{{productName}}</td>
+                <td>{{onUsername}}{{deletedUser}}</td>
+                <td>{{productName}}{{deletedProduct}}</td>
                 <td>{{customerNr}}</td>
                 <td>{{date}}</td>
                 </tr>
