@@ -350,7 +350,11 @@ $(function updateResultFromCategory() {
 });
 
 
-
-setTimeout(function(){
-  $('#divID').remove();
-}, 5000);
+/**
+ * Removes success message on upload
+ */
+$('#successUploud') // set element-id to remove
+            .delay(2000).fadeOut(500, function () {
+        $(this).remove();
+    });
+    ;
