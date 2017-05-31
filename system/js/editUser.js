@@ -14,6 +14,20 @@ $(function getLoggedInUser() {
 });
 
 /**
+ * update user information from logged in user
+ */
+function UpdateLoggedInUser() {
+    $.ajax({
+        type: 'GET',
+        url: '?request=getUserByID',
+        dataType: 'json',
+        success: function (data) {
+            userTableTemplate(data);
+        }
+    });
+}
+
+/**
  * Dispaly user form template
  */ 
 function userTableTemplate(data) {
@@ -41,13 +55,24 @@ $(function editUser() {
             data: data,
             dataType: 'json',
             success: function () {
-
+                UpdateLoggedInUser();
+                successMessage();
             }
         });
         return false;
     });
 });
 
+/**
+ * Display success message on editing user
+ */
+function successMessage() {
+    $('<div class="alert alert-success"><strong>Redigert!</strong> Bruker er redigert. </div>').appendTo('#message')
+            .delay(2000).fadeOut(500, function () {
+        $(this).remove();
+    });
+    ;
+}
 
 /**
  * get Category names for uploading image

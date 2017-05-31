@@ -1,21 +1,10 @@
 <?php require("view/header.php"); ?>
 
-<?php
-if (isset($GLOBALS["errorMessage"])){
-$test = $GLOBALS["errorMessage"];
-}
-?>
-
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
  <div class="container"> 
-                 <div id="message">
-                <?php 
-                if (isset($GLOBALS["errorMessage"])){ ?>
-                     <div class="alert alert-success"> <?php
-                     echo $test; ?>
-                     </div> <?php }
-                ?>
+             <div id="message">
+
             </div>  
     <div class="col-md-4 col-md-offset-1" >
         
@@ -32,7 +21,7 @@ $test = $GLOBALS["errorMessage"];
             <!-- Button to return to last page -->
             <a href="javascript:history.back()" class="btn btn-danger pull-right">Tilbake</a>
             <!-- Post edit saved message -->
-            <input class="btn btn-success pull-right" style="margin-right: 3%" type="submit" value="Lagre" form="editUser" onclick="document.getElementById('editSaved').style.display = 'block'; javascript:history.go(0)"> 
+            <input class="btn btn-success pull-right" style="margin-right: 3%" type="submit" value="Lagre" form="editUser" > 
                 
                  
             
