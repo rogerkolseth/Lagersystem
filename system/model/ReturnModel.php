@@ -9,8 +9,8 @@ class ReturnModel {
     const MAC_TABLE = "returns_macadresse";
     
      // query to run, can include binded variables
-    const SELECT_QUERY = "SELECT returnID, customerNr, products.productName, products.macAdresse, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
-            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID";
+    const SELECT_QUERY = "SELECT returnID, customerNr, products.productName, users.username, products.macAdresse, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
+            " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID INNER JOIN users ON returns.userID = users.userID ORDER BY returnID DESC";
     const SELECT_MY_RETURNS = "SELECT returnID, customerNr, products.productName, users.username, products.macAdresse, DATE_FORMAT(returns.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, returns.deletedStorage, returns.deletedProduct FROM " . ReturnModel::TABLE . 
             " LEFT JOIN products ON returns.productID = products.productID LEFT JOIN storage ON returns.storageID = storage.storageID INNER JOIN users ON returns.userID = users.userID WHERE returns.userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR returns.userID = :givenUserID AND comment LIKE "
             . ":givenProductSearchWord OR returns.userID = :givenUserID AND productName LIKE :givenProductSearchWord OR returns.userID = :givenUserID AND storageName LIKE :givenProductSearchWord ORDER BY returnID DESC";

@@ -9,9 +9,9 @@ class SaleModel {
     const MAC_TABEL = "sales_macadresse";
     
     // query to run, can include binded variables
-    const SELECT_QUERY = "SELECT salesID, customerNr, products.productName, products.macAdresse, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct  FROM " . SaleModel::TABLE . 
-            " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID";
-    const SELECT_MY_SALES = "SELECT salesID, customerNr, products.productName, users.username ,products.macAdresse, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct FROM " . SaleModel::TABLE . 
+    const SELECT_QUERY = "SELECT salesID, customerNr, products.productName, users.username, products.macAdresse, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct  FROM " . SaleModel::TABLE . 
+            " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID INNER JOIN users ON sales.userID = users.userID ORDER BY salesID DESC";
+    const SELECT_MY_SALES = "SELECT salesID, customerNr, products.productName, users.username, products.macAdresse, DATE_FORMAT(sales.date,'%d %b %Y') AS date, comment, storage.storageName, quantity, sales.deletedStorage, sales.deletedProduct FROM " . SaleModel::TABLE . 
             " LEFT JOIN products ON sales.productID = products.productID LEFT JOIN storage ON sales.storageID = storage.storageID INNER JOIN users ON sales.userID = users.userID WHERE sales.userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR sales.userID = :givenUserID AND comment LIKE "
             . ":givenProductSearchWord OR sales.userID = :givenUserID AND productName LIKE :givenProductSearchWord OR sales.userID = :givenUserID AND storageName LIKE :givenProductSearchWord ORDER BY salesID DESC";
     const SELECT_STORAGE = "SELECT * FROM " . SaleModel::TABLE . " WHERE storageID = :givenStorageID";
