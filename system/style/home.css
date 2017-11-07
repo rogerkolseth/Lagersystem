@@ -173,7 +173,9 @@ html,body
     width: 90%;
 }
 
-
+.btn-primary{
+    margin-bottom:4px;
+}
 
 
 

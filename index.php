@@ -15,12 +15,12 @@ $_SESSION["userLevel"] = "";
 
  
 // includes file with all controllers to include, and include Interface file
-require_once("system/controller/IncludedControllers.php");
+require_once("system/controller/includedControllers.php");
 require_once("system/controller/Interface.php");
  
 
 //Include file with all models to include. And include DB connection file
-require_once("system/model/IncludedModels.php");
+require_once("system/model/includedModels.php");
 require_once("system/model/DBconnect.php");
 
 

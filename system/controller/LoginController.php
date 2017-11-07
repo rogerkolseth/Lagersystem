@@ -70,8 +70,7 @@ class LoginController extends Controller {
                 
             // if failed to verifie, give user errormessage
             $errorMessage = "Feil brukernavn eller passord";
-            $message = array("errorMessage" => $errorMessage);
-            $this->data($message);
+	    $this->data("errorMessage", $errorMessage);
             //display loginpage
             return $this->view("LoginPage");
             }

@@ -9,12 +9,12 @@ session_start();
 if ($_SESSION["verified"] == true) {
 
 // includes file with all controllers to include, and include Interface file
-    require_once("controller/IncludedControllers.php");
+    require_once("controller/includedControllers.php");
     require_once("controller/Interface.php");
 
 
 //Include file with all models to include. And include DB connection file
-    require_once("model/IncludedModels.php");
+    require_once("model/includedModels.php");
     require_once("model/DBconnect.php");
 
 //Creates a new API 

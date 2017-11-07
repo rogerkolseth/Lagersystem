@@ -19,7 +19,7 @@ class LoggModel {
         ."LEFT JOIN loggtype as lt ON l.typeID = lt.typeID " 
         ."LEFT JOIN user_group as g ON l.groupID = g.groupID "   
         ."LEFT JOIN products as p ON l.productID = p.productID WHERE lt.typeName LIKE :givenSearchWord OR l.desc LIKE :givenSearchWord OR s1.storageName LIKE :givenSearchWord OR s2.storageName LIKE :givenSearchWord OR s3.storageName LIKE :givenSearchWord OR l.quantity LIKE :givenSearchWord "
-            . "OR l.oldQuantity LIKE :givenSearchWord OR l.newQuantity LIKE :givenSearchWord OR l.differential LIKE :givenSearchWord OR u1.username LIKE :givenSearchWord OR u2.username OR p.productName LIKE :givenSearchWord OR customerNr LIKE :givenSearchWord OR g.groupName LIKE :givenSearchWord ORDER BY date DESC LIMIT 100";
+            . "OR l.oldQuantity LIKE :givenSearchWord OR l.newQuantity LIKE :givenSearchWord OR l.differential LIKE :givenSearchWord OR u1.username LIKE :givenSearchWord OR u2.username OR p.productName LIKE :givenSearchWord OR customerNr LIKE :givenSearchWord OR g.groupName LIKE :givenSearchWord ORDER BY l.date DESC LIMIT 100";
     
     const SELECT_LATEST_QUERY = 
          "SELECT lt.typeName, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, g.groupName, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.deletedUser, l.deletedStorage, l.deletedProduct, l.deletedGroup, DATE_FORMAT(l.date,'%d %b %Y %T') AS date FROM " . LoggModel::TABLE . " AS l "
@@ -30,7 +30,7 @@ class LoggModel {
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
         ."LEFT JOIN loggtype as lt ON l.typeID = lt.typeID "  
         ."LEFT JOIN user_group as g ON l.groupID = g.groupID "    
-        ."LEFT JOIN products as p ON l.productID = p.productID ORDER BY date DESC LIMIT 10 ";
+        ."LEFT JOIN products as p ON l.productID = p.productID ORDER BY l.date DESC LIMIT 10 ";
     
     const INSERT_QUERY = "INSERT INTO " . LoggModel::TABLE . " (typeID, desc, storageID, fromStorageID, toStorageID, quantity, oldQuantity, newQuantity, differential, userID, onUserID, productID, date, customerNr) "
             . "VALUES (:type, :desc, :storageID, :fromStorageID, :toStorageID, :quantity, :oldQuantity, :newQuantity, :differential, :userID, :onUserID, :productID, :date, :customerNr)";
@@ -212,7 +212,7 @@ class LoggModel {
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
         ."LEFT JOIN loggtype as lt ON l.typeID = lt.typeID "    
         ."LEFT JOIN user_group as g ON l.groupID = g.groupID "
-        ."LEFT JOIN products as p ON l.productID = p.productID WHERE $typeQuery $storageQuery $toStorageQuery $fromStorageQuery $usernameQuery $onUserQuery $goupQuery $productQuery $fromDateQuery $toDateQuery ORDER BY date DESC";
+        ."LEFT JOIN products as p ON l.productID = p.productID WHERE $typeQuery $storageQuery $toStorageQuery $fromStorageQuery $usernameQuery $onUserQuery $goupQuery $productQuery $fromDateQuery $toDateQuery ORDER BY l.date DESC";
         
         $this->advSearch = $this->dbConn->prepare($sql);    // prepare the statement
         

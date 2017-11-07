@@ -70,26 +70,26 @@
                            <!-- Administrator only options -->
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
                         <li><a href="?request=logg"><span class="glyphicon glyphicon-paperclip"></span> Logg</a></li>
-                        <li><a id="show-hide-toogle" href="#"><span class="glyphicon glyphicon-wrench"></span> Administrering<span class="caret"></span></a>
+                        <li><a id="show-hide-toogle" href="#"><span class="glyphicon glyphicon-wrench"></span> Admin<span class="caret"></span></a>
                         
                             <ul id="dropdown" class="nav nav-second-level" hidden>
                                 <li>
-                                    <a href="?request=userAdm"><span class="glyphicon glyphicon-user"></span> Bruker Administrering</a>
+                                    <a href="?request=userAdm"><span class="glyphicon glyphicon-user"></span> Bruker</a>
                                 </li>
                                 <li>
-                                    <a  href="?request=storageAdm"><span class="glyphicon glyphicon-home"></span> Lager Administrering</a>
+                                    <a  href="?request=storageAdm"><span class="glyphicon glyphicon-home"></span> Lager</a>
                                 </li>
                                 <li>
-                                    <a href="?request=productAdm"><span class="glyphicon glyphicon-shopping-cart"></span> Produkt Administrering</a>
+                                    <a href="?request=productAdm"><span class="glyphicon glyphicon-shopping-cart"></span> Produkt</a>
                                 </li>
                                 <li>
-                                    <a href="?request=mediaAdm"><span class="glyphicon glyphicon-picture"></span> Media Administrering</a>
+                                    <a href="?request=mediaAdm"><span class="glyphicon glyphicon-picture"></span> Media</a>
                                 </li>
                                 <li>
-                                    <a href="?request=categoryAdm"><span class="glyphicon glyphicon-folder-open"></span> Kategori Administrering</a>
+                                    <a href="?request=categoryAdm"><span class="glyphicon glyphicon-folder-open"></span> Kategori</a>
                                 </li>
                                 <li>
-                                    <a href="?request=groupAdm"><span class="glyphicon glyphicon-share"></span> Gruppe Administrering</a>
+                                    <a href="?request=groupAdm"><span class="glyphicon glyphicon-share"></span> Gruppe</a>
                                 </li>
                             </ul>
                   
